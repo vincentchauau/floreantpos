@@ -144,7 +144,8 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	 * Return the value associated with the column: ADDRESS
 	 */
 	public java.lang.String getAddress() {
-		return address;
+            return "Pick up from hotel";
+		//return address;
 	}
 
 	/**
