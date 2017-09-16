@@ -16,25 +16,19 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-
 import com.floreantpos.model.PayOutTransaction;
 import com.floreantpos.model.Terminal;
 
-
 public class PayOutTransactionDAO extends BasePayOutTransactionDAO {
-
 	/**
 	 * Default constructor.  Can be used in place of getInstance()
 	 */
 	public PayOutTransactionDAO () {}
-
 	public void saveTransaction(PayOutTransaction t, Terminal terminal) throws Exception {
 		Session session = null;
 		Transaction tx = null;

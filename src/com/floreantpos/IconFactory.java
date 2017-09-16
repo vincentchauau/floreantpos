@@ -16,18 +16,14 @@
  * ************************************************************************
  */
 package com.floreantpos;
-
 import java.awt.Dimension;
 import java.util.HashMap;
-
 import javax.swing.ImageIcon;
-
 public class IconFactory {
 	private static HashMap<String, ImageIcon> iconCache = new HashMap<String, ImageIcon>();
 	
 	public static ImageIcon getIcon(String iconName) {
 		ImageIcon icon = iconCache.get(iconName);
-
 		if (icon == null) {
 			try {
 				icon = new ImageIcon(IconFactory.class.getResource("/ui_icons/" + iconName)); //$NON-NLS-1$
@@ -38,7 +34,6 @@ public class IconFactory {
 		}
 		return icon;
 	}
-
 	private static ImageIcon getDefaultIcon(String iconName) {
 		ImageIcon icon = iconCache.get(iconName);
 		if (icon == null) {
@@ -50,10 +45,8 @@ public class IconFactory {
 		}
 		return icon;
 	}
-
 	public static ImageIcon getIcon(String path, String iconName) {
 		ImageIcon icon = iconCache.get(iconName);
-
 		if (icon == null) {
 			try {
 				icon = new ImageIcon(IconFactory.class.getResource(path + iconName)); //$NON-NLS-1$
@@ -66,7 +59,6 @@ public class IconFactory {
 	}
 	public static ImageIcon getIcon(String path, String iconName, Dimension size) {
 		ImageIcon icon = iconCache.get(iconName);
-
 		if (icon == null) {
 			try {
 				icon = new ImageIcon(IconFactory.class.getResource(path + iconName)); //$NON-NLS-1$

@@ -1,12 +1,9 @@
 package com.floreantpos.util;
-
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
-
 import com.floreantpos.PosLog;
-
 public class SerialPortUtil {
 	public static String readWeight(String comPort) throws SerialPortException {
 		final SerialPort serialPort = new SerialPort(comPort);
@@ -14,9 +11,7 @@ public class SerialPortUtil {
 		serialPort.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_7, SerialPort.STOPBITS_2, SerialPort.PARITY_EVEN);
 		serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN | SerialPort.FLOWCONTROL_RTSCTS_OUT | SerialPort.FLOWCONTROL_XONXOFF_IN
 				| SerialPort.FLOWCONTROL_XONXOFF_OUT);
-
 		final StringBuilder messageBuilder = new StringBuilder();
-
 		serialPort.addEventListener(new SerialPortEventListener() {
 			@Override
 			public void serialEvent(SerialPortEvent event) {

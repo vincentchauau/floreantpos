@@ -16,12 +16,8 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.awt.LayoutManager;
-
 import javax.swing.JPanel;
-
-
 
 
 public class TransparentPanel extends JPanel {
@@ -31,19 +27,16 @@ public class TransparentPanel extends JPanel {
 		
 		setOpaque(false);
 	}
-
 	public TransparentPanel(LayoutManager layout) {
 		super(layout);
 		
 		setOpaque(false);
 	}
-
 	public TransparentPanel(boolean isDoubleBuffered) {
 		super(isDoubleBuffered);
 		
 		setOpaque(false);
 	}
-
 	public TransparentPanel() {
 		super();
 		setOpaque(false);

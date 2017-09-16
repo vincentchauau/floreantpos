@@ -16,17 +16,13 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-
 import com.floreantpos.model.PackagingUnit;
 
-
 public class PackagingUnitDAO extends BasePackagingUnitDAO {
-
 	/**
 	 * Default constructor.  Can be used in place of getInstance()
 	 */
@@ -54,6 +50,5 @@ public class PackagingUnitDAO extends BasePackagingUnitDAO {
 			}
 		}
 	}
-
 
 }

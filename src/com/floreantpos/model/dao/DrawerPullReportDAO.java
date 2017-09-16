@@ -16,20 +16,14 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import java.util.Date;
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-
 import com.floreantpos.model.DrawerPullReport;
 
-
-
 public class DrawerPullReportDAO extends BaseDrawerPullReportDAO {
-
 	/**
 	 * Default constructor.  Can be used in place of getInstance()
 	 */

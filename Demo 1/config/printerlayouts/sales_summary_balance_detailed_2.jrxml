@@ -24,7 +24,6 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-
 	<field name="percentage" class="java.lang.Double"/>
 	<field name="netTipsAmount" class="java.lang.Double"/>
 	<field name="netAmount" class="java.lang.Double"/>
@@ -33,7 +32,6 @@
 	<field name="salesAmount" class="java.lang.Double"/>
 	<field name="salesCount" class="java.lang.Integer"/>
 	<field name="creditCard" class="java.lang.String"/>
-
 	<variable name="percentageSum" class="java.lang.Double" resetType="Report" calculation="Sum">
 		<variableExpression><![CDATA[$F{percentage}]]></variableExpression>
 	</variable>

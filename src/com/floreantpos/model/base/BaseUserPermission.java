@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the USER_PERMISSION table.
@@ -28,18 +26,14 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="USER_PERMISSION"
  */
-
 public abstract class BaseUserPermission  implements Comparable, Serializable {
-
 	public static String REF = "UserPermission"; //$NON-NLS-1$
 	public static String PROP_NAME = "name"; //$NON-NLS-1$
-
 
 	// constructors
 	public BaseUserPermission () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -47,17 +41,11 @@ public abstract class BaseUserPermission  implements Comparable, Serializable {
 		this.setName(name);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.String name;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -68,7 +56,6 @@ public abstract class BaseUserPermission  implements Comparable, Serializable {
 	public java.lang.String getName () {
 		return name;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param name the new ID
@@ -77,9 +64,6 @@ public abstract class BaseUserPermission  implements Comparable, Serializable {
 		this.name = name;
 		this.hashCode = Integer.MIN_VALUE;
 	}
-
-
-
 
 
 
@@ -92,7 +76,6 @@ public abstract class BaseUserPermission  implements Comparable, Serializable {
 			else return (this.getName().equals(userPermission.getName()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getName()) return super.hashCode();
@@ -103,16 +86,13 @@ public abstract class BaseUserPermission  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

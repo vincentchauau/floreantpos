@@ -20,9 +20,7 @@
  *
  * Created on August 5, 2006, 2:21 AM
  */
-
 package com.floreantpos.ui.views.order.modifier;
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -37,12 +35,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
-
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
 import com.floreantpos.POSConstants;
 import com.floreantpos.config.TerminalConfig;
 import com.floreantpos.model.MenuItemModifierGroup;
@@ -51,32 +47,24 @@ import com.floreantpos.model.MenuModifierGroup;
 import com.floreantpos.swing.POSToggleButton;
 import com.floreantpos.swing.ScrollableFlowPanel;
 import com.jidesoft.swing.SimpleScrollPane;
-
 /**
  * 
  * @author MShahriar
  */
 public class ModifierGroupView extends JPanel implements ComponentListener {
 	private Vector<ModifierGroupSelectionListener> listenerList = new Vector<ModifierGroupSelectionListener>();
-
 	private ModifierSelectionModel modifierSelectionModel;
-
 	private ButtonGroup modifierGroupButtonGroup;
-
 	private SimpleScrollPane simpleScrollPane;
 	private ScrollableFlowPanel contentPanel;
-
 	public static final String VIEW_NAME = "MODIFIER_GROUP_VIEW"; //$NON-NLS-1$
-
 	/** Creates new form CategoryView */
 	public ModifierGroupView(ModifierSelectionModel modifierSelectionModel) {
 		this.modifierSelectionModel = modifierSelectionModel;
-
 		setLayout(new BorderLayout());
 		TitledBorder border = new TitledBorder(POSConstants.GROUPS);
 		border.setTitleJustification(TitledBorder.CENTER);
 		setBorder(border);
-
 		contentPanel = new ScrollableFlowPanel();
 		simpleScrollPane = new SimpleScrollPane(contentPanel);
 		simpleScrollPane.setBorder(null);
@@ -85,21 +73,15 @@ public class ModifierGroupView extends JPanel implements ComponentListener {
 		simpleScrollPane.setVerticalUnitIncrement(TerminalConfig.getTouchScreenButtonHeight());
 		simpleScrollPane.getScrollUpButton().setPreferredSize(new Dimension(100, TerminalConfig.getTouchScreenButtonHeight()));
 		simpleScrollPane.getScrollDownButton().setPreferredSize(new Dimension(100, TerminalConfig.getTouchScreenButtonHeight()));
-
 		add(simpleScrollPane);
-
 		modifierGroupButtonGroup = new ButtonGroup();
 		setPreferredSize(new Dimension(120, 100));
-
 		init();
-
 		addComponentListener(this);
 	}
-
 	public void reset() {
 		modifierGroupButtonGroup = new ButtonGroup();
 	}
-
 	private void init() {
 		List<MenuItemModifierGroup> modifierGroups = modifierSelectionModel.getMenuItem().getMenuItemModiferGroups();
 		Collections.sort(modifierGroups, new Comparator<MenuItemModifierGroup>() {
@@ -108,7 +90,6 @@ public class ModifierGroupView extends JPanel implements ComponentListener {
 				return o2.getMinQuantity() - o1.getMinQuantity();
 			}
 		});
-
 		for (Iterator<MenuItemModifierGroup> iter = modifierGroups.iterator(); iter.hasNext();) {
 			MenuItemModifierGroup menuItemModifierGroup = iter.next();
 			MenuModifierGroup menuModifierGroup = menuItemModifierGroup.getModifierGroup();
@@ -116,39 +97,30 @@ public class ModifierGroupView extends JPanel implements ComponentListener {
 			if (modifiers == null || modifiers.size() == 0) {
 				continue;
 			}
-
 			menuModifierGroup.setMenuItemModifierGroup(menuItemModifierGroup);
-
 			contentPanel.add(createItemButton(menuModifierGroup));
 		}
 		contentPanel.revalidate();
 		contentPanel.repaint();
 	}
-
 	protected AbstractButton createItemButton(Object item) {
 		MenuModifierGroup menuModifierGroup = (MenuModifierGroup) item;
-
 		ModifierGroupButton button = new ModifierGroupButton(menuModifierGroup);
 		button.setPreferredSize(new Dimension(100, 80));
 		modifierGroupButtonGroup.add(button);
-
 		return button;
 	}
-
 	public void addModifierGroupSelectionListener(ModifierGroupSelectionListener listener) {
 		listenerList.add(listener);
 	}
-
 	public void removeModifierGroupSelectionListener(ModifierGroupSelectionListener listener) {
 		listenerList.remove(listener);
 	}
-
 	private void fireModifierGroupSelected(MenuModifierGroup foodModifierGroup) {
 		for (ModifierGroupSelectionListener listener : listenerList) {
 			listener.modifierGroupSelected(foodModifierGroup);
 		}
 	}
-
 	public void setSelectedModifierGroup(MenuModifierGroup modifierGroup) {
 		Component[] components = contentPanel.getContentPane().getComponents();
 		if (components != null && components.length > 0) {
@@ -165,7 +137,6 @@ public class ModifierGroupView extends JPanel implements ComponentListener {
 			}
 		}
 	}
-
 	public void selectFirst() {
 		Component[] components = contentPanel.getContentPane().getComponents();
 		if (components != null && components.length > 0) {
@@ -174,17 +145,14 @@ public class ModifierGroupView extends JPanel implements ComponentListener {
 			fireModifierGroupSelected(button.menuModifierGroup);
 		}
 	}
-
 	public void selectNextGroup() {
 		ModifierGroupButton button = getNextMandatoryGroup();
 		button.setSelected(true);
 		fireModifierGroupSelected(button.menuModifierGroup);
 	}
-
 	public boolean hasNextMandatoryGroup() {
 		return getNextMandatoryGroup() != null;
 	}
-
 	private ModifierGroupButton getNextMandatoryGroup() {
 		Component[] components = contentPanel.getContentPane().getComponents();
 		if (components != null && components.length > 0) {
@@ -198,19 +166,15 @@ public class ModifierGroupView extends JPanel implements ComponentListener {
 				}
 			}
 		}
-
 		return null;
 	}
-
 	private class ModifierGroupButton extends POSToggleButton implements ActionListener {
 		MenuModifierGroup menuModifierGroup;
-
 		ModifierGroupButton(MenuModifierGroup menuModifierGroup) {
 			this.menuModifierGroup = menuModifierGroup;
 			updateButtonText();
 			addActionListener(this);
 		}
-
 		private void updateButtonText() {
 			String string = "";
 			//			if (addOnMode) {
@@ -222,10 +186,8 @@ public class ModifierGroupView extends JPanel implements ComponentListener {
 					+ "<br/>"
 					+ "<strong><span style='color:white;background-color:orange;margin:0;" + "'>&nbsp; " + menuModifierGroup.getMenuItemModifierGroup().getMinQuantity() + "&nbsp; </span></center></body></html>"; //$NON-NLS-1$ //$NON-NLS-2$ 
 			//			}
-
 			setText(string);
 		}
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (isSelected()) {
@@ -233,7 +195,6 @@ public class ModifierGroupView extends JPanel implements ComponentListener {
 			}
 		}
 	}
-
 	@Override
 	public void componentResized(ComponentEvent e) {
 		int verticalUnitIncrement = simpleScrollPane.getViewport().getVisibleRect().height - TerminalConfig.getTouchScreenButtonHeight();
@@ -242,15 +203,12 @@ public class ModifierGroupView extends JPanel implements ComponentListener {
 		}
 		simpleScrollPane.setVerticalUnitIncrement(verticalUnitIncrement);
 	}
-
 	@Override
 	public void componentMoved(ComponentEvent e) {
 	}
-
 	@Override
 	public void componentShown(ComponentEvent e) {
 	}
-
 	@Override
 	public void componentHidden(ComponentEvent e) {
 	}

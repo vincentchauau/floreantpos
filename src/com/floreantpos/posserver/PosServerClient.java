@@ -1,27 +1,19 @@
 package com.floreantpos.posserver;
-
 import java.awt.BorderLayout;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
 import net.miginfocom.swing.MigLayout;
-
 import com.floreantpos.ui.TitlePanel;
 import com.floreantpos.ui.dialog.POSDialog;
-
 public class PosServerClient extends POSDialog {
 	private static JLabel lblStatus;
-
 	private JTextField txtServerId;
 	private JTextField txtTable;
-
 	private JTextArea txtReqMsg;
 	private JTextArea txtRespMsg;
-
 	private JButton btnSend;
 	private JButton btnRequest;
 	
@@ -30,7 +22,6 @@ public class PosServerClient extends POSDialog {
 	public PosServerClient() {
 		intializeComponents(); 
 	}
-
 	public void intializeComponents() {
 		setLayout(new BorderLayout()); 
 		
@@ -89,18 +80,13 @@ public class PosServerClient extends POSDialog {
 		
 		setSize(500,500);
 	}
-
 	public static void main(String[] args) throws Exception {
-
 		/*Socket socket = new Socket(InetAddress.getLocalHost(), 5656);
 		PrintWriter writer = new PrintWriter(socket.getOutputStream());
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
 		String s = in.readLine();
 		while (s != null) {
-
 		}
-
 		writer.write("e=he");
 		writer.flush();*/
 		

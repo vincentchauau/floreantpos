@@ -16,34 +16,27 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import javax.swing.JComponent;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPanelUI;
-
 public class TransparentPanelUI extends BasicPanelUI {
 	
 	public TransparentPanelUI() {
 		super();
 	}
-
 	static TransparentPanelUI ui = new TransparentPanelUI();
-
 	public static ComponentUI createUI(JComponent b) {
 		return ui;
 	}
-
 	public void update(Graphics g, JComponent c) {
 		if (c.isOpaque()) {
 			Color color1 = UIManager.getColor("control"); //$NON-NLS-1$
 			Color color2 = color1.brighter();
-
 			int x = 0;
 			int y = 0;
 			int width = c.getWidth();
@@ -55,5 +48,4 @@ public class TransparentPanelUI extends BasicPanelUI {
 		}
 		paint(g, c);
 	}
-
 }

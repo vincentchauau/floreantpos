@@ -20,27 +20,20 @@
  *
  * Created on August 23, 2006, 10:45 PM
  */
-
 package com.floreantpos.ui.dialog;
-
 import java.awt.Component;
 import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import org.apache.log4j.Logger;
-
 import com.floreantpos.main.Application;
-
 /**
  * 
  * @author MShahriar
  */
 public class POSMessageDialog {
-
 	private static Logger logger = Logger.getLogger(Application.class);
 	
 	private static void showDialog(Component parent, String message, int messageType, int optionType) {
@@ -62,7 +55,6 @@ public class POSMessageDialog {
 		dialog.setModal(true);
 		dialog.setVisible(true);
 	}
-
 	
 	public static void showMessage(String message) {
 		showDialog(Application.getPosWindow(), message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION);
@@ -71,7 +63,6 @@ public class POSMessageDialog {
 	public static void showMessage(Component parent, String message) {
 		showDialog(parent, message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION);
 	}
-
 	public static void showError(String message) {
 		showDialog(Application.getPosWindow(), message, JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION);
 	}
@@ -79,7 +70,6 @@ public class POSMessageDialog {
 	public static void showError(Component parent, String message) {
 		showDialog(parent, message, JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION);
 	}
-
 	public static void showError(Component parent, String message, Throwable x) {
 		logger.error(message, x);
 		showDialog(parent, message, JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION);
@@ -109,7 +99,6 @@ public class POSMessageDialog {
 		
 		return ((Integer) selectedValue).intValue();
 	}
-
 	public static int showYesNoQuestionDialog(Component parent, String message, String title, String yesButtonText, String noButtonText) {
 		String[] buttonText = { yesButtonText, noButtonText };
 		JOptionPane optionPane = new JOptionPane(message, JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION, null, buttonText);
@@ -125,14 +114,11 @@ public class POSMessageDialog {
 				}
 			}
 		}
-
 		JDialog dialog = optionPane.createDialog(parent, title);
 		dialog.setVisible(true);
-
 		String selectedValue = (String) optionPane.getValue();
 		if (selectedValue.equals(noButtonText))
 			return JOptionPane.CLOSED_OPTION;
-
 		return JOptionPane.YES_OPTION;
 	}
 }

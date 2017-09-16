@@ -16,27 +16,22 @@
  * ************************************************************************
  */
 package com.floreantpos.report;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-
 import org.jdesktop.swingx.calendar.DateUtils;
-
 import com.floreantpos.model.Ticket;
 import com.floreantpos.model.TicketItem;
 import com.floreantpos.model.dao.TicketDAO;
 import com.floreantpos.util.CurrencyUtil;
-
 public class SalesReportModelFactory {
 	private Date startDate;
 	private Date endDate;
@@ -86,7 +81,6 @@ public class SalesReportModelFactory {
 					reportItem.setPrice(ticketItem.getUnitPrice());
 					reportItem.setName(ticketItem.getName());
 					reportItem.setTaxRate(ticketItem.getTaxRate());
-
 					itemMap.put(key, reportItem);
 				}
 				reportItem.setQuantity(ticketItem.getItemCount() + reportItem.getQuantity());
@@ -154,35 +148,27 @@ public class SalesReportModelFactory {
 		JasperPrint print = JasperFillManager.fillReport(masterReport, map, new JREmptyDataSource());
 		JasperViewer.viewReport(print, false);
 	}
-
 	public Date getEndDate() {
 		return endDate;
 	}
-
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-
 	public boolean isSettled() {
 		return settled;
 	}
-
 	public void setSettled(boolean settled) {
 		this.settled = settled;
 	}
-
 	public Date getStartDate() {
 		return startDate;
 	}
-
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-
 	public SalesReportModel getItemReportModel() {
 		return itemReportModel;
 	}
-
 	public SalesReportModel getModifierReportModel() {
 		return modifierReportModel;
 	}

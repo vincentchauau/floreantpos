@@ -16,12 +16,9 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 import java.util.Iterator;
 import java.util.List;
-
 import com.floreantpos.model.base.BaseTableBookingInfo;
-
 public class TableBookingInfo extends BaseTableBookingInfo {
 	private static final long serialVersionUID = 1L;
 	
@@ -32,12 +29,10 @@ public class TableBookingInfo extends BaseTableBookingInfo {
 	public static final String STATUS_DELAY="delay"; //$NON-NLS-1$
 	public static final String STATUS_OPEN="open"; //$NON-NLS-1$
 	
-
 	/*[CONSTRUCTOR MARKER BEGIN]*/
 	public TableBookingInfo () {
 		super();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -49,7 +44,6 @@ public class TableBookingInfo extends BaseTableBookingInfo {
 	public String toString() {
 		return getId().toString();
 	}
-
 	private String customerInfo;
 	private String bookedTableNumbers;
 	
@@ -58,15 +52,12 @@ public class TableBookingInfo extends BaseTableBookingInfo {
 	 */
 	public String getCustomerInfo() {
 		Customer customer = getCustomer();
-
 		if(customer == null) {
 			return customerInfo;
 		}
-
 		if(!customer.getFirstName().equals("")) { //$NON-NLS-1$
 			return customerInfo = customer.getFirstName();
 		}
-
 		if(!customer.getMobileNo().equals("")) { //$NON-NLS-1$
 			return customerInfo = customer.getMobileNo();
 		}
@@ -77,14 +68,12 @@ public class TableBookingInfo extends BaseTableBookingInfo {
 		
 		return customerInfo;
 	}
-
 	/**
 	 * @param customerInfo the customerInfo to set
 	 */
 	public void setCustomerInfo(String customerInfo) {
 		this.customerInfo = customerInfo;
 	}
-
 	/**
 	 * @return table numbers as comma separated string.
 	 */
@@ -92,27 +81,21 @@ public class TableBookingInfo extends BaseTableBookingInfo {
 		if(bookedTableNumbers != null) {
 			return bookedTableNumbers;
 		}
-
 		List<ShopTable> shopTables = getTables();
 		if(shopTables == null || shopTables.isEmpty()) {
 			return null;
 		}
 		String tableNumbers = ""; //$NON-NLS-1$
-
 		for (Iterator iterator = shopTables.iterator(); iterator.hasNext();) {
 			ShopTable shopTable = (ShopTable) iterator.next();
 			tableNumbers += shopTable.getTableNumber();
-
 			if(iterator.hasNext()) {
 				tableNumbers += ", "; //$NON-NLS-1$
 			}
 		}
-
 		return tableNumbers;
 	}
-
 	public void setBookedTableNumbers(String bookTableNumbers) {
 		this.bookedTableNumbers = bookTableNumbers;
 	}
-
 }

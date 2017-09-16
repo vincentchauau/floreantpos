@@ -20,46 +20,35 @@
  *
  * Created on September 8, 2006, 9:43 PM
  */
-
 package com.floreantpos.ui.dialog;
-
 import com.floreantpos.main.Application;
 import com.floreantpos.ui.views.NoteView;
-
 /**
  *
  * @author  MShahriar
  */
 public class NotesDialog extends OkCancelOptionDialog {
 	private NoteView noteView;
-
 	public NotesDialog() {
 		initComponents();
 	}
-
 	private void initComponents() {
 		noteView = new NoteView();
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
 		noteView.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10));
 		getContentPane().add(noteView, java.awt.BorderLayout.CENTER);
-
 		pack();
 	}
-
 	public void doOk() {
 		setCanceled(false);
 		dispose();
 	}
-
 	@Override
 	public void setTitle(String title) {
 		super.setTitle(Application.getTitle());
 		setTitlePaneText(title);
 	}
-
 	public String getNote() {
 		return noteView.getNote();
 	}
-
 }

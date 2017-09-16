@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the DRAWER_PULL_REPORT table.
@@ -28,9 +26,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="DRAWER_PULL_REPORT"
  */
-
 public abstract class BaseDrawerPullVoidTicketEntry  implements Comparable, Serializable {
-
 	public static String REF = "DrawerPullVoidTicketEntry"; //$NON-NLS-1$
 	public static String PROP_AMOUNT = "amount"; //$NON-NLS-1$
 	public static String PROP_HAST = "hast"; //$NON-NLS-1$
@@ -38,15 +34,11 @@ public abstract class BaseDrawerPullVoidTicketEntry  implements Comparable, Seri
 	public static String PROP_CODE = "code"; //$NON-NLS-1$
 	public static String PROP_REASON = "reason"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseDrawerPullVoidTicketEntry () {
 		initialize();
 	}
-
 	protected void initialize () {}
-
-
 
 	// fields
 		protected java.lang.Integer code;
@@ -57,16 +49,12 @@ public abstract class BaseDrawerPullVoidTicketEntry  implements Comparable, Seri
 
 
 
-
-
-
 	/**
 	 * Return the value associated with the column: code
 	 */
 	public java.lang.Integer getCode () {
 									return code == null ? Integer.valueOf(0) : code;
 					}
-
 	/**
 	 * Set the value related to the column: code
 	 * @param code the code value
@@ -75,15 +63,12 @@ public abstract class BaseDrawerPullVoidTicketEntry  implements Comparable, Seri
 		this.code = code;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: reason
 	 */
 	public java.lang.String getReason () {
 					return reason;
 			}
-
 	/**
 	 * Set the value related to the column: reason
 	 * @param reason the reason value
@@ -92,15 +77,12 @@ public abstract class BaseDrawerPullVoidTicketEntry  implements Comparable, Seri
 		this.reason = reason;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: hast
 	 */
 	public java.lang.String getHast () {
 					return hast;
 			}
-
 	/**
 	 * Set the value related to the column: hast
 	 * @param hast the hast value
@@ -109,15 +91,12 @@ public abstract class BaseDrawerPullVoidTicketEntry  implements Comparable, Seri
 		this.hast = hast;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: quantity
 	 */
 	public java.lang.Integer getQuantity () {
 									return quantity == null ? Integer.valueOf(0) : quantity;
 					}
-
 	/**
 	 * Set the value related to the column: quantity
 	 * @param quantity the quantity value
@@ -126,15 +105,12 @@ public abstract class BaseDrawerPullVoidTicketEntry  implements Comparable, Seri
 		this.quantity = quantity;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: amount
 	 */
 	public java.lang.Double getAmount () {
 									return amount == null ? Double.valueOf(0) : amount;
 					}
-
 	/**
 	 * Set the value related to the column: amount
 	 * @param amount the amount value
@@ -145,19 +121,13 @@ public abstract class BaseDrawerPullVoidTicketEntry  implements Comparable, Seri
 
 
 
-
-
-
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

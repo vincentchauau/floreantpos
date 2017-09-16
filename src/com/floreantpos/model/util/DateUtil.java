@@ -16,11 +16,9 @@
  * ************************************************************************
  */
 package com.floreantpos.model.util;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 public class DateUtil {
 	public static Date startOfDay(Date date) {
 		Calendar cal = Calendar.getInstance();
@@ -28,70 +26,54 @@ public class DateUtil {
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
-
 		return new Date(cal.getTimeInMillis());
 	}
-
 	public static Date endOfDay(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		cal.set(Calendar.HOUR_OF_DAY, 23);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
-
 		return new Date(cal.getTimeInMillis());
 	}
-
 	public static boolean isStartOfWeek(Date date) {
 		Calendar c1 = Calendar.getInstance();
 		c1.setTime(date);
 		c1.set(Calendar.HOUR_OF_DAY, 0);
 		c1.set(Calendar.MINUTE, 0);
 		c1.set(Calendar.SECOND, 0);
-
 		return c1.get(Calendar.DAY_OF_WEEK) == 1;
 	}
-
 	public static boolean isStartOfMonth(Date date) {
 		Calendar c1 = Calendar.getInstance();
 		c1.setTime(date);
 		c1.set(Calendar.HOUR_OF_DAY, 0);
 		c1.set(Calendar.MINUTE, 0);
 		c1.set(Calendar.SECOND, 0);
-
 		return c1.get(Calendar.DAY_OF_MONTH) == 1;
 	}
-
 	public static boolean between(Date startDate, Date endDate, Date guniping) {
 		if (startDate == null || endDate == null) {
 			return false;
 		}
-
 		return (guniping.equals(startDate) || guniping.after(startDate)) && (guniping.equals(endDate) || guniping.before(endDate));
 	}
-
 	public static String getReportDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy, h:m a");
 		String date = dateFormat.format(new Date());
-
 		return date;
 	}
-
 	public static boolean isToday(Date date) {
 		return isSameDay(date, Calendar.getInstance().getTime());
 	}
-
 	public static boolean isToday(Calendar cal) {
 		return isSameDay(cal, Calendar.getInstance());
 	}
-
 	public static String formatDateAsString(Date date) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy, h:m a");
 		String dateString = dateFormat.format(date);
-
 		return "TODAY " + dateString;
 	}
-
 	public static boolean isSameDay(Date date1, Date date2) {
 		Calendar cal1 = Calendar.getInstance();
 		cal1.setTime(date1);
@@ -99,10 +81,8 @@ public class DateUtil {
 		cal2.setTime(date2);
 		return isSameDay(cal1, cal2);
 	}
-
 	public static boolean isSameDay(Calendar cal1, Calendar cal2) {
 		return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) && cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1.get(Calendar.DAY_OF_YEAR) == cal2
 				.get(Calendar.DAY_OF_YEAR));
 	}
-
 }

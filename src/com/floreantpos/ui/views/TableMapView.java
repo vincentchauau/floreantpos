@@ -20,46 +20,34 @@
  *
  * Created on August 14, 2006, 11:45 PM
  */
-
 package com.floreantpos.ui.views;
-
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
 import java.util.Locale;
-
 import com.floreantpos.extension.ExtensionManager;
 import com.floreantpos.extension.FloorLayoutPlugin;
 import com.floreantpos.model.OrderType;
 import com.floreantpos.ui.tableselection.DefaultTableSelectionView;
 import com.floreantpos.ui.tableselection.TableSelector;
 import com.floreantpos.ui.views.order.ViewPanel;
-
 /**
  * 
  * @author MShahriar
  */
 public class TableMapView extends ViewPanel {
-
 	public final static String VIEW_NAME = "TABLE_MAP"; //$NON-NLS-1$
-
 	private TableSelector tableSelector = null;
-
 	private OrderType orderType;
 	private static TableMapView instance;
-
 	private TableMapView() {
 		initComponents();
-
 		applyComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
 	}
-
 	private void initComponents() {
 		setLayout(new BorderLayout());
-
 		FloorLayoutPlugin floorLayoutPlugin = (FloorLayoutPlugin) ExtensionManager.getPlugin(FloorLayoutPlugin.class);
 		if (floorLayoutPlugin == null) {
 			tableSelector = new DefaultTableSelectionView();
-
 		}
 		else {
 			tableSelector = floorLayoutPlugin.createTableSelector();
@@ -68,30 +56,24 @@ public class TableMapView extends ViewPanel {
 		tableSelector.updateView(false);
 		add(tableSelector, BorderLayout.CENTER);
 	}
-
 	public void updateView() {
 		tableSelector.redererTables();
 	}
-
 	public static TableMapView getInstance() {
 		if (instance == null) {
 			instance = new TableMapView();
 		}
-
 		return instance;
 	}
-
 	public static TableMapView getInstance(OrderType orderType) {
 		TableMapView instance2 = getInstance();
 		instance2.tableSelector.setOrderType(orderType);
 		instance2.orderType = orderType;
 		return instance2;
 	}
-
 	public OrderType getOrderType() {
 		return orderType;
 	}
-
 	@Override
 	public String getViewName() {
 		return VIEW_NAME;

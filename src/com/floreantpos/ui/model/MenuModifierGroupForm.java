@@ -20,16 +20,11 @@
  *
  * Created on August 4, 2006, 12:28 AM
  */
-
 package com.floreantpos.ui.model;
-
 import javax.swing.JLabel;
-
 import net.miginfocom.swing.MigLayout;
-
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-
 import com.floreantpos.POSConstants;
 import com.floreantpos.model.MenuModifierGroup;
 import com.floreantpos.model.dao.ModifierDAO;
@@ -38,24 +33,20 @@ import com.floreantpos.swing.FixedLengthTextField;
 import com.floreantpos.swing.MessageDialog;
 import com.floreantpos.ui.BeanEditor;
 import com.floreantpos.util.POSUtil;
-
 /**
  *
  * @author  MShahriar
  */
 public class MenuModifierGroupForm extends BeanEditor {
-
 	/** Creates new form ModofierGroupEditor */
 	public MenuModifierGroupForm() throws Exception {
 		this(new MenuModifierGroup());
 	}
-
 	public MenuModifierGroupForm(MenuModifierGroup group) throws Exception {
 		initComponents();
 		
 		setBean(group);
 	}
-
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -68,9 +59,7 @@ public class MenuModifierGroupForm extends BeanEditor {
         jLabel1 = new javax.swing.JLabel();
         tfName = new com.floreantpos.swing.FixedLengthTextField();
         tfName.setLength(60);
-
         jLabel1.setText(com.floreantpos.POSConstants.NAME);
-
         add(jLabel1, "cell 0 0,alignx left,aligny center"); //$NON-NLS-1$
 		add(tfName, "cell 1 0,growx,aligny top"); //$NON-NLS-1$
 		
@@ -81,7 +70,6 @@ public class MenuModifierGroupForm extends BeanEditor {
 		tfTranslatedName.setLength(60);
 		add(tfTranslatedName, "cell 1 1,growx"); //$NON-NLS-1$
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private com.floreantpos.swing.FixedLengthTextField tfName;
@@ -93,7 +81,6 @@ public class MenuModifierGroupForm extends BeanEditor {
 			if(!updateModel()) return false;
 			
 			MenuModifierGroup group = (MenuModifierGroup) getBean();
-
 			ModifierGroupDAO dao = new ModifierGroupDAO();
 			dao.saveOrUpdate(group);
 		} catch (Exception e) {
@@ -102,7 +89,6 @@ public class MenuModifierGroupForm extends BeanEditor {
 		}
 		return true;
 	}
-
 	@Override
 	protected void updateView() {
 		MenuModifierGroup group = (MenuModifierGroup) getBean();
@@ -114,15 +100,12 @@ public class MenuModifierGroupForm extends BeanEditor {
 			Hibernate.initialize(group.getModifiers());
 			session.close();
 		}
-
 		tfName.setText(group.getName());
 		tfTranslatedName.setText(group.getTranslatedName());
 	}
-
 	@Override
 	protected boolean updateModel() {
 		MenuModifierGroup group = (MenuModifierGroup) getBean();
-
 		String name = tfName.getText();
     	if(POSUtil.isBlankOrNull(name)) {
     		MessageDialog.showError(com.floreantpos.POSConstants.NAME_REQUIRED);
@@ -134,7 +117,6 @@ public class MenuModifierGroupForm extends BeanEditor {
 		
 		return true;
 	}
-
 	public String getDisplayText() {
     	MenuModifierGroup modifierGroup = (MenuModifierGroup) getBean();
     	if(modifierGroup.getId() == null) {

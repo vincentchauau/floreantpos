@@ -20,9 +20,7 @@
  *
  * Created on August 2, 2006, 10:34 PM
  */
-
 package com.floreantpos.ui.model;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -36,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -58,13 +55,10 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.AbstractTableModel;
-
 import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.io.FileUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-
 import com.floreantpos.Messages;
 import com.floreantpos.PosLog;
 import com.floreantpos.extension.ExtensionManager;
@@ -96,7 +90,6 @@ import com.floreantpos.ui.dialog.ConfirmDeleteDialog;
 import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.util.POSUtil;
 import com.floreantpos.util.ShiftUtil;
-
 /**
  *
  * @author  MShahriar
@@ -105,7 +98,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 	ShiftTableModel shiftTableModel;
 	PriceByOrderTypeTableModel priceTableModel;
 	private MenuItem menuItem;
-
 	private javax.swing.JButton btnAddShift;
 	private javax.swing.JButton btnNewPrice;
 	private javax.swing.JButton btnUpdatePrice;
@@ -169,77 +161,60 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 	private JLabel lblStockCount;
 	private JCheckBox cbDisableStockCount;
 	private JLabel lblSortOrder;
-
 	/** Creates new form FoodItemEditor */
 	public MenuItemForm() throws Exception {
 		this(new MenuItem());
 	}
-
 	public MenuItemForm(MenuItem menuItem) throws Exception {
 		this.menuItem = menuItem;
 		initComponents();
-
 		MenuGroupDAO foodGroupDAO = new MenuGroupDAO();
 		List<MenuGroup> foodGroups = foodGroupDAO.findAll();
 		cbGroup.setModel(new ComboBoxModel(foodGroups));
-
 		TaxGroupDAO taxDAO = new TaxGroupDAO();
 		List<TaxGroup> taxeGroups = taxDAO.findAll();
 		cbTaxGroup.setModel(new ComboBoxModel(taxeGroups));
-
 		menuItemModifierGroups = menuItem.getMenuItemModiferGroups();
 		shiftTable.setModel(shiftTableModel = new ShiftTableModel(menuItem.getShifts()));
 		priceTable.setModel(priceTableModel = new PriceByOrderTypeTableModel(menuItem.getProperties()));
-
 		setBean(menuItem);
 	}
-
 	protected void doSelectImageFile() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setMultiSelectionEnabled(false);
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
 		int option = fileChooser.showOpenDialog(POSUtil.getBackOfficeWindow());
-
 		if (option == JFileChooser.APPROVE_OPTION) {
 			File imageFile = fileChooser.getSelectedFile();
 			try {
 				byte[] itemImage = FileUtils.readFileToByteArray(imageFile);
 				int imageSize = itemImage.length / 1024;
-
 				if (imageSize > 20) {
 					POSMessageDialog.showMessage(Messages.getString("MenuItemForm.0")); //$NON-NLS-1$
 					itemImage = null;
 					return;
 				}
-
 				ImageIcon imageIcon = new ImageIcon(new ImageIcon(itemImage).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 				lblImagePreview.setIcon(imageIcon);
-
 				MenuItem menuItem = (MenuItem) getBean();
 				menuItem.setImageData(itemImage);
-
 			} catch (IOException e) {
 				PosLog.error(getClass(), e);
 			}
 		}
 	}
-
 	protected void doClearImage() {
 		MenuItem menuItem = (MenuItem) getBean();
 		menuItem.setImageData(null);
 		lblImagePreview.setIcon(null);
 	}
-
 	public void addRecepieExtension() {
 		InventoryPlugin plugin = (InventoryPlugin) ExtensionManager.getPlugin(InventoryPlugin.class);
 		if (plugin == null) {
 			return;
 		}
-
 		plugin.addRecepieView(tabbedPane);
 	}
-
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -266,7 +241,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		tfPrice = new DoubleTextField(20);
 		tfPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 		tfDescription = new JTextArea(new FixedLengthDocument(255));
-
 		//tfDescription.setDocument(;
 		tfUnitName = new FixedLengthTextField(20);
 		lTax = new javax.swing.JLabel();
@@ -301,10 +275,8 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		cbPrinterGroup = new JComboBox<PrinterGroup>(new DefaultComboBoxModel<PrinterGroup>(PrinterGroupDAO.getInstance().findAll()
 				.toArray(new PrinterGroup[0])));
 		cbPrinterGroup.setPreferredSize(new Dimension(226, 0));
-
 		tfTranslatedName = new FixedLengthTextField(20);
 		tfTranslatedName.setLength(120);
-
 		lblUnitName = new JLabel(Messages.getString("MenuItemForm.23")); //$NON-NLS-1$
 		lblKitchenPrinter = new JLabel(Messages.getString("MenuItemForm.27")); //$NON-NLS-1$
 		lgroup.setText(Messages.getString("LABEL_GROUP")); //$NON-NLS-1$
@@ -327,35 +299,27 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		cbShowTextWithImage.setActionCommand(Messages.getString("MenuItemForm.41")); //$NON-NLS-1$
 		lTax.setText(Messages.getString("LABEL_TAX")); //$NON-NLS-1$
 		cbFractionalUnit = new JCheckBox(Messages.getString("MenuItemForm.24")); //$NON-NLS-1$
-
 		btnNewGroup.setText("..."); //$NON-NLS-1$
 		btnNewGroup.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				doCreateNewGroup(evt);
 			}
 		});
-
 		if (Application.getInstance().isPriceIncludesTax()) {
 			lblPrice.setText(Messages.getString("LABEL_SALES_PRICE_INCLUDING_TAX")); //$NON-NLS-1$
 		}
 		else {
 			lblPrice.setText(Messages.getString("LABEL_SALES_PRICE_EXCLUDING_TAX")); //$NON-NLS-1$
 		}
-
 		tfPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
 		lTax.setText(Messages.getString("LABEL_TAX")); //$NON-NLS-1$
-
 		lDiscountRate.setText(com.floreantpos.POSConstants.DISCOUNT_RATE + ":"); //$NON-NLS-1$
-
 		lPercentage.setText("%"); //$NON-NLS-1$
-
 		chkVisible.setText(com.floreantpos.POSConstants.VISIBLE);
 		chkVisible.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		chkVisible.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		tabbedPane.addTab(com.floreantpos.POSConstants.GENERAL, tabGeneral);
 		tabbedPane.setPreferredSize(new Dimension(750, 470));
-
 		btnNewModifierGroup.setText(com.floreantpos.POSConstants.ADD);
 		btnNewModifierGroup.setActionCommand("AddModifierGroup"); //$NON-NLS-1$
 		btnNewModifierGroup.addActionListener(new java.awt.event.ActionListener() {
@@ -363,35 +327,27 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 				btnNewModifierGroupActionPerformed(evt);
 			}
 		});
-
 		btnDeleteModifierGroup.setText(com.floreantpos.POSConstants.DELETE);
 		btnDeleteModifierGroup.setActionCommand("DeleteModifierGroup"); //$NON-NLS-1$
-
 		btnEditModifierGroup.setText(com.floreantpos.POSConstants.EDIT);
 		btnEditModifierGroup.setActionCommand("EditModifierGroup"); //$NON-NLS-1$
-
 		menuItemMGListModel = new MenuItemMGListModel();
 		tableTicketItemModifierGroups.setModel(menuItemMGListModel);
-
 		btnNewModifierGroup.addActionListener(this);
 		btnEditModifierGroup.addActionListener(this);
 		btnDeleteModifierGroup.addActionListener(this);
 		btnAddShift.addActionListener(this);
 		btnDeleteShift.addActionListener(this);
-
 		tfDiscountRate.setDocument(new DoubleDocument());
-
 		tabGeneral.setLayout(new MigLayout("insets 20", "[][]20px[][]", "[][][][][][][][][][][][][]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		/*JLabel lblImage = new JLabel(Messages.getString("MenuItemForm.28")); //$NON-NLS-1$
 		lblImage.setHorizontalAlignment(SwingConstants.TRAILING);
 		tabGeneral.add(lblImage, "cell 0 0,right"); //$NON-NLS-1$
-
 		lblImagePreview = new JLabel(""); //$NON-NLS-1$
 		lblImagePreview.setHorizontalAlignment(JLabel.CENTER);
 		lblImagePreview.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		lblImagePreview.setPreferredSize(new Dimension(100, 100));
 		tabGeneral.add(lblImagePreview, "cell 1 0"); //$NON-NLS-1$
-
 		JButton btnSelectImage = new JButton("..."); //$NON-NLS-1$
 		btnSelectImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -399,7 +355,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			}
 		});
 		tabGeneral.add(btnSelectImage, "cell 1 0"); //$NON-NLS-1$
-
 		btnClearImage = new JButton(Messages.getString("MenuItemForm.34")); //$NON-NLS-1$
 		btnClearImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -408,65 +363,47 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		});
 		tabGeneral.add(btnClearImage, "cell 1 0"); //$NON-NLS-1$
 		*/
-
 		tabGeneral.add(lfname, "cell 0 1 ,right"); //$NON-NLS-1$
 		tabGeneral.add(tfName, "cell 1 1,grow"); //$NON-NLS-1$
-
 		tabGeneral.add(lblTranslatedName, "cell 0 2,right"); //$NON-NLS-1$
 		tabGeneral.add(tfTranslatedName, "cell 1 2,grow"); //$NON-NLS-1$
-
 		/*tabGeneral.add(new JLabel("Description"), "cell 0 3,right");
 		JScrollPane scrlDescription = new JScrollPane(tfDescription, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		tabGeneral.add(scrlDescription, "cell 1 3");*/
-
 		tabGeneral.add(lblUnitName, "cell 0 3,right"); //$NON-NLS-1$
 		tabGeneral.add(tfUnitName, "cell 1 3,grow"); //$NON-NLS-1$
 		JLabel lblBuyPrice = new JLabel(Messages.getString("LABEL_BUY_PRICE")); //$NON-NLS-1$
-
 		tabGeneral.add(lblBuyPrice, "cell 0 4,alignx right"); //$NON-NLS-1$
 		tfBuyPrice = new DoubleTextField(20);
 		tfBuyPrice.setHorizontalAlignment(SwingConstants.TRAILING);
 		tabGeneral.add(tfBuyPrice, "cell 1 4,grow"); //$NON-NLS-1$
-
 		tabGeneral.add(lblPrice, "cell 0 5,alignx right"); //$NON-NLS-1$
 		tabGeneral.add(tfPrice, "cell 1 5,grow"); //$NON-NLS-1$
-
 		tabGeneral.add(lgroup, "cell 0 6,alignx right"); //$NON-NLS-1$
 		tabGeneral.add(cbGroup, "cell 1 6"); //$NON-NLS-1$
 		tabGeneral.add(btnNewGroup, "cell 1 6"); //$NON-NLS-1$
-
 		tabGeneral.add(lblBarcode, "cell 0 7,alignx right"); //$NON-NLS-1$
 		tabGeneral.add(tfBarcode, "cell 1 7,grow"); //$NON-NLS-1$
-
 		tabGeneral.add(lblSortOrder, "cell 0 8,alignx right"); //$NON-NLS-1$
 		tabGeneral.add(tfSortOrder, "cell 1 8,grow"); //$NON-NLS-1$
-
 		tabGeneral.add(lblStockCount, "cell 0 9,alignx right"); //$NON-NLS-1$
 		tabGeneral.add(tfStockCount, "cell 1 9,grow"); //$NON-NLS-1$
-
 		//tabGeneral.add(cbShowTextWithImage, "cell 1 8"); //$NON-NLS-1$
 		tabGeneral.add(chkVisible, "cell 1 10"); //$NON-NLS-1$
 		tabGeneral.add(cbFractionalUnit, "cell 1 11"); //$NON-NLS-1$
 		tabGeneral.add(cbDisableStockCount, "cell 1 12"); //$NON-NLS-1$
-
 		// right side
-
 		tabGeneral.add(lblKitchenPrinter, "cell 2 1,right"); //$NON-NLS-1$
 		tabGeneral.add(cbPrinterGroup, "cell 3 1,grow"); //$NON-NLS-1$
-
 		tabGeneral.add(lTax, "cell 2 2,right"); //$NON-NLS-1$
 		tabGeneral.add(cbTaxGroup, "cell 3 2"); //$NON-NLS-1$
-
 		/*tabGeneral.add(lblButtonColor, "cell 2 3,right"); //$NON-NLS-1$
 		tabGeneral.add(btnButtonColor, "cell 3 3,grow"); //$NON-NLS-1$
-
 		tabGeneral.add(lblTextColor, "cell 2 4,right"); //$NON-NLS-1$
 		tabGeneral.add(btnTextColor, "cell 3 4 3 5"); //$NON-NLS-1$
 		btnTextColor.setPreferredSize(new Dimension(228, 50));*/
-
 		tabGeneral.add(new JLabel(Messages.getString("MenuItemForm.25")), "cell 2 3,,aligny top,alignx right"); //$NON-NLS-1$ //$NON-NLS-2$
 		orderList = new CheckBoxList();
-
 		List<OrderType> orderTypes = Application.getInstance().getOrderTypes();
 		orderList.setModel(orderTypes);
 		//		List<String> orderListM = new ArrayList();
@@ -477,24 +414,19 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		//		orderListM.add(OrderType.PICKUP.toString());
 		//		orderListM.add(OrderType.RETAIL.toString());
 		//		orderListM.add(OrderType.TAKE_OUT.toString());
-
 		//		orderList.setModel(orderListM);
-
 		JScrollPane orderCheckBoxList = new JScrollPane(orderList);
 		orderCheckBoxList.setPreferredSize(new Dimension(228, 100));
 		tabGeneral.add(orderCheckBoxList, "cell 3 3 3 4"); //$NON-NLS-1$
 		tfDescription.setWrapStyleWord(true);
 		tfDescription.setLineWrap(true);
-
 		tabGeneral.add(new JLabel(Messages.getString("MenuItemForm.29")), "cell 2 7,aligny top,alignx right"); //$NON-NLS-1$ //$NON-NLS-2$
 		JScrollPane scrlDescription = new JScrollPane(tfDescription, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrlDescription.setPreferredSize(new Dimension(228, 90));
 		tabGeneral.add(scrlDescription, "cell 3 7 3 4"); //$NON-NLS-1$
-
 		add(tabbedPane);
 		//TODO: 
 		addRecepieExtension();
-
 		/*btnButtonColor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -503,7 +435,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 				btnTextColor.setBackground(color);
 			}
 		});
-
 		btnTextColor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -511,9 +442,7 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 				btnTextColor.setForeground(color);
 			}
 		});*/
-
 		jScrollPane1.setViewportView(tableTicketItemModifierGroups);
-
 		GroupLayout jPanel2Layout = new GroupLayout(tabModifier);
 		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(Alignment.TRAILING).addGroup(
 				jPanel2Layout
@@ -537,17 +466,12 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 														.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnDeleteModifierGroup))
 										.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)).addContainerGap()));
 		tabModifier.setLayout(jPanel2Layout);
-
 		tabbedPane.addTab(com.floreantpos.POSConstants.MODIFIER_GROUPS, tabModifier);
-
 		btnDeleteShift.setText(com.floreantpos.POSConstants.DELETE_SHIFT);
-
 		btnAddShift.setText(com.floreantpos.POSConstants.ADD_SHIFT);
-
 		shiftTable.setModel(new javax.swing.table.DefaultTableModel(new Object[][] { { null, null, null, null }, { null, null, null, null },
 				{ null, null, null, null }, { null, null, null, null } }, new String[] { "Title 1", "Title 2", "Title 3", "Title 4" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		jScrollPane2.setViewportView(shiftTable);
-
 		org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(tabShift);
 		tabShift.setLayout(jPanel3Layout);
 		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(
@@ -566,11 +490,8 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 						.addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
 						.add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE).add(btnAddShift).add(btnDeleteShift))
 						.addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-
 		tabbedPane.addTab(com.floreantpos.POSConstants.SHIFTS, tabShift);
-
 		//
-
 		btnNewPrice.setText(Messages.getString("MenuItemForm.9")); //$NON-NLS-1$
 		btnNewPrice.addActionListener(new ActionListener() {
 			@Override
@@ -580,7 +501,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		});
 		btnUpdatePrice.setText(Messages.getString("MenuItemForm.13")); //$NON-NLS-1$
 		btnUpdatePrice.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				updatePrice();
@@ -588,7 +508,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		});
 		btnDeletePrice.setText(Messages.getString("MenuItemForm.14")); //$NON-NLS-1$
 		btnDeletePrice.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				deletePrice();
@@ -596,16 +515,13 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		});
 		btnDeleteAll.setText(Messages.getString("MenuItemForm.15")); //$NON-NLS-1$
 		btnDeleteAll.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				deleteAll();
 			}
 		});
-
 		btnDefaultValue.setText(Messages.getString("MenuItemForm.7")); //$NON-NLS-1$
 		/*btnDefaultValue.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setDefaultValue();
@@ -613,53 +529,39 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		});*/
 		priceTable.setModel(new javax.swing.table.DefaultTableModel(new Object[][] { { null, null, null, null }, { null, null, null, null },
 				{ null, null, null, null }, { null, null, null, null } }, new String[] { "Title 1", "Title 2", "Title 3", "Title 4" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-
 		jScrollPane3.setViewportView(priceTable);
-
 		tabPrice.setLayout(new BorderLayout());
 		tabPrice.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		tabPrice.add(jScrollPane3, BorderLayout.CENTER);
-
 		JPanel buttonPanel = new JPanel();
-
 		buttonPanel.add(btnNewPrice);
 		buttonPanel.add(btnUpdatePrice);
 		//buttonPanel.add(btnDefaultValue);
 		buttonPanel.add(btnDeletePrice);
-
 		//	buttonPanel.add(btnDeleteAll);
-
 		tabPrice.add(buttonPanel, BorderLayout.SOUTH);
 		tabbedPane.addTab(Messages.getString("MenuItemForm.16"), tabPrice); //$NON-NLS-1$
-
 		//
-
 		tabbedPane.addChangeListener(this);
 		//
-
 		tabButtonStyle.setLayout(new MigLayout("insets 10", "[][]100[][][][]", "[][][center][][][]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-
 		JLabel lblImage = new JLabel(Messages.getString("MenuItemForm.28")); //$NON-NLS-1$
 		lblImage.setHorizontalAlignment(SwingConstants.TRAILING);
 		tabButtonStyle.add(lblImage, "cell 0 0,right"); //$NON-NLS-1$
-
 		lblImagePreview = new JLabel(""); //$NON-NLS-1$
 		lblImagePreview.setHorizontalAlignment(JLabel.CENTER);
 		lblImagePreview.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		lblImagePreview.setPreferredSize(new Dimension(100, 100));
 		tabButtonStyle.add(lblImagePreview, "cell 1 0"); //$NON-NLS-1$
-
 		JButton btnSelectImage = new JButton("..."); //$NON-NLS-1$
 		btnClearImage = new JButton(Messages.getString("MenuItemForm.34")); //$NON-NLS-1$
 		tabButtonStyle.add(btnClearImage, "cell  1 0"); //$NON-NLS-1$
 		tabButtonStyle.add(btnSelectImage, "cell 1 0"); //$NON-NLS-1$
-
 		tabButtonStyle.add(lblButtonColor, "cell 0 2,right"); //$NON-NLS-1$
 		tabButtonStyle.add(btnButtonColor, "cell 1 2,grow"); //$NON-NLS-1$
 		tabButtonStyle.add(lblTextColor, "cell 0 3,right"); //$NON-NLS-1$
 		tabButtonStyle.add(btnTextColor, "cell 1 3"); //$NON-NLS-1$
 		tabButtonStyle.add(cbShowTextWithImage, "cell 1 4"); //$NON-NLS-1$
-
 		/*	tabButtonStyle.add(lblImagePreview, "cell 3 0 3 4"); //$NON-NLS-1$
 			tabButtonStyle.add(btnClearImage, "cell 3 0,gaptop 40"); //$NON-NLS-1$
 			tabButtonStyle.add(btnSelectImage, "cell 3 0,gaptop 40"); //$NON-NLS-1$
@@ -670,19 +572,16 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			tabButtonStyle.add(btnTextColor, "cell 1 1"); //$NON-NLS-1$
 		*/
 		btnTextColor.setPreferredSize(new Dimension(228, 50));
-
 		btnSelectImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				doSelectImageFile();
 			}
 		});
-
 		btnClearImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				doClearImage();
 			}
 		});
-
 		btnButtonColor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -691,7 +590,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 				btnTextColor.setBackground(color);
 			}
 		});
-
 		btnTextColor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -699,20 +597,14 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 				btnTextColor.setForeground(color);
 			}
 		});
-
 		tabbedPane.addTab(Messages.getString("MenuItemForm.26"), tabButtonStyle); //$NON-NLS-1$
-
 	}// </editor-fold>//GEN-END:initComponents
-
 	private void btnNewModifierGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewModifierGroupActionPerformed
-
 	}//GEN-LAST:event_btnNewModifierGroupActionPerformed
-
 	private void doCreateNewGroup(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doCreateNewGroup
 		MenuGroupForm editor = new MenuGroupForm();
 		BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
 		dialog.open();
-
 		if (!dialog.isCanceled()) {
 			MenuGroup foodGroup = (MenuGroup) editor.getBean();
 			ComboBoxModel model = (ComboBoxModel) cbGroup.getModel();
@@ -720,7 +612,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			model.setSelectedItem(foodGroup);
 		}
 	}//GEN-LAST:event_doCreateNewGroup
-
 	private void addMenuItemModifierGroup() {
 		try {
 			MenuItemModifierGroupForm form = new MenuItemModifierGroupForm();
@@ -729,7 +620,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			if (!dialog.isCanceled()) {
 				MenuItemModifierGroup modifier = (MenuItemModifierGroup) form.getBean();
 				//modifier.setParentMenuItem((MenuItem) this.getBean());
-
 				if (menuItemModifierGroups != null) {
 					for (MenuItemModifierGroup modifierGroup : menuItemModifierGroups) {
 						if (modifierGroup.getModifierGroup().equals(modifier.getModifierGroup())) {
@@ -738,22 +628,18 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 						}
 					}
 				}
-
 				menuItemMGListModel.add(modifier);
 			}
 		} catch (Exception x) {
 			MessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
 		}
 	}
-
 	private void editMenuItemModifierGroup() {
 		try {
 			int index = tableTicketItemModifierGroups.getSelectedRow();
 			if (index < 0)
 				return;
-
 			MenuItemModifierGroup menuItemModifierGroup = menuItemMGListModel.get(index);
-
 			MenuItemModifierGroupForm form = new MenuItemModifierGroupForm(menuItemModifierGroup);
 			BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), form);
 			dialog.open();
@@ -765,13 +651,11 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			MessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
 		}
 	}
-
 	private void deleteMenuItemModifierGroup() {
 		try {
 			int index = tableTicketItemModifierGroups.getSelectedRow();
 			if (index < 0)
 				return;
-
 			if (ConfirmDeleteDialog.showMessage(this, com.floreantpos.POSConstants.CONFIRM_DELETE, com.floreantpos.POSConstants.CONFIRM) == ConfirmDeleteDialog.YES) {
 				menuItemMGListModel.remove(index);
 			}
@@ -779,13 +663,11 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			MessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
 		}
 	}
-
 	@Override
 	public boolean save() {
 		try {
 			if (!updateModel())
 				return false;
-
 			MenuItem menuItem = (MenuItem) getBean();
 			MenuItemDAO menuItemDAO = new MenuItemDAO();
 			menuItemDAO.saveOrUpdate(menuItem);
@@ -795,11 +677,9 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		}
 		return true;
 	}
-
 	@Override
 	protected void updateView() {
 		MenuItem menuItem = getBean();
-
 		if (menuItem.getId() != null && !Hibernate.isInitialized(menuItem.getMenuItemModiferGroups())) {
 			//initialize food item modifer groups.
 			MenuItemDAO dao = new MenuItemDAO();
@@ -808,7 +688,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			Hibernate.initialize(menuItem.getMenuItemModiferGroups());
 			session.close();
 		}
-
 		//	terminalList.selectItems(menuItem.getTerminals());
 		orderList.selectItems(menuItem.getOrderTypeList());
 		tfName.setText(menuItem.getName());
@@ -827,28 +706,22 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		if (menuItemImage != null) {
 			lblImagePreview.setIcon(menuItemImage);
 		}
-
 		cbGroup.setSelectedItem(menuItem.getParent());
 		cbTaxGroup.setSelectedItem(menuItem.getTaxGroup());
-
 		cbPrinterGroup.setSelectedItem(menuItem.getPrinterGroup());
-
 		if (menuItem.getSortOrder() != null) {
 			tfSortOrder.setText(menuItem.getSortOrder().toString());
 		}
-
 		Color buttonColor = menuItem.getButtonColor();
 		if (buttonColor != null) {
 			btnButtonColor.setBackground(buttonColor);
 			btnTextColor.setBackground(buttonColor);
 		}
-
 		if (menuItem.getTextColor() != null) {
 			btnTextColor.setForeground(menuItem.getTextColor());
 		}
 		cbFractionalUnit.setSelected(menuItem.isFractionalUnit());
 	}
-
 	@Override
 	protected boolean updateModel() {
 		String itemName = tfName.getText();
@@ -856,7 +729,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			MessageDialog.showError(com.floreantpos.POSConstants.NAME_REQUIRED);
 			return false;
 		}
-
 		MenuItem menuItem = getBean();
 		menuItem.setName(itemName);
 		menuItem.setDescription(tfDescription.getText());
@@ -871,17 +743,13 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		menuItem.setShowImageOnly(cbShowTextWithImage.isSelected());
 		menuItem.setFractionalUnit(cbFractionalUnit.isSelected());
 		menuItem.setDisableWhenStockAmountIsZero(cbDisableStockCount.isSelected());
-
 		menuItem.setTranslatedName(tfTranslatedName.getText());
 		menuItem.setSortOrder(tfSortOrder.getInteger());
-
 		menuItem.setButtonColorCode(btnButtonColor.getBackground().getRGB());
 		menuItem.setTextColorCode(btnTextColor.getForeground().getRGB());
-
 		/*	if (!terminalList.getCheckedValues().isEmpty()) {
 				menuItem.setTerminals(terminalList.getCheckedValues());
 			}*/
-
 		if (orderList.getCheckedValues().isEmpty()) {
 			menuItem.setOrderTypeList(null);
 		}
@@ -894,7 +762,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		}
 		menuItem.setMenuItemModiferGroups(menuItemModifierGroups);
 		menuItem.setShifts(shiftTableModel.getShifts());
-
 		int tabCount = tabbedPane.getTabCount();
 		for (int i = 0; i < tabCount; i++) {
 			Component componentAt = tabbedPane.getComponent(i);
@@ -905,12 +772,9 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 				}
 			}
 		}
-
 		menuItem.setPrinterGroup((PrinterGroup) cbPrinterGroup.getSelectedItem());
-
 		return true;
 	}
-
 	public String getDisplayText() {
 		MenuItem foodItem = (MenuItem) getBean();
 		if (foodItem.getId() == null) {
@@ -918,17 +782,13 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		}
 		return com.floreantpos.POSConstants.EDIT_MENU_ITEM;
 	}
-
 	class MenuItemMGListModel extends AbstractTableModel {
 		String[] cn = { com.floreantpos.POSConstants.GROUP_NAME, com.floreantpos.POSConstants.MIN_QUANTITY, com.floreantpos.POSConstants.MAX_QUANTITY };
-
 		MenuItemMGListModel() {
 		}
-
 		public MenuItemModifierGroup get(int index) {
 			return menuItemModifierGroups.get(index);
 		}
-
 		public void add(MenuItemModifierGroup group) {
 			if (menuItemModifierGroups == null) {
 				menuItemModifierGroups = new ArrayList<MenuItemModifierGroup>();
@@ -936,7 +796,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			menuItemModifierGroups.add(group);
 			fireTableDataChanged();
 		}
-
 		public void remove(int index) {
 			if (menuItemModifierGroups == null) {
 				return;
@@ -944,7 +803,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			menuItemModifierGroups.remove(index);
 			fireTableDataChanged();
 		}
-
 		public void remove(MenuItemModifierGroup group) {
 			if (menuItemModifierGroups == null) {
 				return;
@@ -952,46 +810,35 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			menuItemModifierGroups.remove(group);
 			fireTableDataChanged();
 		}
-
 		public int getRowCount() {
 			if (menuItemModifierGroups == null)
 				return 0;
-
 			return menuItemModifierGroups.size();
-
 		}
-
 		public int getColumnCount() {
 			return cn.length;
 		}
-
 		@Override
 		public String getColumnName(int column) {
 			return cn[column];
 		}
-
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			MenuItemModifierGroup menuItemModifierGroup = menuItemModifierGroups.get(rowIndex);
-
 			switch (columnIndex) {
 				case 0:
 					return menuItemModifierGroup.getModifierGroup().getName();
-
 				case 1:
 					return Integer.valueOf(menuItemModifierGroup.getMinQuantity());
-
 				case 2:
 					return Integer.valueOf(menuItemModifierGroup.getMaxQuantity());
 			}
 			return null;
 		}
 	}
-
 	class ShiftTableModel extends AbstractTableModel {
 		List<MenuItemShift> shifts;
 		String[] cn = { com.floreantpos.POSConstants.START_TIME, com.floreantpos.POSConstants.END_TIME, com.floreantpos.POSConstants.PRICE };
 		Calendar calendar = Calendar.getInstance();
-
 		ShiftTableModel(List<MenuItemShift> shifts) {
 			if (shifts == null) {
 				this.shifts = new ArrayList<MenuItemShift>();
@@ -1000,11 +847,9 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 				this.shifts = new ArrayList<MenuItemShift>(shifts);
 			}
 		}
-
 		public MenuItemShift get(int index) {
 			return shifts.get(index);
 		}
-
 		public void add(MenuItemShift group) {
 			if (shifts == null) {
 				shifts = new ArrayList<MenuItemShift>();
@@ -1012,7 +857,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			shifts.add(group);
 			fireTableDataChanged();
 		}
-
 		public void remove(int index) {
 			if (shifts == null) {
 				return;
@@ -1020,7 +864,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			shifts.remove(index);
 			fireTableDataChanged();
 		}
-
 		public void remove(MenuItemShift group) {
 			if (shifts == null) {
 				return;
@@ -1028,79 +871,59 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			shifts.remove(group);
 			fireTableDataChanged();
 		}
-
 		public int getRowCount() {
 			if (shifts == null)
 				return 0;
-
 			return shifts.size();
-
 		}
-
 		public int getColumnCount() {
 			return cn.length;
 		}
-
 		@Override
 		public String getColumnName(int column) {
 			return cn[column];
 		}
-
 		public List<MenuItemShift> getShifts() {
 			return shifts;
 		}
-
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			MenuItemShift shift = shifts.get(rowIndex);
-
 			switch (columnIndex) {
 				case 0:
 					return ShiftUtil.buildShiftTimeRepresentation(shift.getShift().getStartTime());
-
 				case 1:
 					return ShiftUtil.buildShiftTimeRepresentation(shift.getShift().getEndTime());
-
 				case 2:
 					return String.valueOf(shift.getShiftPrice());
 			}
 			return null;
 		}
 	}
-
 	//
-
 	class PriceByOrderTypeTableModel extends AbstractTableModel {
 		List<String> propertiesKey = new ArrayList<String>();
-
 		String[] cn = { "ORDER TYPE", "PRICE", "TAX" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-
 		PriceByOrderTypeTableModel(Map<String, String> properties) {
-
 			if (properties != null && !properties.isEmpty()) {
 				List<String> keys = new ArrayList(properties.keySet());
 				setPropertiesToTable(keys);
 			}
 		}
-
 		private void setPropertiesToTable(List<String> keys) {
 			propertiesKey.clear();
-
 			for (int i = 0; i < keys.size(); i++) {
 				if (keys.get(i).contains("_PRICE")) { //$NON-NLS-1$
 					this.propertiesKey.add(keys.get(i));
 				}
 			}
 		}
-
 		public String get(int index) {
 			return propertiesKey.get(index);
 		}
-
 		public void add(MenuItem menuItem) {
 			setPropertiesToTable(new ArrayList(menuItem.getProperties().keySet()));
 			fireTableDataChanged();
 		}
-
 		/*public void setDefaultValue() {
 			int selectedRow = priceTable.getSelectedRow();
 			if (selectedRow == -1) {
@@ -1117,57 +940,45 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			else {
 				menuItem.setTaxByOrderType(modifiedKey, 0.0);
 			}
-
 			MenuItemDAO.getInstance().saveOrUpdate(menuItem);
 			add(menuItem);
 			fireTableDataChanged();
 		}*/
-
 		public void remove(int index) {
 			if (propertiesKey == null) {
 				return;
 			}
 			String typeProperty = propertiesKey.get(index);
 			String taxProperty = typeProperty.replaceAll("_PRICE", "_TAX"); //$NON-NLS-1$ //$NON-NLS-2$
-
 			menuItem.removeProperty(typeProperty, taxProperty);
 			MenuItemDAO.getInstance().saveOrUpdate(menuItem);
-
 			propertiesKey.remove(index);
 			fireTableDataChanged();
 		}
-
 		public void removeAll() {
 			menuItem.getProperties().clear();
 			MenuItemDAO.getInstance().saveOrUpdate(menuItem);
 			propertiesKey.clear();
 			fireTableDataChanged();
 		}
-
 		public int getRowCount() {
 			if (propertiesKey == null)
 				return 0;
-
 			return propertiesKey.size();
 		}
-
 		public int getColumnCount() {
 			return cn.length;
 		}
-
 		@Override
 		public String getColumnName(int column) {
 			return cn[column];
 		}
-
 		public List<String> getProperties() {
 			return propertiesKey;
 		}
-
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			String key = String.valueOf(propertiesKey.get(rowIndex));
 			switch (columnIndex) {
-
 				case 0:
 					return menuItem.getStringWithOutUnderScore(key, "_PRICE"); //$NON-NLS-1$
 				case 1:
@@ -1178,21 +989,17 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			return null;
 		}
 	}
-
 	//
 	private void addShift() {
 		MenuItemShiftDialog dialog = new MenuItemShiftDialog(this.getParentFrame());
 		dialog.setSize(350, 220);
 		dialog.open();
-
 		if (!dialog.isCanceled()) {
 			MenuItemShift menuItemShift = dialog.getMenuItemShift();
 			shiftTableModel.add(menuItemShift);
 		}
 	}
-
 	private void addNewPrice() {
-
 		MenuItemPriceByOrderTypeDialog dialog = new MenuItemPriceByOrderTypeDialog(this.getParentFrame(), menuItem);
 		dialog.setSize(350, 220);
 		dialog.open();
@@ -1200,14 +1007,12 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			priceTableModel.add(dialog.getMenuItem());
 		}
 	}
-
 	private void deleteShift() {
 		int selectedRow = shiftTable.getSelectedRow();
 		if (selectedRow >= 0) {
 			shiftTableModel.remove(selectedRow);
 		}
 	}
-
 	private void deletePrice() {
 		int selectedRow = priceTable.getSelectedRow();
 		if (selectedRow == -1) {
@@ -1219,12 +1024,9 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		if (option != JOptionPane.YES_OPTION) {
 			return;
 		}
-
 		priceTableModel.remove(selectedRow);
 	}
-
 	private void deleteAll() {
-
 		int option = POSMessageDialog.showYesNoQuestionDialog(this.getParentFrame(),
 				Messages.getString("MenuItemForm.36"), Messages.getString("MenuItemForm.37")); //$NON-NLS-1$ //$NON-NLS-2$
 		if (option != JOptionPane.YES_OPTION) {
@@ -1232,11 +1034,9 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		}
 		priceTableModel.removeAll();
 	}
-
 	/*private void setDefaultValue() {
 		priceTableModel.setDefaultValue();
 	}*/
-
 	private void updatePrice() {
 		int selectedRow = priceTable.getSelectedRow();
 		if (selectedRow == -1) {
@@ -1252,7 +1052,6 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			priceTableModel.add(dialog.getMenuItem());
 		}
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
 		if (actionCommand.equals("AddModifierGroup")) { //$NON-NLS-1$
@@ -1271,16 +1070,13 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 			deleteShift();
 		}
 	}
-
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		Component selectedComponent = tabbedPane.getSelectedComponent();
 		if (!(selectedComponent instanceof IUpdatebleView)) {
 			return;
 		}
-
 		IUpdatebleView view = (IUpdatebleView) selectedComponent;
-
 		MenuItem menuItem = (MenuItem) getBean();
 		view.initView(menuItem);
 	}

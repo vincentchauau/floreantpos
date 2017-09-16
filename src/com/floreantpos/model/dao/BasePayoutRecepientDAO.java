@@ -16,21 +16,16 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-
 /**
  * This is an automatically generated DAO class which should not be edited.
  */
 public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._RootDAO {
-
 	// query name references
 
-
 	public static PayoutRecepientDAO instance;
-
 	/**
 	 * Return a singleton of the DAO
 	 */
@@ -38,42 +33,34 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 		if (null == instance) instance = new PayoutRecepientDAO();
 		return instance;
 	}
-
 	public Class getReferenceClass () {
 		return com.floreantpos.model.PayoutRecepient.class;
 	}
-
     public Order getDefaultOrder () {
 		return Order.asc("name"); //$NON-NLS-1$
     }
-
 	/**
 	 * Cast the object as a com.floreantpos.model.PayoutRecepient
 	 */
 	public com.floreantpos.model.PayoutRecepient cast (Object object) {
 		return (com.floreantpos.model.PayoutRecepient) object;
 	}
-
 	public com.floreantpos.model.PayoutRecepient get(java.lang.Integer key)
 	{
 		return (com.floreantpos.model.PayoutRecepient) get(getReferenceClass(), key);
 	}
-
 	public com.floreantpos.model.PayoutRecepient get(java.lang.Integer key, Session s)
 	{
 		return (com.floreantpos.model.PayoutRecepient) get(getReferenceClass(), key, s);
 	}
-
 	public com.floreantpos.model.PayoutRecepient load(java.lang.Integer key)
 	{
 		return (com.floreantpos.model.PayoutRecepient) load(getReferenceClass(), key);
 	}
-
 	public com.floreantpos.model.PayoutRecepient load(java.lang.Integer key, Session s)
 	{
 		return (com.floreantpos.model.PayoutRecepient) load(getReferenceClass(), key, s);
 	}
-
 	public com.floreantpos.model.PayoutRecepient loadInitialize(java.lang.Integer key, Session s) 
 	{ 
 		com.floreantpos.model.PayoutRecepient obj = load(key, s); 
@@ -82,23 +69,19 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 		} 
 		return obj; 
 	}
-
 /* Generic methods */
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
 	public java.util.List<com.floreantpos.model.PayoutRecepient> findAll () {
 		return super.findAll();
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
 	public java.util.List<com.floreantpos.model.PayoutRecepient> findAll (Order defaultOrder) {
 		return super.findAll(defaultOrder);
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 * Use the session given.
@@ -107,7 +90,6 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	public java.util.List<com.floreantpos.model.PayoutRecepient> findAll (Session s, Order defaultOrder) {
 		return super.findAll(s, defaultOrder);
 	}
-
 	/**
 	 * Persist the given transient instance, first assigning a generated identifier. (Or using the current value
 	 * of the identifier property if the assigned generator is used.) 
@@ -118,7 +100,6 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	{
 		return (java.lang.Integer) super.save(payoutRecepient);
 	}
-
 	/**
 	 * Persist the given transient instance, first assigning a generated identifier. (Or using the current value
 	 * of the identifier property if the assigned generator is used.) 
@@ -131,7 +112,6 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	{
 		return (java.lang.Integer) save((Object) payoutRecepient, s);
 	}
-
 	/**
 	 * Either save() or update() the given instance, depending upon the value of its identifier property. By default
 	 * the instance is always saved. This behaviour may be adjusted by specifying an unsaved-value attribute of the
@@ -142,7 +122,6 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	{
 		saveOrUpdate((Object) payoutRecepient);
 	}
-
 	/**
 	 * Either save() or update() the given instance, depending upon the value of its identifier property. By default the
 	 * instance is always saved. This behaviour may be adjusted by specifying an unsaved-value attribute of the identifier
@@ -155,7 +134,6 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	{
 		saveOrUpdate((Object) payoutRecepient, s);
 	}
-
 	/**
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
 	 * instance with the same identifier in the current session.
@@ -165,7 +143,6 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	{
 		update((Object) payoutRecepient);
 	}
-
 	/**
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
 	 * instance with the same identifier in the current session.
@@ -177,7 +154,6 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	{
 		update((Object) payoutRecepient, s);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -187,7 +163,6 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	{
 		delete((Object) load(id));
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -199,7 +174,6 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	{
 		delete((Object) load(id, s), s);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -209,7 +183,6 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	{
 		delete((Object) payoutRecepient);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -236,6 +209,5 @@ public abstract class BasePayoutRecepientDAO extends com.floreantpos.model.dao._
 	{
 		refresh((Object) payoutRecepient, s);
 	}
-
 
 }

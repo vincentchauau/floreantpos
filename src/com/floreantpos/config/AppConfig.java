@@ -16,14 +16,10 @@
  * ************************************************************************
  */
 package com.floreantpos.config;
-
 import java.io.File;
-
 import org.apache.commons.configuration.PropertiesConfiguration;
-
 import com.floreantpos.Database;
 import com.floreantpos.PosLog;
-
 public class AppConfig {
 	
 	public static final String DATABASE_URL = "database_url"; //$NON-NLS-1$
@@ -51,7 +47,6 @@ public class AppConfig {
 			
 			config = new PropertiesConfiguration(configFile);
 			config.setAutoSave(true);
-
 		} catch (Exception e) {
 			PosLog.error(AppConfig.class, e.getMessage());
 		}
@@ -96,7 +91,6 @@ public class AppConfig {
 	public static void setDatabaseHost(String url) {
 		config.setProperty(DATABASE_URL, url);
 	}
-
 	public static String getConnectString() {
 		return config.getString(CONNECTION_STRING, Database.DERBY_SINGLE.getConnectString("", "", ""));  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}

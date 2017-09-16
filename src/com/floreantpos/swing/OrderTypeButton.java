@@ -16,11 +16,9 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Set;
-
 import com.floreantpos.IconFactory;
 import com.floreantpos.POSConstants;
 import com.floreantpos.PosLog;
@@ -38,14 +36,11 @@ import com.floreantpos.ui.tableselection.TableSelectorDialog;
 import com.floreantpos.ui.tableselection.TableSelectorFactory;
 import com.floreantpos.ui.views.order.RootView;
 import com.floreantpos.util.TicketAlreadyExistsException;
-
 public class OrderTypeButton extends PosButton implements ActionListener {
 	private OrderType orderType;
-
 	public OrderTypeButton() {
 		super("");
 	}
-
 	public OrderTypeButton(OrderType orderType) {
 		super();
 		this.orderType = orderType;
@@ -61,7 +56,6 @@ public class OrderTypeButton extends PosButton implements ActionListener {
 		}
 		addActionListener(this);
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (!hasPermission()) {
@@ -81,7 +75,6 @@ public class OrderTypeButton extends PosButton implements ActionListener {
 			dialog.setCreateNewTicket(true);
 			dialog.updateView(true);
 			dialog.openUndecoratedFullScreen();
-
 			if (!dialog.isCanceled()) {
 				return;
 			}
@@ -91,7 +84,6 @@ public class OrderTypeButton extends PosButton implements ActionListener {
 			dialog.setCreateNewTicket(true);
 			dialog.updateView(true);
 			dialog.openUndecoratedFullScreen();
-
 			if (!dialog.isCanceled()) {
 				return;
 			}
@@ -104,7 +96,6 @@ public class OrderTypeButton extends PosButton implements ActionListener {
 			}
 		}
 	}
-
 	private boolean hasPermission() {
 		User user = Application.getCurrentUser();
 		UserType userType = user.getType();

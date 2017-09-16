@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--DOCTYPE JposEntries PUBLIC "-//JavaPOS//DTD//EN" "jpos/res/jcl.dtd"-->
-
 <JposEntries>
 	<JposEntry logicalName="POSPrinter">
 	        <creation factoryClass="jp.co.epson.uposcommon.util.EpsonJposServiceInstanceFactory" serviceClass="jp.co.epson.upos.pntr.T88IIIService"/>
@@ -151,13 +149,11 @@
 	        <prop name="DirectIOEventTimeout" type="String" value="5000"/>
 	</JposEntry>
 
-
 	<JposEntry logicalName="CashDrawer">
 		<creation factoryClass="jp.co.epson.uposcommon.util.EpsonJposServiceInstanceFactory" serviceClass="jp.co.epson.upos.drw.StandardService" />
 		<vendor name="SEIKO EPSON" url="http://www.epson.co.jp" />
 		<jpos category="CashDrawer" version="1.9.2" />
 		<product description="EPSON Standard CashDrawer Device Service" name="EPSON Services for JavaPOS(TM) Standard" url="http://www.epson.co.jp" />
-
 		<!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
 		<prop name="FlowType" type="String" value="1" />
 		<prop name="PhysicalPrinterName" type="String" value="TM-T88III" />
@@ -203,5 +199,4 @@
 		<prop name="OfflineCount" type="String" value="2" />
 		<prop name="TransmitRetryTime" type="String" value="100" />
 	</JposEntry>
-
 </JposEntries>

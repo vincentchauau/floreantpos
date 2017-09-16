@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the CASH_DRAWER_RESET_HISTORY table.
@@ -11,21 +9,17 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="CASH_DRAWER_RESET_HISTORY"
  */
-
 public abstract class BaseCashDrawerResetHistory  implements Comparable, Serializable {
-
 	public static String REF = "CashDrawerResetHistory"; //$NON-NLS-1$
 	public static String PROP_DRAWER_PULL_REPORT = "drawerPullReport"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 	public static String PROP_RESET_TIME = "resetTime"; //$NON-NLS-1$
 	public static String PROP_RESETED_BY = "resetedBy"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseCashDrawerResetHistory () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -33,26 +27,17 @@ public abstract class BaseCashDrawerResetHistory  implements Comparable, Seriali
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 	protected java.util.Date resetTime;
-
 	// one to one
 	private com.floreantpos.model.DrawerPullReport drawerPullReport;
-
 	// many to one
 	private com.floreantpos.model.User resetedBy;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -63,7 +48,6 @@ public abstract class BaseCashDrawerResetHistory  implements Comparable, Seriali
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -74,15 +58,12 @@ public abstract class BaseCashDrawerResetHistory  implements Comparable, Seriali
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: RESET_TIME
 	 */
 	public java.util.Date getResetTime () {
 		return resetTime;
 	}
-
 	/**
 	 * Set the value related to the column: RESET_TIME
 	 * @param resetTime the RESET_TIME value
@@ -91,15 +72,12 @@ public abstract class BaseCashDrawerResetHistory  implements Comparable, Seriali
 		this.resetTime = resetTime;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: drawerPullReport
 	 */
 	public com.floreantpos.model.DrawerPullReport getDrawerPullReport () {
 		return drawerPullReport;
 	}
-
 	/**
 	 * Set the value related to the column: drawerPullReport
 	 * @param drawerPullReport the drawerPullReport value
@@ -108,15 +86,12 @@ public abstract class BaseCashDrawerResetHistory  implements Comparable, Seriali
 		this.drawerPullReport = drawerPullReport;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: USER_ID
 	 */
 	public com.floreantpos.model.User getResetedBy () {
 		return resetedBy;
 	}
-
 	/**
 	 * Set the value related to the column: USER_ID
 	 * @param resetedBy the USER_ID value
@@ -124,9 +99,6 @@ public abstract class BaseCashDrawerResetHistory  implements Comparable, Seriali
 	public void setResetedBy (com.floreantpos.model.User resetedBy) {
 		this.resetedBy = resetedBy;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -138,7 +110,6 @@ public abstract class BaseCashDrawerResetHistory  implements Comparable, Seriali
 			else return (this.getId().equals(cashDrawerResetHistory.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -149,16 +120,13 @@ public abstract class BaseCashDrawerResetHistory  implements Comparable, Seriali
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

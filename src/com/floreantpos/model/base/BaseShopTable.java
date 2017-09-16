@@ -1,8 +1,6 @@
 package com.floreantpos.model.base;
-
 import java.lang.Comparable;
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the SHOP_TABLE table.
@@ -12,9 +10,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="SHOP_TABLE"
  */
-
 public abstract class BaseShopTable  implements Comparable, Serializable {
-
 	public static String REF = "ShopTable"; //$NON-NLS-1$
 	public static String PROP_SERVING = "serving"; //$NON-NLS-1$
 	public static String PROP_FLOOR = "floor"; //$NON-NLS-1$
@@ -29,12 +25,10 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 	public static String PROP_DISABLE = "disable"; //$NON-NLS-1$
 	public static String PROP_NAME = "name"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseShopTable () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -42,18 +36,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	 long version;
-
 	// fields
 		protected java.lang.String name;
 		protected java.lang.String description;
@@ -65,14 +53,10 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		protected java.lang.Boolean booked;
 		protected java.lang.Boolean dirty;
 		protected java.lang.Boolean disable;
-
 	// many to one
 	private com.floreantpos.model.ShopFloor floor;
-
 	// collections
 	private java.util.List<com.floreantpos.model.ShopTableType> types;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -83,7 +67,6 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -93,15 +76,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.hashCode = Integer.MIN_VALUE;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: VERSION_NO
 	 */
 	public long getVersion () {
 					return version;
 			}
-
 	/**
 	 * Set the value related to the column: VERSION_NO
 	 * @param version the VERSION_NO value
@@ -111,15 +91,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -128,15 +105,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DESCRIPTION
 	 */
 	public java.lang.String getDescription () {
 					return description;
 			}
-
 	/**
 	 * Set the value related to the column: DESCRIPTION
 	 * @param description the DESCRIPTION value
@@ -145,15 +119,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.description = description;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CAPACITY
 	 */
 	public java.lang.Integer getCapacity () {
 									return capacity == null ? Integer.valueOf(0) : capacity;
 					}
-
 	/**
 	 * Set the value related to the column: CAPACITY
 	 * @param capacity the CAPACITY value
@@ -162,15 +133,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.capacity = capacity;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: X
 	 */
 	public java.lang.Integer getX () {
 									return x == null ? Integer.valueOf(0) : x;
 					}
-
 	/**
 	 * Set the value related to the column: X
 	 * @param x the X value
@@ -179,15 +147,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.x = x;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: Y
 	 */
 	public java.lang.Integer getY () {
 									return y == null ? Integer.valueOf(0) : y;
 					}
-
 	/**
 	 * Set the value related to the column: Y
 	 * @param y the Y value
@@ -196,15 +161,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.y = y;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: FREE
 	 */
 	public java.lang.Boolean isFree () {
 								return free == null ? Boolean.FALSE : free;
 					}
-
 	/**
 	 * Set the value related to the column: FREE
 	 * @param free the FREE value
@@ -213,15 +175,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.free = free;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SERVING
 	 */
 	public java.lang.Boolean isServing () {
 								return serving == null ? Boolean.FALSE : serving;
 					}
-
 	/**
 	 * Set the value related to the column: SERVING
 	 * @param serving the SERVING value
@@ -230,15 +189,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.serving = serving;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: BOOKED
 	 */
 	public java.lang.Boolean isBooked () {
 								return booked == null ? Boolean.FALSE : booked;
 					}
-
 	/**
 	 * Set the value related to the column: BOOKED
 	 * @param booked the BOOKED value
@@ -247,15 +203,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.booked = booked;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DIRTY
 	 */
 	public java.lang.Boolean isDirty () {
 								return dirty == null ? Boolean.FALSE : dirty;
 					}
-
 	/**
 	 * Set the value related to the column: DIRTY
 	 * @param dirty the DIRTY value
@@ -264,15 +217,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.dirty = dirty;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DISABLE
 	 */
 	public java.lang.Boolean isDisable () {
 								return disable == null ? Boolean.FALSE : disable;
 					}
-
 	/**
 	 * Set the value related to the column: DISABLE
 	 * @param disable the DISABLE value
@@ -281,15 +231,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.disable = disable;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: FLOOR_ID
 	 */
 	public com.floreantpos.model.ShopFloor getFloor () {
 					return floor;
 			}
-
 	/**
 	 * Set the value related to the column: FLOOR_ID
 	 * @param floor the FLOOR_ID value
@@ -298,15 +245,12 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		this.floor = floor;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: types
 	 */
 	public java.util.List<com.floreantpos.model.ShopTableType> getTypes () {
 					return types;
 			}
-
 	/**
 	 * Set the value related to the column: types
 	 * @param types the types value
@@ -314,14 +258,10 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 	public void setTypes (java.util.List<com.floreantpos.model.ShopTableType> types) {
 		this.types = types;
 	}
-
 	public void addTotypes (com.floreantpos.model.ShopTableType shopTableType) {
 		if (null == getTypes()) setTypes(new java.util.ArrayList<com.floreantpos.model.ShopTableType>());
 		getTypes().add(shopTableType);
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -333,7 +273,6 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 			else return (this.getId().equals(shopTable.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -344,16 +283,13 @@ public abstract class BaseShopTable  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

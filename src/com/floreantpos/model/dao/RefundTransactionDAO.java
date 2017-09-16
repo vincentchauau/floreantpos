@@ -16,27 +16,21 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-
 import com.floreantpos.model.RefundTransaction;
 import com.floreantpos.model.Terminal;
 import com.floreantpos.model.util.RefundSummary;
 
-
 public class RefundTransactionDAO extends BaseRefundTransactionDAO {
-
 	/**
 	 * Default constructor.  Can be used in place of getInstance()
 	 */
 	public RefundTransactionDAO () {}
-
 	public RefundSummary getTotalRefundForTerminal(Terminal terminal) {
 		Session session = null;
 		RefundSummary refundSummary = new RefundSummary();
@@ -61,7 +55,6 @@ public class RefundTransactionDAO extends BaseRefundTransactionDAO {
 				if (objects.length > 0 && objects[0] != null) {
 					refundSummary.setCount(((Number) objects[0]).intValue());
 				}
-
 				if (objects.length > 1 && objects[1] != null) {
 					refundSummary.setAmount(((Number) objects[1]).doubleValue());
 				}

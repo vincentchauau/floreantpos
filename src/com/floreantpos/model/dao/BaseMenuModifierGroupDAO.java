@@ -16,21 +16,16 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-
 /**
  * This is an automatically generated DAO class which should not be edited.
  */
 public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao._RootDAO {
-
 	// query name references
 
-
 	public static MenuModifierGroupDAO instance;
-
 	/**
 	 * Return a singleton of the DAO
 	 */
@@ -38,42 +33,34 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		if (null == instance) instance = new MenuModifierGroupDAO();
 		return instance;
 	}
-
 	public Class getReferenceClass () {
 		return com.floreantpos.model.MenuModifierGroup.class;
 	}
-
     public Order getDefaultOrder () {
 		return Order.asc("name"); //$NON-NLS-1$
     }
-
 	/**
 	 * Cast the object as a com.floreantpos.model.MenuModifierGroup
 	 */
 	public com.floreantpos.model.MenuModifierGroup cast (Object object) {
 		return (com.floreantpos.model.MenuModifierGroup) object;
 	}
-
 	public com.floreantpos.model.MenuModifierGroup get(java.lang.Integer key)
 		throws org.hibernate.HibernateException {
 		return (com.floreantpos.model.MenuModifierGroup) get(getReferenceClass(), key);
 	}
-
 	public com.floreantpos.model.MenuModifierGroup get(java.lang.Integer key, Session s)
 		throws org.hibernate.HibernateException {
 		return (com.floreantpos.model.MenuModifierGroup) get(getReferenceClass(), key, s);
 	}
-
 	public com.floreantpos.model.MenuModifierGroup load(java.lang.Integer key)
 		throws org.hibernate.HibernateException {
 		return (com.floreantpos.model.MenuModifierGroup) load(getReferenceClass(), key);
 	}
-
 	public com.floreantpos.model.MenuModifierGroup load(java.lang.Integer key, Session s)
 		throws org.hibernate.HibernateException {
 		return (com.floreantpos.model.MenuModifierGroup) load(getReferenceClass(), key, s);
 	}
-
 	public com.floreantpos.model.MenuModifierGroup loadInitialize(java.lang.Integer key, Session s) 
 			throws org.hibernate.HibernateException { 
 		com.floreantpos.model.MenuModifierGroup obj = load(key, s); 
@@ -82,23 +69,19 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		} 
 		return obj; 
 	}
-
 /* Generic methods */
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
 	public java.util.List<com.floreantpos.model.MenuModifierGroup> findAll () {
 		return super.findAll();
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
 	public java.util.List<com.floreantpos.model.MenuModifierGroup> findAll (Order defaultOrder) {
 		return super.findAll(defaultOrder);
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 * Use the session given.
@@ -107,7 +90,6 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 	public java.util.List<com.floreantpos.model.MenuModifierGroup> findAll (Session s, Order defaultOrder) {
 		return super.findAll(s, defaultOrder);
 	}
-
 	/**
 	 * Persist the given transient instance, first assigning a generated identifier. (Or using the current value
 	 * of the identifier property if the assigned generator is used.) 
@@ -118,7 +100,6 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		throws org.hibernate.HibernateException {
 		return (java.lang.Integer) super.save(menuModifierGroup);
 	}
-
 	/**
 	 * Persist the given transient instance, first assigning a generated identifier. (Or using the current value
 	 * of the identifier property if the assigned generator is used.) 
@@ -131,7 +112,6 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		throws org.hibernate.HibernateException {
 		return (java.lang.Integer) save((Object) menuModifierGroup, s);
 	}
-
 	/**
 	 * Either save() or update() the given instance, depending upon the value of its identifier property. By default
 	 * the instance is always saved. This behaviour may be adjusted by specifying an unsaved-value attribute of the
@@ -142,7 +122,6 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		throws org.hibernate.HibernateException {
 		saveOrUpdate((Object) menuModifierGroup);
 	}
-
 	/**
 	 * Either save() or update() the given instance, depending upon the value of its identifier property. By default the
 	 * instance is always saved. This behaviour may be adjusted by specifying an unsaved-value attribute of the identifier
@@ -155,7 +134,6 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		throws org.hibernate.HibernateException {
 		saveOrUpdate((Object) menuModifierGroup, s);
 	}
-
 	/**
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
 	 * instance with the same identifier in the current session.
@@ -165,7 +143,6 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		throws org.hibernate.HibernateException {
 		update((Object) menuModifierGroup);
 	}
-
 	/**
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
 	 * instance with the same identifier in the current session.
@@ -177,7 +154,6 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		throws org.hibernate.HibernateException {
 		update((Object) menuModifierGroup, s);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -187,7 +163,6 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		throws org.hibernate.HibernateException {
 		delete((Object) load(id));
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -199,7 +174,6 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		throws org.hibernate.HibernateException {
 		delete((Object) load(id, s), s);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -209,7 +183,6 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		throws org.hibernate.HibernateException {
 		delete((Object) menuModifierGroup);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -236,6 +209,5 @@ public abstract class BaseMenuModifierGroupDAO extends com.floreantpos.model.dao
 		throws org.hibernate.HibernateException {
 		refresh((Object) menuModifierGroup, s);
 	}
-
 
 }

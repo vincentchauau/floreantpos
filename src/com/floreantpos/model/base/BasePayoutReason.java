@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the PAYOUT_REASONS table.
@@ -28,19 +26,15 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="PAYOUT_REASONS"
  */
-
 public abstract class BasePayoutReason  implements Comparable, Serializable {
-
 	public static String REF = "PayoutReason"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 	public static String PROP_REASON = "reason"; //$NON-NLS-1$
-
 
 	// constructors
 	public BasePayoutReason () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -48,20 +42,13 @@ public abstract class BasePayoutReason  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 	private java.lang.String reason;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -72,7 +59,6 @@ public abstract class BasePayoutReason  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -83,15 +69,12 @@ public abstract class BasePayoutReason  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: REASON
 	 */
 	public java.lang.String getReason () {
 			return reason;
 	}
-
 	/**
 	 * Set the value related to the column: REASON
 	 * @param reason the REASON value
@@ -99,9 +82,6 @@ public abstract class BasePayoutReason  implements Comparable, Serializable {
 	public void setReason (java.lang.String reason) {
 		this.reason = reason;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -113,7 +93,6 @@ public abstract class BasePayoutReason  implements Comparable, Serializable {
 			else return (this.getId().equals(payoutReason.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -124,16 +103,13 @@ public abstract class BasePayoutReason  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

@@ -16,34 +16,25 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.actions;
-
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JTabbedPane;
-
 import com.floreantpos.Messages;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.PizzaCrustExplorer;
-
 public class PizzaCrustExplorerAction extends AbstractAction {
-
 	public PizzaCrustExplorerAction() {
 		super(Messages.getString("PizzaCrustExplorerAction.0")); //$NON-NLS-1$
 	}
-
 	public PizzaCrustExplorerAction(String name) {
 		super(name);
 	}
-
 	public PizzaCrustExplorerAction(String name, Icon icon) {
 		super(name, icon);
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
-
 		PizzaCrustExplorer explorer = null;
 		JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
 		int index = tabbedPane.indexOfTab(Messages.getString("PizzaCrustExplorerAction.0")); //$NON-NLS-1$
@@ -56,5 +47,4 @@ public class PizzaCrustExplorerAction extends AbstractAction {
 		}
 		tabbedPane.setSelectedComponent(explorer);
 	}
-
 }

@@ -16,28 +16,21 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 import org.apache.commons.lang.StringUtils;
-
 import com.floreantpos.model.base.BasePayOutTransaction;
-
-
 
 public class PayOutTransaction extends BasePayOutTransaction {
 	private static final long serialVersionUID = 1L;
-
 /*[CONSTRUCTOR MARKER BEGIN]*/
 	public PayOutTransaction () {
 		super();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
 	public PayOutTransaction (java.lang.Integer id) {
 		super(id);
 	}
-
 	/**
 	 * Constructor for required fields
 	 */
@@ -45,7 +38,6 @@ public class PayOutTransaction extends BasePayOutTransaction {
 		java.lang.Integer id,
 		java.lang.String transactionType,
 		java.lang.String paymentType) {
-
 		super (
 			id,
 			transactionType,
@@ -53,7 +45,6 @@ public class PayOutTransaction extends BasePayOutTransaction {
 	}
 
 /*[CONSTRUCTOR MARKER END]*/
-
 	@Override
 	public String getTransactionType() {
 		String type = super.getTransactionType();
@@ -64,5 +55,4 @@ public class PayOutTransaction extends BasePayOutTransaction {
 		
 		return type;
 	}
-
 }

@@ -20,9 +20,7 @@
  *
  * Created on September 2, 2006, 12:15 AM
  */
-
 package com.floreantpos.ui.views;
-
 /**
  *
  * @author  MShahriar

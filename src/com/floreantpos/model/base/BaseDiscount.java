@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the COUPON_AND_DISCOUNT table.
@@ -11,9 +9,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="COUPON_AND_DISCOUNT"
  */
-
 public abstract class BaseDiscount  implements Comparable, Serializable {
-
 	public static String REF = "Discount";
 	public static String PROP_EXPIRY_DATE = "expiryDate";
 	public static String PROP_ENABLED = "enabled";
@@ -31,12 +27,10 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 	public static String PROP_ID = "id";
 	public static String PROP_UUID = "UUID";
 
-
 	// constructors
 	public BaseDiscount () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -44,16 +38,11 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String name;
 		protected java.lang.Integer type;
@@ -69,13 +58,10 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		protected java.lang.Boolean modifiable;
 		protected java.lang.Boolean neverExpire;
 		protected java.lang.String uUID;
-
 	// collections
 	private java.util.List<com.floreantpos.model.MenuItem> menuItems;
 	private java.util.List<com.floreantpos.model.MenuGroup> menuGroups;
 	private java.util.List<com.floreantpos.model.MenuCategory> menuCategories;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -86,7 +72,6 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -97,15 +82,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -114,15 +96,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: TYPE
 	 */
 	public java.lang.Integer getType () {
 									return type == null ? Integer.valueOf(0) : type;
 					}
-
 	/**
 	 * Set the value related to the column: TYPE
 	 * @param type the TYPE value
@@ -131,15 +110,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.type = type;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: BARCODE
 	 */
 	public java.lang.String getBarcode () {
 					return barcode;
 			}
-
 	/**
 	 * Set the value related to the column: BARCODE
 	 * @param barcode the BARCODE value
@@ -148,15 +124,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.barcode = barcode;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: QUALIFICATION_TYPE
 	 */
 	public java.lang.Integer getQualificationType () {
 									return qualificationType == null ? Integer.valueOf(0) : qualificationType;
 					}
-
 	/**
 	 * Set the value related to the column: QUALIFICATION_TYPE
 	 * @param qualificationType the QUALIFICATION_TYPE value
@@ -165,15 +138,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.qualificationType = qualificationType;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: APPLY_TO_ALL
 	 */
 	public java.lang.Boolean isApplyToAll () {
 								return applyToAll == null ? Boolean.FALSE : applyToAll;
 					}
-
 	/**
 	 * Set the value related to the column: APPLY_TO_ALL
 	 * @param applyToAll the APPLY_TO_ALL value
@@ -182,15 +152,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.applyToAll = applyToAll;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MINIMUM_BUY
 	 */
 	public java.lang.Integer getMinimunBuy () {
 									return minimunBuy == null ? Integer.valueOf(0) : minimunBuy;
 					}
-
 	/**
 	 * Set the value related to the column: MINIMUM_BUY
 	 * @param minimunBuy the MINIMUM_BUY value
@@ -199,15 +166,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.minimunBuy = minimunBuy;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MAXIMUM_OFF
 	 */
 	public java.lang.Integer getMiximumOff () {
 									return miximumOff == null ? Integer.valueOf(0) : miximumOff;
 					}
-
 	/**
 	 * Set the value related to the column: MAXIMUM_OFF
 	 * @param miximumOff the MAXIMUM_OFF value
@@ -216,15 +180,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.miximumOff = miximumOff;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: VALUE
 	 */
 	public java.lang.Double getValue () {
 									return value == null ? Double.valueOf(0) : value;
 					}
-
 	/**
 	 * Set the value related to the column: VALUE
 	 * @param value the VALUE value
@@ -233,15 +194,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.value = value;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: EXPIRY_DATE
 	 */
 	public java.util.Date getExpiryDate () {
 					return expiryDate;
 			}
-
 	/**
 	 * Set the value related to the column: EXPIRY_DATE
 	 * @param expiryDate the EXPIRY_DATE value
@@ -250,15 +208,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.expiryDate = expiryDate;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ENABLED
 	 */
 	public java.lang.Boolean isEnabled () {
 								return enabled == null ? Boolean.FALSE : enabled;
 					}
-
 	/**
 	 * Set the value related to the column: ENABLED
 	 * @param enabled the ENABLED value
@@ -267,15 +222,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.enabled = enabled;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: AUTO_APPLY
 	 */
 	public java.lang.Boolean isAutoApply () {
 								return autoApply == null ? Boolean.FALSE : autoApply;
 					}
-
 	/**
 	 * Set the value related to the column: AUTO_APPLY
 	 * @param autoApply the AUTO_APPLY value
@@ -284,15 +236,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.autoApply = autoApply;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MODIFIABLE
 	 */
 	public java.lang.Boolean isModifiable () {
 								return modifiable == null ? Boolean.FALSE : modifiable;
 					}
-
 	/**
 	 * Set the value related to the column: MODIFIABLE
 	 * @param modifiable the MODIFIABLE value
@@ -301,15 +250,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.modifiable = modifiable;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: NEVER_EXPIRE
 	 */
 	public java.lang.Boolean isNeverExpire () {
 								return neverExpire == null ? Boolean.FALSE : neverExpire;
 					}
-
 	/**
 	 * Set the value related to the column: NEVER_EXPIRE
 	 * @param neverExpire the NEVER_EXPIRE value
@@ -318,15 +264,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.neverExpire = neverExpire;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: UUID
 	 */
 	public java.lang.String getUUID () {
 					return uUID;
 			}
-
 	/**
 	 * Set the value related to the column: UUID
 	 * @param uUID the UUID value
@@ -335,15 +278,12 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		this.uUID = uUID;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: menuItems
 	 */
 	public java.util.List<com.floreantpos.model.MenuItem> getMenuItems () {
 					return menuItems;
 			}
-
 	/**
 	 * Set the value related to the column: menuItems
 	 * @param menuItems the menuItems value
@@ -351,13 +291,10 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 	public void setMenuItems (java.util.List<com.floreantpos.model.MenuItem> menuItems) {
 		this.menuItems = menuItems;
 	}
-
 	public void addTomenuItems (com.floreantpos.model.MenuItem menuItem) {
 		if (null == getMenuItems()) setMenuItems(new java.util.ArrayList<com.floreantpos.model.MenuItem>());
 		getMenuItems().add(menuItem);
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: menuGroups
@@ -365,7 +302,6 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 	public java.util.List<com.floreantpos.model.MenuGroup> getMenuGroups () {
 					return menuGroups;
 			}
-
 	/**
 	 * Set the value related to the column: menuGroups
 	 * @param menuGroups the menuGroups value
@@ -373,13 +309,10 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 	public void setMenuGroups (java.util.List<com.floreantpos.model.MenuGroup> menuGroups) {
 		this.menuGroups = menuGroups;
 	}
-
 	public void addTomenuGroups (com.floreantpos.model.MenuGroup menuGroup) {
 		if (null == getMenuGroups()) setMenuGroups(new java.util.ArrayList<com.floreantpos.model.MenuGroup>());
 		getMenuGroups().add(menuGroup);
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: menuCategories
@@ -387,7 +320,6 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 	public java.util.List<com.floreantpos.model.MenuCategory> getMenuCategories () {
 					return menuCategories;
 			}
-
 	/**
 	 * Set the value related to the column: menuCategories
 	 * @param menuCategories the menuCategories value
@@ -395,14 +327,10 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 	public void setMenuCategories (java.util.List<com.floreantpos.model.MenuCategory> menuCategories) {
 		this.menuCategories = menuCategories;
 	}
-
 	public void addTomenuCategories (com.floreantpos.model.MenuCategory menuCategory) {
 		if (null == getMenuCategories()) setMenuCategories(new java.util.ArrayList<com.floreantpos.model.MenuCategory>());
 		getMenuCategories().add(menuCategory);
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -414,7 +342,6 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 			else return (this.getId().equals(discount.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -425,16 +352,13 @@ public abstract class BaseDiscount  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

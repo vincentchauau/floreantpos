@@ -16,7 +16,6 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -25,68 +24,51 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.lang.StringUtils;
-
 import com.floreantpos.model.base.BaseKitchenTicket;
 import com.floreantpos.model.dao.KitchenTicketDAO;
 import com.floreantpos.model.dao.OrderTypeDAO;
 import com.floreantpos.util.GlobalIdGenerator;
-
 public class KitchenTicket extends BaseKitchenTicket {
 	private static final long serialVersionUID = 1L;
-
 	/*[CONSTRUCTOR MARKER BEGIN]*/
 	public KitchenTicket() {
 		super();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
 	public KitchenTicket(java.lang.Integer id) {
 		super(id);
 	}
-
 	/*[CONSTRUCTOR MARKER END]*/
-
 	private String customerName;
 	private Printer printer;
-
 	public OrderType getType() {
 		String type = getTicketType();
-
 		/*if (StringUtils.isEmpty(type)) {
 			return OrderType.DINE_IN;
 		}*/
-
 		return OrderTypeDAO.getInstance().findByName(type);
 	}
-
 	public void setType(OrderType type) {
 		setTicketType(type.name());
 	}
-
 	public void setPrinter(Printer printer) {
 		this.printer = printer;
 	}
-
 	public Printer getPrinter() {
 		return this.printer;
 	}
-
 	public List<Printer> getPrinters() {
 		List<Printer> printers = new ArrayList<Printer>();
-
 		PosPrinters posPrinters = PosPrinters.load();
 		PrinterGroup virtualPrinter = getPrinterGroup();
-
 		if (virtualPrinter == null) {
 			printers.add(posPrinters.getDefaultKitchenPrinter());
 			return printers;
 		}
-
 		List<String> printerNames = virtualPrinter.getPrinterNames();
 		List<Printer> kitchenPrinters = posPrinters.getKitchenPrinters();
 		for (Printer printer : kitchenPrinters) {
@@ -94,14 +76,11 @@ public class KitchenTicket extends BaseKitchenTicket {
 				printers.add(printer);
 			}
 		}
-
 		if (printers.size() == 0) {
 			printers.add(posPrinters.getDefaultKitchenPrinter());
 		}
-
 		return printers;
 	}
-
 	//	private static List<TicketItem> consolidateTicketItems(Ticket ticket) {
 	//		List<TicketItem> newticketItems = new ArrayList<TicketItem>();
 	//		newticketItems.addAll(((Ticket) SerializationUtils.clone(ticket)).getTicketItems());
@@ -156,20 +135,17 @@ public class KitchenTicket extends BaseKitchenTicket {
 	//
 	//		return newticketItems;
 	//	}
-
 	private static void setPrintedToKitchen(TicketItem ticketItem) {
 		ticketItem.setPrintedToKitchen(true);
 		List<TicketItemModifier> ticketItemModifiers = ticketItem.getTicketItemModifiers();
 		if (ticketItemModifiers != null) {
 			for (TicketItemModifier itemModifier : ticketItemModifiers) {
-
 				if (!itemModifier.isShouldPrintToKitchen()) {
 					continue;
 				}
 				itemModifier.setPrintedToKitchen(true);
 			}
 		}
-
 		List<TicketItemModifier> addOns = ticketItem.getAddOns();
 		if (addOns != null) {
 			for (TicketItemModifier ticketItemModifier : addOns) {
@@ -179,7 +155,6 @@ public class KitchenTicket extends BaseKitchenTicket {
 				ticketItemModifier.setPrintedToKitchen(true);
 			}
 		}
-
 		List<TicketItemCookingInstruction> cookingInstructions = ticketItem.getCookingInstructions();
 		if (cookingInstructions != null) {
 			for (TicketItemCookingInstruction cookingInstruction : cookingInstructions) {
@@ -187,11 +162,9 @@ public class KitchenTicket extends BaseKitchenTicket {
 			}
 		}
 	}
-
 	public static List<KitchenTicket> fromTicket(Ticket ticket) {
 		Map<Printer, KitchenTicket> itemMap = new HashMap<Printer, KitchenTicket>();
 		List<KitchenTicket> kitchenTickets = new ArrayList<KitchenTicket>(4);
-
 		Ticket clonedTicket = (Ticket) SerializationUtils.clone(ticket);
 		clonedTicket.setGlobalId(GlobalIdGenerator.generateGlobalId());
 		clonedTicket.consolidateTicketItems();
@@ -199,35 +172,28 @@ public class KitchenTicket extends BaseKitchenTicket {
 		if (ticketItems == null) {
 			return kitchenTickets;
 		}
-
 		if (ticket.getOrderType().isAllowSeatBasedOrder()) {
 			Collections.sort(ticketItems, new Comparator<TicketItem>() {
-
 				@Override
 				public int compare(TicketItem o1, TicketItem o2) {
 					return o1.getId() - o2.getId();
 				}
 			});
 			Collections.sort(ticketItems, new Comparator<TicketItem>() {
-
 				@Override
 				public int compare(TicketItem o1, TicketItem o2) {
 					return o1.getSeatNumber() - o2.getSeatNumber();
 				}
-
 			});
 		}
-
 		for (TicketItem ticketItem : ticketItems) {
 			if (ticketItem.isPrintedToKitchen() || !ticketItem.isShouldPrintToKitchen()) {
 				continue;
 			}
-
 			List<Printer> printers = ticketItem.getPrinters(ticket.getOrderType());
 			if (printers == null) {
 				continue;
 			}
-
 			for (Printer printer : printers) {
 				KitchenTicket kitchenTicket = itemMap.get(printer);
 				if (kitchenTicket == null) {
@@ -236,25 +202,18 @@ public class KitchenTicket extends BaseKitchenTicket {
 					kitchenTicket.setTicketId(ticket.getId());
 					kitchenTicket.setCreateDate(new Date());
 					kitchenTicket.setTicketType(ticket.getTicketType());
-
 					if (ticket.getTableNumbers() != null) {
 						kitchenTicket.setTableNumbers(new ArrayList<Integer>(ticket.getTableNumbers()));
 					}
-
 					kitchenTicket.setServerName(ticket.getOwner().getFirstName());
 					kitchenTicket.setStatus(KitchenTicketStatus.WAITING.name());
-
 					if (StringUtils.isNotEmpty(ticket.getProperty(Ticket.CUSTOMER_NAME))) {
 						kitchenTicket.setCustomerName(ticket.getProperty(Ticket.CUSTOMER_NAME));
 					}
-
 					KitchenTicketDAO.getInstance().saveOrUpdate(kitchenTicket);
-
 					kitchenTicket.setPrinter(printer);
-
 					itemMap.put(printer, kitchenTicket);
 				}
-
 				KitchenTicketItem item = new KitchenTicketItem();
 				item.setTicketItemId(ticketItem.getId());
 				item.setMenuItemCode(ticketItem.getItemCode());
@@ -269,10 +228,8 @@ public class KitchenTicket extends BaseKitchenTicket {
 					item.setMenuItemGroupId(ticketItem.getMenuItem().getParent().getId());
 					item.setSortOrder(ticketItem.getMenuItem().getParent().getSortOrder());
 				}
-
 				item.setFractionalUnit(ticketItem.isFractionalUnit());
 				item.setUnitName(ticketItem.getItemUnitName());
-
 				if (ticketItem.isFractionalUnit()) {
 					item.setFractionalQuantity(ticketItem.getItemQuantity());
 				}
@@ -280,20 +237,13 @@ public class KitchenTicket extends BaseKitchenTicket {
 					item.setQuantity(ticketItem.getItemCount());
 				}
 				item.setStatus(KitchenTicketStatus.WAITING.name());
-
 				kitchenTicket.addToticketItems(item);
-
 				ticketItem.setPrintedToKitchen(true);
-
 				includeModifiers(ticketItem, kitchenTicket);
 				includeCookintInstructions(ticketItem, kitchenTicket);
-
 			}
-
 		}
-
 		Collection<KitchenTicket> values = itemMap.values();
-
 		for (KitchenTicket kitchenTicket : values) {
 			kitchenTickets.add(kitchenTicket);
 			String kitchenTicketNumber = ticket.getProperty("KITCHEN_TICKET_NUMBER"); //$NON-NLS-1$
@@ -309,7 +259,6 @@ public class KitchenTicket extends BaseKitchenTicket {
 		ticket.markPrintedToKitchen();
 		return kitchenTickets;
 	}
-
 	private static void includeCookintInstructions(TicketItem ticketItem, KitchenTicket kitchenTicket) {
 		List<TicketItemCookingInstruction> cookingInstructions = ticketItem.getCookingInstructions();
 		if (cookingInstructions != null) {
@@ -332,7 +281,6 @@ public class KitchenTicket extends BaseKitchenTicket {
 			}
 		}
 	}
-
 	private static void includeModifiers(TicketItem ticketItem, KitchenTicket kitchenTicket) {
 		List<TicketItemModifier> ticketItemModifiers = ticketItem.getTicketItemModifiers();
 		if (ticketItemModifiers != null) {
@@ -340,13 +288,10 @@ public class KitchenTicket extends BaseKitchenTicket {
 				/*	if (!itemModifier.isShouldPrintToKitchen()) {
 						continue;
 					}*/
-
 				if (itemModifier.isPrintedToKitchen() || !itemModifier.isShouldPrintToKitchen()) {
 					continue;
 				}
-
 				//System.out.println(itemModifier.getName());
-
 				KitchenTicketItem item = new KitchenTicketItem();
 				item.setMenuItemCode(""); //$NON-NLS-1$
 				item.setTicketItemModifierId(itemModifier.getId());
@@ -366,18 +311,15 @@ public class KitchenTicket extends BaseKitchenTicket {
 				item.setQuantity(itemModifier.getItemCount());
 				item.setStatus(KitchenTicketStatus.WAITING.name());
 				kitchenTicket.addToticketItems(item);
-
 				itemModifier.setPrintedToKitchen(true);
 			}
 		}
-
 		List<TicketItemModifier> addOns = ticketItem.getAddOns();
 		if (addOns != null) {
 			for (TicketItemModifier ticketItemModifier : addOns) {
 				/*if (!ticketItemModifier.isShouldPrintToKitchen()) {
 					continue;
 				}*/
-
 				if (ticketItemModifier.isPrintedToKitchen() || !ticketItemModifier.isShouldPrintToKitchen()) {
 					continue;
 				}
@@ -399,20 +341,16 @@ public class KitchenTicket extends BaseKitchenTicket {
 				item.setQuantity(ticketItemModifier.getItemCount());
 				item.setStatus(KitchenTicketStatus.WAITING.name());
 				kitchenTicket.addToticketItems(item);
-
 				ticketItemModifier.setPrintedToKitchen(true);
 			}
 		}
 	}
-
 	public static enum KitchenTicketStatus {
 		WAITING, VOID, DONE;
 	}
-
 	public String getCustomerName() {
 		return customerName;
 	}
-
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}

@@ -16,12 +16,9 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import java.sql.Connection;
-
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
-
 import com.floreantpos.Database;
 import com.floreantpos.config.AppConfig;
 import com.floreantpos.model.ActionHistory;
@@ -98,15 +95,12 @@ import com.floreantpos.model.UserType;
 import com.floreantpos.model.VirtualPrinter;
 import com.floreantpos.model.VoidReason;
 import com.floreantpos.model.ZipCodeVsDeliveryCharge;
-
 public abstract class _RootDAO extends com.floreantpos.model.dao._BaseRootDAO {
-
 	/*
 	 * If you are using lazy loading, uncomment this Somewhere, you should call
 	 * RootDAO.closeCurrentThreadSessions(); public void closeSession (Session
 	 * session) { // do nothing here because the session will be closed later }
 	 */
-
 	/*
 	 * If you are pulling the SessionFactory from a JNDI tree, uncomment this
 	 * protected SessionFactory getSessionFactory(String configFile) { // If you
@@ -117,11 +111,9 @@ public abstract class _RootDAO extends com.floreantpos.model.dao._BaseRootDAO {
 	 * (SessionFactory) new
 	 * InitialContext().lookup("java:/{SessionFactoryName}"); }
 	 */
-
 	public static void initialize(String configFileName, Configuration configuration) {
 		com.floreantpos.model.dao._RootDAO.setSessionFactory(configuration.buildSessionFactory());
 	}
-
 	public static Configuration getNewConfiguration(String configFileName) {
 		Configuration configuration = new Configuration();
 		configuration.addClass(ActionHistory.class);
@@ -189,14 +181,10 @@ public abstract class _RootDAO extends com.floreantpos.model.dao._BaseRootDAO {
 		configuration.addClass(Multiplier.class);
 		configuration.addClass(ModifierMultiplierPrice.class);
 		configuration.addClass(TaxGroup.class);
-
 		configureInventoryClasses(configuration);
-
 		Database defaultDatabase = AppConfig.getDefaultDatabase();
-
 		configuration.setProperty("hibernate.dialect", defaultDatabase.getHibernateDialect()); //$NON-NLS-1$
 		configuration.setProperty("hibernate.connection.driver_class", defaultDatabase.getHibernateConnectionDriverClass()); //$NON-NLS-1$
-
 		configuration.setProperty("hibernate.connection.url", AppConfig.getConnectString()); //$NON-NLS-1$
 		configuration.setProperty("hibernate.connection.username", AppConfig.getDatabaseUser()); //$NON-NLS-1$
 		configuration.setProperty("hibernate.connection.password", AppConfig.getDatabasePassword()); //$NON-NLS-1$
@@ -205,12 +193,9 @@ public abstract class _RootDAO extends com.floreantpos.model.dao._BaseRootDAO {
 		configuration.setProperty("hibernate.max_fetch_depth", "3"); //$NON-NLS-1$ //$NON-NLS-2$
 		configuration.setProperty("hibernate.show_sql", "false"); //$NON-NLS-1$ //$NON-NLS-2$
 		configuration.setProperty("hibernate.connection.isolation", String.valueOf(Connection.TRANSACTION_READ_COMMITTED)); //$NON-NLS-1$
-
 		configureC3p0ConnectionPool(configuration);
-
 		return configuration;
 	}
-
 	private static void configureC3p0ConnectionPool(Configuration configuration) {
 		//min pool size
 		configuration.setProperty("hibernate.c3p0.min_size", "0"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -232,7 +217,6 @@ public abstract class _RootDAO extends com.floreantpos.model.dao._BaseRootDAO {
 		configuration.setProperty("hibernate.c3p0.idle_test_period", "3000"); //$NON-NLS-1$ //$NON-NLS-2$
 		configuration.setProperty("hibernate.c3p0.breakAfterAcquireFailure", "false"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
-
 	private static Configuration configureInventoryClasses(Configuration configuration) {
 		configuration.addClass(InventoryGroup.class);
 		configuration.addClass(InventoryItem.class);
@@ -245,17 +229,13 @@ public abstract class _RootDAO extends com.floreantpos.model.dao._BaseRootDAO {
 		configuration.addClass(Recepie.class);
 		configuration.addClass(RecepieItem.class);
 		configuration.addClass(PackagingUnit.class);
-
 		return configuration;
 	}
-
 	public static Configuration reInitialize() {
 		Configuration configuration = getNewConfiguration(null);
 		com.floreantpos.model.dao._RootDAO.setSessionFactory(configuration.buildSessionFactory());
-
 		return configuration;
 	}
-
 	public void refresh(Object obj) {
 		Session session = createNewSession();
 		super.refresh(obj, session);

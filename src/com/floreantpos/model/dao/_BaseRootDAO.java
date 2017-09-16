@@ -16,13 +16,11 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -33,14 +31,11 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
 
-
 public abstract class _BaseRootDAO {
-
 	protected static Map<String, SessionFactory> sessionFactoryMap;
 	protected static SessionFactory sessionFactory;
 	protected static ThreadLocal<Map> mappedSessions;
 	protected static ThreadLocal<Session> sessions;
-
 	/**
 	 * Configure the session factory by reading hibernate config file
 	 */
@@ -59,7 +54,6 @@ public abstract class _BaseRootDAO {
 			com.floreantpos.model.dao._RootDAO.getNewConfiguration(
 				null));
 	}
-
 	public static void initialize (String configFileName, Configuration configuration) {
 		if (null == configFileName && null != sessionFactory) return;
 		else if (null != sessionFactoryMap && null != sessionFactoryMap.get(configFileName)) return;
@@ -78,7 +72,6 @@ public abstract class _BaseRootDAO {
 			}
 		}
 	}
-
 	/**
 	 * Set the session factory
 	 */
@@ -87,7 +80,6 @@ public abstract class _BaseRootDAO {
 			(String) null,
 			sessionFactory);
 	}
-
 	/**
 	 * Set the session factory
 	 */
@@ -102,7 +94,6 @@ public abstract class _BaseRootDAO {
 				sessionFactory);
 		}
 	}
-
 	/**
 	 * Return the SessionFactory that is to be used by these DAOs.  Change this
 	 * and implement your own strategy if you, for example, want to pull the SessionFactory
@@ -112,7 +103,6 @@ public abstract class _BaseRootDAO {
 		return getSessionFactory(
 		getConfigurationFileName());
 	}
-
 	protected SessionFactory getSessionFactory(String configFile) {
 		if (null == configFile) {
 			if (null == sessionFactory)
@@ -132,7 +122,6 @@ public abstract class _BaseRootDAO {
 			}
 		}
 	}
-
 	/**
 	 * Return a new Session object that must be closed when the work has been completed.
 	 * @return the active Session
@@ -142,7 +131,6 @@ public abstract class _BaseRootDAO {
 			getConfigurationFileName(),
 			false);
 	}
-
 	/**
 	 * Return a new Session object that must be closed when the work has been completed.
 	 * @return the active Session
@@ -152,7 +140,6 @@ public abstract class _BaseRootDAO {
 			getConfigurationFileName(),
 			true);
 	}
-
 	/**
 	 * Return a new Session object that must be closed when the work has been completed.
 	 * @param configFile the config file must match the meta attribute "config-file" in the hibernate mapping file
@@ -188,7 +175,6 @@ public abstract class _BaseRootDAO {
 			}
 		}
 	}
-
 	/**
 	 * Close all sessions for the current thread
 	 */
@@ -219,28 +205,24 @@ public abstract class _BaseRootDAO {
 			}
 		}
 	}
-
 	/**
 	 * Close the session
 	 */
 	public void closeSession (Session session) {
 		if (null != session) session.close();
 	}
-
 	/**
 	 * Begin the transaction related to the session
 	 */
 	public Transaction beginTransaction(Session s) {
 		return s.beginTransaction();
 	}
-
 	/**
 	 * Commit the given transaction
 	 */
 	public void commitTransaction(Transaction t) {
 		t.commit();
 	}
-
 	/**
 	 * Return a new Configuration to use.  This is not a mistake and is meant
 	 * to be overridden in the RootDAO if you want to do something different.
@@ -257,14 +239,12 @@ public abstract class _BaseRootDAO {
 	public String getConfigurationFileName () {
 		return null;
 	}
-
 	/**
 	 * Return the specific Object class that will be used for class-specific
 	 * implementation of this DAO.
 	 * @return the reference Class
 	 */
 	protected abstract Class getReferenceClass();
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Get object matching the given key and return it.
@@ -278,7 +258,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Get object matching the given key and return it.
@@ -286,7 +265,6 @@ public abstract class _BaseRootDAO {
 	protected Object get(Class refClass, Serializable key, Session s) {
 		return s.get(refClass, key);
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Load object matching the given key and return it.
@@ -300,7 +278,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Load object matching the given key and return it.
@@ -308,7 +285,6 @@ public abstract class _BaseRootDAO {
 	protected Object load(Class refClass, Serializable key, Session s) {
 		return s.load(refClass, key);
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
@@ -322,7 +298,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 * Use the session given.
@@ -331,7 +306,6 @@ public abstract class _BaseRootDAO {
 	public java.util.List findAll (Session s) {
    		return findAll(s, getDefaultOrder());
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
@@ -345,7 +319,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 * Use the session given.
@@ -356,7 +329,6 @@ public abstract class _BaseRootDAO {
 		if (null != defaultOrder) crit.addOrder(defaultOrder);
 		return crit.list();
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with a filter.
 	 * Use the session given.
@@ -366,7 +338,6 @@ public abstract class _BaseRootDAO {
 	protected Criteria findFiltered (String propName, Object filter) {
 		return findFiltered(propName, filter, getDefaultOrder());
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with a filter.
 	 * Use the session given.
@@ -414,7 +385,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Obtain an instance of Query for a named query string defined in the mapping file.
 	 * Use the session given.
@@ -426,7 +396,6 @@ public abstract class _BaseRootDAO {
 		Query q = s.getNamedQuery(name);
 		return q;
 	}
-
 	/**
 	 * Obtain an instance of Query for a named query string defined in the mapping file.
 	 * @param name the name of a query defined externally 
@@ -442,7 +411,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Obtain an instance of Query for a named query string defined in the mapping file.
 	 * Use the session given.
@@ -456,7 +424,6 @@ public abstract class _BaseRootDAO {
 		q.setParameter(0, param);
 		return q;
 	}
-
 	/**
 	 * Obtain an instance of Query for a named query string defined in the mapping file.
 	 * Use the parameters given.
@@ -473,7 +440,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Obtain an instance of Query for a named query string defined in the mapping file.
 	 * Use the parameters given and the Session given.
@@ -491,7 +457,6 @@ public abstract class _BaseRootDAO {
 		}
 		return q;
 	}
-
 	/**
 	 * Obtain an instance of Query for a named query string defined in the mapping file.
 	 * Use the parameters given.
@@ -508,7 +473,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Obtain an instance of Query for a named query string defined in the mapping file.
 	 * Use the parameters given and the Session given.
@@ -527,7 +491,6 @@ public abstract class _BaseRootDAO {
 		}
 		return q;
 	}
-
 	/**
 	 * Execute a query. 
 	 * @param queryStr a query expressed in Hibernate's query language
@@ -542,7 +505,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Execute a query but use the session given instead of creating a new one.
 	 * @param queryStr a query expressed in Hibernate's query language
@@ -551,7 +513,6 @@ public abstract class _BaseRootDAO {
 	public Query getQuery(String queryStr, Session s) {
 		return s.createQuery(queryStr);
 	}
-
 	/**
 	 * Execute a query. 
 	 * @param query a query expressed in Hibernate's query language
@@ -568,7 +529,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Execute a query but use the session given instead of creating a new one.
 	 * @param queryStr a query expressed in Hibernate's query language
@@ -581,7 +541,6 @@ public abstract class _BaseRootDAO {
 		q.setParameter(0, param);
 		return q;
 	}
-
 	/**
 	 * Execute a query. 
 	 * @param queryStr a query expressed in Hibernate's query language
@@ -597,7 +556,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Execute a query but use the session given instead of creating a new one.
 	 * @param queryStr a query expressed in Hibernate's query language
@@ -614,7 +572,6 @@ public abstract class _BaseRootDAO {
 		}
 		return q;
 	}
-
 	/**
 	 * Obtain an instance of Query for a named query string defined in the mapping file.
 	 * Use the parameters given.
@@ -631,7 +588,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Obtain an instance of Query for a named query string defined in the mapping file.
 	 * Use the parameters given and the Session given.
@@ -650,11 +606,9 @@ public abstract class _BaseRootDAO {
 		}
 		return q;
 	}
-
 	protected Order getDefaultOrder () {
 		return null;
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Persist the given transient instance, first assigning a generated identifier. 
@@ -668,7 +622,6 @@ public abstract class _BaseRootDAO {
 				}
 			});
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Persist the given transient instance, first assigning a generated identifier. 
@@ -677,7 +630,6 @@ public abstract class _BaseRootDAO {
 	protected Serializable save(Object obj, Session s) {
 		return s.save(obj);
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Either save() or update() the given instance, depending upon the value of its
@@ -692,7 +644,6 @@ public abstract class _BaseRootDAO {
 				}
 			});
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Either save() or update() the given instance, depending upon the value of its
@@ -701,7 +652,6 @@ public abstract class _BaseRootDAO {
 	protected void saveOrUpdate(Object obj, Session s) {
 		s.saveOrUpdate(obj);
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
@@ -717,7 +667,6 @@ public abstract class _BaseRootDAO {
 				}
 			});
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
@@ -728,7 +677,6 @@ public abstract class _BaseRootDAO {
 	protected void update(Object obj, Session s) {
 		s.update(obj);
 	}
-
 	/**
 	 * Delete all objects returned by the query
 	 */
@@ -741,7 +689,6 @@ public abstract class _BaseRootDAO {
 			});
 		return rtn.intValue();
 	}
-
 	/**
 	 * Delete all objects returned by the query
 	 */
@@ -752,7 +699,6 @@ public abstract class _BaseRootDAO {
 		}
 		return list.size();
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
@@ -767,7 +713,6 @@ public abstract class _BaseRootDAO {
 				}
 			});
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
@@ -776,7 +721,6 @@ public abstract class _BaseRootDAO {
 	protected void delete(Object obj, Session s) {
 		s.delete(obj);
 	}
-
 	/**
 	 * Used by the base DAO classes but here for your modification
 	 * Re-read the state of the given instance from the underlying database. It is inadvisable to use this to implement
@@ -785,13 +729,11 @@ public abstract class _BaseRootDAO {
 	protected void refresh(Object obj, Session s) {
 		s.refresh(obj);
 	}
-
 	protected void throwException (Throwable t) {
 		if (t instanceof HibernateException) throw (HibernateException) t;
 		else if (t instanceof RuntimeException) throw (RuntimeException) t;
 		else throw new HibernateException(t);
 	}
-
 	/**
 	 * Execute the given transaction runnable.
 	 */
@@ -825,7 +767,6 @@ public abstract class _BaseRootDAO {
 			closeSession(s);
 		}
 	}
-
 	/**
 	 * Execute the given transaction runnable.
 	 */
@@ -835,27 +776,23 @@ public abstract class _BaseRootDAO {
 		threadRunner.start();
 		return transactionPointer;
 	}
-
 	/**
 	 * This class can be used to encapsulate logic used for a single transaction.
 	 */
 	public abstract class TransactionRunnable {
 		public abstract Object run (Session s) throws Exception;
 	}
-
 	/**
 	 * This class can be used to handle any error that has occured during a transaction
 	 */
 	public interface TransactionFailHandler {
 		public void onFail (Session s);
 	}
-
 	/**
 	 * This class can be used to handle failed transactions
 	 */
 	public abstract class TransactionRunnableFailHandler extends TransactionRunnable implements TransactionFailHandler {
 	}
-
 	public class TransactionPointer {
 		private TransactionRunnable transactionRunnable;
 		private Throwable thrownException;
@@ -865,7 +802,6 @@ public abstract class _BaseRootDAO {
 		public TransactionPointer (TransactionRunnable transactionRunnable) {
 			this.transactionRunnable = transactionRunnable;
 		}
-
 		public boolean hasCompleted() {
 			return hasCompleted;
 		}
@@ -879,7 +815,6 @@ public abstract class _BaseRootDAO {
 		public void setReturnValue(Object returnValue) {
 			this.returnValue = returnValue;
 		}
-
 		public Throwable getThrownException() {
 			return thrownException;
 		}
@@ -892,7 +827,6 @@ public abstract class _BaseRootDAO {
 		public void setTransactionRunnable(TransactionRunnable transactionRunnable) {
 			this.transactionRunnable = transactionRunnable;
 		}
-
 		/**
 		 * Wait until the transaction completes and return the value returned from the run method of the TransactionRunnable.
 		 * If the transaction throws an Exception, throw that Exception.
@@ -916,7 +850,6 @@ public abstract class _BaseRootDAO {
 			else return returnValue;
 		}
 	}
-
 	private class ThreadRunner extends Thread {
 		private TransactionPointer transactionPointer;
 		
@@ -960,9 +893,7 @@ public abstract class _BaseRootDAO {
 			}
 		}
 	}
-
 	protected void handleError (Throwable t) {
 	}
-
 
 }

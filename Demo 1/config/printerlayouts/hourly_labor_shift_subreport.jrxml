@@ -23,7 +23,6 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-
 	<field name="period" class="java.lang.String"/>
 	<field name="checks" class="java.lang.String"/>
 	<field name="guests" class="java.lang.String"/>
@@ -34,7 +33,6 @@
 	<field name="guestsPerMHr" class="java.lang.String"/>
 	<field name="checksPerMHr" class="java.lang.String"/>
 	<field name="laborCost" class="java.lang.String"/>
-
 		<background>
 			<band height="0"  isSplitAllowed="true" >
 			</band>

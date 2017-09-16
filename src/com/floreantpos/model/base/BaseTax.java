@@ -1,8 +1,6 @@
 package com.floreantpos.model.base;
-
 import java.lang.Comparable;
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the TAX table.
@@ -12,20 +10,16 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="TAX"
  */
-
 public abstract class BaseTax  implements Comparable, Serializable {
-
 	public static String REF = "Tax"; //$NON-NLS-1$
 	public static String PROP_RATE = "rate"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 	public static String PROP_NAME = "name"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseTax () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -33,33 +27,24 @@ public abstract class BaseTax  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	/**
 	 * Constructor for required fields
 	 */
 	public BaseTax (
 		java.lang.Integer id,
 		java.lang.String name) {
-
 		this.setId(id);
 		this.setName(name);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String name;
 		protected java.lang.Double rate;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -70,7 +55,6 @@ public abstract class BaseTax  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -81,15 +65,12 @@ public abstract class BaseTax  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -98,15 +79,12 @@ public abstract class BaseTax  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: RATE
 	 */
 	public java.lang.Double getRate () {
 									return rate == null ? Double.valueOf(0) : rate;
 					}
-
 	/**
 	 * Set the value related to the column: RATE
 	 * @param rate the RATE value
@@ -114,9 +92,6 @@ public abstract class BaseTax  implements Comparable, Serializable {
 	public void setRate (java.lang.Double rate) {
 		this.rate = rate;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -128,7 +103,6 @@ public abstract class BaseTax  implements Comparable, Serializable {
 			else return (this.getId().equals(tax.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -139,16 +113,13 @@ public abstract class BaseTax  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

@@ -16,31 +16,23 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-
 import com.floreantpos.model.Discount;
 import com.floreantpos.model.MenuItem;
-
 public class DiscountDAO extends BaseDiscountDAO {
-
 	/**
 	 * Default constructor.  Can be used in place of getInstance()
 	 */
 	public DiscountDAO() {
 	}
-
 	public List<Discount> findAllValidCoupons() {
 		Session session = null;
-
 		Date currentDate = new Date();
-
 		try {
 			session = createNewSession();
 			Criteria criteria = session.createCriteria(getReferenceClass());
@@ -50,13 +42,10 @@ public class DiscountDAO extends BaseDiscountDAO {
 		} finally {
 			closeSession(session);
 		}
-
 	}
 	public List<Discount> getValidCoupons() {
 		Session session = null;
-
 		Date currentDate = new Date();
-
 		try {
 			session = createNewSession();
 			Criteria criteria = session.createCriteria(getReferenceClass());
@@ -67,9 +56,7 @@ public class DiscountDAO extends BaseDiscountDAO {
 		} finally {
 			closeSession(session);
 		}
-
 	}
-
 	public List<Discount> getValidCoupon(MenuItem menuItem) {
 		List<Discount> discountList = new ArrayList<Discount>();
 		for (Discount discount : getValidCoupons()) {
@@ -79,12 +66,9 @@ public class DiscountDAO extends BaseDiscountDAO {
 		}
 		return discountList;
 	}
-
 	public List<Discount> getTicketValidCoupon() {
 		Session session = null;
-
 		Date currentDate = new Date();
-
 		try {
 			session = createNewSession();
 			Criteria criteria = session.createCriteria(getReferenceClass());

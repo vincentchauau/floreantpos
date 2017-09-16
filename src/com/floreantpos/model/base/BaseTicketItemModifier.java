@@ -1,8 +1,6 @@
 package com.floreantpos.model.base;
-
 import java.lang.Comparable;
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the TICKET_ITEM_MODIFIER table.
@@ -12,9 +10,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="TICKET_ITEM_MODIFIER"
  */
-
 public abstract class BaseTicketItemModifier  implements Comparable, Serializable {
-
 	public static String REF = "TicketItemModifier"; //$NON-NLS-1$
 	public static String PROP_MULTIPLIER_NAME = "multiplierName"; //$NON-NLS-1$
 	public static String PROP_STATUS = "status"; //$NON-NLS-1$
@@ -36,12 +32,10 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 	public static String PROP_MODIFIER_ID = "modifierId"; //$NON-NLS-1$
 	public static String PROP_SUB_TOTAL_AMOUNT = "subTotalAmount"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseTicketItemModifier () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -49,16 +43,11 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.Integer modifierId;
 		protected java.lang.Integer menuItemModifierGroupId;
@@ -77,11 +66,8 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		protected java.lang.Boolean shouldSectionWisePrice;
 		protected java.lang.String status;
 		protected java.lang.Boolean printedToKitchen;
-
 	// many to one
 	private com.floreantpos.model.TicketItem ticketItem;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -92,7 +78,6 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -103,15 +88,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: ITEM_ID
 	 */
 	public java.lang.Integer getModifierId () {
 									return modifierId == null ? Integer.valueOf(0) : modifierId;
 					}
-
 	/**
 	 * Set the value related to the column: ITEM_ID
 	 * @param modifierId the ITEM_ID value
@@ -120,15 +102,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.modifierId = modifierId;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: GROUP_ID
 	 */
 	public java.lang.Integer getMenuItemModifierGroupId () {
 									return menuItemModifierGroupId == null ? Integer.valueOf(0) : menuItemModifierGroupId;
 					}
-
 	/**
 	 * Set the value related to the column: GROUP_ID
 	 * @param menuItemModifierGroupId the GROUP_ID value
@@ -137,15 +116,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.menuItemModifierGroupId = menuItemModifierGroupId;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ITEM_COUNT
 	 */
 	public java.lang.Integer getItemCount () {
 									return itemCount == null ? Integer.valueOf(0) : itemCount;
 					}
-
 	/**
 	 * Set the value related to the column: ITEM_COUNT
 	 * @param itemCount the ITEM_COUNT value
@@ -154,15 +130,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.itemCount = itemCount;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MODIFIER_NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: MODIFIER_NAME
 	 * @param name the MODIFIER_NAME value
@@ -171,15 +144,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MODIFIER_PRICE
 	 */
 	public java.lang.Double getUnitPrice () {
 									return unitPrice == null ? Double.valueOf(0) : unitPrice;
 					}
-
 	/**
 	 * Set the value related to the column: MODIFIER_PRICE
 	 * @param unitPrice the MODIFIER_PRICE value
@@ -188,15 +158,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.unitPrice = unitPrice;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MODIFIER_TAX_RATE
 	 */
 	public java.lang.Double getTaxRate () {
 									return taxRate == null ? Double.valueOf(0) : taxRate;
 					}
-
 	/**
 	 * Set the value related to the column: MODIFIER_TAX_RATE
 	 * @param taxRate the MODIFIER_TAX_RATE value
@@ -205,15 +172,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.taxRate = taxRate;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MODIFIER_TYPE
 	 */
 	public java.lang.Integer getModifierType () {
 									return modifierType == null ? Integer.valueOf(0) : modifierType;
 					}
-
 	/**
 	 * Set the value related to the column: MODIFIER_TYPE
 	 * @param modifierType the MODIFIER_TYPE value
@@ -222,15 +186,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.modifierType = modifierType;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SUBTOTAL_PRICE
 	 */
 	public java.lang.Double getSubTotalAmount () {
 									return subTotalAmount == null ? Double.valueOf(0) : subTotalAmount;
 					}
-
 	/**
 	 * Set the value related to the column: SUBTOTAL_PRICE
 	 * @param subTotalAmount the SUBTOTAL_PRICE value
@@ -239,15 +200,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.subTotalAmount = subTotalAmount;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: TOTAL_PRICE
 	 */
 	public java.lang.Double getTotalAmount () {
 									return totalAmount == null ? Double.valueOf(0) : totalAmount;
 					}
-
 	/**
 	 * Set the value related to the column: TOTAL_PRICE
 	 * @param totalAmount the TOTAL_PRICE value
@@ -256,15 +214,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.totalAmount = totalAmount;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: TAX_AMOUNT
 	 */
 	public java.lang.Double getTaxAmount () {
 									return taxAmount == null ? Double.valueOf(0) : taxAmount;
 					}
-
 	/**
 	 * Set the value related to the column: TAX_AMOUNT
 	 * @param taxAmount the TAX_AMOUNT value
@@ -273,15 +228,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.taxAmount = taxAmount;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: INFO_ONLY
 	 */
 	public java.lang.Boolean isInfoOnly () {
 								return infoOnly == null ? Boolean.FALSE : infoOnly;
 					}
-
 	/**
 	 * Set the value related to the column: INFO_ONLY
 	 * @param infoOnly the INFO_ONLY value
@@ -290,15 +242,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.infoOnly = infoOnly;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SECTION_NAME
 	 */
 	public java.lang.String getSectionName () {
 					return sectionName;
 			}
-
 	/**
 	 * Set the value related to the column: SECTION_NAME
 	 * @param sectionName the SECTION_NAME value
@@ -307,15 +256,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.sectionName = sectionName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MULTIPLIER_NAME
 	 */
 	public java.lang.String getMultiplierName () {
 					return multiplierName;
 			}
-
 	/**
 	 * Set the value related to the column: MULTIPLIER_NAME
 	 * @param multiplierName the MULTIPLIER_NAME value
@@ -324,15 +270,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.multiplierName = multiplierName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: PRINT_TO_KITCHEN
 	 */
 	public java.lang.Boolean isShouldPrintToKitchen () {
 									return shouldPrintToKitchen == null ? Boolean.valueOf(true) : shouldPrintToKitchen;
 						}
-
 	/**
 	 * Set the value related to the column: PRINT_TO_KITCHEN
 	 * @param shouldPrintToKitchen the PRINT_TO_KITCHEN value
@@ -341,7 +284,6 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.shouldPrintToKitchen = shouldPrintToKitchen;
 	}
 
-
 	/**
 	 * Custom property
 	 */
@@ -349,14 +291,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		return "true";
 	}
 
-
 	/**
 	 * Return the value associated with the column: SECTION_WISE_PRICING
 	 */
 	public java.lang.Boolean isShouldSectionWisePrice () {
 								return shouldSectionWisePrice == null ? Boolean.FALSE : shouldSectionWisePrice;
 					}
-
 	/**
 	 * Set the value related to the column: SECTION_WISE_PRICING
 	 * @param shouldSectionWisePrice the SECTION_WISE_PRICING value
@@ -365,15 +305,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.shouldSectionWisePrice = shouldSectionWisePrice;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: STATUS
 	 */
 	public java.lang.String getStatus () {
 					return status;
 			}
-
 	/**
 	 * Set the value related to the column: STATUS
 	 * @param status the STATUS value
@@ -382,15 +319,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.status = status;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: PRINTED_TO_KITCHEN
 	 */
 	public java.lang.Boolean isPrintedToKitchen () {
 								return printedToKitchen == null ? Boolean.FALSE : printedToKitchen;
 					}
-
 	/**
 	 * Set the value related to the column: PRINTED_TO_KITCHEN
 	 * @param printedToKitchen the PRINTED_TO_KITCHEN value
@@ -399,15 +333,12 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		this.printedToKitchen = printedToKitchen;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: TICKET_ITEM_ID
 	 */
 	public com.floreantpos.model.TicketItem getTicketItem () {
 					return ticketItem;
 			}
-
 	/**
 	 * Set the value related to the column: TICKET_ITEM_ID
 	 * @param ticketItem the TICKET_ITEM_ID value
@@ -415,9 +346,6 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 	public void setTicketItem (com.floreantpos.model.TicketItem ticketItem) {
 		this.ticketItem = ticketItem;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -429,7 +357,6 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 			else return (this.getId().equals(ticketItemModifier.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -440,16 +367,13 @@ public abstract class BaseTicketItemModifier  implements Comparable, Serializabl
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

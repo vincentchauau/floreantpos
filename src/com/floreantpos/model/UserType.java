@@ -16,32 +16,24 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 import java.util.Set;
-
 import javax.xml.bind.annotation.XmlRootElement;
-
 import com.floreantpos.model.base.BaseUserType;
-
 
 @XmlRootElement(name="user-type")
 public class UserType extends BaseUserType {
 	private static final long serialVersionUID = 1L;
-
 /*[CONSTRUCTOR MARKER BEGIN]*/
 	public UserType () {
 		super();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
 	public UserType (java.lang.Integer id) {
 		super(id);
 	}
-
 /*[CONSTRUCTOR MARKER END]*/
-
 	public void clearPermissions() {
 		Set<UserPermission> permissions = getPermissions();
 		if(permissions != null) {

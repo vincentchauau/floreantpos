@@ -16,25 +16,20 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.AbstractListModel;
 import javax.swing.MutableComboBoxModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
-
 public class ComboBoxModel extends AbstractListModel implements MutableComboBoxModel, Serializable, ListDataListener {
 	private List dataList;
 	private Object selectedObject;
-
 	public ComboBoxModel() {
 		this(new ArrayList());
 	}
-
 	public ComboBoxModel(List list) {
 		setDataList(list);
 		
@@ -51,7 +46,6 @@ public class ComboBoxModel extends AbstractListModel implements MutableComboBoxM
 		this.dataList = list;
 		fireContentsChanged(this, 0, size);
 	}
-
 	// implements javax.swing.ComboBoxModel
 	/**
 	 * Set the value of the selected item. The selected item may be null.
@@ -64,12 +58,10 @@ public class ComboBoxModel extends AbstractListModel implements MutableComboBoxM
 			fireContentsChanged(this, -1, -1);
 		}
 	}
-
 	// implements javax.swing.ComboBoxModel
 	public Object getSelectedItem() {
 		return selectedObject;
 	}
-
 	// implements javax.swing.ListModel
 	public int getSize() {
 		if(dataList == null) {
@@ -77,7 +69,6 @@ public class ComboBoxModel extends AbstractListModel implements MutableComboBoxM
 		}
 		return dataList.size();
 	}
-
 	// implements javax.swing.ListModel
 	public Object getElementAt(int index) {
 		if(dataList != null) {
@@ -90,7 +81,6 @@ public class ComboBoxModel extends AbstractListModel implements MutableComboBoxM
 		else
 			return null;
 	}
-
 	/**
 	 * Returns the index-position of the specified object in the list.
 	 *
@@ -101,7 +91,6 @@ public class ComboBoxModel extends AbstractListModel implements MutableComboBoxM
 	public int getIndexOf(Object anObject) {
 		return dataList.indexOf(anObject);
 	}
-
 	// implements javax.swing.MutableComboBoxModel
 	@SuppressWarnings("unchecked")
 	public void addElement(Object anObject) {
@@ -111,7 +100,6 @@ public class ComboBoxModel extends AbstractListModel implements MutableComboBoxM
 			setSelectedItem(anObject);
 		}
 	}
-
 	// implements javax.swing.MutableComboBoxModel
 	public void insertElementAt(Object anObject, int index) {
 		if(dataList == null) {
@@ -120,7 +108,6 @@ public class ComboBoxModel extends AbstractListModel implements MutableComboBoxM
 		dataList.add(index, anObject);
 		fireIntervalAdded(this, index, index);
 	}
-
 	// implements javax.swing.MutableComboBoxModel
 	public void removeElementAt(int index) {
 		if(dataList == null) {
@@ -133,12 +120,9 @@ public class ComboBoxModel extends AbstractListModel implements MutableComboBoxM
 				setSelectedItem(getElementAt(index - 1));
 			}
 		}
-
 		dataList.remove(index);
-
 		fireIntervalRemoved(this, index, index);
 	}
-
 	// implements javax.swing.MutableComboBoxModel
 	public void removeElement(Object anObject) {
 		if(dataList == null) {
@@ -149,7 +133,6 @@ public class ComboBoxModel extends AbstractListModel implements MutableComboBoxM
 			removeElementAt(index);
 		}
 	}
-
 	/**
 	 * Empties the list.
 	 */
@@ -167,25 +150,21 @@ public class ComboBoxModel extends AbstractListModel implements MutableComboBoxM
 			selectedObject = null;
 		}
 	}
-
 	public void intervalAdded(ListDataEvent e) {
 		int index0 = e.getIndex0();
 		int index1 = e.getIndex1();
 		fireIntervalAdded(this, index0, index1);
 	}
-
 	public void intervalRemoved(ListDataEvent e) {
 		int index0 = e.getIndex0();
 		int index1 = e.getIndex1();
 		fireIntervalRemoved(this, index0, index1);
 	}
-
 	public void contentsChanged(ListDataEvent e) {
 		int index0 = e.getIndex0();
 		int index1 = e.getIndex1();
 		fireContentsChanged(this, index0, index1);
 	}
-
 	public List getDataList() {
 		return dataList;
 	}

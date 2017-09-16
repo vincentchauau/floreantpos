@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the ATTENDENCE_HISTORY table.
@@ -28,9 +26,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="ATTENDENCE_HISTORY"
  */
-
 public abstract class BaseAttendenceHistory  implements Comparable, Serializable {
-
 	public static String REF = "AttendenceHistory"; //$NON-NLS-1$
 	public static String PROP_USER = "user"; //$NON-NLS-1$
 	public static String PROP_CLOCK_IN_TIME = "clockInTime"; //$NON-NLS-1$
@@ -42,12 +38,10 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 	public static String PROP_CLOCK_OUT_HOUR = "clockOutHour"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseAttendenceHistory () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -55,29 +49,21 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 	private java.util.Date clockInTime;
 	private java.util.Date clockOutTime;
 	private java.lang.Short clockInHour;
 	private java.lang.Short clockOutHour;
 	private java.lang.Boolean clockedOut;
-
 	// many to one
 	private com.floreantpos.model.User user;
 	private com.floreantpos.model.Shift shift;
 	private com.floreantpos.model.Terminal terminal;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -88,7 +74,6 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -99,15 +84,12 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: CLOCK_IN_TIME
 	 */
 	public java.util.Date getClockInTime () {
 			return clockInTime;
 	}
-
 	/**
 	 * Set the value related to the column: CLOCK_IN_TIME
 	 * @param clockInTime the CLOCK_IN_TIME value
@@ -116,15 +98,12 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 		this.clockInTime = clockInTime;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CLOCK_OUT_TIME
 	 */
 	public java.util.Date getClockOutTime () {
 			return clockOutTime;
 	}
-
 	/**
 	 * Set the value related to the column: CLOCK_OUT_TIME
 	 * @param clockOutTime the CLOCK_OUT_TIME value
@@ -133,15 +112,12 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 		this.clockOutTime = clockOutTime;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CLOCK_IN_HOUR
 	 */
 	public java.lang.Short getClockInHour () {
 			return clockInHour;
 	}
-
 	/**
 	 * Set the value related to the column: CLOCK_IN_HOUR
 	 * @param clockInHour the CLOCK_IN_HOUR value
@@ -150,15 +126,12 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 		this.clockInHour = clockInHour;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CLOCK_OUT_HOUR
 	 */
 	public java.lang.Short getClockOutHour () {
 			return clockOutHour;
 	}
-
 	/**
 	 * Set the value related to the column: CLOCK_OUT_HOUR
 	 * @param clockOutHour the CLOCK_OUT_HOUR value
@@ -167,15 +140,12 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 		this.clockOutHour = clockOutHour;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CLOCKED_OUT
 	 */
 	public java.lang.Boolean isClockedOut () {
 			return clockedOut == null ? Boolean.FALSE : clockedOut;
 	}
-
 	/**
 	 * Set the value related to the column: CLOCKED_OUT
 	 * @param clockedOut the CLOCKED_OUT value
@@ -184,15 +154,12 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 		this.clockedOut = clockedOut;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: USER_ID
 	 */
 	public com.floreantpos.model.User getUser () {
 			return user;
 	}
-
 	/**
 	 * Set the value related to the column: USER_ID
 	 * @param user the USER_ID value
@@ -201,15 +168,12 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 		this.user = user;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHIFT_ID
 	 */
 	public com.floreantpos.model.Shift getShift () {
 			return shift;
 	}
-
 	/**
 	 * Set the value related to the column: SHIFT_ID
 	 * @param shift the SHIFT_ID value
@@ -218,15 +182,12 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 		this.shift = shift;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: TERMINAL_ID
 	 */
 	public com.floreantpos.model.Terminal getTerminal () {
 			return terminal;
 	}
-
 	/**
 	 * Set the value related to the column: TERMINAL_ID
 	 * @param terminal the TERMINAL_ID value
@@ -234,9 +195,6 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 	public void setTerminal (com.floreantpos.model.Terminal terminal) {
 		this.terminal = terminal;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -248,7 +206,6 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 			else return (this.getId().equals(attendenceHistory.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -259,16 +216,13 @@ public abstract class BaseAttendenceHistory  implements Comparable, Serializable
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

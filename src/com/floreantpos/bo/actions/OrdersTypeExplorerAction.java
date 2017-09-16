@@ -16,31 +16,23 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.actions;
-
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JTabbedPane;
-
 import com.floreantpos.POSConstants;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.OrderTypeExplorer;
-
 public class OrdersTypeExplorerAction extends AbstractAction {
-
 	public OrdersTypeExplorerAction() {
 		super(POSConstants.ORDER_TYPE);
 	}
-
 	public OrdersTypeExplorerAction(String name) {
 		super(name);
 	}
-
 	public OrdersTypeExplorerAction(String name, Icon icon) {
 		super(name, icon);
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
 		
@@ -56,5 +48,4 @@ public class OrdersTypeExplorerAction extends AbstractAction {
 		}
 		tabbedPane.setSelectedComponent(explorer);
 	}
-
 }

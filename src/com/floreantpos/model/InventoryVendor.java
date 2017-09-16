@@ -16,26 +16,20 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 import com.floreantpos.model.base.BaseInventoryVendor;
-
-
 
 public class InventoryVendor extends BaseInventoryVendor {
 	private static final long serialVersionUID = 1L;
-
 /*[CONSTRUCTOR MARKER BEGIN]*/
 	public InventoryVendor () {
 		super();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
 	public InventoryVendor (java.lang.Integer id) {
 		super(id);
 	}
-
 	/**
 	 * Constructor for required fields
 	 */
@@ -43,14 +37,12 @@ public class InventoryVendor extends BaseInventoryVendor {
 		java.lang.Integer id,
  java.lang.String name, java.lang.String address, java.lang.String city, java.lang.String state,
 			java.lang.String zip, java.lang.String country, java.lang.String email, java.lang.String phone) {
-
 		super (
 			id,
  name, address, city, state, zip, country, email, phone);
 	}
 
 /*[CONSTRUCTOR MARKER END]*/
-
 	@Override
 	public Boolean isVisible() {
 		return visible == null ? true : visible;

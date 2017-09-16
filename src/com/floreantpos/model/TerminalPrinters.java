@@ -1,17 +1,12 @@
 package com.floreantpos.model;
-
 import com.floreantpos.model.base.BaseTerminalPrinters;
-
-
 
 public class TerminalPrinters extends BaseTerminalPrinters {
 	private static final long serialVersionUID = 1L;
-
 /*[CONSTRUCTOR MARKER BEGIN]*/
 	public TerminalPrinters () {
 		super();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -20,6 +15,5 @@ public class TerminalPrinters extends BaseTerminalPrinters {
 	}
 
 /*[CONSTRUCTOR MARKER END]*/
-
 
 }

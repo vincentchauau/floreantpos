@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the MENUITEM_MODIFIERGROUP table.
@@ -28,9 +26,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="MENUITEM_MODIFIERGROUP"
  */
-
 public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializable {
-
 	public static String REF = "MenuItemModifierGroup"; //$NON-NLS-1$
 	public static String PROP_MIN_QUANTITY = "minQuantity"; //$NON-NLS-1$
 	public static String PROP_SORT_ORDER = "sortOrder"; //$NON-NLS-1$
@@ -38,12 +34,10 @@ public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializ
 	public static String PROP_MODIFIER_GROUP = "modifierGroup"; //$NON-NLS-1$
 	public static String PROP_MAX_QUANTITY = "maxQuantity"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseMenuItemModifierGroup () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -51,25 +45,17 @@ public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializ
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.Integer minQuantity;
 		protected java.lang.Integer maxQuantity;
 		protected java.lang.Integer sortOrder;
-
 	// many to one
 	private com.floreantpos.model.MenuModifierGroup modifierGroup;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -80,7 +66,6 @@ public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializ
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -91,15 +76,12 @@ public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializ
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: MIN_QUANTITY
 	 */
 	public java.lang.Integer getMinQuantity () {
 					return minQuantity == null ? Integer.valueOf(0) : minQuantity;
 			}
-
 	/**
 	 * Set the value related to the column: MIN_QUANTITY
 	 * @param minQuantity the MIN_QUANTITY value
@@ -108,15 +90,12 @@ public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializ
 		this.minQuantity = minQuantity;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MAX_QUANTITY
 	 */
 	public java.lang.Integer getMaxQuantity () {
 					return maxQuantity == null ? Integer.valueOf(0) : maxQuantity;
 			}
-
 	/**
 	 * Set the value related to the column: MAX_QUANTITY
 	 * @param maxQuantity the MAX_QUANTITY value
@@ -125,15 +104,12 @@ public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializ
 		this.maxQuantity = maxQuantity;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SORT_ORDER
 	 */
 	public java.lang.Integer getSortOrder () {
 					return sortOrder == null ? Integer.valueOf(0) : sortOrder;
 			}
-
 	/**
 	 * Set the value related to the column: SORT_ORDER
 	 * @param sortOrder the SORT_ORDER value
@@ -142,15 +118,12 @@ public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializ
 		this.sortOrder = sortOrder;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MODIFIER_GROUP
 	 */
 	public com.floreantpos.model.MenuModifierGroup getModifierGroup () {
 					return modifierGroup;
 			}
-
 	/**
 	 * Set the value related to the column: MODIFIER_GROUP
 	 * @param modifierGroup the MODIFIER_GROUP value
@@ -158,9 +131,6 @@ public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializ
 	public void setModifierGroup (com.floreantpos.model.MenuModifierGroup modifierGroup) {
 		this.modifierGroup = modifierGroup;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -172,7 +142,6 @@ public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializ
 			else return (this.getId().equals(menuItemModifierGroup.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -183,16 +152,13 @@ public abstract class BaseMenuItemModifierGroup  implements Comparable, Serializ
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

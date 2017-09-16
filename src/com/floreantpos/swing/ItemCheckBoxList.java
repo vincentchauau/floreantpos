@@ -1,24 +1,19 @@
 package com.floreantpos.swing;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-
 import com.floreantpos.model.MenuCategory;
 import com.floreantpos.model.MenuGroup;
 import com.floreantpos.model.MenuItem;
-
 /**
  * A list from which multiple items can be selected.
  */
 public class ItemCheckBoxList<E> extends CheckBoxList {
-
 	public ItemCheckBoxList() {
 	}
 	
@@ -57,15 +52,12 @@ public class ItemCheckBoxList<E> extends CheckBoxList {
 		for (int i = 0; i < model.items.size(); i++) {
 			Entry entry = (Entry) model.items.get(i);
 			entry.checked = false;
-
 		}
-
 		model.fireTableRowsUpdated(0, model.getRowCount());
 	}
 	
 	public void setSelected(Object type) {
 		CheckBoxListModel model = (CheckBoxListModel) getModel();
-
 		if(type != null) {
 			for (int i = 0; i < model.items.size(); i++) {
 				Entry entry = (Entry) model.items.get(i);
@@ -82,15 +74,11 @@ public class ItemCheckBoxList<E> extends CheckBoxList {
 	@Override
 	public void selectItems(List types) {
 		CheckBoxListModel model = (CheckBoxListModel) getModel();
-
 		if(types != null) {
 			for (int i = 0; i < model.items.size(); i++) {
 				Entry entry = (Entry) model.items.get(i);
-
 				for (int j = 0; j < types.size(); j++) {
-
 					Object type = types.get(j);
-
 					if(type.equals(entry.value)) {
 						entry.checked = true;
 						break;
@@ -102,7 +90,6 @@ public class ItemCheckBoxList<E> extends CheckBoxList {
 	}
 	@Override
 	public TableCellRenderer getCellRenderer(int row, int column) {
-
 		if(column == 0) {
 			return super.getCellRenderer(row, column);
 		}
@@ -121,7 +108,6 @@ public class ItemCheckBoxList<E> extends CheckBoxList {
 		}
 		return super.getCellRenderer(row, column);
 	}
-
 	public void init() {
 		getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		setShowGrid(true);
@@ -134,10 +120,8 @@ public class ItemCheckBoxList<E> extends CheckBoxList {
 		column.setMaxWidth(checkBoxWidth);
 		column.setResizable(false);
 	}
-
 	public static class CheckBoxListModel<E> extends CheckBoxList.CheckBoxListModel<E> {
 		List<CheckBoxList.Entry<E>> items;
-
 		CheckBoxListModel(List<E> _items) {
 			super(_items);
 			items = new ArrayList<CheckBoxList.Entry<E>>(_items.size());
@@ -145,15 +129,12 @@ public class ItemCheckBoxList<E> extends CheckBoxList {
 				items.add(createEntry(_items.get(i)));
 			}
 		}
-
 		@Override
 		public int getColumnCount() {
 			return 3;
 		}
-
 		@Override
 		public String getColumnName(int col) {
-
 			switch (col) {
 				case 0:
 				return "ALL";
@@ -163,12 +144,10 @@ public class ItemCheckBoxList<E> extends CheckBoxList {
 					
 				case 2:
 					return "Price";
-
 				default:
 					return null;
 			}
 		}
-
 		@Override
 		public Object getValueAt(int row, int col) {
 			CheckBoxList.Entry entry = items.get(row);
@@ -193,16 +172,13 @@ public class ItemCheckBoxList<E> extends CheckBoxList {
 					throw new InternalError();
 			}
 		}
-
 		@Override
 		public void setValueAt(Object value, int row, int col) {
 			if(col == 0) {
 				CheckBoxList.Entry entry = items.get(row);
 				entry.checked = (value.equals(Boolean.TRUE));
-
 				fireTableRowsUpdated(row, row);
 			}
 		}
-
 	}
 }

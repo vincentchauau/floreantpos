@@ -1,21 +1,15 @@
 package com.floreantpos.services;
-
 import javax.ws.rs.core.MultivaluedMap;
-
 import com.floreantpos.PosLog;
 import com.floreantpos.config.TerminalConfig;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-
 public class PosWebService {
-
 	private static final String SERVICE_URL = TerminalConfig.getWebServiceUrl();
-
 	public PosWebService() {
 	}
-
 	public String getAvailableNewVersions(String terminalKey, String currentPosVersion) {
 		try {
 			Client client = Client.create();
@@ -32,7 +26,6 @@ public class PosWebService {
 			PosLog.info(getClass(),"\n============update info============");
 			PosLog.info(getClass(),versionInfo);
 			return versionInfo;
-
 		} catch (Exception e) {
 			//PosLog.error(getClass(), e);
 		}

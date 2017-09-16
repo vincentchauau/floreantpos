@@ -16,28 +16,21 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 import org.apache.commons.lang.StringUtils;
-
 import com.floreantpos.model.base.BaseVoidTransaction;
-
-
 
 public class VoidTransaction extends BaseVoidTransaction {
 	private static final long serialVersionUID = 1L;
-
 /*[CONSTRUCTOR MARKER BEGIN]*/
 	public VoidTransaction () {
 		super();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
 	public VoidTransaction (java.lang.Integer id) {
 		super(id);
 	}
-
 	/**
 	 * Constructor for required fields
 	 */
@@ -45,7 +38,6 @@ public class VoidTransaction extends BaseVoidTransaction {
 		java.lang.Integer id,
 		java.lang.String transactionType,
 		java.lang.String paymentType) {
-
 		super (
 			id,
 			transactionType,
@@ -53,7 +45,6 @@ public class VoidTransaction extends BaseVoidTransaction {
 	}
 
 /*[CONSTRUCTOR MARKER END]*/
-
 	@Override
 	public String getTransactionType() {
 		String type = super.getTransactionType();
@@ -64,5 +55,4 @@ public class VoidTransaction extends BaseVoidTransaction {
 		
 		return type;
 	}
-
 }

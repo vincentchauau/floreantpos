@@ -16,11 +16,9 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Set;
-
 import com.floreantpos.POSConstants;
 import com.floreantpos.config.TerminalConfig;
 import com.floreantpos.main.Application;
@@ -29,14 +27,11 @@ import com.floreantpos.model.User;
 import com.floreantpos.model.UserPermission;
 import com.floreantpos.model.UserType;
 import com.floreantpos.ui.views.LoginView;
-
 public class OrderTypeLoginButton extends PosButton implements ActionListener {
 	private OrderType orderType;
-
 	public OrderTypeLoginButton() {
 		super("");
 	}
-
 	public OrderTypeLoginButton(OrderType orderType) {
 		super();
 		this.orderType = orderType;
@@ -48,7 +43,6 @@ public class OrderTypeLoginButton extends PosButton implements ActionListener {
 		}
 		addActionListener(this);
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 //		if(!hasPermission()) {
@@ -59,7 +53,6 @@ public class OrderTypeLoginButton extends PosButton implements ActionListener {
 		TerminalConfig.setDefaultView(orderType.getName());
 		LoginView.getInstance().doLogin();
 	}
-
 	private boolean hasPermission() {
 		User user = Application.getCurrentUser();
 		UserType userType = user.getType();

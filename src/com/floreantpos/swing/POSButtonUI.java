@@ -19,25 +19,19 @@
  * 
  */
 package com.floreantpos.swing;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
-
 import com.jgoodies.looks.plastic.PlasticButtonUI;
-
 public class POSButtonUI extends PlasticButtonUI {
 	private static final POSButtonUI INSTANCE = new POSButtonUI();
-
 	public static ComponentUI createUI(JComponent b) {
 		return INSTANCE;
 	}
-
 	public void update(Graphics g, JComponent c) {
 		if (c.isOpaque()) {
 			AbstractButton b = (AbstractButton) c;
@@ -46,7 +40,6 @@ public class POSButtonUI extends PlasticButtonUI {
 			} else if (b.isContentAreaFilled()) {
 				g.setColor(c.getBackground());
 				g.fillRect(0, 0, c.getWidth(), c.getHeight());
-
 				if (is3D(b)) {
 					Color color1 = c.getBackground();// UIManager.getColor("control");
 					Color color2 = color1.brighter();
@@ -65,5 +58,4 @@ public class POSButtonUI extends PlasticButtonUI {
 		}
 		paint(g, c);
 	}
-
 }

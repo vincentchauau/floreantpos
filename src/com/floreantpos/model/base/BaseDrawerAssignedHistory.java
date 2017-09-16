@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the DRAWER_ASSIGNED_HISTORY table.
@@ -28,21 +26,17 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="DRAWER_ASSIGNED_HISTORY"
  */
-
 public abstract class BaseDrawerAssignedHistory  implements Comparable, Serializable {
-
 	public static String REF = "DrawerAssignedHistory"; //$NON-NLS-1$
 	public static String PROP_USER = "user"; //$NON-NLS-1$
 	public static String PROP_OPERATION = "operation"; //$NON-NLS-1$
 	public static String PROP_TIME = "time"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseDrawerAssignedHistory () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -50,24 +44,16 @@ public abstract class BaseDrawerAssignedHistory  implements Comparable, Serializ
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.util.Date time;
 		protected java.lang.String operation;
-
 	// many to one
 	private com.floreantpos.model.User user;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -78,7 +64,6 @@ public abstract class BaseDrawerAssignedHistory  implements Comparable, Serializ
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -89,15 +74,12 @@ public abstract class BaseDrawerAssignedHistory  implements Comparable, Serializ
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: TIME
 	 */
 	public java.util.Date getTime () {
 					return time;
 			}
-
 	/**
 	 * Set the value related to the column: TIME
 	 * @param time the TIME value
@@ -106,15 +88,12 @@ public abstract class BaseDrawerAssignedHistory  implements Comparable, Serializ
 		this.time = time;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: OPERATION
 	 */
 	public java.lang.String getOperation () {
 					return operation;
 			}
-
 	/**
 	 * Set the value related to the column: OPERATION
 	 * @param operation the OPERATION value
@@ -123,15 +102,12 @@ public abstract class BaseDrawerAssignedHistory  implements Comparable, Serializ
 		this.operation = operation;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: USER
 	 */
 	public com.floreantpos.model.User getUser () {
 					return user;
 			}
-
 	/**
 	 * Set the value related to the column: USER
 	 * @param user the USER value
@@ -139,9 +115,6 @@ public abstract class BaseDrawerAssignedHistory  implements Comparable, Serializ
 	public void setUser (com.floreantpos.model.User user) {
 		this.user = user;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -153,7 +126,6 @@ public abstract class BaseDrawerAssignedHistory  implements Comparable, Serializ
 			else return (this.getId().equals(drawerAssignedHistory.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -164,16 +136,13 @@ public abstract class BaseDrawerAssignedHistory  implements Comparable, Serializ
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

@@ -20,29 +20,23 @@
  *
  * Created on September 8, 2006, 10:04 PM
  */
-
 package com.floreantpos.ui.dialog;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
 import net.miginfocom.swing.MigLayout;
-
 import com.floreantpos.model.OrderType;
 import com.floreantpos.swing.CheckBoxList;
 import com.floreantpos.swing.ComboBoxModel;
 import com.floreantpos.swing.PosButton;
 import com.floreantpos.swing.PosComboRenderer;
 import com.floreantpos.util.POSUtil;
-
 /**
  *
  * @author  MShahriar
@@ -61,7 +55,6 @@ public class ComboItemSelectionDialog extends OkCancelOptionDialog {
 	private boolean newItem;
 	private boolean allowMutipleSelection;
 	private List selectedItems = new ArrayList<>();
-
 	public ComboItemSelectionDialog(String title, String lblText, List items, boolean allowMutipleSelection) {
 		super(POSUtil.getBackOfficeWindow(), true);
 		this.title = title;
@@ -71,15 +64,11 @@ public class ComboItemSelectionDialog extends OkCancelOptionDialog {
 		setTitle(title); //$NON-NLS-1$
 		initComponents();
 	}
-
 	public void setFirstItem(String firstItem) {
-
 	}
-
 	public void setVisibleNewButton(boolean b) {
 		if (b) {
 			btnNew.addActionListener(new ActionListener() {
-
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					newItem = true;
@@ -90,28 +79,21 @@ public class ComboItemSelectionDialog extends OkCancelOptionDialog {
 			contentPane.add(btnNew, "h 40");
 		}
 	}
-
 	private void initComponents() {
 		contentPane = new JPanel(new MigLayout("inset 0, hidemode 3,fillx", "", ""));
-
 		setTitle(title); //$NON-NLS-1$
 		setTitlePaneText(title); //$NON-NLS-1$
-
 		lblItemText = new JLabel(lblText);//$NON-NLS-2$
 		if (!allowMutipleSelection)
 			contentPane.add(lblItemText, "alignx trailing"); //$NON-NLS-1$ 
-
 		PosComboRenderer comboRenderer = new PosComboRenderer();
 		comboRenderer.setEnableDefaultValueShowing(false);
-
 		cbItems = new JComboBox();
 		chkItems = new CheckBoxList<>(items);
-
 		if (allowMutipleSelection) {
 			JPanel borderedPanel = new JPanel(new MigLayout("inset 0,fill"));
 			borderedPanel.setBorder(new TitledBorder(lblText));
 			chkSelectAll.addActionListener(new ActionListener() {
-
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (chkSelectAll.isSelected()) {
@@ -133,12 +115,10 @@ public class ComboItemSelectionDialog extends OkCancelOptionDialog {
 		}
 		getContentPanel().add(contentPane);
 	}
-
 	public void doCancel() {
 		setCanceled(true);
 		dispose();
 	}
-
 	public void doOk() {
 		setCanceled(false);
 		if (!allowMutipleSelection) {
@@ -149,23 +129,18 @@ public class ComboItemSelectionDialog extends OkCancelOptionDialog {
 		}
 		dispose();
 	}
-
 	public Object getSelectedItem() {
 		return selectedObject;
 	}
-
 	public List getSelectedItems() {
 		return selectedItems;
 	}
-
 	public boolean isNewItem() {
 		return newItem;
 	}
-
 	public void setSelectedItem(Object defaultValue) {
 		cbItems.setSelectedItem(defaultValue);
 	}
-
 	public void setSelectedItems(List<OrderType> defaultValues) {
 		chkItems.selectItems(defaultValues);
 	}

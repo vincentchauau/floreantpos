@@ -16,33 +16,25 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
-
 import javax.swing.AbstractListModel;
-
 public class ListModel<E> extends AbstractListModel<E> {
 	private List<E> list;
-
 	public ListModel() {
 		this.list = new ArrayList<E>();
 	}
-
 	public ListModel(List<E> list) {
 		this.list = list;
 	}
-
 	public void setData(List<E> list) {
 		this.list = list;
 	}
-
 	public List<E> getDataList() {
 		return this.list;
 	}
-
 	/**
 	 * Adds the specified component to the end of this list.
 	 *
@@ -54,7 +46,6 @@ public class ListModel<E> extends AbstractListModel<E> {
 		list.add(element);
 		fireIntervalAdded(this, index, index);
 	}
-
 	/**
 	 * Returns an enumeration of the components of this list.
 	 *
@@ -64,24 +55,19 @@ public class ListModel<E> extends AbstractListModel<E> {
 	public Iterator<E> iterator() {
 		return list.iterator();
 	}
-
 	@Override
 	public int getSize() {
 		return list.size();
 	}
-
 	@Override
 	public E getElementAt(int index) {
 		return list.get(index);
 	}
-
 	public void remove(int index) {
 		list.remove(index);
 		fireContentsChanged(this, index, index);
 	}
-
 	public void removeElement(E element) {
 		list.remove(element);
 	}
-
 }

@@ -16,31 +16,23 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.actions;
-
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JTabbedPane;
-
 import com.floreantpos.Messages;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.report.AttendanceReportView;
-
 public class EmployeeAttendanceAction extends AbstractAction {
-
 	public EmployeeAttendanceAction() {
 		super(Messages.getString("EmployeeAttendanceAction.0")); //$NON-NLS-1$
 	}
-
 	public EmployeeAttendanceAction(String name) {
 		super(name);
 	}
-
 	public EmployeeAttendanceAction(String name, Icon icon) {
 		super(name, icon);
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		BackOfficeWindow window = com.floreantpos.util.POSUtil.getBackOfficeWindow();
 		JTabbedPane tabbedPane = window.getTabbedPane();
@@ -56,5 +48,4 @@ public class EmployeeAttendanceAction extends AbstractAction {
 		}
 		tabbedPane.setSelectedComponent(reportView);
 	}
-
 }

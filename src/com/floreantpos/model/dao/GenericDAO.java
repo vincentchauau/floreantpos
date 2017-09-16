@@ -16,20 +16,15 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import java.io.Serializable;
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 public class GenericDAO extends _RootDAO {
-
 	public GenericDAO() {
 		super();
 	}
-
 	@Override
 	protected Class getReferenceClass() {
 		return null;

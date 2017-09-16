@@ -16,16 +16,12 @@
  * ************************************************************************
  */
 package com.floreantpos.report;
-
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
-
 import com.floreantpos.model.Ticket;
 import com.floreantpos.util.NumberUtil;
-
 public class TicketReportModel extends AbstractTableModel {
 	private static DecimalFormat formatter = new DecimalFormat("#,##0.00"); //$NON-NLS-1$
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); //$NON-NLS-1$
@@ -37,13 +33,11 @@ public class TicketReportModel extends AbstractTableModel {
 	public TicketReportModel() {
 		super();
 	}
-
 	public int getRowCount() {
 		if(items == null) return 0;
 		
 		return items.size();
 	}
-
 	public int getColumnCount() {
 		return columnNames.length;
 	}
@@ -52,7 +46,6 @@ public class TicketReportModel extends AbstractTableModel {
 	public String getColumnName(int column) {
 		return columnNames[column];
 	}
-
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Ticket ticket = items.get(rowIndex);
 		
@@ -80,11 +73,9 @@ public class TicketReportModel extends AbstractTableModel {
 		}
 		return null;
 	}
-
 	public List<Ticket> getItems() {
 		return items;
 	}
-
 	public void setItems(List<Ticket> items) {
 		this.items = items;
 	}
@@ -92,20 +83,16 @@ public class TicketReportModel extends AbstractTableModel {
 	public String getGrandTotalAsString() {
 		return formatter.format(grandTotal);
 	}
-
 	public void setGrandTotal(double grandTotal) {
 		this.grandTotal = grandTotal;
 	}
-
 	public void calculateGrandTotal() {
 		grandTotal = 0;
 		if (items == null) {
 			return;
 		}
-
 		for (Ticket item : items) {
 			grandTotal += item.getDueAmount();
 		}
 	}
-
 }

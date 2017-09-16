@@ -19,20 +19,16 @@
  * 
  */
 package com.floreantpos.ui;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-
 import com.floreantpos.util.NumberUtil;
-
 public class PosTableRenderer extends DefaultTableCellRenderer {
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy, h:m a"); //$NON-NLS-1$
 	/**

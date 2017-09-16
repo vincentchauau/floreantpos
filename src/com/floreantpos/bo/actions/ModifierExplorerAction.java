@@ -16,30 +16,22 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.actions;
-
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JTabbedPane;
-
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.ModifierExplorer;
-
 public class ModifierExplorerAction extends AbstractAction {
-
 	public ModifierExplorerAction() {
 		super(com.floreantpos.POSConstants.MENU_MODIFIERS);
 	}
-
 	public ModifierExplorerAction(String name) {
 		super(name);
 	}
-
 	public ModifierExplorerAction(String name, Icon icon) {
 		super(name, icon);
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
 		JTabbedPane tabbedPane;
@@ -55,5 +47,4 @@ public class ModifierExplorerAction extends AbstractAction {
 		}
 		tabbedPane.setSelectedComponent(modifier);
 	}
-
 }

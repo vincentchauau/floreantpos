@@ -45,220 +45,221 @@ import com.floreantpos.ui.views.order.OrderView;
 import com.floreantpos.ui.views.order.RootView;
 
 public class OrderInfoDialog extends POSDialog {
-	OrderInfoView view;
-	private boolean reorder = false;
-	private PosButton btnReOrder;
-	private PosButton btnTransferUser;
-	private PosButton btnPrint;
-	private PosButton btnPrintDriverCopy;
 
-	public OrderInfoDialog(OrderInfoView view) {
-		this.view = view;
-		setTitle(Messages.getString("OrderInfoDialog.0")); //$NON-NLS-1$
+    OrderInfoView view;
+    private boolean reorder = false;
+    private PosButton btnReOrder;
+    private PosButton btnTransferUser;
+    private PosButton btnPrint;
+    private PosButton btnPrintDriverCopy;
 
-		createUI();
-	}
+    public OrderInfoDialog(OrderInfoView view) {
+        this.view = view;
+        setTitle(Messages.getString("OrderInfoDialog.0")); //$NON-NLS-1$
 
-	public void createUI() {
-		add(view);
+        createUI();
+    }
 
-		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.SOUTH);
+    public void createUI() {
+        add(view);
 
-		btnReOrder = new PosButton("Reorder");
+        JPanel panel = new JPanel();
+        getContentPane().add(panel, BorderLayout.SOUTH);
 
-		btnReOrder.addActionListener(new ActionListener() {
+        btnReOrder = new PosButton("Reorder");
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				for (Iterator iter = view.getTickets().iterator(); iter.hasNext();) {
+        btnReOrder.addActionListener(new ActionListener() {
 
-					Ticket ticket = (Ticket) iter.next();
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (Iterator iter = view.getTickets().iterator(); iter.hasNext();) {
 
-					createReOrder(ticket);
-					setCanceled(true);
-					dispose();
+                    Ticket ticket = (Ticket) iter.next();
 
-				}
-			}
-		});
+                    createReOrder(ticket);
+                    setCanceled(true);
+                    dispose();
 
-		panel.add(btnReOrder);
+                }
+            }
+        });
 
-		btnTransferUser = new PosButton();
-		btnTransferUser.setText(Messages.getString("OrderInfoDialog.3")); //$NON-NLS-1$
-		btnTransferUser.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+        panel.add(btnReOrder);
 
-				User currentUser = Application.getCurrentUser();
+        btnTransferUser = new PosButton();
+        btnTransferUser.setText(Messages.getString("OrderInfoDialog.3")); //$NON-NLS-1$
+        btnTransferUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-				for (Iterator iter = view.getTickets().iterator(); iter.hasNext();) {
+                User currentUser = Application.getCurrentUser();
 
-					Ticket ticket = (Ticket) iter.next();
+                for (Iterator iter = view.getTickets().iterator(); iter.hasNext();) {
 
-					if (!currentUser.equals(ticket.getOwner())) {
+                    Ticket ticket = (Ticket) iter.next();
 
-						if (!currentUser.hasPermission(UserPermission.TRANSFER_TICKET)) {
-							POSMessageDialog.showError(getParent(), Messages.getString("OrderInfoDialog.4") + ticket.getId()); //$NON-NLS-1$
-							return;
-						}
-					}
-				}
+                    if (!currentUser.equals(ticket.getOwner())) {
 
-				UserTransferDialog dialog = new UserTransferDialog(view);
-				dialog.setSize(PosUIManager.getSize(360, 555));
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setLocationRelativeTo(Application.getPosWindow());
-				dialog.setVisible(true);
-			}
-		});
+                        if (!currentUser.hasPermission(UserPermission.TRANSFER_TICKET)) {
+                            POSMessageDialog.showError(getParent(), Messages.getString("OrderInfoDialog.4") + ticket.getId()); //$NON-NLS-1$
+                            return;
+                        }
+                    }
+                }
 
-		panel.add(btnTransferUser);
+                UserTransferDialog dialog = new UserTransferDialog(view);
+                dialog.setSize(PosUIManager.getSize(360, 555));
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                dialog.setLocationRelativeTo(Application.getPosWindow());
+                dialog.setVisible(true);
+            }
+        });
 
-		btnPrint = new PosButton();
-		btnPrint.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				doPrint();
-			}
-		});
-		btnPrint.setText(Messages.getString("OrderInfoDialog.1")); //$NON-NLS-1$
-		panel.add(btnPrint);
+        panel.add(btnTransferUser);
 
-		btnPrintDriverCopy = new PosButton();
-		btnPrintDriverCopy.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				doPrintDriverCopy();
-			}
-		});
-		btnPrintDriverCopy.setText("Print (Driver Copy)"); //$NON-NLS-1$
-		btnPrintDriverCopy.setVisible(false);
-		panel.add(btnPrintDriverCopy);
+        btnPrint = new PosButton();
+        btnPrint.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                doPrint();
+            }
+        });
+        btnPrint.setText(Messages.getString("OrderInfoDialog.1")); //$NON-NLS-1$
+        panel.add(btnPrint);
 
-		PosButton btnClose = new PosButton();
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		btnClose.setText(Messages.getString("OrderInfoDialog.2")); //$NON-NLS-1$
-		panel.add(btnClose);
-	}
+        btnPrintDriverCopy = new PosButton();
+        btnPrintDriverCopy.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                doPrintDriverCopy();
+            }
+        });
+        btnPrintDriverCopy.setText("Print (Driver Copy)"); //$NON-NLS-1$
+        btnPrintDriverCopy.setVisible(false);
+        panel.add(btnPrintDriverCopy);
 
-	private void doPrintDriverCopy() {
-		try {
-			view.printCopy(ReceiptPrintService.DRIVER_COPY);
-		} catch (Exception e) {
-			POSMessageDialog.showError(Application.getPosWindow(), e.getMessage());
-		}
-	}
+        PosButton btnClose = new PosButton();
+        btnClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        btnClose.setText(Messages.getString("OrderInfoDialog.2")); //$NON-NLS-1$
+        panel.add(btnClose);
+    }
 
-	public void updateView() {
-		btnTransferUser.setVisible(false);
-		btnReOrder.setVisible(false);
-		btnPrintDriverCopy.setVisible(true);
-		btnPrint.setText("Print (Customer Copy)");
-	}
+    private void doPrintDriverCopy() {
+        try {
+            view.printCopy(ReceiptPrintService.DRIVER_COPY);
+        } catch (Exception e) {
+            POSMessageDialog.showError(Application.getPosWindow(), e.getMessage());
+        }
+    }
 
-	protected void doPrint() {
-		try {
-			view.printCopy(ReceiptPrintService.CUSTOMER_COPY);
-		} catch (Exception e) {
-			POSMessageDialog.showError(Application.getPosWindow(), e.getMessage());
-		}
-	}
+    public void updateView() {
+        btnTransferUser.setVisible(false);
+        btnReOrder.setVisible(false);
+        btnPrintDriverCopy.setVisible(true);
+        btnPrint.setText("Print (Customer Copy)");
+    }
 
-	private void createReOrder(Ticket oldticket) {
-		Ticket ticket = new Ticket();
-		ticket.setPriceIncludesTax(oldticket.isPriceIncludesTax());
-		ticket.setOrderType(oldticket.getOrderType());
-		ticket.setProperties(oldticket.getProperties());
-		ticket.setTerminal(Application.getInstance().getTerminal());
-		ticket.setOwner(Application.getCurrentUser());
-		ticket.setShift(Application.getInstance().getCurrentShift());
-		ticket.setNumberOfGuests(oldticket.getNumberOfGuests());
+    protected void doPrint() {
+        try {
+            view.printCopy(ReceiptPrintService.CUSTOMER_COPY);
+        } catch (Exception e) {
+            POSMessageDialog.showError(Application.getPosWindow(), e.getMessage());
+        }
+    }
 
-		Calendar currentTime = Calendar.getInstance();
-		ticket.setCreateDate(currentTime.getTime());
-		ticket.setCreationHour(currentTime.get(Calendar.HOUR_OF_DAY));
+    private void createReOrder(Ticket oldticket) {
+        Ticket ticket = new Ticket();
+        ticket.setPriceIncludesTax(oldticket.isPriceIncludesTax());
+        ticket.setOrderType(oldticket.getOrderType());
+        ticket.setProperties(oldticket.getProperties());
+        ticket.setTerminal(Application.getInstance().getTerminal());
+        ticket.setOwner(Application.getCurrentUser());
+        ticket.setShift(Application.getInstance().getCurrentShift());
+        ticket.setNumberOfGuests(oldticket.getNumberOfGuests());
 
-		List<TicketItem> newTicketItems = new ArrayList<TicketItem>();
-		for (TicketItem oldTicketItem : oldticket.getTicketItems()) {
-			TicketItem newTicketItem = new TicketItem();
-			newTicketItem.setItemCount(oldTicketItem.getItemCount());
-			newTicketItem.setItemQuantity(oldTicketItem.getItemQuantity());
-			newTicketItem.setItemId(oldTicketItem.getItemId());
-			newTicketItem.setHasModifiers(oldTicketItem.isHasModifiers());
-			newTicketItem.setName(oldTicketItem.getName());
-			newTicketItem.setGroupName(oldTicketItem.getGroupName());
-			newTicketItem.setCategoryName(oldTicketItem.getCategoryName());
-			newTicketItem.setUnitPrice(oldTicketItem.getUnitPrice());
-			newTicketItem.setFractionalUnit(oldTicketItem.isFractionalUnit());
-			newTicketItem.setItemUnitName(oldTicketItem.getItemUnitName());
+        Calendar currentTime = Calendar.getInstance();
+        ticket.setCreateDate(currentTime.getTime());
+        ticket.setCreationHour(currentTime.get(Calendar.HOUR_OF_DAY));
 
-			List<TicketItemDiscount> discounts = oldTicketItem.getDiscounts();
-			if (discounts != null) {
-				List<TicketItemDiscount> newDiscounts = new ArrayList<TicketItemDiscount>();
-				for (TicketItemDiscount ticketItemDiscount : discounts) {
-					TicketItemDiscount newDiscount = new TicketItemDiscount(ticketItemDiscount);
-					newDiscount.setTicketItem(newTicketItem);
-					newDiscounts.add(newDiscount);
-				}
-				newTicketItem.setDiscounts(newDiscounts);
-			}
+        List<TicketItem> newTicketItems = new ArrayList<TicketItem>();
+        for (TicketItem oldTicketItem : oldticket.getTicketItems()) {
+            TicketItem newTicketItem = new TicketItem();
+            newTicketItem.setItemCount(oldTicketItem.getItemCount());
+            newTicketItem.setItemQuantity(oldTicketItem.getItemQuantity());
+            newTicketItem.setItemId(oldTicketItem.getItemId());
+            newTicketItem.setHasModifiers(oldTicketItem.isHasModifiers());
+            newTicketItem.setName(oldTicketItem.getName());
+            newTicketItem.setGroupName(oldTicketItem.getGroupName());
+            newTicketItem.setCategoryName(oldTicketItem.getCategoryName());
+            newTicketItem.setUnitPrice(oldTicketItem.getUnitPrice());
+            newTicketItem.setFractionalUnit(oldTicketItem.isFractionalUnit());
+            newTicketItem.setItemUnitName(oldTicketItem.getItemUnitName());
 
-			List<TicketItemModifier> ticketItemModifiers = oldTicketItem.getTicketItemModifiers();
-			if (ticketItemModifiers != null) {
-				for (TicketItemModifier ticketItemModifier : ticketItemModifiers) {
-					TicketItemModifier newModifier = new TicketItemModifier();
-					newModifier.setModifierId(ticketItemModifier.getModifierId());
-					newModifier.setMenuItemModifierGroupId(ticketItemModifier.getMenuItemModifierGroupId());
-					newModifier.setItemCount(ticketItemModifier.getItemCount());
-					newModifier.setName(ticketItemModifier.getName());
-					newModifier.setUnitPrice(ticketItemModifier.getUnitPrice());
-					newModifier.setTaxRate(ticketItemModifier.getTaxRate());
-					newModifier.setModifierType(ticketItemModifier.getModifierType());
-					newModifier.setPrintedToKitchen(false);
-					newModifier.setShouldPrintToKitchen(ticketItemModifier.isShouldPrintToKitchen());
-					newModifier.setTicketItem(newTicketItem);
-					newTicketItem.addToticketItemModifiers(newModifier);
-				}
-			}
-			List<TicketItemModifier> addOnsList = oldTicketItem.getAddOns();
-			if (addOnsList != null) {
-				for (TicketItemModifier addOns : oldTicketItem.getAddOns()) {
-					TicketItemModifier newAddOns = new TicketItemModifier();
-					newAddOns.setModifierId(addOns.getModifierId());
-					newAddOns.setMenuItemModifierGroupId(addOns.getMenuItemModifierGroupId());
-					newAddOns.setItemCount(addOns.getItemCount());
-					newAddOns.setName(addOns.getName());
-					newAddOns.setUnitPrice(addOns.getUnitPrice());
-					newAddOns.setTaxRate(addOns.getTaxRate());
-					newAddOns.setModifierType(addOns.getModifierType());
-					newAddOns.setPrintedToKitchen(false);
-					newAddOns.setShouldPrintToKitchen(addOns.isShouldPrintToKitchen());
-					newTicketItem.addToaddOns(newAddOns);
-				}
-			}
+            List<TicketItemDiscount> discounts = oldTicketItem.getDiscounts();
+            if (discounts != null) {
+                List<TicketItemDiscount> newDiscounts = new ArrayList<TicketItemDiscount>();
+                for (TicketItemDiscount ticketItemDiscount : discounts) {
+                    TicketItemDiscount newDiscount = new TicketItemDiscount(ticketItemDiscount);
+                    newDiscount.setTicketItem(newTicketItem);
+                    newDiscounts.add(newDiscount);
+                }
+                newTicketItem.setDiscounts(newDiscounts);
+            }
 
-			newTicketItem.setTaxRate(oldTicketItem.getTaxRate());
-			newTicketItem.setBeverage(oldTicketItem.isBeverage());
-			newTicketItem.setShouldPrintToKitchen(oldTicketItem.isShouldPrintToKitchen());
-			newTicketItem.setPrinterGroup(oldTicketItem.getPrinterGroup());
-			newTicketItem.setPrintedToKitchen(false);
+            List<TicketItemModifier> ticketItemModifiers = oldTicketItem.getTicketItemModifiers();
+            if (ticketItemModifiers != null) {
+                for (TicketItemModifier ticketItemModifier : ticketItemModifiers) {
+                    TicketItemModifier newModifier = new TicketItemModifier();
+                    newModifier.setModifierId(ticketItemModifier.getModifierId());
+                    newModifier.setMenuItemModifierGroupId(ticketItemModifier.getMenuItemModifierGroupId());
+                    newModifier.setItemCount(ticketItemModifier.getItemCount());
+                    newModifier.setName(ticketItemModifier.getName());
+                    newModifier.setUnitPrice(ticketItemModifier.getUnitPrice());
+                    newModifier.setTaxRate(ticketItemModifier.getTaxRate());
+                    newModifier.setModifierType(ticketItemModifier.getModifierType());
+                    newModifier.setPrintedToKitchen(false);
+                    newModifier.setShouldPrintToKitchen(ticketItemModifier.isShouldPrintToKitchen());
+                    newModifier.setTicketItem(newTicketItem);
+                    newTicketItem.addToticketItemModifiers(newModifier);
+                }
+            }
+            List<TicketItemModifier> addOnsList = oldTicketItem.getAddOns();
+            if (addOnsList != null) {
+                for (TicketItemModifier addOns : oldTicketItem.getAddOns()) {
+                    TicketItemModifier newAddOns = new TicketItemModifier();
+                    newAddOns.setModifierId(addOns.getModifierId());
+                    newAddOns.setMenuItemModifierGroupId(addOns.getMenuItemModifierGroupId());
+                    newAddOns.setItemCount(addOns.getItemCount());
+                    newAddOns.setName(addOns.getName());
+                    newAddOns.setUnitPrice(addOns.getUnitPrice());
+                    newAddOns.setTaxRate(addOns.getTaxRate());
+                    newAddOns.setModifierType(addOns.getModifierType());
+                    newAddOns.setPrintedToKitchen(false);
+                    newAddOns.setShouldPrintToKitchen(addOns.isShouldPrintToKitchen());
+                    newTicketItem.addToaddOns(newAddOns);
+                }
+            }
 
-			newTicketItem.setTicket(ticket);
-			newTicketItems.add(newTicketItem);
-		}
-		ticket.getTicketItems().addAll(newTicketItems);
+            newTicketItem.setTaxRate(oldTicketItem.getTaxRate());
+            newTicketItem.setBeverage(oldTicketItem.isBeverage());
+            newTicketItem.setShouldPrintToKitchen(oldTicketItem.isShouldPrintToKitchen());
+            newTicketItem.setPrinterGroup(oldTicketItem.getPrinterGroup());
+            newTicketItem.setPrintedToKitchen(false);
 
-		OrderView.getInstance().setCurrentTicket(ticket);
-		RootView.getInstance().showView(OrderView.VIEW_NAME);
+            newTicketItem.setTicket(ticket);
+            newTicketItems.add(newTicketItem);
+        }
+        ticket.getTicketItems().addAll(newTicketItems);
 
-		reorder = true;
-	}
+        OrderView.getInstance().setCurrentTicket(ticket);
+        RootView.getInstance().showView(OrderView.VIEW_NAME);
 
-	public boolean isReorder() {
-		return reorder;
-	}
+        reorder = true;
+    }
+
+    public boolean isReorder() {
+        return reorder;
+    }
 }

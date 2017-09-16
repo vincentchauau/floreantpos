@@ -16,21 +16,16 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-
 /**
  * This is an automatically generated DAO class which should not be edited.
  */
 public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._RootDAO {
-
 	// query name references
 
-
 	public static RecepieItemDAO instance;
-
 	/**
 	 * Return a singleton of the DAO
 	 */
@@ -38,42 +33,34 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		if (null == instance) instance = new RecepieItemDAO();
 		return instance;
 	}
-
 	public Class getReferenceClass () {
 		return com.floreantpos.model.RecepieItem.class;
 	}
-
     public Order getDefaultOrder () {
 		return null;
     }
-
 	/**
 	 * Cast the object as a com.floreantpos.model.RecepieItem
 	 */
 	public com.floreantpos.model.RecepieItem cast (Object object) {
 		return (com.floreantpos.model.RecepieItem) object;
 	}
-
 	public com.floreantpos.model.RecepieItem get(java.lang.Integer key)
 		throws org.hibernate.HibernateException {
 		return (com.floreantpos.model.RecepieItem) get(getReferenceClass(), key);
 	}
-
 	public com.floreantpos.model.RecepieItem get(java.lang.Integer key, Session s)
 		throws org.hibernate.HibernateException {
 		return (com.floreantpos.model.RecepieItem) get(getReferenceClass(), key, s);
 	}
-
 	public com.floreantpos.model.RecepieItem load(java.lang.Integer key)
 		throws org.hibernate.HibernateException {
 		return (com.floreantpos.model.RecepieItem) load(getReferenceClass(), key);
 	}
-
 	public com.floreantpos.model.RecepieItem load(java.lang.Integer key, Session s)
 		throws org.hibernate.HibernateException {
 		return (com.floreantpos.model.RecepieItem) load(getReferenceClass(), key, s);
 	}
-
 	public com.floreantpos.model.RecepieItem loadInitialize(java.lang.Integer key, Session s) 
 			throws org.hibernate.HibernateException { 
 		com.floreantpos.model.RecepieItem obj = load(key, s); 
@@ -82,23 +69,19 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		} 
 		return obj; 
 	}
-
 /* Generic methods */
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
 	public java.util.List<com.floreantpos.model.RecepieItem> findAll () {
 		return super.findAll();
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
 	public java.util.List<com.floreantpos.model.RecepieItem> findAll (Order defaultOrder) {
 		return super.findAll(defaultOrder);
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 * Use the session given.
@@ -107,7 +90,6 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 	public java.util.List<com.floreantpos.model.RecepieItem> findAll (Session s, Order defaultOrder) {
 		return super.findAll(s, defaultOrder);
 	}
-
 	/**
 	 * Persist the given transient instance, first assigning a generated identifier. (Or using the current value
 	 * of the identifier property if the assigned generator is used.) 
@@ -118,7 +100,6 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		throws org.hibernate.HibernateException {
 		return (java.lang.Integer) super.save(recepieItem);
 	}
-
 	/**
 	 * Persist the given transient instance, first assigning a generated identifier. (Or using the current value
 	 * of the identifier property if the assigned generator is used.) 
@@ -131,7 +112,6 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		throws org.hibernate.HibernateException {
 		return (java.lang.Integer) save((Object) recepieItem, s);
 	}
-
 	/**
 	 * Either save() or update() the given instance, depending upon the value of its identifier property. By default
 	 * the instance is always saved. This behaviour may be adjusted by specifying an unsaved-value attribute of the
@@ -142,7 +122,6 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		throws org.hibernate.HibernateException {
 		saveOrUpdate((Object) recepieItem);
 	}
-
 	/**
 	 * Either save() or update() the given instance, depending upon the value of its identifier property. By default the
 	 * instance is always saved. This behaviour may be adjusted by specifying an unsaved-value attribute of the identifier
@@ -155,7 +134,6 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		throws org.hibernate.HibernateException {
 		saveOrUpdate((Object) recepieItem, s);
 	}
-
 	/**
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
 	 * instance with the same identifier in the current session.
@@ -165,7 +143,6 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		throws org.hibernate.HibernateException {
 		update((Object) recepieItem);
 	}
-
 	/**
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
 	 * instance with the same identifier in the current session.
@@ -177,7 +154,6 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		throws org.hibernate.HibernateException {
 		update((Object) recepieItem, s);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -187,7 +163,6 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		throws org.hibernate.HibernateException {
 		delete((Object) load(id));
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -199,7 +174,6 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		throws org.hibernate.HibernateException {
 		delete((Object) load(id, s), s);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -209,7 +183,6 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		throws org.hibernate.HibernateException {
 		delete((Object) recepieItem);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -236,6 +209,5 @@ public abstract class BaseRecepieItemDAO extends com.floreantpos.model.dao._Root
 		throws org.hibernate.HibernateException {
 		refresh((Object) recepieItem, s);
 	}
-
 
 }

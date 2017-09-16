@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the PIZZA_PRICE table.
@@ -11,9 +9,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="PIZZA_PRICE"
  */
-
 public abstract class BasePizzaPrice  implements Comparable, Serializable {
-
 	public static String REF = "PizzaPrice"; //$NON-NLS-1$
 	public static String PROP_CRUST = "crust"; //$NON-NLS-1$
 	public static String PROP_ORDER_TYPE = "orderType"; //$NON-NLS-1$
@@ -21,12 +17,10 @@ public abstract class BasePizzaPrice  implements Comparable, Serializable {
 	public static String PROP_SIZE = "size"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 
-
 	// constructors
 	public BasePizzaPrice () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -34,25 +28,17 @@ public abstract class BasePizzaPrice  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.Double price;
-
 	// many to one
 	private com.floreantpos.model.MenuItemSize size;
 	private com.floreantpos.model.PizzaCrust crust;
 	private com.floreantpos.model.OrderType orderType;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -63,7 +49,6 @@ public abstract class BasePizzaPrice  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -74,15 +59,12 @@ public abstract class BasePizzaPrice  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: PRICE
 	 */
 	public java.lang.Double getPrice () {
 									return price == null ? Double.valueOf(0) : price;
 					}
-
 	/**
 	 * Set the value related to the column: PRICE
 	 * @param price the PRICE value
@@ -91,15 +73,12 @@ public abstract class BasePizzaPrice  implements Comparable, Serializable {
 		this.price = price;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MENU_ITEM_SIZE
 	 */
 	public com.floreantpos.model.MenuItemSize getSize () {
 					return size;
 			}
-
 	/**
 	 * Set the value related to the column: MENU_ITEM_SIZE
 	 * @param size the MENU_ITEM_SIZE value
@@ -108,15 +87,12 @@ public abstract class BasePizzaPrice  implements Comparable, Serializable {
 		this.size = size;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CRUST
 	 */
 	public com.floreantpos.model.PizzaCrust getCrust () {
 					return crust;
 			}
-
 	/**
 	 * Set the value related to the column: CRUST
 	 * @param crust the CRUST value
@@ -125,15 +101,12 @@ public abstract class BasePizzaPrice  implements Comparable, Serializable {
 		this.crust = crust;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ORDER_TYPE
 	 */
 	public com.floreantpos.model.OrderType getOrderType () {
 					return orderType;
 			}
-
 	/**
 	 * Set the value related to the column: ORDER_TYPE
 	 * @param orderType the ORDER_TYPE value
@@ -141,9 +114,6 @@ public abstract class BasePizzaPrice  implements Comparable, Serializable {
 	public void setOrderType (com.floreantpos.model.OrderType orderType) {
 		this.orderType = orderType;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -155,7 +125,6 @@ public abstract class BasePizzaPrice  implements Comparable, Serializable {
 			else return (this.getId().equals(pizzaPrice.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -166,16 +135,13 @@ public abstract class BasePizzaPrice  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

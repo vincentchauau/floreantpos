@@ -16,17 +16,13 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.ui.explorer;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-
 import org.jdesktop.swingx.JXTable;
-
 import com.floreantpos.Messages;
 import com.floreantpos.POSConstants;
 import com.floreantpos.bo.ui.BOMessageDialog;
@@ -39,12 +35,9 @@ import com.floreantpos.ui.dialog.BeanEditorDialog;
 import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.ui.model.OrderTypeForm;
 import com.floreantpos.util.POSUtil;
-
 public class OrderTypeExplorer extends TransparentPanel {
-
 	private JXTable table;
 	private BeanTableModel<OrderType> tableModel;
-
 	public OrderTypeExplorer() {
 		tableModel = new BeanTableModel<OrderType>(OrderType.class);
 		tableModel.addColumn(POSConstants.ID.toUpperCase(), "id"); //$NON-NLS-1$
@@ -54,41 +47,30 @@ public class OrderTypeExplorer extends TransparentPanel {
 		tableModel.addColumn(POSConstants.PRINT_TO_KITCHEN, "shouldPrintToKitchen"); //$NON-NLS-1$
 		tableModel.addColumn(POSConstants.ENABLED.toUpperCase(), "enabled"); //$NON-NLS-1$
 		tableModel.addColumn(Messages.getString("OrderTypeExplorer.4"), "preAuthCreditCard"); //$NON-NLS-1$ //$NON-NLS-2$
-
 		tableModel.addRows(OrderTypeDAO.getInstance().findAll());
-
 		table = new JXTable(tableModel);
 		table.setDefaultRenderer(Object.class, new CustomCellRenderer());
-
 		setLayout(new BorderLayout(5, 5));
 		add(new JScrollPane(table));
-
 		addButtonPanel();
 	}
-
 	private void addButtonPanel() {
 		JButton addButton = new JButton(POSConstants.ADD);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-
 					OrderTypeForm editor = new OrderTypeForm();
 					BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
 					dialog.open();
-
 					if (dialog.isCanceled())
 						return;
-
 					OrderType ordersType = (OrderType) editor.getBean();
 					tableModel.addRow(ordersType);
-
 				} catch (Exception x) {
 					BOMessageDialog.showError(POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
-
 		JButton editButton = new JButton(POSConstants.EDIT);
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,23 +78,18 @@ public class OrderTypeExplorer extends TransparentPanel {
 					int index = table.getSelectedRow();
 					if (index < 0)
 						return;
-
 					index = table.convertRowIndexToModel(index);
 					OrderType ordersType = tableModel.getRow(index);
-
 					OrderTypeForm editor = new OrderTypeForm(ordersType);
 					BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
 					dialog.open();
 					if (dialog.isCanceled())
 						return;
-
 					table.repaint();
-
 				} catch (Throwable x) {
 					BOMessageDialog.showError(POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
 		JButton deleteButton = new JButton(POSConstants.DELETE);
 		deleteButton.addActionListener(new ActionListener() {
@@ -121,27 +98,20 @@ public class OrderTypeExplorer extends TransparentPanel {
 					int index = table.getSelectedRow();
 					if (index < 0)
 						return;
-
 					index = table.convertRowIndexToModel(index);
 					OrderType orderType = tableModel.getRow(index);
-
 					if (POSMessageDialog.showYesNoQuestionDialog(OrderTypeExplorer.this, POSConstants.CONFIRM_DELETE, POSConstants.DELETE) != JOptionPane.YES_OPTION) {
 						return;
 					}
-
 					OrderTypeDAO dao = new OrderTypeDAO();
 					dao.delete(orderType);
-
 					POSMessageDialog.showMessage(com.floreantpos.util.POSUtil.getFocusedWindow(), Messages.getString("TerminalConfigurationView.40")); //$NON-NLS-1$
-
 					tableModel.removeRow(index);
 				} catch (Exception x) {
 					BOMessageDialog.showError(POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
-
 		TransparentPanel panel = new TransparentPanel();
 		panel.add(addButton);
 		panel.add(editButton);

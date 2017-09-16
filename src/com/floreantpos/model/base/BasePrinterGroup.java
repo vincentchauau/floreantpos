@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the PRINTER_GROUP table.
@@ -28,20 +26,16 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="PRINTER_GROUP"
  */
-
 public abstract class BasePrinterGroup  implements Comparable, Serializable {
-
 	public static String REF = "PrinterGroup";
 	public static String PROP_IS_DEFAULT = "isDefault";
 	public static String PROP_ID = "id";
 	public static String PROP_NAME = "name";
 
-
 	// constructors
 	public BasePrinterGroup () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -49,36 +43,26 @@ public abstract class BasePrinterGroup  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	/**
 	 * Constructor for required fields
 	 */
 	public BasePrinterGroup (
 		java.lang.Integer id,
 		java.lang.String name) {
-
 		this.setId(id);
 		this.setName(name);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String name;
 		protected boolean isDefault;
-
 	// collections
 	private java.util.List<String> printerNames;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -89,7 +73,6 @@ public abstract class BasePrinterGroup  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -100,15 +83,12 @@ public abstract class BasePrinterGroup  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -117,15 +97,12 @@ public abstract class BasePrinterGroup  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: IS_DEFAULT
 	 */
 	public boolean isIsDefault () {
 					return isDefault;
 			}
-
 	/**
 	 * Set the value related to the column: IS_DEFAULT
 	 * @param isDefault the IS_DEFAULT value
@@ -134,15 +111,12 @@ public abstract class BasePrinterGroup  implements Comparable, Serializable {
 		this.isDefault = isDefault;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: printerNames
 	 */
 	public java.util.List<String> getPrinterNames () {
 					return printerNames;
 			}
-
 	/**
 	 * Set the value related to the column: printerNames
 	 * @param printerNames the printerNames value
@@ -150,9 +124,6 @@ public abstract class BasePrinterGroup  implements Comparable, Serializable {
 	public void setPrinterNames (java.util.List<String> printerNames) {
 		this.printerNames = printerNames;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -164,7 +135,6 @@ public abstract class BasePrinterGroup  implements Comparable, Serializable {
 			else return (this.getId().equals(printerGroup.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -175,16 +145,13 @@ public abstract class BasePrinterGroup  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

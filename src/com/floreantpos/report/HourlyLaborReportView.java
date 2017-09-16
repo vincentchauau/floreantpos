@@ -16,7 +16,6 @@
  * ************************************************************************
  */
 package com.floreantpos.report;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Insets;
@@ -29,7 +28,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -37,7 +35,6 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -45,9 +42,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JRViewer;
-
 import org.jdesktop.swingx.JXDatePicker;
-
 import com.floreantpos.Messages;
 import com.floreantpos.PosLog;
 import com.floreantpos.model.Shift;
@@ -69,7 +64,6 @@ import com.floreantpos.util.NumberUtil;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-
 /**
  * Created by IntelliJ IDEA.
  * User: mshahriar
@@ -85,55 +79,41 @@ public class HourlyLaborReportView extends TransparentPanel {
 	private JPanel reportPanel;
 	private JPanel contentPane;
 	private JComboBox cbUserType;
-
 	public HourlyLaborReportView() {
-
 		UserTypeDAO dao = new UserTypeDAO();
 		List<UserType> userTypes = dao.findAll();
-
 		Vector list = new Vector();
 		list.add(null);
 		list.addAll(userTypes);
-
 		cbUserType.setModel(new DefaultComboBoxModel(list));
-
 		TerminalDAO terminalDAO = new TerminalDAO();
 		List terminals = terminalDAO.findAll();
 		terminals.add(0, com.floreantpos.POSConstants.ALL);
 		cbTerminal.setModel(new ListComboBoxModel(terminals));
-
 		setLayout(new BorderLayout());
 		add(contentPane);
-
 		btnGo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				viewReport();
 			}
 		});
 	}
-
 	private void viewReport() {
 		Date fromDate = fromDatePicker.getDate();
 		Date toDate = toDatePicker.getDate();
-
 		if (fromDate.after(toDate)) {
 			POSMessageDialog.showError(com.floreantpos.util.POSUtil.getFocusedWindow(), com.floreantpos.POSConstants.FROM_DATE_CANNOT_BE_GREATER_THAN_TO_DATE_);
 			return;
 		}
-
 		UserType userType = (UserType) cbUserType.getSelectedItem();
-
 		Terminal terminal = null;
 		if (cbTerminal.getSelectedItem() instanceof Terminal) {
 			terminal = (Terminal) cbTerminal.getSelectedItem();
 		}
-
 		Calendar calendar = Calendar.getInstance();
 		calendar.clear();
-
 		Calendar calendar2 = Calendar.getInstance();
 		calendar2.setTime(fromDate);
-
 		calendar.set(Calendar.YEAR, calendar2.get(Calendar.YEAR));
 		calendar.set(Calendar.MONTH, calendar2.get(Calendar.MONTH));
 		calendar.set(Calendar.DATE, calendar2.get(Calendar.DATE));
@@ -141,7 +121,6 @@ public class HourlyLaborReportView extends TransparentPanel {
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		fromDate = calendar.getTime();
-
 		calendar.clear();
 		calendar2.setTime(toDate);
 		calendar.set(Calendar.YEAR, calendar2.get(Calendar.YEAR));
@@ -151,13 +130,10 @@ public class HourlyLaborReportView extends TransparentPanel {
 		calendar.set(Calendar.MINUTE, 59);
 		calendar.set(Calendar.SECOND, 59);
 		toDate = calendar.getTime();
-
 		TicketDAO ticketDAO = TicketDAO.getInstance();
 		AttendenceHistoryDAO attendenceHistoryDAO = new AttendenceHistoryDAO();
 		ArrayList<LaborReportData> rows = new ArrayList<LaborReportData>();
-
 		DecimalFormat formatter = new DecimalFormat("00"); //$NON-NLS-1$
-
 		int grandTotalChecks = 0;
 		int grandTotalGuests = 0;
 		double grandTotalSales = 0;
@@ -167,11 +143,9 @@ public class HourlyLaborReportView extends TransparentPanel {
 		double grandTotalGuestsPerMHr = 0;
 		double grandTotalCheckPerMHr = 0;
 		double grandTotalLaborCost = 0;
-
 		for (int i = 0; i < 24; i++) {
 			List<Ticket> tickets = ticketDAO.findTicketsForLaborHour(fromDate, toDate, i, userType, terminal);
 			List<User> users = attendenceHistoryDAO.findNumberOfClockedInUserAtHour(fromDate, toDate, i, userType, terminal);
-
 			int manHour = users.size();
 			int totalChecks = 0;
 			int totalGuests = 0;
@@ -181,13 +155,11 @@ public class HourlyLaborReportView extends TransparentPanel {
 			double guestsPerMHr = 0;
 			double checksPerMHr = 0;
 			//double laborCost = 0;
-
 			for (Ticket ticket : tickets) {
 				++totalChecks;
 				totalGuests += ticket.getNumberOfGuests();
 				totalSales += ticket.getTotalAmount();
 			}
-
 			for (User user : users) {
 				labor += (user.getCostPerHour() == null ? 0 : user.getCostPerHour());
 			}
@@ -198,7 +170,6 @@ public class HourlyLaborReportView extends TransparentPanel {
 				checksPerMHr = totalChecks / manHour;
 				//laborCost =
 			}
-
 			LaborReportData reportData = new LaborReportData();
 			reportData.setPeriod(formatter.format(i) + ":00 - " + formatter.format(i) + ":59"); //$NON-NLS-1$ //$NON-NLS-2$
 			reportData.setManHour(manHour);
@@ -209,9 +180,7 @@ public class HourlyLaborReportView extends TransparentPanel {
 			reportData.setSalesPerMHr(salesPerMHr);
 			reportData.setGuestsPerMHr(guestsPerMHr);
 			reportData.setCheckPerMHr(checksPerMHr);
-
 			rows.add(reportData);
-
 			grandTotalChecks += totalChecks;
 			grandTotalGuests += totalGuests;
 			grandTotalSales += totalSales;
@@ -221,16 +190,13 @@ public class HourlyLaborReportView extends TransparentPanel {
 			grandTotalCheckPerMHr += checksPerMHr;
 			grandTotalGuestsPerMHr += guestsPerMHr;
 			//grandTotalLaborCost +=
-
 		}
-
 		ArrayList<LaborReportData> shiftReportRows = new ArrayList<LaborReportData>();
 		ShiftDAO shiftDAO = new ShiftDAO();
 		List<Shift> shifts = shiftDAO.findAll();
 		for (Shift shift : shifts) {
 			List<Ticket> tickets = ticketDAO.findTicketsForShift(fromDate, toDate, shift, userType, terminal);
 			List<User> users = attendenceHistoryDAO.findNumberOfClockedInUserAtShift(fromDate, toDate, shift, userType, terminal);
-
 			int manHour = users.size();
 			int totalChecks = 0;
 			int totalGuests = 0;
@@ -240,13 +206,11 @@ public class HourlyLaborReportView extends TransparentPanel {
 			double guestsPerMHr = 0;
 			double checksPerMHr = 0;
 			//double laborCost = 0;
-
 			for (Ticket ticket : tickets) {
 				++totalChecks;
 				totalGuests += ticket.getNumberOfGuests();
 				totalSales += ticket.getTotalAmount();
 			}
-
 			for (User user : users) {
 				labor += (user.getCostPerHour() == null ? 0 : user.getCostPerHour());
 			}
@@ -257,7 +221,6 @@ public class HourlyLaborReportView extends TransparentPanel {
 				checksPerMHr = totalChecks / manHour;
 				//laborCost =
 			}
-
 			LaborReportData reportData = new LaborReportData();
 			reportData.setPeriod(shift.getName());
 			reportData.setManHour(manHour);
@@ -268,16 +231,12 @@ public class HourlyLaborReportView extends TransparentPanel {
 			reportData.setSalesPerMHr(salesPerMHr);
 			reportData.setGuestsPerMHr(guestsPerMHr);
 			reportData.setCheckPerMHr(checksPerMHr);
-
 			shiftReportRows.add(reportData);
 		}
-
 		try {
 			JasperReport hourlyReport = ReportUtil.getReport("hourly_labor_subreport"); //$NON-NLS-1$
 			JasperReport shiftReport = ReportUtil.getReport("hourly_labor_shift_subreport"); //$NON-NLS-1$
-
 			JasperReport report = ReportUtil.getReport("hourly_labor_report"); //$NON-NLS-1$
-
 			HashMap properties = new HashMap();
 			ReportUtil.populateRestaurantProperties(properties);
 			properties.put("reportTitle", com.floreantpos.POSConstants.HOURLY_LABOR_REPORT); //$NON-NLS-1$
@@ -288,7 +247,6 @@ public class HourlyLaborReportView extends TransparentPanel {
 			properties.put("dept", userType == null ? com.floreantpos.POSConstants.ALL : userType.getName()); //$NON-NLS-1$
 			properties.put("incr", Messages.getString("HourlyLaborReportView.0")); //$NON-NLS-1$ //$NON-NLS-2$
 			properties.put("cntr", terminal == null ? com.floreantpos.POSConstants.ALL : terminal.getName()); //$NON-NLS-1$
-
 			properties.put("totalChecks", String.valueOf(grandTotalChecks)); //$NON-NLS-1$
 			properties.put("totalGuests", String.valueOf(grandTotalGuests)); //$NON-NLS-1$
 			properties.put("totalSales", NumberUtil.formatNumber(grandTotalSales)); //$NON-NLS-1$
@@ -298,14 +256,11 @@ public class HourlyLaborReportView extends TransparentPanel {
 			properties.put("totalGuestsPerMhr", NumberUtil.formatNumber(grandTotalCheckPerMHr)); //$NON-NLS-1$
 			properties.put("totalCheckPerMHr", NumberUtil.formatNumber(grandTotalGuestsPerMHr)); //$NON-NLS-1$
 			properties.put("totalLaborCost", NumberUtil.formatNumber(grandTotalLaborCost)); //$NON-NLS-1$
-
 			properties.put("hourlyReport", hourlyReport); //$NON-NLS-1$
 			properties.put("hourlyReportDatasource", new JRTableModelDataSource(new HourlyLaborReportModel(rows))); //$NON-NLS-1$
 			properties.put("shiftReport", shiftReport); //$NON-NLS-1$
 			properties.put("shiftReportDatasource", new JRTableModelDataSource(new HourlyLaborReportModel(shiftReportRows))); //$NON-NLS-1$
-
 			JasperPrint print = JasperFillManager.fillReport(report, properties, new JREmptyDataSource());
-
 			JRViewer viewer = new JRViewer(print);
 			reportPanel.removeAll();
 			reportPanel.add(viewer);
@@ -314,14 +269,12 @@ public class HourlyLaborReportView extends TransparentPanel {
 			PosLog.error(getClass(), e);
 		}
 	}
-
 	{
 		// GUI initializer generated by IntelliJ IDEA GUI Designer
 		// >>> IMPORTANT!! <<<
 		// DO NOT EDIT OR ADD ANY CODE HERE!
 		$$$setupUI$$$();
 	}
-
 	/**
 	 * Method generated by IntelliJ IDEA GUI Designer
 	 * >>> IMPORTANT!! <<<
@@ -382,14 +335,12 @@ public class HourlyLaborReportView extends TransparentPanel {
 				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK
 						| GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 	}
-
 	/**
 	 * @noinspection ALL
 	 */
 	public JComponent $$$getRootComponent$$$() {
 		return contentPane;
 	}
-
 	public static class LaborReportData {
 		private String period;
 		private int noOfChecks;
@@ -401,86 +352,65 @@ public class HourlyLaborReportView extends TransparentPanel {
 		private double guestsPerMHr;
 		private double checkPerMHr;
 		private double laborCost;
-
 		public double getCheckPerMHr() {
 			return checkPerMHr;
 		}
-
 		public void setCheckPerMHr(double checkPerMHr) {
 			this.checkPerMHr = checkPerMHr;
 		}
-
 		public double getGuestsPerMHr() {
 			return guestsPerMHr;
 		}
-
 		public void setGuestsPerMHr(double guestsPerMHr) {
 			this.guestsPerMHr = guestsPerMHr;
 		}
-
 		public double getLabor() {
 			return labor;
 		}
-
 		public void setLabor(double labor) {
 			this.labor = labor;
 		}
-
 		public double getLaborCost() {
 			return laborCost;
 		}
-
 		public void setLaborCost(double laborCost) {
 			this.laborCost = laborCost;
 		}
-
 		public double getManHour() {
 			return manHour;
 		}
-
 		public void setManHour(double manHour) {
 			this.manHour = manHour;
 		}
-
 		public int getNoOfChecks() {
 			return noOfChecks;
 		}
-
 		public void setNoOfChecks(int noOfChecks) {
 			this.noOfChecks = noOfChecks;
 		}
-
 		public int getNoOfGuests() {
 			return noOfGuests;
 		}
-
 		public void setNoOfGuests(int noOfGuests) {
 			this.noOfGuests = noOfGuests;
 		}
-
 		public String getPeriod() {
 			return period;
 		}
-
 		public void setPeriod(String period) {
 			this.period = period;
 		}
-
 		public double getSales() {
 			return sales;
 		}
-
 		public void setSales(double sales) {
 			this.sales = sales;
 		}
-
 		public double getSalesPerMHr() {
 			return salesPerMHr;
 		}
-
 		public void setSalesPerMHr(double salesPerMHr) {
 			this.salesPerMHr = salesPerMHr;
 		}
-
 	}
 }

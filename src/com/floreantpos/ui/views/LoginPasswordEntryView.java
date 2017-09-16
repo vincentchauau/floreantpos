@@ -20,9 +20,7 @@
  *
  * Created on August 14, 2006, 11:01 PM
  */
-
 package com.floreantpos.ui.views;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -32,7 +30,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -41,11 +38,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
-
 import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.logging.LogFactory;
-
 import com.floreantpos.Messages;
 import com.floreantpos.actions.ClockInOutAction;
 import com.floreantpos.config.TerminalConfig;
@@ -60,21 +54,17 @@ import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.ui.dialog.PasswordEntryDialog;
 import com.floreantpos.util.ShiftException;
 import com.floreantpos.util.UserNotFoundException;
-
 /**
  * 
  * @author MShahriar
  */
 class LoginPasswordEntryView extends JPanel {
-
 	/** Creates new form PasswordScreen */
 	LoginPasswordEntryView() {
 		//setMinimumSize(new Dimension(320, 10));
 		initComponents();
-
 		applyComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
 	}
-
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,22 +75,17 @@ class LoginPasswordEntryView extends JPanel {
 	private void initComponents() {
 		buttonPanel = new javax.swing.JPanel();
 		bottomPanel = new javax.swing.JPanel();
-
 		btnShutdown = new com.floreantpos.swing.PosButton();
-
 		setPreferredSize(new Dimension(320, 593));
 		setLayout(new BorderLayout());
-
 		buttonPanel.setOpaque(false);
 		buttonPanel.setPreferredSize(new java.awt.Dimension(200, 180));
 		buttonPanel.setLayout(new MigLayout("", "[111px][111px][111px,grow]", "[60px][60px][60px][60px]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-
 		lblTerminalId = new JLabel("TERMINAL ID:"); //$NON-NLS-1$
 		lblTerminalId.setForeground(Color.BLACK);
 		lblTerminalId.setFont(new Font("Dialog", Font.BOLD, 18)); //$NON-NLS-1$
 		lblTerminalId.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblTerminalId, BorderLayout.NORTH);
-
 		bottomPanel.setLayout(new MigLayout("hidemode 3, fill")); //$NON-NLS-1$
 		bottomPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 		
@@ -132,7 +117,6 @@ class LoginPasswordEntryView extends JPanel {
 		modePanel.add(btnKitchenMode);
 		
 		bottomPanel.add(modePanel, "h 60!, grow, wrap"); //$NON-NLS-1$
-
 		psbtnLogin = new PosButton();
 		psbtnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -153,11 +137,9 @@ class LoginPasswordEntryView extends JPanel {
 			btnConfigureDatabase.setActionCommand("DBCONFIG"); //$NON-NLS-1$
 			bottomPanel.add(btnConfigureDatabase, "grow, wrap, h 60!"); //$NON-NLS-1$
 		}
-
 		btnShutdown.setAction(goAction);
 		btnShutdown.setText(com.floreantpos.POSConstants.SHUTDOWN);
 		btnShutdown.setFocusable(false);
-
 		if (TerminalConfig.isFullscreenMode()) {
 			if(btnConfigureDatabase != null) {
 				btnConfigureDatabase.setVisible(false);
@@ -169,10 +151,8 @@ class LoginPasswordEntryView extends JPanel {
 		
 		bottomPanel.add(btnShutdown, "grow, wrap, h 60!"); //$NON-NLS-1$
 		add(bottomPanel, BorderLayout.SOUTH);
-
 		lblTerminalId.setText(""); //$NON-NLS-1$
 	}// </editor-fold>//GEN-END:initComponents
-
 	public synchronized void doLogin() {
 		try {
                         final User user;
@@ -183,7 +163,6 @@ class LoginPasswordEntryView extends JPanel {
 			}
 			Application application = Application.getInstance();
 			application.doLogin(user);
-
 		} catch (UserNotFoundException e) {
 			LogFactory.getLog(Application.class).error(e);
 			POSMessageDialog.showError(Application.getPosWindow(), Messages.getString("LoginPasswordEntryView.15")); //$NON-NLS-1$
@@ -193,7 +172,6 @@ class LoginPasswordEntryView extends JPanel {
 		} catch (Exception e1) {
 			LogFactory.getLog(Application.class).error(e1);
 			String message = e1.getMessage();
-
 			if (message != null && message.contains("Cannot open connection")) { //$NON-NLS-1$
 				MessageDialog.showError(Messages.getString("LoginPasswordEntryView.17"), e1); //$NON-NLS-1$
 				DatabaseConfigurationDialog.show(Application.getPosWindow());
@@ -203,13 +181,10 @@ class LoginPasswordEntryView extends JPanel {
 			}
 		}
 	}
-
 	
-
 	public void setTerminalId(int terminalId) {
 		lblTerminalId.setText(Messages.getString("LoginPasswordEntryView.19") + terminalId); //$NON-NLS-1$
 	}
-
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private com.floreantpos.swing.PosButton btnConfigureDatabase;
 	private com.floreantpos.swing.PosButton btnShutdown;
@@ -217,10 +192,8 @@ class LoginPasswordEntryView extends JPanel {
 	private javax.swing.JPanel bottomPanel;
 	
 	// End of variables declaration//GEN-END:variables
-
 	Action goAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent e) {
-
 			String command = e.getActionCommand();
 			if (com.floreantpos.POSConstants.LOGIN.equals(command)) {
 				doLogin();
@@ -240,7 +213,6 @@ class LoginPasswordEntryView extends JPanel {
 	private JToggleButton btnRegularMode = new JToggleButton("<html><center>REGULAR<br/>MODE</center></html>"); //$NON-NLS-1$
 	//private JToggleButton btnCashierMode = new JToggleButton("<html><center>CASHIER<br/>MODE</center></html>");
 	private JToggleButton btnKitchenMode = new JToggleButton("<html><center>KITCHEN<br/>MODE</center></html>"); //$NON-NLS-1$
-
 	
 	class ModeSelectionListener implements ActionListener {
 		@Override

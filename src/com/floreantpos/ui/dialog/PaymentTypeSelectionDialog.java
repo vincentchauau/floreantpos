@@ -20,25 +20,19 @@
  *
  * Created on August 25, 2006, 3:47 PM
  */
-
 package com.floreantpos.ui.dialog;
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-
 import net.miginfocom.swing.MigLayout;
-
 import com.floreantpos.IconFactory;
 import com.floreantpos.Messages;
 import com.floreantpos.model.PaymentType;
 import com.floreantpos.swing.PosButton;
-
 /**
  *
  * @author  MShahriar
@@ -47,7 +41,6 @@ public class PaymentTypeSelectionDialog extends POSDialog {
 	PaymentType selectedPaymentType;
 	private PaymentSelectionButton btnCash;
 	private PaymentSelectionButton btnGiftCert;
-
 	/** Creates new form PaymentTypeSelectionDialog */
 	public PaymentTypeSelectionDialog() {
 		super();
@@ -55,7 +48,6 @@ public class PaymentTypeSelectionDialog extends POSDialog {
 		
 		initComponents();
 	}
-
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -102,14 +94,11 @@ public class PaymentTypeSelectionDialog extends POSDialog {
 		content.add(cancel, "alignx center, gaptop 20px"); //$NON-NLS-1$
 		
 		add(content);
-
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-
 	public PaymentType getSelectedPaymentType() {
 		return selectedPaymentType;
 	}
-
 	// End of variables declaration//GEN-END:variables
 	
 	class PaymentSelectionButton extends PosButton implements ActionListener {
@@ -128,7 +117,6 @@ public class PaymentTypeSelectionDialog extends POSDialog {
 			addActionListener(this);
 			setEnabled(paymentType.isSupported());
 		}
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			selectedPaymentType = paymentType;

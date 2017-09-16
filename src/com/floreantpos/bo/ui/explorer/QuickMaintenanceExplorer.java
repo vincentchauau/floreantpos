@@ -16,16 +16,11 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.ui.explorer;
-
 import java.util.List;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
-
 import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.beanutils.PropertyUtils;
-
 import com.floreantpos.IconFactory;
 import com.floreantpos.Messages;
 import com.floreantpos.POSConstants;
@@ -54,17 +49,14 @@ import com.floreantpos.ui.views.SwitchboardView;
 import com.floreantpos.ui.views.TableMapView;
 import com.floreantpos.ui.views.order.OrderView;
 import com.floreantpos.util.POSUtil;
-
 public class QuickMaintenanceExplorer extends TransparentPanel {
 	private static POSToggleButton btnCursor;
 	private static POSToggleButton btnEdit;
 	private static POSToggleButton btnCopy;
 	private static POSToggleButton btnDelete;
 	private static POSToggleButton btni18;
-
 	public QuickMaintenanceExplorer() {
 		super(new MigLayout("inset 0"));
-
 		int btnSize = PosUIManager.getSize(60);
 		btnCursor = new POSToggleButton();
 		btnCursor.setIcon(IconFactory.getIcon("/ui_icons/", "cursor_hand.png"));
@@ -72,23 +64,19 @@ public class QuickMaintenanceExplorer extends TransparentPanel {
 		btnCopy = new POSToggleButton("COPY");
 		btnDelete = new POSToggleButton("DEL");
 		btni18 = new POSToggleButton("i18n");
-
 		ButtonGroup group = new ButtonGroup();
 		group.add(btnCursor);
 		group.add(btnCopy);
 		group.add(btnEdit);
 		group.add(btnDelete);
 		group.add(btni18);
-
 		btnEdit.setSelected(true);
-
 		add(btnCursor, "w " + btnSize + "!, h " + btnSize + "!");
 		add(btnEdit, "w " + btnSize + "!, h " + btnSize + "!");
 		add(btnCopy, "w " + btnSize + "!, h " + btnSize + "!");
 		add(btnDelete, "w " + btnSize + "!, h " + btnSize + "!");
 		//add(btni18, "w " + btnSize + "!, h " + btnSize + "!");
 	}
-
 	public static void quickMaintain(Object object) {
 		if (object instanceof MenuItem) {
 			quickMaintainMenuItem((MenuItem) object);
@@ -109,7 +97,6 @@ public class QuickMaintenanceExplorer extends TransparentPanel {
 			quickMaintainShopTable((ShopTable) object);
 		}
 	}
-
 	private static void quickMaintainMenuItem(MenuItem menuItem) {
 		try {
 			if (menuItem.getId() != null) {
@@ -155,7 +142,6 @@ public class QuickMaintenanceExplorer extends TransparentPanel {
 			return;
 		}
 	}
-
 	private static void quickMaintainMenuGroup(MenuGroup menuGroup) {
 		try {
 			if (menuGroup.getId() != null) {
@@ -171,7 +157,6 @@ public class QuickMaintenanceExplorer extends TransparentPanel {
 					}
 					MenuItemDAO menuItemDao = new MenuItemDAO();
 					List<MenuItem> menuItems = menuItemDao.findByParent(null, menuGroup, true);
-
 					if (menuItems.size() > 0) {
 						if (POSMessageDialog
 								.showYesNoQuestionDialog(POSUtil.getFocusedWindow(), Messages.getString("MenuGroupExplorer.0"), POSConstants.DELETE) != JOptionPane.YES_OPTION) { //$NON-NLS-1$
@@ -196,7 +181,6 @@ public class QuickMaintenanceExplorer extends TransparentPanel {
 			return;
 		}
 	}
-
 	private static void quickMaintainMenuCategory(MenuCategory menuCategory) {
 		try {
 			if (menuCategory.getId() != null) {
@@ -210,10 +194,8 @@ public class QuickMaintenanceExplorer extends TransparentPanel {
 					if (POSMessageDialog.showYesNoQuestionDialog(POSUtil.getFocusedWindow(), POSConstants.CONFIRM_DELETE, POSConstants.DELETE) != JOptionPane.YES_OPTION) {
 						return;
 					}
-
 					MenuGroupDAO menuGroupDao = new MenuGroupDAO();
 					List<MenuGroup> menuGroups = menuGroupDao.findByParent(menuCategory);
-
 					if (menuGroups.size() > 0) {
 						if (POSMessageDialog.showYesNoQuestionDialog(POSUtil.getFocusedWindow(),
 								Messages.getString("MenuCategoryExplorer.0"), POSConstants.DELETE) != JOptionPane.YES_OPTION) { //$NON-NLS-1$
@@ -238,7 +220,6 @@ public class QuickMaintenanceExplorer extends TransparentPanel {
 			return;
 		}
 	}
-
 	private static void quickMaintainOrderType(OrderType orderType) {
 		try {
 			if (orderType.getId() != null) {
@@ -252,7 +233,6 @@ public class QuickMaintenanceExplorer extends TransparentPanel {
 					if (POSMessageDialog.showYesNoQuestionDialog(POSUtil.getFocusedWindow(), POSConstants.CONFIRM_DELETE, POSConstants.DELETE) != JOptionPane.YES_OPTION) {
 						return;
 					}
-
 					OrderTypeDAO orderTypeDAO = new OrderTypeDAO();
 					orderTypeDAO.delete(orderType.getId());
 					SwitchboardView.getInstance().rendererOrderPanel();
@@ -271,7 +251,6 @@ public class QuickMaintenanceExplorer extends TransparentPanel {
 			return;
 		}
 	}
-
 	private static void quickMaintainShopTable(ShopTable shopTable) {
 		try {
 			if (shopTable.getId() != null) {
@@ -286,7 +265,6 @@ public class QuickMaintenanceExplorer extends TransparentPanel {
 					if (POSMessageDialog.showYesNoQuestionDialog(POSUtil.getFocusedWindow(), POSConstants.CONFIRM_DELETE, POSConstants.DELETE) != JOptionPane.YES_OPTION) {
 						return;
 					}
-
 					ShopTableDAO shopTableDAO = new ShopTableDAO();
 					shopTableDAO.delete(shopTable.getId());
 					TableMapView.getInstance().updateView();

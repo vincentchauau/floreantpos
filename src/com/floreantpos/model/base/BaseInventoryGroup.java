@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the INVENTORY_GROUP table.
@@ -28,20 +26,16 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="INVENTORY_GROUP"
  */
-
 public abstract class BaseInventoryGroup  implements Comparable, Serializable {
-
 	public static String REF = "InventoryGroup"; //$NON-NLS-1$
 	public static String PROP_NAME = "name"; //$NON-NLS-1$
 	public static String PROP_VISIBLE = "visible"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseInventoryGroup () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -49,33 +43,24 @@ public abstract class BaseInventoryGroup  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	/**
 	 * Constructor for required fields
 	 */
 	public BaseInventoryGroup (
 		java.lang.Integer id,
 		java.lang.String name) {
-
 		this.setId(id);
 		this.setName(name);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String name;
 		protected java.lang.Boolean visible;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -86,7 +71,6 @@ public abstract class BaseInventoryGroup  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -97,15 +81,12 @@ public abstract class BaseInventoryGroup  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -114,15 +95,12 @@ public abstract class BaseInventoryGroup  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: VISIBLE
 	 */
 	public java.lang.Boolean isVisible () {
 								return visible == null ? Boolean.FALSE : visible;
 					}
-
 	/**
 	 * Set the value related to the column: VISIBLE
 	 * @param visible the VISIBLE value
@@ -130,9 +108,6 @@ public abstract class BaseInventoryGroup  implements Comparable, Serializable {
 	public void setVisible (java.lang.Boolean visible) {
 		this.visible = visible;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -144,7 +119,6 @@ public abstract class BaseInventoryGroup  implements Comparable, Serializable {
 			else return (this.getId().equals(inventoryGroup.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -155,16 +129,13 @@ public abstract class BaseInventoryGroup  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

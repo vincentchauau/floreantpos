@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the CURRENCY table.
@@ -11,9 +9,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="CURRENCY"
  */
-
 public abstract class BaseCurrency  implements Comparable, Serializable {
-
 	public static String REF = "Currency";
 	public static String PROP_SALES_PRICE = "salesPrice";
 	public static String PROP_BUY_PRICE = "buyPrice";
@@ -25,12 +21,10 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 	public static String PROP_ID = "id";
 	public static String PROP_CODE = "code";
 
-
 	// constructors
 	public BaseCurrency () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -38,16 +32,11 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String code;
 		protected java.lang.String name;
@@ -58,8 +47,6 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		protected java.lang.Double salesPrice;
 		protected java.lang.Boolean main;
 
-
-
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
@@ -69,7 +56,6 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -80,15 +66,12 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: CODE
 	 */
 	public java.lang.String getCode () {
 					return code;
 			}
-
 	/**
 	 * Set the value related to the column: CODE
 	 * @param code the CODE value
@@ -97,15 +80,12 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		this.code = code;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -114,15 +94,12 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SYMBOL
 	 */
 	public java.lang.String getSymbol () {
 					return symbol;
 			}
-
 	/**
 	 * Set the value related to the column: SYMBOL
 	 * @param symbol the SYMBOL value
@@ -131,15 +108,12 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		this.symbol = symbol;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: EXCHANGE_RATE
 	 */
 	public java.lang.Double getExchangeRate () {
 									return exchangeRate == null ? Double.valueOf(1) : exchangeRate;
 						}
-
 	/**
 	 * Set the value related to the column: EXCHANGE_RATE
 	 * @param exchangeRate the EXCHANGE_RATE value
@@ -148,7 +122,6 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		this.exchangeRate = exchangeRate;
 	}
 
-
 	/**
 	 * Custom property
 	 */
@@ -156,14 +129,12 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		return "1";
 	}
 
-
 	/**
 	 * Return the value associated with the column: TOLERANCE
 	 */
 	public java.lang.Double getTolerance () {
 									return tolerance == null ? Double.valueOf(0) : tolerance;
 					}
-
 	/**
 	 * Set the value related to the column: TOLERANCE
 	 * @param tolerance the TOLERANCE value
@@ -172,15 +143,12 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		this.tolerance = tolerance;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: BUY_PRICE
 	 */
 	public java.lang.Double getBuyPrice () {
 									return buyPrice == null ? Double.valueOf(0) : buyPrice;
 					}
-
 	/**
 	 * Set the value related to the column: BUY_PRICE
 	 * @param buyPrice the BUY_PRICE value
@@ -189,15 +157,12 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		this.buyPrice = buyPrice;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SALES_PRICE
 	 */
 	public java.lang.Double getSalesPrice () {
 									return salesPrice == null ? Double.valueOf(0) : salesPrice;
 					}
-
 	/**
 	 * Set the value related to the column: SALES_PRICE
 	 * @param salesPrice the SALES_PRICE value
@@ -206,15 +171,12 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		this.salesPrice = salesPrice;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MAIN
 	 */
 	public java.lang.Boolean isMain () {
 								return main == null ? Boolean.FALSE : main;
 					}
-
 	/**
 	 * Set the value related to the column: MAIN
 	 * @param main the MAIN value
@@ -222,9 +184,6 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 	public void setMain (java.lang.Boolean main) {
 		this.main = main;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -236,7 +195,6 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 			else return (this.getId().equals(currency.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -247,16 +205,13 @@ public abstract class BaseCurrency  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

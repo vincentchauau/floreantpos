@@ -16,31 +16,23 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 import org.apache.commons.lang.StringUtils;
-
 import com.floreantpos.model.base.BaseInventoryItem;
 import com.floreantpos.util.POSUtil;
 
-
-
 public class InventoryItem extends BaseInventoryItem {
 	private static final long serialVersionUID = 1L;
-
 /*[CONSTRUCTOR MARKER BEGIN]*/
 	public InventoryItem () {
 		super();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
 	public InventoryItem (java.lang.Integer id) {
 		super(id);
 	}
-
 /*[CONSTRUCTOR MARKER END]*/
-
 	@Override
 	public String toString() {
 		return getName();
@@ -78,12 +70,10 @@ public class InventoryItem extends BaseInventoryItem {
 			inventoryItem.setDescription(strings[index++]);
 			inventoryItem.setUnitSellingPrice(POSUtil.parseDouble(strings[index++]));
 			
-
 		} catch (Exception e) {
 			//e.printStackTrace();
 		}
 		
 		return inventoryItem;
 	}
-
 }

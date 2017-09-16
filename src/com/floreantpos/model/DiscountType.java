@@ -1,5 +1,4 @@
 package com.floreantpos.model;
-
 public enum DiscountType {
 	AMOUNT("AMOUNT"), //$NON-NLS-1$
 	PERCENTAGE("PERCENTAGE"), //$NON-NLS-1$

@@ -1,6 +1,5 @@
 
 package com.floreantpos.report;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Insets;
@@ -10,22 +9,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JRViewer;
-
 import org.jdesktop.swingx.JXDatePicker;
-
 import com.floreantpos.PosLog;
 import com.floreantpos.main.Application;
 import com.floreantpos.model.InventoryItem;
@@ -38,7 +33,6 @@ import com.floreantpos.ui.util.UiUtil;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-
 public class InventoryOnHandReportView extends TransparentPanel {
 	private JButton btnGo;
 	//private JComboBox cbTerminal;
@@ -46,20 +40,15 @@ public class InventoryOnHandReportView extends TransparentPanel {
 	private JXDatePicker toDatePicker;
 	private JPanel reportPanel;
 	private JPanel contentPane;
-
 	//private JComboBox cbUserType;
-
 	public InventoryOnHandReportView() {
 		//cbUserType.setModel(new DefaultComboBoxModel(new String[]{com.floreantpos.POSConstants.ALL, com.floreantpos.POSConstants.SERVER, com.floreantpos.POSConstants.CASHIER, com.floreantpos.POSConstants.MANAGER}));
-
 		TerminalDAO terminalDAO = new TerminalDAO();
 		List terminals = terminalDAO.findAll();
 		terminals.add(0, com.floreantpos.POSConstants.ALL);
 		// cbTerminal.setModel(new ListComboBoxModel(terminals));
-
 		setLayout(new BorderLayout());
 		add(contentPane);
-
 		btnGo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InventoryItemDAO dao = new InventoryItemDAO();
@@ -68,41 +57,32 @@ public class InventoryOnHandReportView extends TransparentPanel {
 			}
 		});
 	}
-
 	public InventoryOnHandReportView(final List<InventoryItem> inventoryList) {
 		//cbUserType.setModel(new DefaultComboBoxModel(new String[]{com.floreantpos.POSConstants.ALL, com.floreantpos.POSConstants.SERVER, com.floreantpos.POSConstants.CASHIER, com.floreantpos.POSConstants.MANAGER}));
-
 		TerminalDAO terminalDAO = new TerminalDAO();
 		List terminals = terminalDAO.findAll();
 		terminals.add(0, com.floreantpos.POSConstants.ALL);
 		// cbTerminal.setModel(new ListComboBoxModel(terminals));
-
 		setLayout(new BorderLayout());
 		add(contentPane);
 		viewReport(inventoryList);
-
 		/*btnGo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});*/
 	}
-
 	private void viewReport(List<InventoryItem> inventList) {
 		Date fromDate = fromDatePicker.getDate();
 		Date toDate = toDatePicker.getDate();
-
 		if (fromDate.after(toDate)) {
 			POSMessageDialog.showError(com.floreantpos.util.POSUtil.getFocusedWindow(), com.floreantpos.POSConstants.FROM_DATE_CANNOT_BE_GREATER_THAN_TO_DATE_);
 			return;
 		}
-
 		Calendar calendar = Calendar.getInstance();
 		calendar.clear();
-
 		Calendar calendar2 = Calendar.getInstance();
 		calendar2.setTime(fromDate);
-
 		calendar.set(Calendar.YEAR, calendar2.get(Calendar.YEAR));
 		calendar.set(Calendar.MONTH, calendar2.get(Calendar.MONTH));
 		calendar.set(Calendar.DATE, calendar2.get(Calendar.DATE));
@@ -110,7 +90,6 @@ public class InventoryOnHandReportView extends TransparentPanel {
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		fromDate = calendar.getTime();
-
 		calendar.clear();
 		calendar2.setTime(toDate);
 		calendar.set(Calendar.YEAR, calendar2.get(Calendar.YEAR));
@@ -120,19 +99,15 @@ public class InventoryOnHandReportView extends TransparentPanel {
 		calendar.set(Calendar.MINUTE, 59);
 		calendar.set(Calendar.SECOND, 59);
 		toDate = calendar.getTime();
-
 		try {
 			JasperReport report = ReportUtil.getReport("inventoryOnHandReport"); //$NON-NLS-1$
-
 			HashMap properties = new HashMap();
 			ReportUtil.populateRestaurantProperties(properties);
 			properties.put("fromDate", fromDate); //$NON-NLS-1$
 			properties.put("toDate", toDate); //$NON-NLS-1$
 			properties.put("reportDate", new Date()); //$NON-NLS-1$
 			properties.put("reportTitle", "Purchase Order");
-
 			Restaurant restaurant = Application.getInstance().getRestaurant();
-
 			properties.put("companyName", restaurant.getName());
 			properties.put("address", restaurant.getAddressLine1());
 			properties.put("city", restaurant.getAddressLine2());
@@ -140,12 +115,9 @@ public class InventoryOnHandReportView extends TransparentPanel {
 			properties.put("fax", restaurant.getZipCode());
 			properties.put("email", restaurant.getAddressLine3());
 
-
 			InventoryOnHandReportModel reportModel = new InventoryOnHandReportModel();
 			reportModel.setRows(inventList);
-
 			JasperPrint print = JasperFillManager.fillReport(report, properties, new JRTableModelDataSource(reportModel));
-
 			JRViewer viewer = new JRViewer(print);
 			reportPanel.removeAll();
 			reportPanel.add(viewer);
@@ -154,14 +126,12 @@ public class InventoryOnHandReportView extends TransparentPanel {
 			PosLog.error(getClass(), e);
 		}
 	}
-
 	{
 		// GUI initializer generated by IntelliJ IDEA GUI Designer
 		// >>> IMPORTANT!! <<<
 		// DO NOT EDIT OR ADD ANY CODE HERE!
 		$$$setupUI$$$();
 	}
-
 	/**
 	 * Method generated by IntelliJ IDEA GUI Designer
 	 * >>> IMPORTANT!! <<<
@@ -218,12 +188,10 @@ public class InventoryOnHandReportView extends TransparentPanel {
 				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK
 						| GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 	}
-
 	/**
 	 * @noinspection ALL
 	 */
 	public JComponent $$$getRootComponent$$$() {
 		return contentPane;
 	}
-
 }

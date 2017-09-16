@@ -16,19 +16,15 @@
  * ************************************************************************
  */
 package com.jstatcom.component;
-
 // source:
 // http://java.sun.com/products/jfc/tsc/articles/cardpanel/
-
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.Rectangle;
-
 import javax.swing.JPanel;
-
 /**
  * source:
  * http://java.sun.com/products/jfc/tsc/articles/cardpanel/
@@ -75,7 +71,6 @@ import javax.swing.JPanel;
  * Originallly the <code>getVisibleChild()</code> method was private. I
  * changed it to protected. Alexander Benkwitz Feb 2002.
  */
-
 public class CardPanel extends JPanel {
     private static class Layout implements LayoutManager {
         /**
@@ -90,7 +85,6 @@ public class CardPanel extends JPanel {
             }
             child.setVisible(child.getParent().getComponentCount() == 1);
         }
-
         /**
          * If this child was visible, then make the first remaining child
          * visible.
@@ -103,7 +97,6 @@ public class CardPanel extends JPanel {
                 }
             }
         }
-
         /**
          * @return the maximum preferred width/height + the parents insets
          */
@@ -112,7 +105,6 @@ public class CardPanel extends JPanel {
             Insets insets = parent.getInsets();
             int width = insets.left + insets.right;
             int height = insets.top + insets.bottom;
-
             for (int i = 0; i < nChildren; i++) {
                 Dimension d = parent.getComponent(i).getPreferredSize();
                 if (d.width > width) {
@@ -124,7 +116,6 @@ public class CardPanel extends JPanel {
             }
             return new Dimension(width, height);
         }
-
         /**
          * @return the maximum minimum width/height + the parents insets
          */
@@ -133,7 +124,6 @@ public class CardPanel extends JPanel {
             Insets insets = parent.getInsets();
             int width = insets.left + insets.right;
             int height = insets.top + insets.bottom;
-
             for (int i = 0; i < nChildren; i++) {
                 Dimension d = parent.getComponent(i).getMinimumSize();
                 if (d.width > width) {
@@ -145,7 +135,6 @@ public class CardPanel extends JPanel {
             }
             return new Dimension(width, height);
         }
-
         public void layoutContainer(Container parent) {
             int nChildren = parent.getComponentCount();
             Insets insets = parent.getInsets();
@@ -161,7 +150,6 @@ public class CardPanel extends JPanel {
             }
         }
     }
-
     /**
      * Creates a <code>CardPanel</code>. Children, called "cards" in this
      * API, should be added with add(). The first child we be made visible,
@@ -171,7 +159,6 @@ public class CardPanel extends JPanel {
     public CardPanel() {
         super(new Layout());
     }
-
     /**
      * Return the index of the first (and one would hope - only) visible child.
      * If a visible child can't be found, perhaps the caller has inexlicably
@@ -187,7 +174,6 @@ public class CardPanel extends JPanel {
         }
         return -1;
     }
-
     /**
      * Hide the currently visible child "card" and show the specified card. If
      * the specified card isn't a child of the CardPanel then we add it here.
@@ -204,7 +190,6 @@ public class CardPanel extends JPanel {
         revalidate();
         repaint();
     }
-
     /**
      * Show the card with the specified name.
      * 
@@ -220,7 +205,6 @@ public class CardPanel extends JPanel {
             }
         }
     }
-
     /**
      * Show the first card that was added to this CardPanel.
      */
@@ -230,7 +214,6 @@ public class CardPanel extends JPanel {
         }
         showCard(getComponent(0));
     }
-
     /**
      * Show the last card that was added to this CardPanel.
      */
@@ -240,7 +223,6 @@ public class CardPanel extends JPanel {
         }
         showCard(getComponent(getComponentCount() - 1));
     }
-
     /**
      * Show the card that was added to this CardPanel after the currently
      * visible card. If the currently visible card was added last, then show the
@@ -259,7 +241,6 @@ public class CardPanel extends JPanel {
             showCard(getComponent(index + 1));
         }
     }
-
     /**
      * Show the card that was added to this CardPanel before the currently
      * visible card. If the currently visible card was added first, then show

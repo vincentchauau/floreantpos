@@ -20,20 +20,15 @@
  *
  * Created on July 30, 2006, 11:20 PM
  */
-
 package com.floreantpos.ui.model;
-
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-
 import net.miginfocom.swing.MigLayout;
-
 import com.floreantpos.Messages;
 import com.floreantpos.POSConstants;
 import com.floreantpos.extension.ExtensionManager;
@@ -46,13 +41,11 @@ import com.floreantpos.swing.TransparentPanel;
 import com.floreantpos.ui.BeanEditor;
 import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.util.POSUtil;
-
 /**
  *
  * @author  MShahriar
  */
 public class OrderTypeForm extends BeanEditor implements ItemListener {
-
 	private JLabel jLabel1;
 	private FixedLengthTextField tfName;
 	private JCheckBox chkEnabled;
@@ -75,24 +68,19 @@ public class OrderTypeForm extends BeanEditor implements ItemListener {
 	private JCheckBox chkShowStockCountOnButton;
 	private JCheckBox chkShowUnitPriceInTicketGrid;
 	private JCheckBox chkRetailOrder;
-
 	OrderType orderType;
 	JList<String> list;
 	DefaultListModel<String> listModel;
-
 	public OrderTypeForm() throws Exception {
 		this(new OrderType());
 		initHandler();
 	}
-
 	public OrderTypeForm(OrderType orderType) throws Exception {
 		this.orderType = orderType;
 		initComponents();
-
 		setBean(orderType);
 		initHandler();
 	}
-
 	public String getDisplayText() {
 		OrderType orderType = (OrderType) getBean();
 		if (orderType.getId() == null) {
@@ -100,20 +88,15 @@ public class OrderTypeForm extends BeanEditor implements ItemListener {
 		}
 		return POSConstants.ORDER_TYPE;
 	}
-
 	private void initHandler() {
 		chkRequiredCustomerData.addItemListener(this);
 		chkDelivery.addItemListener(this);
 	}
-
 	private void initComponents() {
-
 		TransparentPanel generalPanel = new com.floreantpos.swing.TransparentPanel();
-
 		jLabel1 = new JLabel(com.floreantpos.POSConstants.NAME + ":"); //$NON-NLS-1$
 		tfName = new com.floreantpos.swing.FixedLengthTextField();
 		tfName.setLength(120);
-
 		chkEnabled = new JCheckBox(POSConstants.ENABLED);
 		chkShowTableSelection = new JCheckBox(Messages.getString("OrderTypeForm.1")); //$NON-NLS-1$
 		chkShowGuestSelection = new JCheckBox(Messages.getString("OrderTypeForm.2")); //$NON-NLS-1$
@@ -130,12 +113,10 @@ public class OrderTypeForm extends BeanEditor implements ItemListener {
 		chkHasForHereAndToGo = new JCheckBox(Messages.getString("OrderTypeForm.13")); //$NON-NLS-1$
 		chkBarTab = new JCheckBox(Messages.getString("OrderTypeForm.14")); //$NON-NLS-1$
 		chkPreAuthCreditCard = new JCheckBox(Messages.getString("OrderTypeForm.0")); //$NON-NLS-1$
-
 		chkShowPriceOnButton = new JCheckBox("Show price on button");
 		chkShowStockCountOnButton = new JCheckBox("Show count on button");
 		chkShowUnitPriceInTicketGrid = new JCheckBox("Show unit price in ticket grid");
 		chkRetailOrder = new JCheckBox("Retail");
-
 		generalPanel.setLayout(new MigLayout("", "[87px][327px,grow]", "[19px][][19px][][][21px][15px]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		generalPanel.add(jLabel1, "cell 0 0,alignx left,aligny center"); //$NON-NLS-1$
 		generalPanel.add(tfName, "cell 1 0,growx,aligny top"); //$NON-NLS-1$
@@ -162,19 +143,15 @@ public class OrderTypeForm extends BeanEditor implements ItemListener {
 		generalPanel.add(chkShowStockCountOnButton,"cell 1 19,alignx left,aligny top");
 		//generalPanel.add(chkShowUnitPriceInTicketGrid, "cell 1 19,alignx left,aligny top"); //$NON-NLS-1$
 		generalPanel.add(chkRetailOrder,"cell 1 20,alignx left,aligny top");
-
 		add(new JScrollPane(generalPanel));
 	}
-
 	protected void updateView() {
 		OrderType ordersType = (OrderType) getBean();
-
 		if (ordersType == null) {
 			tfName.setText(""); //$NON-NLS-1$
 			chkEnabled.setSelected(false);
 			return;
 		}
-
 		tfName.setText(ordersType.getName());
 		if (ordersType.getId() == null) {
 			chkEnabled.setSelected(true);
@@ -202,19 +179,16 @@ public class OrderTypeForm extends BeanEditor implements ItemListener {
 			chkRetailOrder.setSelected(ordersType.isRetailOrder());
 		}
 	}
-
 	protected boolean updateModel() {
 		OrderType ordersType = (OrderType) getBean();
 		if (ordersType == null) {
 			return false;
 		}
-
 		String categoryName = tfName.getText();
 		if (POSUtil.isBlankOrNull(categoryName)) {
 			MessageDialog.showError(Messages.getString("MenuCategoryForm.26")); //$NON-NLS-1$
 			return false;
 		}
-
 		ordersType.setName(categoryName);
 		ordersType.setEnabled(chkEnabled.isSelected());
 		//if (!chkBarTab.isSelected()) {
@@ -237,30 +211,22 @@ public class OrderTypeForm extends BeanEditor implements ItemListener {
 		ordersType.setShowUnitPriceInTicketGrid(chkShowUnitPriceInTicketGrid.isSelected());
 		ordersType.setRetailOrder(chkRetailOrder.isSelected());
 		ordersType.setBarTab(chkBarTab.isSelected());
-
 		return true;
 	}
-
 	@Override
 	public boolean save() {
 		try {
-
 			if (!updateModel())
 				return false;
-
 			OrderType ordersType = (OrderType) getBean();
 			OrderTypeDAO.getInstance().saveOrUpdate(ordersType);
-
 			POSMessageDialog.showMessage(com.floreantpos.util.POSUtil.getFocusedWindow(), Messages.getString("TerminalConfigurationView.40")); //$NON-NLS-1$
-
 			return true;
-
 		} catch (Exception x) {
 			MessageDialog.showError(x);
 			return false;
 		}
 	}
-
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		JCheckBox chkBox = (JCheckBox) e.getItem();

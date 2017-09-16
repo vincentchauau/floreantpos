@@ -16,31 +16,24 @@
  * ************************************************************************
  */
 package com.floreantpos.ui.dialog;
-
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JSeparator;
-
 import net.miginfocom.swing.MigLayout;
-
 import com.floreantpos.model.CookingInstruction;
 import com.floreantpos.model.dao.CookingInstructionDAO;
 import com.floreantpos.swing.PosButton;
 import com.floreantpos.ui.views.NoteView;
-
 public class NewCookongInstructionDialog extends POSDialog implements ActionListener {
 	private CookingInstruction cookingInstruction;
 	
 	private NoteView noteView;
 	private PosButton btnOk;
 	private PosButton btnCancel;
-
 	public NewCookongInstructionDialog() throws HeadlessException {
 		super();
 	}
-
 	@Override
 	protected void initUI() {
 		setLayout(new MigLayout());
@@ -73,12 +66,10 @@ public class NewCookongInstructionDialog extends POSDialog implements ActionList
 		setCanceled(false);
 		dispose();
 	}
-
 	private void doCancel() {
 		setCanceled(true);
 		dispose();
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
 		
@@ -89,9 +80,7 @@ public class NewCookongInstructionDialog extends POSDialog implements ActionList
 			doCancel();
 		}
 	}
-
 	public CookingInstruction getCookingInstruction() {
 		return cookingInstruction;
 	}
-
 }

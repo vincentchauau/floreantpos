@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the TRANSACTIONS table.
@@ -28,21 +26,17 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="TRANSACTIONS"
  */
-
 public abstract class BaseCardTransaction extends com.floreantpos.model.PosTransaction  implements Comparable, Serializable {
-
 	public static String REF = "CardTransaction"; //$NON-NLS-1$
 	public static String PROP_CARD_NUMBER = "cardNumber"; //$NON-NLS-1$
 	public static String PROP_AUTHORIZATION_CODE = "authorizationCode"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 	public static String PROP_CARD_TYPE = "cardType"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseCardTransaction () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -50,18 +44,12 @@ public abstract class BaseCardTransaction extends com.floreantpos.model.PosTrans
 		super(id);
 	}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 
 	// fields
 		protected java.lang.String cardNumber;
 		protected java.lang.String authorizationCode;
 		protected java.lang.String cardType;
-
-
-
 
 
 
@@ -71,7 +59,6 @@ public abstract class BaseCardTransaction extends com.floreantpos.model.PosTrans
 	public java.lang.String getCardNumber () {
 					return cardNumber;
 			}
-
 	/**
 	 * Set the value related to the column: CARD_NUMBER
 	 * @param cardNumber the CARD_NUMBER value
@@ -80,15 +67,12 @@ public abstract class BaseCardTransaction extends com.floreantpos.model.PosTrans
 		this.cardNumber = cardNumber;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: AUTHORIZATION_CODE
 	 */
 	public java.lang.String getAuthorizationCode () {
 					return authorizationCode;
 			}
-
 	/**
 	 * Set the value related to the column: AUTHORIZATION_CODE
 	 * @param authorizationCode the AUTHORIZATION_CODE value
@@ -97,15 +81,12 @@ public abstract class BaseCardTransaction extends com.floreantpos.model.PosTrans
 		this.authorizationCode = authorizationCode;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CARD_TYPE
 	 */
 	public java.lang.String getCardType () {
 					return cardType;
 			}
-
 	/**
 	 * Set the value related to the column: CARD_TYPE
 	 * @param cardType the CARD_TYPE value
@@ -113,9 +94,6 @@ public abstract class BaseCardTransaction extends com.floreantpos.model.PosTrans
 	public void setCardType (java.lang.String cardType) {
 		this.cardType = cardType;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -127,7 +105,6 @@ public abstract class BaseCardTransaction extends com.floreantpos.model.PosTrans
 			else return (this.getId().equals(cardTransaction.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -138,16 +115,13 @@ public abstract class BaseCardTransaction extends com.floreantpos.model.PosTrans
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

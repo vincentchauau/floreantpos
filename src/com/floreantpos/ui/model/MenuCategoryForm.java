@@ -20,20 +20,15 @@
  *
  * Created on July 30, 2006, 11:20 PM
  */
-
 package com.floreantpos.ui.model;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
-
 import net.miginfocom.swing.MigLayout;
-
 import com.floreantpos.Messages;
 import com.floreantpos.model.MenuCategory;
 import com.floreantpos.model.dao.MenuCategoryDAO;
@@ -42,24 +37,19 @@ import com.floreantpos.swing.IntegerTextField;
 import com.floreantpos.swing.MessageDialog;
 import com.floreantpos.ui.BeanEditor;
 import com.floreantpos.util.POSUtil;
-
 /**
  *
  * @author  MShahriar
  */
 public class MenuCategoryForm extends BeanEditor {
-
 	/** Creates new form CategoryBeanEditor */
 	public MenuCategoryForm() throws Exception {
 		this(new MenuCategory());
 	}
-
 	public MenuCategoryForm(MenuCategory category) throws Exception {
 		initComponents();
-
 		setBean(category);
 	}
-
 	public String getDisplayText() {
 		MenuCategory foodCategory = (MenuCategory) getBean();
 		if (foodCategory.getId() == null) {
@@ -67,7 +57,6 @@ public class MenuCategoryForm extends BeanEditor {
 		}
 		return com.floreantpos.POSConstants.EDIT_MENU_CATEGORY;
 	}
-
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -75,39 +64,28 @@ public class MenuCategoryForm extends BeanEditor {
 	 */
 	// <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
 	private void initComponents() {
-
 		jLabel1 = new javax.swing.JLabel();
 		chkVisible = new javax.swing.JCheckBox();
 		tfName = new com.floreantpos.swing.FixedLengthTextField();
 		tfName.setLength(120);
 		chkBeverage = new javax.swing.JCheckBox();
-
 		jLabel1.setText(com.floreantpos.POSConstants.NAME + ":"); //$NON-NLS-1$
-
 		chkVisible.setText(com.floreantpos.POSConstants.VISIBLE);
 		chkVisible.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		chkVisible.setMargin(new java.awt.Insets(0, 0, 0, 0));
-
 		chkBeverage.setText(com.floreantpos.POSConstants.BEVERAGE);
 		chkBeverage.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		chkBeverage.setMargin(new java.awt.Insets(0, 0, 0, 0));
-
 		lblSortOrder = new JLabel(Messages.getString("MenuCategoryForm.1")); //$NON-NLS-1$
-
 		tfSortOrder = new IntegerTextField();
 		tfSortOrder.setColumns(10);
-
 		lblButtonColor = new JLabel(Messages.getString("MenuCategoryForm.2")); //$NON-NLS-1$
-
 		btnButtonColor = new JButton();
 		btnButtonColor.setPreferredSize(new Dimension(140, 40));
-
 		setLayout(new MigLayout("", "[87px][327px,grow]", "[19px][][19px][][][21px][15px]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		add(jLabel1, "cell 0 0,alignx left,aligny center"); //$NON-NLS-1$
-
 		lblTranslatedName = new JLabel(Messages.getString("MenuCategoryForm.7")); //$NON-NLS-1$
 		add(lblTranslatedName, "cell 0 1,alignx trailing"); //$NON-NLS-1$
-
 		tfTranslatedName = new FixedLengthTextField();
 		tfTranslatedName.setLength(120);
 		add(tfTranslatedName, "cell 1 1,growx"); //$NON-NLS-1$
@@ -115,10 +93,8 @@ public class MenuCategoryForm extends BeanEditor {
 		add(lblButtonColor, "cell 0 3,alignx left,growy"); //$NON-NLS-1$
 		add(tfName, "cell 1 0,growx,aligny top"); //$NON-NLS-1$
 		add(tfSortOrder, "cell 1 2,alignx left,aligny top"); //$NON-NLS-1$
-
 		lblTextColor = new JLabel("Text color"); //$NON-NLS-1$
 		add(lblTextColor, "cell 0 4"); //$NON-NLS-1$
-
 		btnTextColor = new JButton();
 		btnTextColor.setText(Messages.getString("MenuCategoryForm.16")); //$NON-NLS-1$
 		btnTextColor.setPreferredSize(new Dimension(140, 40));
@@ -126,7 +102,6 @@ public class MenuCategoryForm extends BeanEditor {
 		add(chkBeverage, "cell 1 5,alignx left,growy"); //$NON-NLS-1$
 		add(chkVisible, "cell 1 6,alignx left,aligny top"); //$NON-NLS-1$
 		add(btnButtonColor, "cell 1 3,alignx left,growy"); //$NON-NLS-1$
-
 		btnButtonColor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -135,7 +110,6 @@ public class MenuCategoryForm extends BeanEditor {
 				btnTextColor.setBackground(color);
 			}
 		});
-
 		btnTextColor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -144,10 +118,8 @@ public class MenuCategoryForm extends BeanEditor {
 			}
 		});
 	}// </editor-fold>//GEN-END:initComponents
-
 	protected void updateView() {
 		MenuCategory menuCategory = (MenuCategory) getBean();
-
 		if (menuCategory == null) {
 			tfName.setText(""); //$NON-NLS-1$
 			tfTranslatedName.setText(""); //$NON-NLS-1$
@@ -155,24 +127,19 @@ public class MenuCategoryForm extends BeanEditor {
 			chkVisible.setSelected(false);
 			return;
 		}
-
 		tfName.setText(menuCategory.getName());
 		tfTranslatedName.setText(menuCategory.getTranslatedName());
-
 		if (menuCategory.getSortOrder() != null) {
 			tfSortOrder.setText(menuCategory.getSortOrder().toString());
 		}
-
 		Color buttonColor = menuCategory.getButtonColor();
 		if (buttonColor != null) {
 			btnButtonColor.setBackground(buttonColor);
 			btnTextColor.setBackground(buttonColor);
 		}
-
 		if (menuCategory.getTextColor() != null) {
 			btnTextColor.setForeground(menuCategory.getTextColor());
 		}
-
 		chkBeverage.setSelected(menuCategory.isBeverage());
 		if (menuCategory.getId() == null) {
 			chkVisible.setSelected(true);
@@ -181,35 +148,27 @@ public class MenuCategoryForm extends BeanEditor {
 			chkVisible.setSelected(menuCategory.isVisible());
 		}
 	}
-
 	protected boolean updateModel() {
 		MenuCategory menuCategory = (MenuCategory) getBean();
 		if (menuCategory == null) {
 			return false;
 		}
-
 		String categoryName = tfName.getText();
 		if (POSUtil.isBlankOrNull(categoryName)) {
 			MessageDialog.showError(Messages.getString("MenuCategoryForm.26")); //$NON-NLS-1$
 			return false;
 		}
-
 		menuCategory.setName(categoryName);
 		menuCategory.setTranslatedName(tfTranslatedName.getText());
 		menuCategory.setSortOrder(tfSortOrder.getInteger());
-
 		menuCategory.setButtonColor(btnButtonColor.getBackground());
 		menuCategory.setTextColor(btnTextColor.getForeground());
-
 		menuCategory.setButtonColorCode(btnButtonColor.getBackground().getRGB());
 		menuCategory.setTextColorCode(btnTextColor.getForeground().getRGB());
-
 		menuCategory.setBeverage(chkBeverage.isSelected());
 		menuCategory.setVisible(chkVisible.isSelected());
-
 		return true;
 	}
-
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JCheckBox chkBeverage;
 	private javax.swing.JCheckBox chkVisible;
@@ -223,20 +182,15 @@ public class MenuCategoryForm extends BeanEditor {
 	private FixedLengthTextField tfTranslatedName;
 	private JLabel lblTextColor;
 	private JButton btnTextColor;
-
 	// End of variables declaration//GEN-END:variables
 	@Override
 	public boolean save() {
 		try {
-
 			if (!updateModel())
 				return false;
-
 			MenuCategory menuCategory = (MenuCategory) getBean();
 			MenuCategoryDAO.getInstance().saveOrUpdate(menuCategory);
-
 			return true;
-
 		} catch (Exception x) {
 			MessageDialog.showError(x);
 			return false;

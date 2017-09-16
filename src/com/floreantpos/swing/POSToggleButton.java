@@ -16,52 +16,40 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.awt.Dimension;
-
 import javax.swing.JToggleButton;
 import javax.swing.UIManager;
-
 import com.floreantpos.POSConstants;
-
 
 public class POSToggleButton extends JToggleButton {
 	//public static Border border = new LineBorder(Color.BLACK, 1);
 	//static Insets margin = new Insets(0, 0, 0, 0);
-
 	static {
 		UIManager.put("POSToggleButtonUI", "com.floreantpos.swing.POSToggleButtonUI"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
-
 	public POSToggleButton() {
 		this(null);
 	}
-
 	public POSToggleButton(String text) {
 		super(text);
-
 //		setFont(UIConfig.getButtonFont());
 		setFocusPainted(false);
 		setFocusable(false);
 		//setMargin(margin);
 	}
-
 	@Override
 	public String getUIClassID() {
 		return "POSToggleButtonUI"; //$NON-NLS-1$
 	}
-
 	@Override
 	public Dimension getPreferredSize() {
 		Dimension size = null;
-
 		if (isPreferredSizeSet()) {
 			return super.getPreferredSize();
 		}
 		else if (ui != null) {
 			size = ui.getPreferredSize(this);
 		}
-
 		if (size == null) {
 			size = new Dimension(PosUIManager.getSize(POSConstants.BUTTON_DEFAULT_WIDTH, POSConstants.BUTTON_DEFAULT_HEIGHT));
 		}
@@ -70,7 +58,6 @@ public class POSToggleButton extends JToggleButton {
 			int height = size.height < POSConstants.BUTTON_DEFAULT_HEIGHT ? POSConstants.BUTTON_DEFAULT_HEIGHT : size.height;
 			size.setSize(PosUIManager.getSize(width, height));
 		}
-
 		return size;
 	}
 }

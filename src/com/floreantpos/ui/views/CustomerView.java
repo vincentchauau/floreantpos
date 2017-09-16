@@ -20,38 +20,29 @@
  *
  * Created on August 14, 2006, 11:45 PM
  */
-
 package com.floreantpos.ui.views;
-
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
 import java.util.Locale;
-
 import com.floreantpos.customer.CustomerSelector;
 import com.floreantpos.customer.DefaultCustomerListView;
 import com.floreantpos.extension.ExtensionManager;
 import com.floreantpos.extension.OrderServiceExtension;
 import com.floreantpos.model.OrderType;
 import com.floreantpos.ui.views.order.ViewPanel;
-
 /**
  * 
  * @author MShahriar
  */
 public class CustomerView extends ViewPanel {
-
 	public final static String VIEW_NAME = "CUSTOMER_ACTIVITY"; //$NON-NLS-1$
-
 	private CustomerSelector customerSelector = null;
 	private static CustomerView instance;
-
 	private CustomerView(OrderType orderType) {
 		setLayout(new BorderLayout());
-
 		OrderServiceExtension orderServicePlugin = (OrderServiceExtension) ExtensionManager.getPlugin(OrderServiceExtension.class);
 		if (orderServicePlugin == null) {
 			customerSelector = new DefaultCustomerListView();
-
 		}
 		else {
 			customerSelector = orderServicePlugin.createCustomerSelectorView();
@@ -59,23 +50,18 @@ public class CustomerView extends ViewPanel {
 		customerSelector.setCreateNewTicket(true);
 		customerSelector.updateView(false);
 		add(customerSelector, BorderLayout.CENTER);
-
 		applyComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
 	}
-
 	public void updateView() {
 		customerSelector.redererCustomers();
 	}
-
 	public static CustomerView getInstance(OrderType orderType) {
 		if (instance == null) {
 			instance = new CustomerView(orderType);
 		}
 		instance.customerSelector.setOrderType(orderType);
-
 		return instance;
 	}
-
 	@Override
 	public String getViewName() {
 		return VIEW_NAME;

@@ -1,15 +1,12 @@
 package com.floreantpos.util;
-
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Random;
-
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.SessionImplementor;
 import org.hibernate.id.IdentifierGenerator;
-
 public class GlobalIdGenerator implements IdentifierGenerator {
 	@Override
 	public Serializable generate(SessionImplementor session, Object object) throws HibernateException {

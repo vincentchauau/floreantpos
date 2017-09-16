@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the PRINTER_CONFIGURATION table.
@@ -28,9 +26,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="PRINTER_CONFIGURATION"
  */
-
 public abstract class BasePrinterConfiguration  implements Comparable, Serializable {
-
 	public static String REF = "PrinterConfiguration"; //$NON-NLS-1$
 	public static String PROP_USE_NORMAL_PRINTER_FOR_TICKET = "useNormalPrinterForTicket"; //$NON-NLS-1$
 	public static String PROP_USE_NORMAL_PRINTER_FOR_KITCHEN = "useNormalPrinterForKitchen"; //$NON-NLS-1$
@@ -42,12 +38,10 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 	public static String PROP_KITCHEN_PRINTER_NAME = "kitchenPrinterName"; //$NON-NLS-1$
 
-
 	// constructors
 	public BasePrinterConfiguration () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -55,16 +49,11 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 	private java.lang.String receiptPrinterName;
 	private java.lang.String kitchenPrinterName;
@@ -75,8 +64,6 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 	private java.lang.Boolean useNormalPrinterForTicket;
 	private java.lang.Boolean useNormalPrinterForKitchen;
 
-
-
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
@@ -86,7 +73,6 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -97,15 +83,12 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: RECEIPT_PRINTER
 	 */
 	public java.lang.String getReceiptPrinterName () {
 			return receiptPrinterName;
 	}
-
 	/**
 	 * Set the value related to the column: RECEIPT_PRINTER
 	 * @param receiptPrinterName the RECEIPT_PRINTER value
@@ -114,15 +97,12 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		this.receiptPrinterName = receiptPrinterName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: KITCHEN_PRINTER
 	 */
 	public java.lang.String getKitchenPrinterName () {
 			return kitchenPrinterName;
 	}
-
 	/**
 	 * Set the value related to the column: KITCHEN_PRINTER
 	 * @param kitchenPrinterName the KITCHEN_PRINTER value
@@ -131,15 +111,12 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		this.kitchenPrinterName = kitchenPrinterName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: PRWTS
 	 */
 	public java.lang.Boolean isPrintRecreiptWhenTicketSettled () {
 					return printRecreiptWhenTicketSettled == null ? Boolean.valueOf(true) : printRecreiptWhenTicketSettled;
 			}
-
 	/**
 	 * Set the value related to the column: PRWTS
 	 * @param printRecreiptWhenTicketSettled the PRWTS value
@@ -148,7 +125,6 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		this.printRecreiptWhenTicketSettled = printRecreiptWhenTicketSettled;
 	}
 
-
 	/**
 	 * Custom property
 	 */
@@ -156,14 +132,12 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		return "true"; //$NON-NLS-1$
 	}
 
-
 	/**
 	 * Return the value associated with the column: PRWTP
 	 */
 	public java.lang.Boolean isPrintKitchenWhenTicketSettled () {
 					return printKitchenWhenTicketSettled == null ? Boolean.valueOf(true) : printKitchenWhenTicketSettled;
 			}
-
 	/**
 	 * Set the value related to the column: PRWTP
 	 * @param printKitchenWhenTicketSettled the PRWTP value
@@ -172,7 +146,6 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		this.printKitchenWhenTicketSettled = printKitchenWhenTicketSettled;
 	}
 
-
 	/**
 	 * Custom property
 	 */
@@ -180,14 +153,12 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		return "true"; //$NON-NLS-1$
 	}
 
-
 	/**
 	 * Return the value associated with the column: PKWTS
 	 */
 	public java.lang.Boolean isPrintReceiptWhenTicketPaid () {
 					return printReceiptWhenTicketPaid == null ? Boolean.valueOf(true) : printReceiptWhenTicketPaid;
 			}
-
 	/**
 	 * Set the value related to the column: PKWTS
 	 * @param printReceiptWhenTicketPaid the PKWTS value
@@ -196,7 +167,6 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		this.printReceiptWhenTicketPaid = printReceiptWhenTicketPaid;
 	}
 
-
 	/**
 	 * Custom property
 	 */
@@ -204,14 +174,12 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		return "true"; //$NON-NLS-1$
 	}
 
-
 	/**
 	 * Return the value associated with the column: PKWTP
 	 */
 	public java.lang.Boolean isPrintKitchenWhenTicketPaid () {
 					return printKitchenWhenTicketPaid == null ? Boolean.valueOf(true) : printKitchenWhenTicketPaid;
 			}
-
 	/**
 	 * Set the value related to the column: PKWTP
 	 * @param printKitchenWhenTicketPaid the PKWTP value
@@ -220,7 +188,6 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		this.printKitchenWhenTicketPaid = printKitchenWhenTicketPaid;
 	}
 
-
 	/**
 	 * Custom property
 	 */
@@ -228,14 +195,12 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		return "true"; //$NON-NLS-1$
 	}
 
-
 	/**
 	 * Return the value associated with the column: UNPFT
 	 */
 	public java.lang.Boolean isUseNormalPrinterForTicket () {
 					return useNormalPrinterForTicket == null ? Boolean.valueOf(false) : useNormalPrinterForTicket;
 			}
-
 	/**
 	 * Set the value related to the column: UNPFT
 	 * @param useNormalPrinterForTicket the UNPFT value
@@ -244,7 +209,6 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		this.useNormalPrinterForTicket = useNormalPrinterForTicket;
 	}
 
-
 	/**
 	 * Custom property
 	 */
@@ -252,14 +216,12 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		return "false"; //$NON-NLS-1$
 	}
 
-
 	/**
 	 * Return the value associated with the column: UNPFK
 	 */
 	public java.lang.Boolean isUseNormalPrinterForKitchen () {
 					return useNormalPrinterForKitchen == null ? Boolean.valueOf(false) : useNormalPrinterForKitchen;
 			}
-
 	/**
 	 * Set the value related to the column: UNPFK
 	 * @param useNormalPrinterForKitchen the UNPFK value
@@ -268,15 +230,12 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		this.useNormalPrinterForKitchen = useNormalPrinterForKitchen;
 	}
 
-
 	/**
 	 * Custom property
 	 */
 	public static String getUseNormalPrinterForKitchenDefaultValue () {
 		return "false"; //$NON-NLS-1$
 	}
-
-
 
 
 	public boolean equals (Object obj) {
@@ -288,7 +247,6 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 			else return (this.getId().equals(printerConfiguration.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -299,16 +257,13 @@ public abstract class BasePrinterConfiguration  implements Comparable, Serializa
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

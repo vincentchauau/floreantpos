@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the USERS table.
@@ -11,9 +9,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="USERS"
  */
-
 public abstract class BaseUser  implements Comparable, Serializable {
-
 	public static String REF = "User";
 	public static String PROP_LAST_CLOCK_IN_TIME = "lastClockInTime";
 	public static String PROP_TYPE = "type";
@@ -33,12 +29,10 @@ public abstract class BaseUser  implements Comparable, Serializable {
 	public static String PROP_CURRENT_SHIFT = "currentShift";
 	public static String PROP_LAST_CLOCK_OUT_TIME = "lastClockOutTime";
 
-
 	// constructors
 	public BaseUser () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -46,28 +40,21 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.setAutoId(autoId);
 		initialize();
 	}
-
 	/**
 	 * Constructor for required fields
 	 */
 	public BaseUser (
 		java.lang.Integer autoId,
 		java.lang.String password) {
-
 		this.setAutoId(autoId);
 		this.setPassword(password);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer autoId;
-
 	// fields
 		protected java.lang.Integer userId;
 		protected java.lang.String password;
@@ -82,13 +69,10 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		protected java.lang.Boolean driver;
 		protected java.lang.Boolean availableForDelivery;
 		protected java.lang.Boolean active;
-
 	// many to one
 	private com.floreantpos.model.Shift currentShift;
 	private com.floreantpos.model.Terminal currentTerminal;
 	private com.floreantpos.model.UserType type;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -99,7 +83,6 @@ public abstract class BaseUser  implements Comparable, Serializable {
 	public java.lang.Integer getAutoId () {
 		return autoId;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param autoId the new ID
@@ -110,15 +93,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: USER_ID
 	 */
 	public java.lang.Integer getUserId () {
 									return userId == null ? Integer.valueOf(0) : userId;
 					}
-
 	/**
 	 * Set the value related to the column: USER_ID
 	 * @param userId the USER_ID value
@@ -127,15 +107,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.userId = userId;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: USER_PASS
 	 */
 	public java.lang.String getPassword () {
 					return password;
 			}
-
 	/**
 	 * Set the value related to the column: USER_PASS
 	 * @param password the USER_PASS value
@@ -144,15 +121,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.password = password;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: FIRST_NAME
 	 */
 	public java.lang.String getFirstName () {
 					return firstName;
 			}
-
 	/**
 	 * Set the value related to the column: FIRST_NAME
 	 * @param firstName the FIRST_NAME value
@@ -161,15 +135,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.firstName = firstName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: LAST_NAME
 	 */
 	public java.lang.String getLastName () {
 					return lastName;
 			}
-
 	/**
 	 * Set the value related to the column: LAST_NAME
 	 * @param lastName the LAST_NAME value
@@ -178,15 +149,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.lastName = lastName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SSN
 	 */
 	public java.lang.String getSsn () {
 					return ssn;
 			}
-
 	/**
 	 * Set the value related to the column: SSN
 	 * @param ssn the SSN value
@@ -195,15 +163,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.ssn = ssn;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: COST_PER_HOUR
 	 */
 	public java.lang.Double getCostPerHour () {
 									return costPerHour == null ? Double.valueOf(0) : costPerHour;
 					}
-
 	/**
 	 * Set the value related to the column: COST_PER_HOUR
 	 * @param costPerHour the COST_PER_HOUR value
@@ -212,15 +177,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.costPerHour = costPerHour;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CLOCKED_IN
 	 */
 	public java.lang.Boolean isClockedIn () {
 								return clockedIn == null ? Boolean.FALSE : clockedIn;
 					}
-
 	/**
 	 * Set the value related to the column: CLOCKED_IN
 	 * @param clockedIn the CLOCKED_IN value
@@ -229,15 +191,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.clockedIn = clockedIn;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: LAST_CLOCK_IN_TIME
 	 */
 	public java.util.Date getLastClockInTime () {
 					return lastClockInTime;
 			}
-
 	/**
 	 * Set the value related to the column: LAST_CLOCK_IN_TIME
 	 * @param lastClockInTime the LAST_CLOCK_IN_TIME value
@@ -246,15 +205,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.lastClockInTime = lastClockInTime;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: LAST_CLOCK_OUT_TIME
 	 */
 	public java.util.Date getLastClockOutTime () {
 					return lastClockOutTime;
 			}
-
 	/**
 	 * Set the value related to the column: LAST_CLOCK_OUT_TIME
 	 * @param lastClockOutTime the LAST_CLOCK_OUT_TIME value
@@ -263,15 +219,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.lastClockOutTime = lastClockOutTime;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: PHONE_NO
 	 */
 	public java.lang.String getPhoneNo () {
 					return phoneNo;
 			}
-
 	/**
 	 * Set the value related to the column: PHONE_NO
 	 * @param phoneNo the PHONE_NO value
@@ -280,15 +233,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.phoneNo = phoneNo;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: IS_DRIVER
 	 */
 	public java.lang.Boolean isDriver () {
 								return driver == null ? Boolean.FALSE : driver;
 					}
-
 	/**
 	 * Set the value related to the column: IS_DRIVER
 	 * @param driver the IS_DRIVER value
@@ -297,15 +247,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.driver = driver;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: AVAILABLE_FOR_DELIVERY
 	 */
 	public java.lang.Boolean isAvailableForDelivery () {
 								return availableForDelivery == null ? Boolean.FALSE : availableForDelivery;
 					}
-
 	/**
 	 * Set the value related to the column: AVAILABLE_FOR_DELIVERY
 	 * @param availableForDelivery the AVAILABLE_FOR_DELIVERY value
@@ -314,15 +261,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.availableForDelivery = availableForDelivery;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ACTIVE
 	 */
 	public java.lang.Boolean isActive () {
 								return active == null ? Boolean.FALSE : active;
 					}
-
 	/**
 	 * Set the value related to the column: ACTIVE
 	 * @param active the ACTIVE value
@@ -331,15 +275,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.active = active;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHIFT_ID
 	 */
 	public com.floreantpos.model.Shift getCurrentShift () {
 					return currentShift;
 			}
-
 	/**
 	 * Set the value related to the column: SHIFT_ID
 	 * @param currentShift the SHIFT_ID value
@@ -348,15 +289,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.currentShift = currentShift;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: currentTerminal
 	 */
 	public com.floreantpos.model.Terminal getCurrentTerminal () {
 					return currentTerminal;
 			}
-
 	/**
 	 * Set the value related to the column: currentTerminal
 	 * @param currentTerminal the currentTerminal value
@@ -365,15 +303,12 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		this.currentTerminal = currentTerminal;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: N_USER_TYPE
 	 */
 	public com.floreantpos.model.UserType getType () {
 					return type;
 			}
-
 	/**
 	 * Set the value related to the column: N_USER_TYPE
 	 * @param type the N_USER_TYPE value
@@ -381,9 +316,6 @@ public abstract class BaseUser  implements Comparable, Serializable {
 	public void setType (com.floreantpos.model.UserType type) {
 		this.type = type;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -395,7 +327,6 @@ public abstract class BaseUser  implements Comparable, Serializable {
 			else return (this.getAutoId().equals(user.getAutoId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getAutoId()) return super.hashCode();
@@ -406,16 +337,13 @@ public abstract class BaseUser  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

@@ -57,11 +57,8 @@ public class TaxConfigurationView extends ConfigurationView {
 		}
 
 		restaurant.setItemPriceIncludesTax(cbItemSalesPriceIncludesTax.isSelected());
-
 		RestaurantDAO.getInstance().saveOrUpdate(restaurant);
-
 		Application.getInstance().refreshRestaurant();
-
 		return true;
 	}
 
@@ -69,7 +66,6 @@ public class TaxConfigurationView extends ConfigurationView {
 	public void initialize() throws Exception {
 		restaurant = RestaurantDAO.getInstance().get(Integer.valueOf(1));
 		cbItemSalesPriceIncludesTax.setSelected(POSUtil.getBoolean(restaurant.isItemPriceIncludesTax()));
-
 		setInitialized(true);
 	}
 

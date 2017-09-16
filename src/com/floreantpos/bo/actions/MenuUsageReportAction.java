@@ -16,30 +16,22 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.actions;
-
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JTabbedPane;
-
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.report.MenuUsageReportView;
-
 public class MenuUsageReportAction extends AbstractAction {
-
 	public MenuUsageReportAction() {
 		super(com.floreantpos.POSConstants.MENU_USAGE_REPORT);
 	}
-
 	public MenuUsageReportAction(String name) {
 		super(name);
 	}
-
 	public MenuUsageReportAction(String name, Icon icon) {
 		super(name, icon);
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		BackOfficeWindow window = com.floreantpos.util.POSUtil.getBackOfficeWindow();
 		JTabbedPane tabbedPane = window.getTabbedPane();
@@ -55,5 +47,4 @@ public class MenuUsageReportAction extends AbstractAction {
 		}
 		tabbedPane.setSelectedComponent(reportView);
 	}
-
 }

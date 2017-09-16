@@ -16,26 +16,21 @@
  * ************************************************************************
  */
 package com.floreantpos.report;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
-
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import com.floreantpos.Messages;
 import com.floreantpos.PosLog;
 import com.floreantpos.model.Restaurant;
 import com.floreantpos.model.dao.RestaurantDAO;
-
 public class ReportUtil {
 	private static Log logger = LogFactory.getLog(ReportUtil.class);
 	
@@ -57,7 +52,6 @@ public class ReportUtil {
 	
 	public static JasperReport getReport(String reportName) {
 		InputStream resource = null;
-
 		try {
 			resource = ReceiptPrintService.class.getResourceAsStream(USER_REPORT_DIR + reportName + ".jasper"); //$NON-NLS-1$
 			if (resource == null) {
@@ -86,7 +80,6 @@ public class ReportUtil {
 			File jrxmlFile = new File(ReceiptPrintService.class.getResource(USER_REPORT_DIR + reportName + ".jrxml").getFile()); //$NON-NLS-1$
 			File dir = jrxmlFile.getParentFile();
 			jasperFile = new File(dir, reportName + ".jasper"); //$NON-NLS-1$
-
 			in = ReceiptPrintService.class.getResourceAsStream(USER_REPORT_DIR + reportName + ".jrxml"); //$NON-NLS-1$
 			out = new FileOutputStream(jasperFile);
 			JasperCompileManager.compileReportToStream(in, out);
@@ -112,7 +105,6 @@ public class ReportUtil {
 	
 	private static JasperReport getDefaultReport(String reportName) {
 		InputStream resource = null;
-
 		try {
 			
 			resource = ReceiptPrintService.class.getResourceAsStream(DEFAULT_REPORT_DIR + reportName + ".jasper"); //$NON-NLS-1$

@@ -16,22 +16,17 @@
  * ************************************************************************
  */
 package com.floreantpos.ui.dialog;
-
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JSeparator;
-
 import net.miginfocom.swing.MigLayout;
-
 import com.floreantpos.model.CookingInstruction;
 import com.floreantpos.model.dao.CookingInstructionDAO;
 import com.floreantpos.swing.PosButton;
-
 public class SelectCookongInstructionDialog extends POSDialog implements ActionListener {
 	private CookingInstruction cookingInstruction;
 	
@@ -39,11 +34,9 @@ public class SelectCookongInstructionDialog extends POSDialog implements ActionL
 	private PosButton btnNew;
 	private PosButton btnOk;
 	private PosButton btnCancel;
-
 	public SelectCookongInstructionDialog() throws HeadlessException {
 		super();
 	}
-
 	@Override
 	protected void initUI() {
 		setLayout(new MigLayout());
@@ -73,7 +66,6 @@ public class SelectCookongInstructionDialog extends POSDialog implements ActionL
 		setCanceled(false);
 		dispose();
 	}
-
 	private void doCancel() {
 		setCanceled(true);
 		dispose();
@@ -91,7 +83,6 @@ public class SelectCookongInstructionDialog extends POSDialog implements ActionL
 			model.setSelectedItem(cookingInstruction);
 		}
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
 		
@@ -105,13 +96,10 @@ public class SelectCookongInstructionDialog extends POSDialog implements ActionL
 			doCreateNew();
 		}
 	}
-
 	public CookingInstruction getCookingInstruction() {
 		return cookingInstruction;
 	}
-
 	public CookingInstruction getSelectedCookingInstruction() {
 		return cookingInstruction;
 	}
-
 }

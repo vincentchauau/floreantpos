@@ -16,12 +16,9 @@
  * ************************************************************************
  */
 package com.floreantpos.ui.util;
-
 import java.util.Calendar;
 import java.util.Locale;
-
 import org.jdesktop.swingx.JXDatePicker;
-
 public class UiUtil {
 	public static JXDatePicker getCurrentMonthStart() {
 		Locale locale = Locale.getDefault();
@@ -32,7 +29,6 @@ public class UiUtil {
 		
 		return datePicker;
 	}
-
 	public static JXDatePicker getCurrentMonthEnd() {
 		Locale locale = Locale.getDefault();
 		
@@ -44,7 +40,6 @@ public class UiUtil {
 	}
 	
 	public static JXDatePicker getDeafultDate() {
-
 		JXDatePicker datePicker = new JXDatePicker();
 		
 		return datePicker;

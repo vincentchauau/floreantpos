@@ -16,23 +16,19 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.ui.explorer;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-
 import org.jdesktop.swingx.JXTable;
-
 import com.floreantpos.Messages;
 import com.floreantpos.POSConstants;
 import com.floreantpos.bo.ui.BOMessageDialog;
@@ -47,12 +43,9 @@ import com.floreantpos.ui.dialog.BeanEditorDialog;
 import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.ui.model.MenuCategoryForm;
 import com.floreantpos.util.POSUtil;
-
 public class MenuCategoryExplorer extends TransparentPanel {
-
 	private JXTable table;
 	private BeanTableModel<MenuCategory> tableModel;
-
 	public MenuCategoryExplorer() {
 		tableModel = new BeanTableModel<MenuCategory>(MenuCategory.class);
 		tableModel.addColumn(POSConstants.ID.toUpperCase(), "id"); //$NON-NLS-1$
@@ -63,9 +56,7 @@ public class MenuCategoryExplorer extends TransparentPanel {
 		tableModel.addColumn(POSConstants.SORT_ORDER.toUpperCase(), "sortOrder"); //$NON-NLS-1$
 		tableModel.addColumn(POSConstants.BUTTON_COLOR.toUpperCase(), "buttonColor"); //$NON-NLS-1$
 		tableModel.addColumn(POSConstants.TEXT_COLOR.toUpperCase(), "textColor"); //$NON-NLS-1$
-
 		tableModel.addRows(MenuCategoryDAO.getInstance().findAll());
-
 		table = new JXTable(tableModel);
 		table.setDefaultRenderer(Object.class, new CustomCellRenderer());
 		table.getColumnModel().getColumn(7).setCellRenderer(new DefaultTableCellRenderer() {
@@ -79,36 +70,27 @@ public class MenuCategoryExplorer extends TransparentPanel {
 				return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			}
 		});
-
 		setLayout(new BorderLayout(5, 5));
 		add(new JScrollPane(table));
-
 		addButtonPanel();
 	}
-
 	private void addButtonPanel() {
 		JButton addButton = new JButton(POSConstants.ADD);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-
 					MenuCategoryForm editor = new MenuCategoryForm();
 					BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
 					dialog.open();
-
 					if (dialog.isCanceled())
 						return;
-
 					MenuCategory foodCategory = (MenuCategory) editor.getBean();
 					tableModel.addRow(foodCategory);
-
 				} catch (Exception x) {
 					BOMessageDialog.showError(POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
-
 		JButton editButton = new JButton(POSConstants.EDIT);
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -116,23 +98,18 @@ public class MenuCategoryExplorer extends TransparentPanel {
 					int index = table.getSelectedRow();
 					if (index < 0)
 						return;
-
 					index = table.convertRowIndexToModel(index);
 					MenuCategory category = tableModel.getRow(index);
-
 					MenuCategoryForm editor = new MenuCategoryForm(category);
 					BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
 					dialog.open();
 					if (dialog.isCanceled())
 						return;
-
 					table.repaint();
-
 				} catch (Throwable x) {
 					BOMessageDialog.showError(POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
 		JButton deleteButton = new JButton(POSConstants.DELETE);
 		deleteButton.addActionListener(new ActionListener() {
@@ -141,17 +118,13 @@ public class MenuCategoryExplorer extends TransparentPanel {
 					int index = table.getSelectedRow();
 					if (index < 0)
 						return;
-
 					index = table.convertRowIndexToModel(index);
 					MenuCategory category = tableModel.getRow(index);
-
 					if (POSMessageDialog.showYesNoQuestionDialog(MenuCategoryExplorer.this, POSConstants.CONFIRM_DELETE, POSConstants.DELETE) != JOptionPane.YES_OPTION) {
 						return;
 					}
-
 					MenuGroupDAO menuGroupDao = new MenuGroupDAO();
 					List<MenuGroup> menuGroups = menuGroupDao.findByParent(category);
-
 					if (menuGroups.size() > 0) {
 						if (POSMessageDialog.showYesNoQuestionDialog(MenuCategoryExplorer.this,
 								Messages.getString("MenuCategoryExplorer.0"), POSConstants.DELETE) != JOptionPane.YES_OPTION) { //$NON-NLS-1$
@@ -159,18 +132,14 @@ public class MenuCategoryExplorer extends TransparentPanel {
 						}
 						menuGroupDao.releaseParent(menuGroups);
 					}
-
 					MenuCategoryDAO dao = new MenuCategoryDAO();
 					dao.delete(category);
-
 					tableModel.removeRow(index);
 				} catch (Exception x) {
 					BOMessageDialog.showError(POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
-
 		TransparentPanel panel = new TransparentPanel();
 		panel.add(addButton);
 		panel.add(editButton);

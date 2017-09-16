@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the EMPLOYEE_IN_OUT_HISTORY table.
@@ -11,9 +9,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="EMPLOYEE_IN_OUT_HISTORY"
  */
-
 public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializable {
-
 	public static String REF = "EmployeeInOutHistory";
 	public static String PROP_USER = "user";
 	public static String PROP_OUT_TIME = "outTime";
@@ -25,12 +21,10 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 	public static String PROP_IN_TIME = "inTime";
 	public static String PROP_ID = "id";
 
-
 	// constructors
 	public BaseEmployeeInOutHistory () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -38,29 +32,21 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.util.Date outTime;
 		protected java.util.Date inTime;
 		protected java.lang.Short outHour;
 		protected java.lang.Short inHour;
 		protected java.lang.Boolean clockOut;
-
 	// many to one
 	private com.floreantpos.model.User user;
 	private com.floreantpos.model.Shift shift;
 	private com.floreantpos.model.Terminal terminal;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -71,7 +57,6 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -82,15 +67,12 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: OUT_TIME
 	 */
 	public java.util.Date getOutTime () {
 					return outTime;
 			}
-
 	/**
 	 * Set the value related to the column: OUT_TIME
 	 * @param outTime the OUT_TIME value
@@ -99,15 +81,12 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 		this.outTime = outTime;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: IN_TIME
 	 */
 	public java.util.Date getInTime () {
 					return inTime;
 			}
-
 	/**
 	 * Set the value related to the column: IN_TIME
 	 * @param inTime the IN_TIME value
@@ -116,15 +95,12 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 		this.inTime = inTime;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: OUT_HOUR
 	 */
 	public java.lang.Short getOutHour () {
 					return outHour;
 			}
-
 	/**
 	 * Set the value related to the column: OUT_HOUR
 	 * @param outHour the OUT_HOUR value
@@ -133,15 +109,12 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 		this.outHour = outHour;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: IN_HOUR
 	 */
 	public java.lang.Short getInHour () {
 					return inHour;
 			}
-
 	/**
 	 * Set the value related to the column: IN_HOUR
 	 * @param inHour the IN_HOUR value
@@ -150,15 +123,12 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 		this.inHour = inHour;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CLOCK_OUT
 	 */
 	public java.lang.Boolean isClockOut () {
 								return clockOut == null ? Boolean.FALSE : clockOut;
 					}
-
 	/**
 	 * Set the value related to the column: CLOCK_OUT
 	 * @param clockOut the CLOCK_OUT value
@@ -167,15 +137,12 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 		this.clockOut = clockOut;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: USER_ID
 	 */
 	public com.floreantpos.model.User getUser () {
 					return user;
 			}
-
 	/**
 	 * Set the value related to the column: USER_ID
 	 * @param user the USER_ID value
@@ -184,15 +151,12 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 		this.user = user;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHIFT_ID
 	 */
 	public com.floreantpos.model.Shift getShift () {
 					return shift;
 			}
-
 	/**
 	 * Set the value related to the column: SHIFT_ID
 	 * @param shift the SHIFT_ID value
@@ -201,15 +165,12 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 		this.shift = shift;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: TERMINAL_ID
 	 */
 	public com.floreantpos.model.Terminal getTerminal () {
 					return terminal;
 			}
-
 	/**
 	 * Set the value related to the column: TERMINAL_ID
 	 * @param terminal the TERMINAL_ID value
@@ -217,9 +178,6 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 	public void setTerminal (com.floreantpos.model.Terminal terminal) {
 		this.terminal = terminal;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -231,7 +189,6 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 			else return (this.getId().equals(employeeInOutHistory.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -242,16 +199,13 @@ public abstract class BaseEmployeeInOutHistory  implements Comparable, Serializa
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

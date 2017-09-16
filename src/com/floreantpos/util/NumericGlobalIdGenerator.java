@@ -1,7 +1,5 @@
 package com.floreantpos.util;
-
 import java.util.Random;
-
 public class NumericGlobalIdGenerator extends GlobalIdGenerator {
 	@Override
 	public String generate() {

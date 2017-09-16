@@ -1,29 +1,21 @@
 package com.floreantpos.bo.actions;
-
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JTabbedPane;
-
 import com.floreantpos.Messages;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.PizzaItemExplorer;
-
 public class PizzaItemExplorerAction extends AbstractAction {
-
 	public PizzaItemExplorerAction() {
 		super(Messages.getString("PizzaItemExplorerAction.0")); //$NON-NLS-1$
 	}
-
 	public PizzaItemExplorerAction(String name) {
 		super(name);
 	}
-
 	public PizzaItemExplorerAction(String name, Icon icon) {
 		super(name, icon);
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
 		JTabbedPane tabbedPane;
@@ -39,5 +31,4 @@ public class PizzaItemExplorerAction extends AbstractAction {
 		}
 		tabbedPane.setSelectedComponent(item);
 	}
-
 }

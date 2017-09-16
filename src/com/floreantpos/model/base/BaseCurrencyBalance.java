@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the CURRENCY_BALANCE table.
@@ -11,21 +9,17 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="CURRENCY_BALANCE"
  */
-
 public abstract class BaseCurrencyBalance  implements Comparable, Serializable {
-
 	public static String REF = "CurrencyBalance";
 	public static String PROP_ID = "id";
 	public static String PROP_CASH_DRAWER = "cashDrawer";
 	public static String PROP_CURRENCY = "currency";
 	public static String PROP_BALANCE = "balance";
 
-
 	// constructors
 	public BaseCurrencyBalance () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -33,24 +27,16 @@ public abstract class BaseCurrencyBalance  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.Double balance;
-
 	// many to one
 	private com.floreantpos.model.Currency currency;
 	private com.floreantpos.model.CashDrawer cashDrawer;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -61,7 +47,6 @@ public abstract class BaseCurrencyBalance  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -72,15 +57,12 @@ public abstract class BaseCurrencyBalance  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: BALANCE
 	 */
 	public java.lang.Double getBalance () {
 									return balance == null ? Double.valueOf(0) : balance;
 					}
-
 	/**
 	 * Set the value related to the column: BALANCE
 	 * @param balance the BALANCE value
@@ -89,15 +71,12 @@ public abstract class BaseCurrencyBalance  implements Comparable, Serializable {
 		this.balance = balance;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CURRENCY_ID
 	 */
 	public com.floreantpos.model.Currency getCurrency () {
 					return currency;
 			}
-
 	/**
 	 * Set the value related to the column: CURRENCY_ID
 	 * @param currency the CURRENCY_ID value
@@ -106,15 +85,12 @@ public abstract class BaseCurrencyBalance  implements Comparable, Serializable {
 		this.currency = currency;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CASH_DRAWER_ID
 	 */
 	public com.floreantpos.model.CashDrawer getCashDrawer () {
 					return cashDrawer;
 			}
-
 	/**
 	 * Set the value related to the column: CASH_DRAWER_ID
 	 * @param cashDrawer the CASH_DRAWER_ID value
@@ -122,9 +98,6 @@ public abstract class BaseCurrencyBalance  implements Comparable, Serializable {
 	public void setCashDrawer (com.floreantpos.model.CashDrawer cashDrawer) {
 		this.cashDrawer = cashDrawer;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -136,7 +109,6 @@ public abstract class BaseCurrencyBalance  implements Comparable, Serializable {
 			else return (this.getId().equals(currencyBalance.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -147,16 +119,13 @@ public abstract class BaseCurrencyBalance  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

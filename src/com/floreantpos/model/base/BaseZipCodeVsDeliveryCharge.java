@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the ZIP_CODE_VS_DELIVERY_CHARGE table.
@@ -28,20 +26,16 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="ZIP_CODE_VS_DELIVERY_CHARGE"
  */
-
 public abstract class BaseZipCodeVsDeliveryCharge  implements Comparable, Serializable {
-
 	public static String REF = "ZipCodeVsDeliveryCharge"; //$NON-NLS-1$
 	public static String PROP_DELIVERY_CHARGE = "deliveryCharge"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 	public static String PROP_ZIP_CODE = "zipCode"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseZipCodeVsDeliveryCharge () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -49,7 +43,6 @@ public abstract class BaseZipCodeVsDeliveryCharge  implements Comparable, Serial
 		this.setId(id);
 		initialize();
 	}
-
 	/**
 	 * Constructor for required fields
 	 */
@@ -57,27 +50,19 @@ public abstract class BaseZipCodeVsDeliveryCharge  implements Comparable, Serial
 		java.lang.Integer id,
 		java.lang.String zipCode,
 		double deliveryCharge) {
-
 		this.setId(id);
 		this.setZipCode(zipCode);
 		this.setDeliveryCharge(deliveryCharge);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String zipCode;
 		protected double deliveryCharge;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -88,7 +73,6 @@ public abstract class BaseZipCodeVsDeliveryCharge  implements Comparable, Serial
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -99,15 +83,12 @@ public abstract class BaseZipCodeVsDeliveryCharge  implements Comparable, Serial
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: ZIP_CODE
 	 */
 	public java.lang.String getZipCode () {
 					return zipCode;
 			}
-
 	/**
 	 * Set the value related to the column: ZIP_CODE
 	 * @param zipCode the ZIP_CODE value
@@ -116,15 +97,12 @@ public abstract class BaseZipCodeVsDeliveryCharge  implements Comparable, Serial
 		this.zipCode = zipCode;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DELIVERY_CHARGE
 	 */
 	public double getDeliveryCharge () {
 					return deliveryCharge;
 			}
-
 	/**
 	 * Set the value related to the column: DELIVERY_CHARGE
 	 * @param deliveryCharge the DELIVERY_CHARGE value
@@ -132,9 +110,6 @@ public abstract class BaseZipCodeVsDeliveryCharge  implements Comparable, Serial
 	public void setDeliveryCharge (double deliveryCharge) {
 		this.deliveryCharge = deliveryCharge;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -146,7 +121,6 @@ public abstract class BaseZipCodeVsDeliveryCharge  implements Comparable, Serial
 			else return (this.getId().equals(zipCodeVsDeliveryCharge.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -157,16 +131,13 @@ public abstract class BaseZipCodeVsDeliveryCharge  implements Comparable, Serial
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

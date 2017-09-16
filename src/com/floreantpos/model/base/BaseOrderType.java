@@ -1,8 +1,6 @@
 package com.floreantpos.model.base;
-
 import java.lang.Comparable;
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the ORDER_TYPE table.
@@ -12,9 +10,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="ORDER_TYPE"
  */
-
 public abstract class BaseOrderType  implements Comparable, Serializable {
-
 	public static String REF = "OrderType"; //$NON-NLS-1$
 	public static String PROP_CLOSE_ON_PAID = "closeOnPaid"; //$NON-NLS-1$
 	public static String PROP_SHOW_TABLE_SELECTION = "showTableSelection"; //$NON-NLS-1$
@@ -39,12 +35,10 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 	public static String PROP_SHOW_PRICE_ON_BUTTON = "showPriceOnButton"; //$NON-NLS-1$
 	public static String PROP_CONSOLIDATE_ITEMS_IN_RECEIPT = "consolidateItemsInReceipt"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseOrderType () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -52,28 +46,21 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	/**
 	 * Constructor for required fields
 	 */
 	public BaseOrderType (
 		java.lang.Integer id,
 		java.lang.String name) {
-
 		this.setId(id);
 		this.setName(name);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String name;
 		protected java.lang.Boolean enabled;
@@ -97,8 +84,6 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		protected java.lang.Boolean showStockCountOnButton;
 		protected java.lang.Boolean showUnitPriceInTicketGrid;
 
-
-
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
@@ -108,7 +93,6 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -119,15 +103,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -136,15 +117,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ENABLED
 	 */
 	public java.lang.Boolean isEnabled () {
 								return enabled == null ? Boolean.FALSE : enabled;
 					}
-
 	/**
 	 * Set the value related to the column: ENABLED
 	 * @param enabled the ENABLED value
@@ -153,15 +131,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.enabled = enabled;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHOW_TABLE_SELECTION
 	 */
 	public java.lang.Boolean isShowTableSelection () {
 								return showTableSelection == null ? Boolean.FALSE : showTableSelection;
 					}
-
 	/**
 	 * Set the value related to the column: SHOW_TABLE_SELECTION
 	 * @param showTableSelection the SHOW_TABLE_SELECTION value
@@ -170,15 +145,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.showTableSelection = showTableSelection;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHOW_GUEST_SELECTION
 	 */
 	public java.lang.Boolean isShowGuestSelection () {
 								return showGuestSelection == null ? Boolean.FALSE : showGuestSelection;
 					}
-
 	/**
 	 * Set the value related to the column: SHOW_GUEST_SELECTION
 	 * @param showGuestSelection the SHOW_GUEST_SELECTION value
@@ -187,15 +159,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.showGuestSelection = showGuestSelection;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHOULD_PRINT_TO_KITCHEN
 	 */
 	public java.lang.Boolean isShouldPrintToKitchen () {
 								return shouldPrintToKitchen == null ? Boolean.FALSE : shouldPrintToKitchen;
 					}
-
 	/**
 	 * Set the value related to the column: SHOULD_PRINT_TO_KITCHEN
 	 * @param shouldPrintToKitchen the SHOULD_PRINT_TO_KITCHEN value
@@ -204,15 +173,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.shouldPrintToKitchen = shouldPrintToKitchen;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: PREPAID
 	 */
 	public java.lang.Boolean isPrepaid () {
 								return prepaid == null ? Boolean.FALSE : prepaid;
 					}
-
 	/**
 	 * Set the value related to the column: PREPAID
 	 * @param prepaid the PREPAID value
@@ -221,15 +187,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.prepaid = prepaid;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CLOSE_ON_PAID
 	 */
 	public java.lang.Boolean isCloseOnPaid () {
 								return closeOnPaid == null ? Boolean.FALSE : closeOnPaid;
 					}
-
 	/**
 	 * Set the value related to the column: CLOSE_ON_PAID
 	 * @param closeOnPaid the CLOSE_ON_PAID value
@@ -238,15 +201,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.closeOnPaid = closeOnPaid;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: REQUIRED_CUSTOMER_DATA
 	 */
 	public java.lang.Boolean isRequiredCustomerData () {
 								return requiredCustomerData == null ? Boolean.FALSE : requiredCustomerData;
 					}
-
 	/**
 	 * Set the value related to the column: REQUIRED_CUSTOMER_DATA
 	 * @param requiredCustomerData the REQUIRED_CUSTOMER_DATA value
@@ -255,15 +215,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.requiredCustomerData = requiredCustomerData;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DELIVERY
 	 */
 	public java.lang.Boolean isDelivery () {
 								return delivery == null ? Boolean.FALSE : delivery;
 					}
-
 	/**
 	 * Set the value related to the column: DELIVERY
 	 * @param delivery the DELIVERY value
@@ -272,15 +229,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.delivery = delivery;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHOW_ITEM_BARCODE
 	 */
 	public java.lang.Boolean isShowItemBarcode () {
 								return showItemBarcode == null ? Boolean.FALSE : showItemBarcode;
 					}
-
 	/**
 	 * Set the value related to the column: SHOW_ITEM_BARCODE
 	 * @param showItemBarcode the SHOW_ITEM_BARCODE value
@@ -289,15 +243,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.showItemBarcode = showItemBarcode;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHOW_IN_LOGIN_SCREEN
 	 */
 	public java.lang.Boolean isShowInLoginScreen () {
 								return showInLoginScreen == null ? Boolean.FALSE : showInLoginScreen;
 					}
-
 	/**
 	 * Set the value related to the column: SHOW_IN_LOGIN_SCREEN
 	 * @param showInLoginScreen the SHOW_IN_LOGIN_SCREEN value
@@ -306,15 +257,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.showInLoginScreen = showInLoginScreen;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CONSOLIDATE_TIEMS_IN_RECEIPT
 	 */
 	public java.lang.Boolean isConsolidateItemsInReceipt () {
 								return consolidateItemsInReceipt == null ? Boolean.FALSE : consolidateItemsInReceipt;
 					}
-
 	/**
 	 * Set the value related to the column: CONSOLIDATE_TIEMS_IN_RECEIPT
 	 * @param consolidateItemsInReceipt the CONSOLIDATE_TIEMS_IN_RECEIPT value
@@ -323,15 +271,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.consolidateItemsInReceipt = consolidateItemsInReceipt;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ALLOW_SEAT_BASED_ORDER
 	 */
 	public java.lang.Boolean isAllowSeatBasedOrder () {
 								return allowSeatBasedOrder == null ? Boolean.FALSE : allowSeatBasedOrder;
 					}
-
 	/**
 	 * Set the value related to the column: ALLOW_SEAT_BASED_ORDER
 	 * @param allowSeatBasedOrder the ALLOW_SEAT_BASED_ORDER value
@@ -340,15 +285,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.allowSeatBasedOrder = allowSeatBasedOrder;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: HIDE_ITEM_WITH_EMPTY_INVENTORY
 	 */
 	public java.lang.Boolean isHideItemWithEmptyInventory () {
 								return hideItemWithEmptyInventory == null ? Boolean.FALSE : hideItemWithEmptyInventory;
 					}
-
 	/**
 	 * Set the value related to the column: HIDE_ITEM_WITH_EMPTY_INVENTORY
 	 * @param hideItemWithEmptyInventory the HIDE_ITEM_WITH_EMPTY_INVENTORY value
@@ -357,15 +299,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.hideItemWithEmptyInventory = hideItemWithEmptyInventory;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: HAS_FORHERE_AND_TOGO
 	 */
 	public java.lang.Boolean isHasForHereAndToGo () {
 								return hasForHereAndToGo == null ? Boolean.FALSE : hasForHereAndToGo;
 					}
-
 	/**
 	 * Set the value related to the column: HAS_FORHERE_AND_TOGO
 	 * @param hasForHereAndToGo the HAS_FORHERE_AND_TOGO value
@@ -374,15 +313,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.hasForHereAndToGo = hasForHereAndToGo;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: PRE_AUTH_CREDIT_CARD
 	 */
 	public java.lang.Boolean isPreAuthCreditCard () {
 								return preAuthCreditCard == null ? Boolean.FALSE : preAuthCreditCard;
 					}
-
 	/**
 	 * Set the value related to the column: PRE_AUTH_CREDIT_CARD
 	 * @param preAuthCreditCard the PRE_AUTH_CREDIT_CARD value
@@ -391,15 +327,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.preAuthCreditCard = preAuthCreditCard;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: BAR_TAB
 	 */
 	public java.lang.Boolean isBarTab () {
 								return barTab == null ? Boolean.FALSE : barTab;
 					}
-
 	/**
 	 * Set the value related to the column: BAR_TAB
 	 * @param barTab the BAR_TAB value
@@ -408,15 +341,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.barTab = barTab;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: RETAIL_ORDER
 	 */
 	public java.lang.Boolean isRetailOrder () {
 								return retailOrder == null ? Boolean.FALSE : retailOrder;
 					}
-
 	/**
 	 * Set the value related to the column: RETAIL_ORDER
 	 * @param retailOrder the RETAIL_ORDER value
@@ -425,15 +355,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.retailOrder = retailOrder;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHOW_PRICE_ON_BUTTON
 	 */
 	public java.lang.Boolean isShowPriceOnButton () {
 								return showPriceOnButton == null ? Boolean.FALSE : showPriceOnButton;
 					}
-
 	/**
 	 * Set the value related to the column: SHOW_PRICE_ON_BUTTON
 	 * @param showPriceOnButton the SHOW_PRICE_ON_BUTTON value
@@ -442,15 +369,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.showPriceOnButton = showPriceOnButton;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHOW_STOCK_COUNT_ON_BUTTON
 	 */
 	public java.lang.Boolean isShowStockCountOnButton () {
 								return showStockCountOnButton == null ? Boolean.FALSE : showStockCountOnButton;
 					}
-
 	/**
 	 * Set the value related to the column: SHOW_STOCK_COUNT_ON_BUTTON
 	 * @param showStockCountOnButton the SHOW_STOCK_COUNT_ON_BUTTON value
@@ -459,15 +383,12 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		this.showStockCountOnButton = showStockCountOnButton;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHOW_UNIT_PRICE_IN_TICKET_GRID
 	 */
 	public java.lang.Boolean isShowUnitPriceInTicketGrid () {
 								return showUnitPriceInTicketGrid == null ? Boolean.FALSE : showUnitPriceInTicketGrid;
 					}
-
 	/**
 	 * Set the value related to the column: SHOW_UNIT_PRICE_IN_TICKET_GRID
 	 * @param showUnitPriceInTicketGrid the SHOW_UNIT_PRICE_IN_TICKET_GRID value
@@ -475,9 +396,6 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 	public void setShowUnitPriceInTicketGrid (java.lang.Boolean showUnitPriceInTicketGrid) {
 		this.showUnitPriceInTicketGrid = showUnitPriceInTicketGrid;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -489,7 +407,6 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 			else return (this.getId().equals(orderType.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -500,16 +417,13 @@ public abstract class BaseOrderType  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

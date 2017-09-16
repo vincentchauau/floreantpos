@@ -22,7 +22,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.AbstractCellEditor;
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -33,7 +32,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-
 /**
  *  The ButtonColumn class provides a renderer and an editor that looks like a
  *  PosButton. The renderer and editor will then be used for a specified column
@@ -55,12 +53,10 @@ public class ButtonColumn extends AbstractCellEditor
 	private int mnemonic;
 	private Border originalBorder;
 	private Border focusBorder;
-
 	private PosButton renderButton;
 	private PosButton editButton;
 	private Object editorValue;
 	private boolean isButtonColumnEditor;
-
 	/**
 	 *  Create the ButtonColumn to be used as a renderer and editor. The
 	 *  renderer and editor will automatically be installed on the TableColumn
@@ -74,20 +70,17 @@ public class ButtonColumn extends AbstractCellEditor
 	{
 		this.table = table;
 		this.action = action;
-
 		renderButton = new PosButton();
 		editButton = new PosButton();
 		editButton.setFocusPainted( false );
 		editButton.addActionListener( this );
 		originalBorder = editButton.getBorder();
 		setFocusBorder( new LineBorder(Color.BLUE) );
-
 		TableColumnModel columnModel = table.getColumnModel();
 		columnModel.getColumn(column).setCellRenderer( this );
 		columnModel.getColumn(column).setCellEditor( this );
 		table.addMouseListener( this );
 	}
-
 
 	/**
 	 *  Get foreground color of the button when the cell has focus
@@ -98,7 +91,6 @@ public class ButtonColumn extends AbstractCellEditor
 	{
 		return focusBorder;
 	}
-
 	/**
 	 *  The foreground color of the button when the cell has focus
 	 *
@@ -109,12 +101,10 @@ public class ButtonColumn extends AbstractCellEditor
 		this.focusBorder = focusBorder;
 		editButton.setBorder( focusBorder );
 	}
-
 	public int getMnemonic()
 	{
 		return mnemonic;
 	}
-
 	/**
 	 *  The mnemonic to activate the button when the cell has focus
 	 *
@@ -126,7 +116,6 @@ public class ButtonColumn extends AbstractCellEditor
 		renderButton.setMnemonic(mnemonic);
 		editButton.setMnemonic(mnemonic);
 	}
-
 	@Override
 	public Component getTableCellEditorComponent(
 		JTable table, Object value, boolean isSelected, int row, int column)
@@ -146,17 +135,14 @@ public class ButtonColumn extends AbstractCellEditor
 			editButton.setText( value.toString() );
 			editButton.setIcon( null );
 		}
-
 		this.editorValue = value;
 		return editButton;
 	}
-
 	@Override
 	public Object getCellEditorValue()
 	{
 		return editorValue;
 	}
-
 //
 //  Implement TableCellRenderer interface
 //
@@ -173,7 +159,6 @@ public class ButtonColumn extends AbstractCellEditor
 			renderButton.setForeground(table.getForeground());
 			renderButton.setBackground(UIManager.getColor("Button.background")); //$NON-NLS-1$
 		}
-
 		if (hasFocus)
 		{
 			renderButton.setBorder( focusBorder );
@@ -182,7 +167,6 @@ public class ButtonColumn extends AbstractCellEditor
 		{
 			renderButton.setBorder( originalBorder );
 		}
-
 //		renderButton.setText( (value == null) ? "" : value.toString() );
 		if (value == null)
 		{
@@ -199,10 +183,8 @@ public class ButtonColumn extends AbstractCellEditor
 			renderButton.setText( value.toString() );
 			renderButton.setIcon( null );
 		}
-
 		return renderButton;
 	}
-
 //
 //  Implement ActionListener interface
 //
@@ -213,16 +195,13 @@ public class ButtonColumn extends AbstractCellEditor
 	{
 		int row = table.convertRowIndexToModel( table.getEditingRow() );
 		fireEditingStopped();
-
 		//  Invoke the Action
-
 		ActionEvent event = new ActionEvent(
 			table,
 			ActionEvent.ACTION_PERFORMED,
 			"" + row); //$NON-NLS-1$
 		action.actionPerformed(event);
 	}
-
 //
 //  Implement MouseListener interface
 //
@@ -237,16 +216,13 @@ public class ButtonColumn extends AbstractCellEditor
 		&&  table.getCellEditor() == this)
 			isButtonColumnEditor = true;
     }
-
     public void mouseReleased(MouseEvent e)
     {
     	if (isButtonColumnEditor
     	&&  table.isEditing())
     		table.getCellEditor().stopCellEditing();
-
 		isButtonColumnEditor = false;
     }
-
     public void mouseClicked(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}

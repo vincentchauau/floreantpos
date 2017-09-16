@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the DELIVERY_INSTRUCTION table.
@@ -11,20 +9,16 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="DELIVERY_INSTRUCTION"
  */
-
 public abstract class BaseDeliveryInstruction  implements Comparable, Serializable {
-
 	public static String REF = "DeliveryInstruction";
 	public static String PROP_CUSTOMER = "customer";
 	public static String PROP_NOTES = "notes";
 	public static String PROP_ID = "id";
 
-
 	// constructors
 	public BaseDeliveryInstruction () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -32,23 +26,15 @@ public abstract class BaseDeliveryInstruction  implements Comparable, Serializab
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String notes;
-
 	// many to one
 	private com.floreantpos.model.Customer customer;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -59,7 +45,6 @@ public abstract class BaseDeliveryInstruction  implements Comparable, Serializab
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -70,15 +55,12 @@ public abstract class BaseDeliveryInstruction  implements Comparable, Serializab
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: NOTES
 	 */
 	public java.lang.String getNotes () {
 					return notes;
 			}
-
 	/**
 	 * Set the value related to the column: NOTES
 	 * @param notes the NOTES value
@@ -87,15 +69,12 @@ public abstract class BaseDeliveryInstruction  implements Comparable, Serializab
 		this.notes = notes;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CUSTOMER_NO
 	 */
 	public com.floreantpos.model.Customer getCustomer () {
 					return customer;
 			}
-
 	/**
 	 * Set the value related to the column: CUSTOMER_NO
 	 * @param customer the CUSTOMER_NO value
@@ -103,9 +82,6 @@ public abstract class BaseDeliveryInstruction  implements Comparable, Serializab
 	public void setCustomer (com.floreantpos.model.Customer customer) {
 		this.customer = customer;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -117,7 +93,6 @@ public abstract class BaseDeliveryInstruction  implements Comparable, Serializab
 			else return (this.getId().equals(deliveryInstruction.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -128,16 +103,13 @@ public abstract class BaseDeliveryInstruction  implements Comparable, Serializab
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

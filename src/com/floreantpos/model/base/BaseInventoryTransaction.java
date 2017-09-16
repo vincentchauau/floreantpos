@@ -1,8 +1,6 @@
 package com.floreantpos.model.base;
-
 import java.lang.Comparable;
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the INVENTORY_TRANSACTION table.
@@ -12,9 +10,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="INVENTORY_TRANSACTION"
  */
-
 public abstract class BaseInventoryTransaction  implements Comparable, Serializable {
-
 	public static String REF = "InventoryTransaction"; //$NON-NLS-1$
 	public static String PROP_INVENTORY_ITEM = "inventoryItem"; //$NON-NLS-1$
 	public static String PROP_QUANTITY = "quantity"; //$NON-NLS-1$
@@ -27,12 +23,10 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 	public static String PROP_REMARK = "remark"; //$NON-NLS-1$
 	public static String PROP_REFERENCE_NO = "referenceNo"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseInventoryTransaction () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -40,30 +34,22 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.util.Date transactionDate;
 	protected java.lang.Double quantity;
 		protected java.lang.Double unitPrice;
 		protected java.lang.String remark;
-
 	// many to one
 	private com.floreantpos.model.PurchaseOrder referenceNo;
 	private com.floreantpos.model.InventoryItem inventoryItem;
 	private com.floreantpos.model.InventoryVendor vendor;
 	private com.floreantpos.model.InventoryWarehouse fromWarehouse;
 	private com.floreantpos.model.InventoryWarehouse toWarehouse;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -74,7 +60,6 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -85,15 +70,12 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: TRANSACTION_DATE
 	 */
 	public java.util.Date getTransactionDate () {
 					return transactionDate;
 			}
-
 	/**
 	 * Set the value related to the column: TRANSACTION_DATE
 	 * @param transactionDate the TRANSACTION_DATE value
@@ -102,15 +84,12 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 		this.transactionDate = transactionDate;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: UNIT_QUANTITY
 	 */
 	public java.lang.Double getQuantity() {
 		return quantity == null ? Double.valueOf(0) : quantity;
 	}
-
 	/**
 	 * Set the value related to the column: UNIT_QUANTITY
 	 * @param quantity the UNIT_QUANTITY value
@@ -119,15 +98,12 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 		this.quantity = quantity;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: UNIT_PRICE
 	 */
 	public java.lang.Double getUnitPrice () {
 									return unitPrice == null ? Double.valueOf(0) : unitPrice;
 					}
-
 	/**
 	 * Set the value related to the column: UNIT_PRICE
 	 * @param unitPrice the UNIT_PRICE value
@@ -136,15 +112,12 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 		this.unitPrice = unitPrice;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: REMARK
 	 */
 	public java.lang.String getRemark () {
 					return remark;
 			}
-
 	/**
 	 * Set the value related to the column: REMARK
 	 * @param remark the REMARK value
@@ -153,15 +126,12 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 		this.remark = remark;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: REFERENCE_ID
 	 */
 	public com.floreantpos.model.PurchaseOrder getReferenceNo () {
 					return referenceNo;
 			}
-
 	/**
 	 * Set the value related to the column: REFERENCE_ID
 	 * @param referenceNo the REFERENCE_ID value
@@ -170,15 +140,12 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 		this.referenceNo = referenceNo;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ITEM_ID
 	 */
 	public com.floreantpos.model.InventoryItem getInventoryItem () {
 					return inventoryItem;
 			}
-
 	/**
 	 * Set the value related to the column: ITEM_ID
 	 * @param inventoryItem the ITEM_ID value
@@ -187,15 +154,12 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 		this.inventoryItem = inventoryItem;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: VENDOR_ID
 	 */
 	public com.floreantpos.model.InventoryVendor getVendor () {
 					return vendor;
 			}
-
 	/**
 	 * Set the value related to the column: VENDOR_ID
 	 * @param vendor the VENDOR_ID value
@@ -204,15 +168,12 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 		this.vendor = vendor;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: FROM_WAREHOUSE_ID
 	 */
 	public com.floreantpos.model.InventoryWarehouse getFromWarehouse () {
 					return fromWarehouse;
 			}
-
 	/**
 	 * Set the value related to the column: FROM_WAREHOUSE_ID
 	 * @param fromWarehouse the FROM_WAREHOUSE_ID value
@@ -221,15 +182,12 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 		this.fromWarehouse = fromWarehouse;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: TO_WAREHOUSE_ID
 	 */
 	public com.floreantpos.model.InventoryWarehouse getToWarehouse () {
 					return toWarehouse;
 			}
-
 	/**
 	 * Set the value related to the column: TO_WAREHOUSE_ID
 	 * @param toWarehouse the TO_WAREHOUSE_ID value
@@ -237,9 +195,6 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 	public void setToWarehouse (com.floreantpos.model.InventoryWarehouse toWarehouse) {
 		this.toWarehouse = toWarehouse;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -252,7 +207,6 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 			else return (this.getId().equals(inventoryTransaction.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -263,16 +217,13 @@ public abstract class BaseInventoryTransaction  implements Comparable, Serializa
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

@@ -16,7 +16,6 @@
  * ************************************************************************
  */
 package com.floreantpos.ui.dialog;
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
@@ -24,21 +23,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import net.miginfocom.swing.MigLayout;
-
 import com.floreantpos.model.ShopTable;
 import com.floreantpos.model.dao.ShopTableDAO;
 import com.floreantpos.swing.PosButton;
 import com.floreantpos.ui.TitlePanel;
-
 public class SeatSelectionDialog extends POSDialog implements ActionListener {
 	private TitlePanel titlePanel;
 	private Integer selectedSeat;
-
 	private List<Integer> seats = new ArrayList<>();
 	private List<Integer> orderSeats;
-
 	public SeatSelectionDialog(List<Integer> tableNumbers, List<Integer> orderSeats) {
 		List<ShopTable> tables = ShopTableDAO.getInstance().getByNumbers(tableNumbers);
 		int seatNumber = 1;
@@ -60,18 +54,13 @@ public class SeatSelectionDialog extends POSDialog implements ActionListener {
 		}
 		init();
 	}
-
 	private void init() {
 		setResizable(false);
-
 		Container contentPane = getContentPane();
-
 		MigLayout layout = new MigLayout("fillx,wrap 3", "[60px,fill][60px,fill][60px,fill]", "[][][][][]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		contentPane.setLayout(layout);
-
 		titlePanel = new TitlePanel();
 		contentPane.add(titlePanel, "spanx ,growy,height 60,wrap"); //$NON-NLS-1$
-
 		for (Integer seat : seats) {
 			PosButton posButton = new PosButton();
 			posButton.setFocusable(false);
@@ -91,21 +80,17 @@ public class SeatSelectionDialog extends POSDialog implements ActionListener {
 		}
 		btnShared.addActionListener(this);
 		contentPane.add(btnShared, "grow, height 55"); //$NON-NLS-1$
-
 		PosButton btnCustom = new PosButton("Custom");
 		btnCustom.setFocusable(false);
 		btnCustom.addActionListener(this);
 		contentPane.add(btnCustom, "grow, height 55"); //$NON-NLS-1$
-
 		PosButton btnCancel = new PosButton("Cancel");
 		btnCancel.setFocusable(false);
 		btnCancel.addActionListener(this);
 		contentPane.add(btnCancel, "newline, span,grow, height 55"); //$NON-NLS-1$
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
-
 		boolean canceled = false;
 		if ("Shared".equalsIgnoreCase(actionCommand)) {
 			selectedSeat = 0;
@@ -122,17 +107,13 @@ public class SeatSelectionDialog extends POSDialog implements ActionListener {
 		setCanceled(canceled);
 		dispose();
 	}
-
 	public Integer getSeatNumber() {
 		return selectedSeat;
 	}
-
 	public void setTitle(String title) {
 		titlePanel.setTitle(title);
-
 		super.setTitle(title);
 	}
-
 	public void setDialogTitle(String title) {
 		super.setTitle(title);
 	}

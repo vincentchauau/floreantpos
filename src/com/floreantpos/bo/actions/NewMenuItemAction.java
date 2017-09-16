@@ -16,31 +16,23 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.actions;
-
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
-
 import com.floreantpos.bo.ui.BOMessageDialog;
 import com.floreantpos.ui.dialog.BeanEditorDialog;
 import com.floreantpos.ui.model.MenuItemForm;
 import com.floreantpos.util.POSUtil;
-
 public class NewMenuItemAction extends AbstractAction {
-
 	public NewMenuItemAction() {
 		super();
 	}
-
 	public NewMenuItemAction(String name) {
 		super(name);
 	}
-
 	public NewMenuItemAction(String name, Icon icon) {
 		super(name, icon);
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		try {
 			MenuItemForm editor = new MenuItemForm();
@@ -50,5 +42,4 @@ public class NewMenuItemAction extends AbstractAction {
 			BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
 		}
 	}
-
 }

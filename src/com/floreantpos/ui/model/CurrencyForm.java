@@ -20,21 +20,15 @@
  *
  * Created on August 3, 2006, 1:49 AM
  */
-
 package com.floreantpos.ui.model;
-
 import java.util.List;
-
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import net.miginfocom.swing.MigLayout;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.floreantpos.bo.ui.BOMessageDialog;
 import com.floreantpos.model.Currency;
 import com.floreantpos.model.dao.CurrencyDAO;
@@ -44,50 +38,37 @@ import com.floreantpos.swing.MessageDialog;
 import com.floreantpos.ui.BeanEditor;
 import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.util.POSUtil;
-
 /**
  *
  * @author  MShahriar
  */
 public class CurrencyForm extends BeanEditor {
-
 	private FixedLengthTextField tfCode;
 	private FixedLengthTextField tfName;
 	private JTextField tfSymbol;
 	private DoubleTextField tfExchangeRate;
 	private DoubleTextField tfTolerance;
 	private JCheckBox chkMain;
-
 	public CurrencyForm() {
 		this(new Currency());
 	}
-
 	public CurrencyForm(Currency currency) {
 		initComponents();
-
 		setBean(currency);
 	}
-
 	private void initComponents() {
 		JPanel contentPanel = new JPanel(new MigLayout("fill"));
-
 		JLabel lblCode = new JLabel("Code:");
 		tfCode = new FixedLengthTextField();
-
 		JLabel lblName = new JLabel(com.floreantpos.POSConstants.NAME + ":");
 		tfName = new FixedLengthTextField();
-
 		JLabel lblExchangeRate = new JLabel("Exchange Rate:");
 		tfExchangeRate = new DoubleTextField();
-
 		JLabel lblTolerance = new JLabel("Tolerance:");
 		tfTolerance = new DoubleTextField();
-
 		JLabel lblSymbol = new JLabel("Symbol");
 		tfSymbol = new JTextField();
-
 		chkMain = new JCheckBox("Main");
-
 		contentPanel.add(lblName, "cell 0 0");
 		contentPanel.add(tfName, "cell 1 0");
 		contentPanel.add(lblCode, "cell 0 1");
@@ -99,17 +80,13 @@ public class CurrencyForm extends BeanEditor {
 		contentPanel.add(lblTolerance, "cell 0 4");
 		contentPanel.add(tfTolerance, "grow,cell 1 4");
 		contentPanel.add(chkMain, "cell 1 5");
-
 		add(contentPanel);
 	}
-
 	@Override
 	public boolean save() {
-
 		try {
 			if (!updateModel())
 				return false;
-
 			Currency currency = (Currency) getBean();
 			CurrencyDAO dao = new CurrencyDAO();
 			dao.saveOrUpdate(currency);
@@ -117,10 +94,8 @@ public class CurrencyForm extends BeanEditor {
 			MessageDialog.showError(e);
 			return false;
 		}
-
 		return true;
 	}
-
 	@Override
 	protected void updateView() {
 		Currency currency = (Currency) getBean();
@@ -134,11 +109,9 @@ public class CurrencyForm extends BeanEditor {
 		tfTolerance.setText("" + currency.getTolerance()); //$NON-NLS-1$
 		chkMain.setSelected(currency.isMain());
 	}
-
 	@Override
 	protected boolean updateModel() {
 		Currency currency = (Currency) getBean();
-
 		String code = tfCode.getText();
 		String name = tfName.getText();
 		if (POSUtil.isBlankOrNull(code)) {
@@ -160,17 +133,14 @@ public class CurrencyForm extends BeanEditor {
 		currency.setMain(chkMain.isSelected());
 		currency.setExchangeRate(exchangeRate);
 		currency.setTolerance(tfTolerance.getDouble());
-
 		if (chkMain.isSelected()) {
 			CurrencyDAO dao = new CurrencyDAO();
 			List<Currency> currencyList = dao.findAll();
-
 			Session session = null;
 			Transaction transaction = null;
 			try {
 				session = CurrencyDAO.getInstance().createNewSession();
 				transaction = session.beginTransaction();
-
 				for (Currency curr : currencyList) {
 					curr.setMain(false);
 					session.saveOrUpdate(curr);
@@ -185,7 +155,6 @@ public class CurrencyForm extends BeanEditor {
 		}
 		return true;
 	}
-
 	public String getDisplayText() {
 		Currency currency = (Currency) getBean();
 		if (currency.getId() == null) {

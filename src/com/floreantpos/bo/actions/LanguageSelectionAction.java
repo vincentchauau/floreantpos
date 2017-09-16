@@ -16,33 +16,24 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.actions;
-
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JDialog;
-
 import com.floreantpos.swing.PosUIManager;
 import com.floreantpos.ui.dialog.LanguageSelectionDialog;
 import com.floreantpos.util.POSUtil;
-
 public class LanguageSelectionAction extends AbstractAction {
-
 	public LanguageSelectionAction() {
 		super("Language");
 	}
-
 	public LanguageSelectionAction(String name) {
 		super(name);
 	}
-
 	public LanguageSelectionAction(String name, Icon icon) {
 		super(name, icon);
 	}
-
 	public void actionPerformed(ActionEvent e) {
-
 		LanguageSelectionDialog dialog = new LanguageSelectionDialog();
 		dialog.setTitle("Language Selection");
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -50,5 +41,4 @@ public class LanguageSelectionAction extends AbstractAction {
 		dialog.setLocationRelativeTo(POSUtil.getFocusedWindow());
 		dialog.setVisible(true);
 	}
-
 }

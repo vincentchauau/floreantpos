@@ -16,16 +16,13 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.ui.explorer;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import com.floreantpos.bo.ui.BOMessageDialog;
 import com.floreantpos.model.Shift;
 import com.floreantpos.model.User;
@@ -37,7 +34,6 @@ import com.floreantpos.ui.PosTableRenderer;
 import com.floreantpos.ui.dialog.ConfirmDeleteDialog;
 import com.floreantpos.ui.model.ShiftEntryDialog;
 import com.floreantpos.util.ShiftUtil;
-
 public class ShiftExplorer extends TransparentPanel {
 	
 	private JTable table;
@@ -77,14 +73,12 @@ public class ShiftExplorer extends TransparentPanel {
 					int index = table.getSelectedRow();
 					if (index < 0)
 						return;
-
 					Shift shift = (Shift) tableModel.getRowData(index);
 					ShiftEntryDialog dialog = new ShiftEntryDialog();
 					dialog.setShift(shift);
 					dialog.open();
 					if (dialog.isCanceled())
 						return;
-
 					tableModel.updateItem(index);
 				} catch (Throwable x) {
 				BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
@@ -99,7 +93,6 @@ public class ShiftExplorer extends TransparentPanel {
 					int index = table.getSelectedRow();
 					if (index < 0)
 						return;
-
 					if (ConfirmDeleteDialog.showMessage(ShiftExplorer.this, com.floreantpos.POSConstants.CONFIRM_DELETE, com.floreantpos.POSConstants.DELETE) == ConfirmDeleteDialog.YES) {
 						User user = (User) tableModel.getRowData(index);
 						UserDAO.getInstance().delete(user);
@@ -111,7 +104,6 @@ public class ShiftExplorer extends TransparentPanel {
 			}
 			
 		});
-
 		TransparentPanel panel = new TransparentPanel();
 		panel.add(addButton);
 		panel.add(editButton);
@@ -125,7 +117,6 @@ public class ShiftExplorer extends TransparentPanel {
 			super(new String[] {com.floreantpos.POSConstants.ID, com.floreantpos.POSConstants.NAME, com.floreantpos.POSConstants.START_TIME, com.floreantpos.POSConstants.END_TIME}, list);
 		}
 		
-
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			Shift shift = (Shift) rows.get(rowIndex);
 			

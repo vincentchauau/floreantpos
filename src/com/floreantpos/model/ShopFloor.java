@@ -16,27 +16,21 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Set;
-
 import org.hibernate.Hibernate;
-
 import com.floreantpos.PosLog;
 import com.floreantpos.model.base.BaseShopFloor;
-
 public class ShopFloor extends BaseShopFloor {
 	private static final long serialVersionUID = 1L;
-
 	/*[CONSTRUCTOR MARKER BEGIN]*/
 	public ShopFloor () {
 		super();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -45,17 +39,13 @@ public class ShopFloor extends BaseShopFloor {
 	}
 
 	/*[CONSTRUCTOR MARKER END]*/
-
 	private byte[] imageData;
-
 	public void setImageData(byte[] imageData) {
 		this.imageData = imageData;
 	}
-
 	public byte[] getImageData() {
 		return imageData;
 	}
-
 	@Override
 	public void setImage(Blob image) {
 		//super.setImage(image);
@@ -65,7 +55,6 @@ public class ShopFloor extends BaseShopFloor {
 			PosLog.error(getClass(), e);
 		}
 	}
-
 	@Override
 	public Blob getImage() {
 		return Hibernate.createBlob(this.imageData);
@@ -75,7 +64,6 @@ public class ShopFloor extends BaseShopFloor {
 	public String toString() {
 		return getName();
 	}
-
 	private byte[] toByteArray(Blob fromBlob) throws Exception {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
@@ -89,7 +77,6 @@ public class ShopFloor extends BaseShopFloor {
 			}
 		}
 	}
-
 	private byte[] toByteArrayImpl(Blob fromBlob, ByteArrayOutputStream baos) throws SQLException, IOException {
 		byte[] buf = new byte[4000];
 		InputStream is = fromBlob.getBinaryStream();

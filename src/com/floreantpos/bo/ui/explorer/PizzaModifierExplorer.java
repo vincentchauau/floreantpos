@@ -1,5 +1,4 @@
 package com.floreantpos.bo.ui.explorer;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -8,7 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,13 +18,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-
 import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jdesktop.swingx.JXTable;
-
 import com.floreantpos.Messages;
 import com.floreantpos.POSConstants;
 import com.floreantpos.bo.ui.BOMessageDialog;
@@ -47,16 +42,12 @@ import com.floreantpos.ui.dialog.ConfirmDeleteDialog;
 import com.floreantpos.ui.model.PizzaModifierForm;
 import com.floreantpos.util.CurrencyUtil;
 import com.floreantpos.util.POSUtil;
-
 public class PizzaModifierExplorer extends TransparentPanel {
-
 	private String currencySymbol;
 	private JXTable table;
 	private PizzaModifierExplorerModel tableModel;
-
 	public PizzaModifierExplorer() {
 		setLayout(new BorderLayout(5, 5));
-
 		currencySymbol = CurrencyUtil.getCurrencySymbol();
 		tableModel = new PizzaModifierExplorerModel();
 		table = new JXTable(tableModel);
@@ -64,12 +55,9 @@ public class PizzaModifierExplorer extends TransparentPanel {
 		table.setRowHeight(PosUIManager.getSize(table.getRowHeight()));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		add(new JScrollPane(table));
-
 		createActionButtons();
 		add(buildSearchForm(), BorderLayout.NORTH);
-
 		updateModifierList();
-
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
@@ -79,29 +67,23 @@ public class PizzaModifierExplorer extends TransparentPanel {
 			}
 		});
 	}
-
 	private void editSelectedRow() {
 		try {
 			int index = table.getSelectedRow();
 			if (index < 0)
 				return;
-
 			index = table.convertRowIndexToModel(index);
 			MenuModifier modifier = (MenuModifier) tableModel.getRowData(index);
-
 			PizzaModifierForm editor = new PizzaModifierForm(modifier);
 			BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
 			dialog.open();
 			if (dialog.isCanceled())
 				return;
-
 			table.repaint();
 		} catch (Throwable x) {
 			BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
 		}
-
 	}
-
 	private void createActionButtons() {
 		ExplorerButtonPanel explorerButtonPanel = new ExplorerButtonPanel();
 		JButton editButton = explorerButtonPanel.getEditButton();
@@ -123,23 +105,19 @@ public class PizzaModifierExplorer extends TransparentPanel {
 					BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editSelectedRow();
 			}
 		});
-
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					int index = table.getSelectedRow();
 					if (index < 0)
 						return;
-
 					index = table.convertRowIndexToModel(index);
-
 					if (ConfirmDeleteDialog.showMessage(PizzaModifierExplorer.this, com.floreantpos.POSConstants.CONFIRM_DELETE,
 							com.floreantpos.POSConstants.DELETE) != ConfirmDeleteDialog.NO) {
 						MenuModifier category = (MenuModifier) tableModel.getRowData(index);
@@ -150,22 +128,16 @@ public class PizzaModifierExplorer extends TransparentPanel {
 				} catch (Throwable x) {
 					BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
 				}
-
 			}
-
 		});
-
 		duplicateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					int index = table.getSelectedRow();
 					if (index < 0)
 						return;
-
 					index = table.convertRowIndexToModel(index);
-
 					MenuModifier existingModifier = (MenuModifier) tableModel.getRowData(index);
-
 					MenuModifier newMenuModifier = new MenuModifier();
 					PropertyUtils.copyProperties(newMenuModifier, existingModifier);
 					newMenuModifier.setId(null);
@@ -173,7 +145,6 @@ public class PizzaModifierExplorer extends TransparentPanel {
 					newMenuModifier.setName(newName);
 					newMenuModifier.setPizzaModifier(true);
 					newMenuModifier.setMultiplierPriceList(null);
-
 					List<PizzaModifierPrice> pizzaModifierPriceList = existingModifier.getPizzaModifierPriceList();
 					if (pizzaModifierPriceList != null) {
 						List<PizzaModifierPrice> newPriceList = new ArrayList<>();
@@ -194,17 +165,14 @@ public class PizzaModifierExplorer extends TransparentPanel {
 								}
 								newPrice.setMultiplierPriceList(newMultiplierPriceList);
 							}
-
 						}
 						newMenuModifier.setPizzaModifierPriceList(newPriceList);
 					}
-
 					PizzaModifierForm editor = new PizzaModifierForm(newMenuModifier);
 					BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
 					dialog.open();
 					if (dialog.isCanceled())
 						return;
-
 					MenuModifier menuModifier = (MenuModifier) editor.getBean();
 					tableModel.addModifier(menuModifier);
 					table.scrollRowToVisible(tableModel.getRowCount() - 1);
@@ -212,20 +180,16 @@ public class PizzaModifierExplorer extends TransparentPanel {
 					BOMessageDialog.showError(POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
-
 		btnChangeModifierGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					int[] rows = table.getSelectedRows();
 					if (rows.length < 1)
 						return;
-
 					MenuModifierGroup group = getSelectedModifierGroup(null);
 					if (group == null)
 						return;
-
 					List<MenuModifier> menuModifiers = new ArrayList<>();
 					for (int i = 0; i < rows.length; i++) {
 						int index = table.convertRowIndexToModel(rows[i]);
@@ -239,22 +203,18 @@ public class PizzaModifierExplorer extends TransparentPanel {
 				}
 			}
 		});
-
 		TransparentPanel panel = new TransparentPanel();
 		panel.add(addButton);
 		panel.add(editButton);
 		panel.add(deleteButton);
 		panel.add(duplicateButton);
 		panel.add(btnChangeModifierGroup);
-
 		add(panel, BorderLayout.SOUTH);
 	}
-
 	private JPanel buildSearchForm() {
 		List<MenuModifierGroup> grpName;
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout("", "[][]30[][]30[]", "[]20[]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-
 		JLabel nameLabel = new JLabel(Messages.getString("ModifierExplorer.3")); //$NON-NLS-1$
 		JLabel groupLabel = new JLabel(Messages.getString("ModifierExplorer.4")); //$NON-NLS-1$
 		final JTextField nameField = new JTextField(15);
@@ -264,14 +224,12 @@ public class PizzaModifierExplorer extends TransparentPanel {
 		for (MenuModifierGroup s : grpName) {
 			cbGroup.addItem(s);
 		}
-
 		JButton searchBttn = new JButton(Messages.getString("ModifierExplorer.6")); //$NON-NLS-1$
 		panel.add(nameLabel, "align label"); //$NON-NLS-1$
 		panel.add(nameField);
 		panel.add(groupLabel);
 		panel.add(cbGroup);
 		panel.add(searchBttn);
-
 		TitledBorder title;
 		Border loweredetched;
 		loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
@@ -279,7 +237,6 @@ public class PizzaModifierExplorer extends TransparentPanel {
 		title.setTitleJustification(TitledBorder.LEFT);
 		panel.setBorder(title);
 		searchBttn.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 				List<MenuModifier> modifierList;
 				String txName = nameField.getText();
@@ -290,23 +247,17 @@ public class PizzaModifierExplorer extends TransparentPanel {
 				else {
 					modifierList = ModifierDAO.getInstance().findPizzaModifier(txName, null);
 				}
-
 				setModifierList(modifierList);
 			}
 		});
 		return panel;
 	}
-
 	public synchronized void updateModifierList() {
 		setModifierList(ModifierDAO.getInstance().getPizzaModifiers());
-
 	}
-
 	public void setModifierList(List<MenuModifier> modifierList) {
 		tableModel.setRows(modifierList);
-
 	}
-
 	private String doDuplicateName(MenuModifier existingModifier) {
 		String existingName = existingModifier.getName();
 		String newName = new String();
@@ -328,77 +279,56 @@ public class PizzaModifierExplorer extends TransparentPanel {
 		}
 		return newName;
 	}
-
 	private class PizzaModifierExplorerModel extends ListTableModel {
-
 		public PizzaModifierExplorerModel() {
-
 			super(new String[] { com.floreantpos.POSConstants.ID, com.floreantpos.POSConstants.NAME, POSConstants.TRANSLATED_NAME,
 					//com.floreantpos.POSConstants.PRICE + " (" + currencySymbol + ")", com.floreantpos.POSConstants.EXTRA_PRICE, //$NON-NLS-1$ //$NON-NLS-2$
 					com.floreantpos.POSConstants.TAX + "(%)", com.floreantpos.POSConstants.MODIFIER_GROUP, POSConstants.BUTTON_COLOR, POSConstants.SORT_ORDER }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-
 		}
-
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			List<MenuModifier> modifierList = getRows();
-
 			MenuModifier modifier = modifierList.get(rowIndex);
-
 			switch (columnIndex) {
 				case 0:
 					return String.valueOf(modifier.getId());
-
 				case 1:
 					return modifier.getName();
-
 				case 2:
 					return modifier.getTranslatedName();
-
 					/*	case 3:
 							return Double.valueOf(modifier.getPrice());
-
 						case 4:
 							return Double.valueOf(modifier.getExtraPrice());*/
-
 				case 3:
 					if (modifier.getTax() == null) {
 						return ""; //$NON-NLS-1$
 					}
 					return Double.valueOf(modifier.getTax().getRate());
-
 				case 4:
 					if (modifier.getModifierGroup() == null) {
 						return ""; //$NON-NLS-1$
 					}
 					return modifier.getModifierGroup().getName();
-
 				case 5:
 					if (modifier.getButtonColor() != null) {
 						return new Color(modifier.getButtonColor());
 					}
-
 					return null;
-
 				case 6:
 					return modifier.getSortOrder();
 			}
 			return null;
 		}
-
 		public void addModifier(MenuModifier category) {
 			int size = getRows().size();
 			getRows().add(category);
 			fireTableRowsInserted(size, size);
-
 		}
-
 		public void deleteModifier(MenuModifier category, int index) {
 			getRows().remove(category);
 			fireTableRowsDeleted(index, index);
 		}
-
 	}
-
 	protected MenuModifierGroup getSelectedModifierGroup(MenuModifierGroup defaultValue) {
 		List<MenuModifierGroup> modifierGroups = MenuModifierGroupDAO.getInstance().findAll();
 		ComboItemSelectionDialog dialog = new ComboItemSelectionDialog("SELECT MODIFIER GROUP", "Modifier Group", modifierGroups, false);
@@ -406,11 +336,8 @@ public class PizzaModifierExplorer extends TransparentPanel {
 		dialog.setVisibleNewButton(false);
 		dialog.pack();
 		dialog.open();
-
 		if (dialog.isCanceled())
 			return null;
-
 		return (MenuModifierGroup) dialog.getSelectedItem();
 	}
-
 }

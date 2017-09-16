@@ -16,10 +16,8 @@
  * ************************************************************************
  */
 package com.floreantpos.util;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 public class PanelTester {
 	public static boolean pack;
 	public static int width;

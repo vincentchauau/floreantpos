@@ -16,21 +16,16 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-
 /**
  * This is an automatically generated DAO class which should not be edited.
  */
 public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._RootDAO {
-
 	// query name references
 
-
 	public static UserPermissionDAO instance;
-
 	/**
 	 * Return a singleton of the DAO
 	 */
@@ -38,42 +33,34 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 		if (null == instance) instance = new UserPermissionDAO();
 		return instance;
 	}
-
 	public Class getReferenceClass () {
 		return com.floreantpos.model.UserPermission.class;
 	}
-
     public Order getDefaultOrder () {
 		return Order.asc("name"); //$NON-NLS-1$
     }
-
 	/**
 	 * Cast the object as a com.floreantpos.model.UserPermission
 	 */
 	public com.floreantpos.model.UserPermission cast (Object object) {
 		return (com.floreantpos.model.UserPermission) object;
 	}
-
 	public com.floreantpos.model.UserPermission get(java.lang.String key)
 	{
 		return (com.floreantpos.model.UserPermission) get(getReferenceClass(), key);
 	}
-
 	public com.floreantpos.model.UserPermission get(java.lang.String key, Session s)
 	{
 		return (com.floreantpos.model.UserPermission) get(getReferenceClass(), key, s);
 	}
-
 	public com.floreantpos.model.UserPermission load(java.lang.String key)
 	{
 		return (com.floreantpos.model.UserPermission) load(getReferenceClass(), key);
 	}
-
 	public com.floreantpos.model.UserPermission load(java.lang.String key, Session s)
 	{
 		return (com.floreantpos.model.UserPermission) load(getReferenceClass(), key, s);
 	}
-
 	public com.floreantpos.model.UserPermission loadInitialize(java.lang.String key, Session s) 
 	{ 
 		com.floreantpos.model.UserPermission obj = load(key, s); 
@@ -82,23 +69,19 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 		} 
 		return obj; 
 	}
-
 /* Generic methods */
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
 	public java.util.List<com.floreantpos.model.UserPermission> findAll () {
 		return super.findAll();
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
 	public java.util.List<com.floreantpos.model.UserPermission> findAll (Order defaultOrder) {
 		return super.findAll(defaultOrder);
 	}
-
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 * Use the session given.
@@ -107,7 +90,6 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	public java.util.List<com.floreantpos.model.UserPermission> findAll (Session s, Order defaultOrder) {
 		return super.findAll(s, defaultOrder);
 	}
-
 	/**
 	 * Persist the given transient instance, first assigning a generated identifier. (Or using the current value
 	 * of the identifier property if the assigned generator is used.) 
@@ -118,7 +100,6 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	{
 		return (java.lang.String) super.save(userPermission);
 	}
-
 	/**
 	 * Persist the given transient instance, first assigning a generated identifier. (Or using the current value
 	 * of the identifier property if the assigned generator is used.) 
@@ -131,7 +112,6 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	{
 		return (java.lang.String) save((Object) userPermission, s);
 	}
-
 	/**
 	 * Either save() or update() the given instance, depending upon the value of its identifier property. By default
 	 * the instance is always saved. This behaviour may be adjusted by specifying an unsaved-value attribute of the
@@ -142,7 +122,6 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	{
 		saveOrUpdate((Object) userPermission);
 	}
-
 	/**
 	 * Either save() or update() the given instance, depending upon the value of its identifier property. By default the
 	 * instance is always saved. This behaviour may be adjusted by specifying an unsaved-value attribute of the identifier
@@ -155,7 +134,6 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	{
 		saveOrUpdate((Object) userPermission, s);
 	}
-
 	/**
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
 	 * instance with the same identifier in the current session.
@@ -165,7 +143,6 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	{
 		update((Object) userPermission);
 	}
-
 	/**
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
 	 * instance with the same identifier in the current session.
@@ -177,7 +154,6 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	{
 		update((Object) userPermission, s);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -187,7 +163,6 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	{
 		delete((Object) load(id));
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -199,7 +174,6 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	{
 		delete((Object) load(id, s), s);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -209,7 +183,6 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	{
 		delete((Object) userPermission);
 	}
-
 	/**
 	 * Remove a persistent instance from the datastore. The argument may be an instance associated with the receiving
 	 * Session or a transient instance with an identifier associated with existing persistent state. 
@@ -236,6 +209,5 @@ public abstract class BaseUserPermissionDAO extends com.floreantpos.model.dao._R
 	{
 		refresh((Object) userPermission, s);
 	}
-
 
 }

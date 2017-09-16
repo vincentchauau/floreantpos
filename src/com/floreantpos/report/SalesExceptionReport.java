@@ -16,30 +16,24 @@
  * ************************************************************************
  */
 package com.floreantpos.report;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.floreantpos.model.Discount;
 import com.floreantpos.model.Ticket;
 import com.floreantpos.model.TicketDiscount;
 import com.floreantpos.swing.ListTableModel;
-
 public class SalesExceptionReport {
 	private Date fromDate;
 	private Date toDate;
 	private Date reportTime;
-
 	private List<VoidData> voidedTickets = new ArrayList<VoidData>();
 	private Map<Integer, DiscountData> disountMap = new HashMap<Integer, DiscountData>();
-
 	public void addVoidToVoidData(Ticket ticket) {
 		double amount = ticket.getSubtotalAmount();
 		String voidReason = ticket.getVoidReason();
-
 		/*boolean found = false;
 		for (VoidData voidData : voidedTickets) {
 			if (voidData.getReasonCode().equalsIgnoreCase(voidReason)) {
@@ -56,11 +50,9 @@ public class SalesExceptionReport {
 		voidData.setCount(1);
 		voidData.setAmount(amount);
 		voidData.wasted = ticket.isWasted();
-
 		voidedTickets.add(voidData);
 		//}
 	}
-
 	public void addDiscountData(Ticket ticket) {
 		List<TicketDiscount> discounts = ticket.getDiscounts();
 		if (discounts != null) {
@@ -73,7 +65,6 @@ public class SalesExceptionReport {
 					discountData.name = name;
 					disountMap.put(discount.getDiscountId(), discountData);
 				}
-
 				discountData.totalCount = ++discountData.totalCount;
 				discountData.totalDiscount = discountData.totalDiscount + discount.getValue();
 				discountData.totalGuest = discountData.totalGuest + ticket.getNumberOfGuests();
@@ -83,7 +74,6 @@ public class SalesExceptionReport {
 			}
 		}
 	}
-
 	public void addEmptyDiscounts(List<Discount> discounts) {
 		if (discounts != null) {
 			for (Discount discount : discounts) {
@@ -98,39 +88,31 @@ public class SalesExceptionReport {
 			}
 		}
 	}
-
 	public static class VoidData {
 		Integer id;
 		private String reasonCode;
 		private int count;
 		private double amount;
 		boolean wasted;
-
 		public double getAmount() {
 			return amount;
 		}
-
 		public void setAmount(double amount) {
 			this.amount = amount;
 		}
-
 		public int getCount() {
 			return count;
 		}
-
 		public void setCount(int count) {
 			this.count = count;
 		}
-
 		public String getReasonCode() {
 			return reasonCode;
 		}
-
 		public void setReasonCode(String reasonCode) {
 			this.reasonCode = reasonCode;
 		}
 	}
-
 	public static class DiscountData {
 		private int code;
 		private String name;
@@ -142,187 +124,138 @@ public class SalesExceptionReport {
 		private double checkSize;
 		private double countPercentage;
 		private double ratioDNet;
-
 		public double getCheckSize() {
 			return checkSize;
 		}
-
 		public void setCheckSize(double checkSize) {
 			this.checkSize = checkSize;
 		}
-
 		public int getCode() {
 			return code;
 		}
-
 		public void setCode(int code) {
 			this.code = code;
 		}
-
 		public double getCountPercentage() {
 			return countPercentage;
 		}
-
 		public void setCountPercentage(double countPercentage) {
 			this.countPercentage = countPercentage;
 		}
-
 		public String getName() {
 			return name;
 		}
-
 		public void setName(String name) {
 			this.name = name;
 		}
-
 		public double getPartySize() {
 			return partySize;
 		}
-
 		public void setPartySize(double partySize) {
 			this.partySize = partySize;
 		}
-
 		public double getRatioDNet() {
 			return ratioDNet;
 		}
-
 		public void setRatioDNet(double ratioDNet) {
 			this.ratioDNet = ratioDNet;
 		}
-
 		public int getTotalCount() {
 			return totalCount;
 		}
-
 		public void setTotalCount(int totalCount) {
 			this.totalCount = totalCount;
 		}
-
 		public double getTotalDiscount() {
 			return totalDiscount;
 		}
-
 		public void setTotalDiscount(double totalDiscount) {
 			this.totalDiscount = totalDiscount;
 		}
-
 		public double getTotalGuest() {
 			return totalGuest;
 		}
-
 		public void setTotalGuest(double totalGuest) {
 			this.totalGuest = totalGuest;
 		}
-
 		public double getTotalNetSales() {
 			return totalNetSales;
 		}
-
 		public void setTotalNetSales(double totalNetSales) {
 			this.totalNetSales = totalNetSales;
 		}
-
 	}
-
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
 	}
-
 	public Date getFromDate() {
 		return fromDate;
 	}
-
 	public void setFromDate(Date fromDate) {
 		this.fromDate = fromDate;
 	}
-
 	public Date getReportTime() {
 		return reportTime;
 	}
-
 	public void setReportTime(Date reportTime) {
 		this.reportTime = reportTime;
 	}
-
 	public Date getToDate() {
 		return toDate;
 	}
-
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
 	}
-
 	public VoidTableModel getVoidTableModel() {
 		VoidTableModel model = new VoidTableModel();
 		model.setRows(this.voidedTickets);
-
 		return model;
 	}
-
 	public DiscountTableModel getDiscountTableModel() {
 		DiscountTableModel model = new DiscountTableModel();
 		ArrayList list = new ArrayList(disountMap.values());
 		model.setRows(list);
-
 		return model;
 	}
-
 	public class VoidTableModel extends ListTableModel {
 		public VoidTableModel() {
 			setColumnNames(new String[] { "code", "reason", "wast", "qty", "amount" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		}
-
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			VoidData data = (VoidData) rows.get(rowIndex);
-
 			switch (columnIndex) {
 				case 0:
 					return String.valueOf(data.id);
-
 				case 1:
 					return data.getReasonCode();
-
 				case 2:
 					return data.wasted ? "Y" : "N"; //$NON-NLS-1$ //$NON-NLS-2$
-
 				case 3:
 					return String.valueOf(data.getCount());
-
 				case 4:
 					return data.getAmount();
 			}
-
 			return null;
 		}
-
 	}
-
 	public class DiscountTableModel extends ListTableModel {
 		public DiscountTableModel() {
 			setColumnNames(new String[] {
 					"no", "name", "code", "totalCount", "totalDiscount", "totalNetSales", "totalGuests", "partySize", "checkSize", "countPercent", "ratioDnet" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$
 		}
-
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			DiscountData data = (DiscountData) rows.get(rowIndex);
-
 			switch (columnIndex) {
 				case 0:
 					return data.code;
-
 				case 1:
 					return data.name;
-
 				case 2:
 					return data.code;
-
 				case 3:
 					return data.totalCount;
-
 				case 4:
 					return data.totalDiscount;
 				case 5:
@@ -338,9 +271,7 @@ public class SalesExceptionReport {
 				case 10:
 					return data.ratioDNet;
 			}
-
 			return null;
 		}
-
 	}
 }

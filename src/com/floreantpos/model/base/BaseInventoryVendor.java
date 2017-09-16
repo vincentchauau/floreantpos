@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the INVENTORY_VENDOR table.
@@ -11,9 +9,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="INVENTORY_VENDOR"
  */
-
 public abstract class BaseInventoryVendor  implements Comparable, Serializable {
-
 	public static String REF = "InventoryVendor"; //$NON-NLS-1$
 	public static String PROP_ZIP = "zip"; //$NON-NLS-1$
 	public static String PROP_EMAIL = "email"; //$NON-NLS-1$
@@ -27,12 +23,10 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	public static String PROP_FAX = "fax"; //$NON-NLS-1$
 	public static String PROP_NAME = "name"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseInventoryVendor () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -40,7 +34,6 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	/**
 	 * Constructor for required fields
 	 */
@@ -48,7 +41,6 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 		java.lang.Integer id,
  java.lang.String name, java.lang.String address, java.lang.String city, java.lang.String state,
 			java.lang.String zip, java.lang.String country, java.lang.String email, java.lang.String phone) {
-
 		this.setId(id);
 		this.setName(name);
 		this.setAddress(address);
@@ -60,16 +52,11 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 		this.setPhone(phone);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String name;
 		protected java.lang.Boolean visible;
@@ -82,8 +69,6 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	protected java.lang.String phone;
 	protected java.lang.String fax;
 
-
-
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
@@ -93,7 +78,6 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -104,15 +88,12 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -121,15 +102,12 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: VISIBLE
 	 */
 	public java.lang.Boolean isVisible () {
 								return visible == null ? Boolean.FALSE : visible;
 					}
-
 	/**
 	 * Set the value related to the column: VISIBLE
 	 * @param visible the VISIBLE value
@@ -138,8 +116,6 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 		this.visible = visible;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ADDRESS
 	 */
@@ -147,7 +123,6 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
             return "Pick up from hotel";
 		//return address;
 	}
-
 	/**
 	 * Set the value related to the column: ADDRESS
 	 * @param address the ADDRESS value
@@ -155,14 +130,12 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	public void setAddress(java.lang.String address) {
 		this.address = address;
 	}
-
 	/**
 	 * Return the value associated with the column: CITY
 	 */
 	public java.lang.String getCity() {
 		return city;
 	}
-
 	/**
 	 * Set the value related to the column: CITY
 	 * @param city the CITY value
@@ -170,14 +143,12 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	public void setCity(java.lang.String city) {
 		this.city = city;
 	}
-
 	/**
 	 * Return the value associated with the column: STATE
 	 */
 	public java.lang.String getState() {
 		return state;
 	}
-
 	/**
 	 * Set the value related to the column: STATE
 	 * @param state the STATE value
@@ -185,14 +156,12 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	public void setState(java.lang.String state) {
 		this.state = state;
 	}
-
 	/**
 	 * Return the value associated with the column: ZIP
 	 */
 	public java.lang.String getZip() {
 		return zip;
 	}
-
 	/**
 	 * Set the value related to the column: ZIP
 	 * @param zip the ZIP value
@@ -200,14 +169,12 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	public void setZip(java.lang.String zip) {
 		this.zip = zip;
 	}
-
 	/**
 	 * Return the value associated with the column: COUNTRY
 	 */
 	public java.lang.String getCountry() {
 		return country;
 	}
-
 	/**
 	 * Set the value related to the column: COUNTRY
 	 * @param country the COUNTRY value
@@ -215,14 +182,12 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	public void setCountry(java.lang.String country) {
 		this.country = country;
 	}
-
 	/**
 	 * Return the value associated with the column: EMAIL
 	 */
 	public java.lang.String getEmail() {
 		return email;
 	}
-
 	/**
 	 * Set the value related to the column: EMAIL
 	 * @param email the EMAIL value
@@ -230,14 +195,12 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	public void setEmail(java.lang.String email) {
 		this.email = email;
 	}
-
 	/**
 	 * Return the value associated with the column: PHONE
 	 */
 	public java.lang.String getPhone() {
 		return phone;
 	}
-
 	/**
 	 * Set the value related to the column: PHONE
 	 * @param phone the PHONE value
@@ -245,14 +208,12 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	public void setPhone(java.lang.String phone) {
 		this.phone = phone;
 	}
-
 	/**
 	 * Return the value associated with the column: FAX
 	 */
 	public java.lang.String getFax() {
 		return fax;
 	}
-
 	/**
 	 * Set the value related to the column: FAX
 	 * @param fax the FAX value
@@ -260,7 +221,6 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 	public void setFax(java.lang.String fax) {
 		this.fax = fax;
 	}
-
 	public boolean equals (Object obj) {
 		if (null == obj) return false;
 		if (!(obj instanceof com.floreantpos.model.InventoryVendor)) return false;
@@ -270,7 +230,6 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 			else return (this.getId().equals(inventoryVendor.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -281,16 +240,13 @@ public abstract class BaseInventoryVendor  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

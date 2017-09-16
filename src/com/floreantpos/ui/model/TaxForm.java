@@ -20,16 +20,13 @@
  *
  * Created on August 3, 2006, 1:49 AM
  */
-
 package com.floreantpos.ui.model;
-
 import com.floreantpos.model.Tax;
 import com.floreantpos.model.dao.TaxDAO;
 import com.floreantpos.swing.DoubleTextField;
 import com.floreantpos.swing.MessageDialog;
 import com.floreantpos.ui.BeanEditor;
 import com.floreantpos.util.POSUtil;
-
 /**
  *
  * @author  MShahriar
@@ -59,15 +56,10 @@ public class TaxForm extends BeanEditor {
         tfName = new com.floreantpos.swing.FixedLengthTextField();
         tfRate = new DoubleTextField();
         jLabel3 = new javax.swing.JLabel();
-
         jLabel1.setText(com.floreantpos.POSConstants.NAME + ":"); //$NON-NLS-1$
-
         jLabel2.setText(com.floreantpos.POSConstants.RATE + ":"); //$NON-NLS-1$
-
         tfRate.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
         jLabel3.setText("%"); //$NON-NLS-1$
-
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,14 +118,12 @@ public class TaxForm extends BeanEditor {
 		
 		return true;
 	}
-
 	@Override
 	protected void updateView() {
 		Tax tax = (Tax) getBean();
 		tfName.setText(tax.getName());
 		tfRate.setText("" + tax.getRate()); //$NON-NLS-1$
 	}
-
 	@Override
 	protected boolean updateModel() {
 		Tax tax = (Tax) getBean();

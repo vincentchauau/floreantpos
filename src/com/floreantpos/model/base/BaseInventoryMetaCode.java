@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the INVENTORY_META_CODE table.
@@ -28,9 +26,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="INVENTORY_META_CODE"
  */
-
 public abstract class BaseInventoryMetaCode  implements Comparable, Serializable {
-
 	public static String REF = "InventoryMetaCode"; //$NON-NLS-1$
 	public static String PROP_DESCRIPTION = "description"; //$NON-NLS-1$
 	public static String PROP_CODE_NO = "codeNo"; //$NON-NLS-1$
@@ -38,12 +34,10 @@ public abstract class BaseInventoryMetaCode  implements Comparable, Serializable
 	public static String PROP_CODE_TEXT = "codeText"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseInventoryMetaCode () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -51,23 +45,16 @@ public abstract class BaseInventoryMetaCode  implements Comparable, Serializable
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String type;
 		protected java.lang.String codeText;
 		protected java.lang.Integer codeNo;
 		protected java.lang.String description;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -78,7 +65,6 @@ public abstract class BaseInventoryMetaCode  implements Comparable, Serializable
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -89,15 +75,12 @@ public abstract class BaseInventoryMetaCode  implements Comparable, Serializable
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: TYPE
 	 */
 	public java.lang.String getType () {
 					return type;
 			}
-
 	/**
 	 * Set the value related to the column: TYPE
 	 * @param type the TYPE value
@@ -106,15 +89,12 @@ public abstract class BaseInventoryMetaCode  implements Comparable, Serializable
 		this.type = type;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CODE_TEXT
 	 */
 	public java.lang.String getCodeText () {
 					return codeText;
 			}
-
 	/**
 	 * Set the value related to the column: CODE_TEXT
 	 * @param codeText the CODE_TEXT value
@@ -123,15 +103,12 @@ public abstract class BaseInventoryMetaCode  implements Comparable, Serializable
 		this.codeText = codeText;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CODE_NO
 	 */
 	public java.lang.Integer getCodeNo () {
 					return codeNo == null ? Integer.valueOf(0) : codeNo;
 			}
-
 	/**
 	 * Set the value related to the column: CODE_NO
 	 * @param codeNo the CODE_NO value
@@ -140,15 +117,12 @@ public abstract class BaseInventoryMetaCode  implements Comparable, Serializable
 		this.codeNo = codeNo;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DESCRIPTION
 	 */
 	public java.lang.String getDescription () {
 					return description;
 			}
-
 	/**
 	 * Set the value related to the column: DESCRIPTION
 	 * @param description the DESCRIPTION value
@@ -156,9 +130,6 @@ public abstract class BaseInventoryMetaCode  implements Comparable, Serializable
 	public void setDescription (java.lang.String description) {
 		this.description = description;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -170,7 +141,6 @@ public abstract class BaseInventoryMetaCode  implements Comparable, Serializable
 			else return (this.getId().equals(inventoryMetaCode.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -181,16 +151,13 @@ public abstract class BaseInventoryMetaCode  implements Comparable, Serializable
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

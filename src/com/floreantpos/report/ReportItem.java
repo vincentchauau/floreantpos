@@ -16,7 +16,6 @@
  * ************************************************************************
  */
 package com.floreantpos.report;
-
 public class ReportItem {
 	private String uniqueId;
 	private String id;
@@ -28,89 +27,67 @@ public class ReportItem {
 	private double grossTotal;
 	private double taxTotal;
 	private double discount;
-
 	public ReportItem() {
 		super();
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public double getQuantity() {
 		return quantity;
 	}
-
 	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
-
 	public double getTaxRate() {
 		return taxRate;
 	}
-
 	public void setTaxRate(double taxRate) {
 		this.taxRate = taxRate;
 	}
-
 	public double getTotal() {
 		return total;
 	}
-
 	public void setTotal(double total) {
 		this.total = total;
 	}
-
 	public double getPrice() {
 		return price;
 	}
-
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
 	public double getDiscount() {
 		return discount;
 	}
-
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
-
 	public double getGrossTotal() {
 		return grossTotal;
 	}
-
 	public void setGrossTotal(double grossTotal) {
 		this.grossTotal = grossTotal;
 	}
-
 	public double getTaxTotal() {
 		return taxTotal;
 	}
-
 	public void setTaxTotal(double taxTotal) {
 		this.taxTotal = taxTotal;
 	}
-
 	public String getUniqueId() {
 		return uniqueId;
 	}
-
 	public void setUniqueId(String uniqueId) {
 		this.uniqueId = uniqueId;
 	}
-
 }

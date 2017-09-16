@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 /**
  * This is an object that contains data related to the TICKET_ITEM_DISCOUNT table.
  * Do not modify this class because it will be overwritten if the configuration file
@@ -10,9 +8,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="TICKET_ITEM_DISCOUNT"
  */
-
 public abstract class BaseTicketItemDiscount implements Comparable, Serializable {
-
 	public static String REF = "TicketItemDiscount";
 	public static String PROP_NAME = "name";
 	public static String PROP_AMOUNT = "amount";
@@ -23,12 +19,10 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	public static String PROP_TICKET_ITEM = "ticketItem";
 	public static String PROP_MINIMUM_QUANTITY = "minimumQuantity";
 	public static String PROP_AUTO_APPLY = "autoApply";
-
 	// constructors
 	public BaseTicketItemDiscount() {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -36,15 +30,11 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize() {
 	}
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 	protected java.lang.Integer discountId;
 	protected java.lang.String name;
@@ -53,10 +43,8 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	protected java.lang.Integer minimumQuantity;
 	protected java.lang.Double value;
 	protected java.lang.Double amount;
-
 	// many to one
 	private com.floreantpos.model.TicketItem ticketItem;
-
 	/**
 	 * Return the unique identifier of this class
 	 * @hibernate.id
@@ -66,7 +54,6 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	public java.lang.Integer getId() {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -75,14 +62,12 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 		this.id = id;
 		this.hashCode = Integer.MIN_VALUE;
 	}
-
 	/**
 	 * Return the value associated with the column: DISCOUNT_ID
 	 */
 	public java.lang.Integer getDiscountId() {
 		return discountId == null ? Integer.valueOf(0) : discountId;
 	}
-
 	/**
 	 * Set the value related to the column: DISCOUNT_ID
 	 * @param discountId the DISCOUNT_ID value
@@ -90,14 +75,12 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	public void setDiscountId(java.lang.Integer discountId) {
 		this.discountId = discountId;
 	}
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName() {
 		return name;
 	}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -105,14 +88,12 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	public void setName(java.lang.String name) {
 		this.name = name;
 	}
-
 	/**
 	 * Return the value associated with the column: TYPE
 	 */
 	public java.lang.Integer getType() {
 		return type == null ? Integer.valueOf(0) : type;
 	}
-
 	/**
 	 * Set the value related to the column: TYPE
 	 * @param type the TYPE value
@@ -120,14 +101,12 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	public void setType(java.lang.Integer type) {
 		this.type = type;
 	}
-
 	/**
 	 * Return the value associated with the column: AUTO_APPLY
 	 */
 	public java.lang.Boolean isAutoApply() {
 		return autoApply == null ? Boolean.FALSE : autoApply;
 	}
-
 	/**
 	 * Set the value related to the column: AUTO_APPLY
 	 * @param autoApply the AUTO_APPLY value
@@ -135,14 +114,12 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	public void setAutoApply(java.lang.Boolean autoApply) {
 		this.autoApply = autoApply;
 	}
-
 	/**
 	 * Return the value associated with the column: MINIMUM_QUANTITY
 	 */
 	public java.lang.Integer getMinimumQuantity() {
 		return minimumQuantity == null ? Integer.valueOf(0) : minimumQuantity;
 	}
-
 	/**
 	 * Set the value related to the column: MINIMUM_QUANTITY
 	 * @param minimumQuantity the MINIMUM_QUANTITY value
@@ -150,14 +127,12 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	public void setMinimumQuantity(java.lang.Integer minimumQuantity) {
 		this.minimumQuantity = minimumQuantity;
 	}
-
 	/**
 	 * Return the value associated with the column: VALUE
 	 */
 	public java.lang.Double getValue() {
 		return value == null ? Double.valueOf(0) : value;
 	}
-
 	/**
 	 * Set the value related to the column: VALUE
 	 * @param value the VALUE value
@@ -165,14 +140,12 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	public void setValue(java.lang.Double value) {
 		this.value = value;
 	}
-
 	/**
 	 * Return the value associated with the column: AMOUNT
 	 */
 	public java.lang.Double getAmount() {
 		return amount == null ? Double.valueOf(0) : amount;
 	}
-
 	/**
 	 * Set the value related to the column: AMOUNT
 	 * @param amount the AMOUNT value
@@ -180,14 +153,12 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	public void setAmount(java.lang.Double amount) {
 		this.amount = amount;
 	}
-
 	/**
 	 * Return the value associated with the column: TICKET_ITEMID
 	 */
 	public com.floreantpos.model.TicketItem getTicketItem() {
 		return ticketItem;
 	}
-
 	/**
 	 * Set the value related to the column: TICKET_ITEMID
 	 * @param ticketItem the TICKET_ITEMID value
@@ -195,7 +166,6 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 	public void setTicketItem(com.floreantpos.model.TicketItem ticketItem) {
 		this.ticketItem = ticketItem;
 	}
-
 	public boolean equals(Object obj) {
 		if (null == obj)
 			return false;
@@ -209,7 +179,6 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 				return (this.getId().equals(ticketItemDiscount.getId()));
 		}
 	}
-
 	public int hashCode() {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId())
@@ -221,7 +190,6 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo(Object obj) {
 		if (obj.hashCode() > hashCode())
 			return 1;
@@ -230,9 +198,7 @@ public abstract class BaseTicketItemDiscount implements Comparable, Serializable
 		else
 			return 0;
 	}
-
 	public String toString() {
 		return super.toString();
 	}
-
 }

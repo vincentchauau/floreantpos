@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the ACTION_HISTORY table.
@@ -28,9 +26,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="ACTION_HISTORY"
  */
-
 public abstract class BaseActionHistory  implements Comparable, Serializable {
-
 	public static String REF = "ActionHistory"; //$NON-NLS-1$
 	public static String PROP_PERFORMER = "performer"; //$NON-NLS-1$
 	public static String PROP_DESCRIPTION = "description"; //$NON-NLS-1$
@@ -38,12 +34,10 @@ public abstract class BaseActionHistory  implements Comparable, Serializable {
 	public static String PROP_ACTION_TIME = "actionTime"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseActionHistory () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -51,25 +45,17 @@ public abstract class BaseActionHistory  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 	private java.util.Date actionTime;
 	private java.lang.String actionName;
 	private java.lang.String description;
-
 	// many to one
 	private com.floreantpos.model.User performer;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -80,7 +66,6 @@ public abstract class BaseActionHistory  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -91,15 +76,12 @@ public abstract class BaseActionHistory  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: ACTION_TIME
 	 */
 	public java.util.Date getActionTime () {
 			return actionTime;
 	}
-
 	/**
 	 * Set the value related to the column: ACTION_TIME
 	 * @param actionTime the ACTION_TIME value
@@ -108,15 +90,12 @@ public abstract class BaseActionHistory  implements Comparable, Serializable {
 		this.actionTime = actionTime;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ACTION_NAME
 	 */
 	public java.lang.String getActionName () {
 			return actionName;
 	}
-
 	/**
 	 * Set the value related to the column: ACTION_NAME
 	 * @param actionName the ACTION_NAME value
@@ -125,15 +104,12 @@ public abstract class BaseActionHistory  implements Comparable, Serializable {
 		this.actionName = actionName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DESCRIPTION
 	 */
 	public java.lang.String getDescription () {
 			return description;
 	}
-
 	/**
 	 * Set the value related to the column: DESCRIPTION
 	 * @param description the DESCRIPTION value
@@ -142,15 +118,12 @@ public abstract class BaseActionHistory  implements Comparable, Serializable {
 		this.description = description;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: USER_ID
 	 */
 	public com.floreantpos.model.User getPerformer () {
 			return performer;
 	}
-
 	/**
 	 * Set the value related to the column: USER_ID
 	 * @param performer the USER_ID value
@@ -158,9 +131,6 @@ public abstract class BaseActionHistory  implements Comparable, Serializable {
 	public void setPerformer (com.floreantpos.model.User performer) {
 		this.performer = performer;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -172,7 +142,6 @@ public abstract class BaseActionHistory  implements Comparable, Serializable {
 			else return (this.getId().equals(actionHistory.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -183,16 +152,13 @@ public abstract class BaseActionHistory  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

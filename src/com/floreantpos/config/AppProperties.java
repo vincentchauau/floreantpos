@@ -16,11 +16,8 @@
  * ************************************************************************
  */
 package com.floreantpos.config;
-
 import org.apache.commons.configuration.PropertiesConfiguration;
-
 import com.floreantpos.PosLog;
-
 public class AppProperties {
 	
 	private static PropertiesConfiguration properties;

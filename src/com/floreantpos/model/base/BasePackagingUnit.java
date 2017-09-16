@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the PACKAGING_UNIT table.
@@ -28,9 +26,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="PACKAGING_UNIT"
  */
-
 public abstract class BasePackagingUnit  implements Comparable, Serializable {
-
 	public static String REF = "PackagingUnit"; //$NON-NLS-1$
 	public static String PROP_NAME = "name"; //$NON-NLS-1$
 	public static String PROP_FACTOR = "factor"; //$NON-NLS-1$
@@ -39,12 +35,10 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 	public static String PROP_DIMENSION = "dimension"; //$NON-NLS-1$
 	public static String PROP_BASE_UNIT = "baseUnit"; //$NON-NLS-1$
 
-
 	// constructors
 	public BasePackagingUnit () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -52,24 +46,17 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String name;
 		protected java.lang.String shortName;
 		protected java.lang.Double factor;
 		protected java.lang.Boolean baseUnit;
 		protected java.lang.String dimension;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -80,7 +67,6 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -91,15 +77,12 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -108,15 +91,12 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHORT_NAME
 	 */
 	public java.lang.String getShortName () {
 					return shortName;
 			}
-
 	/**
 	 * Set the value related to the column: SHORT_NAME
 	 * @param shortName the SHORT_NAME value
@@ -125,15 +105,12 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 		this.shortName = shortName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: FACTOR
 	 */
 	public java.lang.Double getFactor () {
 									return factor == null ? Double.valueOf(0) : factor;
 					}
-
 	/**
 	 * Set the value related to the column: FACTOR
 	 * @param factor the FACTOR value
@@ -142,15 +119,12 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 		this.factor = factor;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: BASEUNIT
 	 */
 	public java.lang.Boolean isBaseUnit () {
 								return baseUnit == null ? Boolean.FALSE : baseUnit;
 					}
-
 	/**
 	 * Set the value related to the column: BASEUNIT
 	 * @param baseUnit the BASEUNIT value
@@ -159,15 +133,12 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 		this.baseUnit = baseUnit;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DIMENSION
 	 */
 	public java.lang.String getDimension () {
 					return dimension;
 			}
-
 	/**
 	 * Set the value related to the column: DIMENSION
 	 * @param dimension the DIMENSION value
@@ -175,9 +146,6 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 	public void setDimension (java.lang.String dimension) {
 		this.dimension = dimension;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -189,7 +157,6 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 			else return (this.getId().equals(packagingUnit.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -200,16 +167,13 @@ public abstract class BasePackagingUnit  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

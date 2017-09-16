@@ -16,24 +16,18 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-
 import com.floreantpos.model.CashDropTransaction;
 import com.floreantpos.model.Terminal;
 
-
 public class CashDropTransactionDAO extends BaseCashDropTransactionDAO {
-
 	/**
 	 * Default constructor.  Can be used in place of getInstance()
 	 */
 	public CashDropTransactionDAO () {}
-
 	public List<CashDropTransaction> findUnsettled(Terminal terminal) throws Exception {
 		Session session = null;
 		
@@ -42,7 +36,6 @@ public class CashDropTransactionDAO extends BaseCashDropTransactionDAO {
 			Criteria criteria = session.createCriteria(getReferenceClass());
 			criteria.add(Restrictions.eq(CashDropTransaction.PROP_DRAWER_RESETTED, Boolean.FALSE));
 			criteria.add(Restrictions.eq(CashDropTransaction.PROP_TERMINAL, terminal));
-
 			return criteria.list();
 		} catch (Exception e) {
 			throw e;
@@ -59,7 +52,6 @@ public class CashDropTransactionDAO extends BaseCashDropTransactionDAO {
 		try {
 			session = createNewSession();
 			tx = session.beginTransaction();
-
 			session.delete(transaction);
 			session.update(terminal);
 			tx.commit();
@@ -79,7 +71,6 @@ public class CashDropTransactionDAO extends BaseCashDropTransactionDAO {
 		try {
 			session = createNewSession();
 			tx = session.beginTransaction();
-
 			session.save(transaction);
 			session.update(terminal);
 			tx.commit();

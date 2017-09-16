@@ -16,25 +16,20 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
-
 import com.jgoodies.looks.plastic.PlasticButtonUI;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
-
 public class ButtonUI extends PlasticButtonUI {
-
 	public ButtonUI() {
 		super();
 	}
@@ -43,7 +38,6 @@ public class ButtonUI extends PlasticButtonUI {
 	public static ComponentUI createUI(JComponent b) {
         return ui;
     }
-
 	public void update(Graphics g, JComponent c) {
 		if (c.isOpaque()) {
 			AbstractButton b = (AbstractButton) c;
@@ -52,7 +46,6 @@ public class ButtonUI extends PlasticButtonUI {
 			} else if (b.isContentAreaFilled()) {
 				g.setColor(c.getBackground());
 				g.fillRect(0, 0, c.getWidth(), c.getHeight());
-
 				if (is3D(b)) {
 					Rectangle r = new Rectangle(1, 1, c.getWidth() - 2, c.getHeight() - 1);
 					add3DEffekt(g, r);
@@ -69,12 +62,10 @@ public class ButtonUI extends PlasticButtonUI {
 		g.drawLine(y+1, y+1, w - 3, 1);
 	}
 
-
 	static void drawDisabledBorder(Graphics g, int x, int y, int w, int h) {
 		g.setColor(PlasticLookAndFeel.getControlShadow());
 		drawRect(g, x, y, w - 1, h - 1);
 	}
-
 
 	/*
 	 * Unlike <code>MetalUtils</code> we first draw with highlight then dark shadow
@@ -90,7 +81,6 @@ public class ButtonUI extends PlasticButtonUI {
 		g.translate(-x, -y);
 	}
 
-
 	/*
 	 * Copied from <code>MetalUtils</code>.
 	 */
@@ -103,7 +93,6 @@ public class ButtonUI extends PlasticButtonUI {
 		g.translate(-x, -y);
 	}
 
-
 	/*
 	 * Copied from <code>MetalUtils</code>.
 	 */
@@ -114,7 +103,6 @@ public class ButtonUI extends PlasticButtonUI {
             drawFlush3DBorder(g, x, y, w, h);
 		}
     }
-
 	/*
 	 * Copied from <code>MetalUtils</code>.
 	 */
@@ -127,7 +115,6 @@ public class ButtonUI extends PlasticButtonUI {
 		g.drawLine( x+2, h-2, w-2, h-2 );
 		g.drawLine( w-2, y+2, w-2, h-2 );
     }
-
 	/*
 	 * Modified edges.
 	 */
@@ -156,7 +143,6 @@ public class ButtonUI extends PlasticButtonUI {
         g.drawLine(0, h - 1, 0, h - 1);
         g.translate(-x, -y);
     }
-
 	static void drawThinFlush3DBorder(Graphics g, int x, int y, int w, int h) {
 		g.translate(x, y);
 		g.setColor(PlasticLookAndFeel.getControlHighlight());
@@ -190,7 +176,6 @@ public class ButtonUI extends PlasticButtonUI {
 	
 	
 	// 3D Effects ***********************************************************************
-
 	/**
 	 * Checks and returns whether the specified component type has 3D effects.
      * 
@@ -204,7 +189,6 @@ public class ButtonUI extends PlasticButtonUI {
 		return Boolean.TRUE.equals(value);
 	}
 
-
 	/**
 	 * Checks and returns whether we have a custom hint that forces the 3D mode.
 	 * 
@@ -216,7 +200,6 @@ public class ButtonUI extends PlasticButtonUI {
 		Object value = c.getClientProperty(PlasticLookAndFeel.IS_3D_KEY);
 		return Boolean.TRUE.equals(value);
 	}
-
 
 	/**
 	 * Checks and returns whether we have a custom hint that prevents the 3D mode.
@@ -230,12 +213,10 @@ public class ButtonUI extends PlasticButtonUI {
 		return Boolean.FALSE.equals(value);
 	}
 
-
 	// Painting 3D Effects *************************************************************
 	
 	private static float FRACTION_3D = 0.5f;
 	
-
 	private static void add3DEffekt(Graphics g, Rectangle r, boolean isHorizontal,
 		Color startC0, Color stopC0, Color startC1, Color stopC1) {
 			
@@ -270,12 +251,10 @@ public class ButtonUI extends PlasticButtonUI {
 		g2.fillRect(xd0, yd0, width, height);
 	}
 
-
 	static void add3DEffekt(Graphics g, Rectangle r) {
 		Color brightenStop = UIManager.getColor("Plastic.brightenStop"); //$NON-NLS-1$
 		if (null == brightenStop)
 			brightenStop = PlasticTheme.BRIGHTEN_STOP;
-
 		// Add round sides
 		Graphics2D g2 = (Graphics2D) g;
 		int border = 10;
@@ -285,16 +264,13 @@ public class ButtonUI extends PlasticButtonUI {
 		int y = r.y;
 		g2.setPaint(new GradientPaint(x, y, PlasticTheme.DARKEN_START, x + border, y, PlasticTheme.LT_DARKEN_STOP));
 		g2.fillRect(x, y, border, r.height);
-
 		add3DEffekt(g, r, true, PlasticTheme.BRIGHTEN_START, brightenStop, PlasticTheme.DARKEN_START, PlasticTheme.LT_DARKEN_STOP);
 	}
-
 
 	static void addLight3DEffekt(Graphics g, Rectangle r, boolean isHorizontal) {
 		Color ltBrightenStop = UIManager.getColor("Plastic.ltBrightenStop"); //$NON-NLS-1$
 		if (null == ltBrightenStop)
 			ltBrightenStop = PlasticTheme.LT_BRIGHTEN_STOP;
-
 		add3DEffekt(g, r, isHorizontal, PlasticTheme.BRIGHTEN_START, ltBrightenStop, PlasticTheme.DARKEN_START, PlasticTheme.LT_DARKEN_STOP);
 	}
 	
@@ -306,13 +282,10 @@ public class ButtonUI extends PlasticButtonUI {
 		Color ltBrightenStop = UIManager.getColor("Plastic.ltBrightenStop"); //$NON-NLS-1$
 		if (null == ltBrightenStop)
 			ltBrightenStop = PlasticTheme.LT_BRIGHTEN_STOP;
-
 		add3DEffekt(g, r, true, PlasticTheme.DARKEN_START, PlasticTheme.LT_DARKEN_STOP, PlasticTheme.BRIGHTEN_START, ltBrightenStop);
 	}
     
-
     // Low level graphics ***************************************************
-
     /*
      * An optimized version of Graphics.drawRect.
      */
@@ -322,5 +295,4 @@ public class ButtonUI extends PlasticButtonUI {
         g.fillRect(x+1, y+h, w,   1);
         g.fillRect(x+w, y+1, 1,   h);
     }
-
 }

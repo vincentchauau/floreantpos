@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the DELIVERY_CONFIGURATION table.
@@ -11,21 +9,17 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="DELIVERY_CONFIGURATION"
  */
-
 public abstract class BaseDeliveryConfiguration  implements Comparable, Serializable {
-
 	public static String REF = "DeliveryConfiguration";
 	public static String PROP_UNIT_NAME = "unitName";
 	public static String PROP_ID = "id";
 	public static String PROP_CHARGE_BY_ZIP_CODE = "chargeByZipCode";
 	public static String PROP_UNIT_SYMBOL = "unitSymbol";
 
-
 	// constructors
 	public BaseDeliveryConfiguration () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -33,22 +27,15 @@ public abstract class BaseDeliveryConfiguration  implements Comparable, Serializ
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String unitName;
 		protected java.lang.String unitSymbol;
 		protected java.lang.Boolean chargeByZipCode;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -59,7 +46,6 @@ public abstract class BaseDeliveryConfiguration  implements Comparable, Serializ
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -70,15 +56,12 @@ public abstract class BaseDeliveryConfiguration  implements Comparable, Serializ
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: UNIT_NAME
 	 */
 	public java.lang.String getUnitName () {
 					return unitName;
 			}
-
 	/**
 	 * Set the value related to the column: UNIT_NAME
 	 * @param unitName the UNIT_NAME value
@@ -87,15 +70,12 @@ public abstract class BaseDeliveryConfiguration  implements Comparable, Serializ
 		this.unitName = unitName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: UNIT_SYMBOL
 	 */
 	public java.lang.String getUnitSymbol () {
 					return unitSymbol;
 			}
-
 	/**
 	 * Set the value related to the column: UNIT_SYMBOL
 	 * @param unitSymbol the UNIT_SYMBOL value
@@ -104,15 +84,12 @@ public abstract class BaseDeliveryConfiguration  implements Comparable, Serializ
 		this.unitSymbol = unitSymbol;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CHARGE_BY_ZIP_CODE
 	 */
 	public java.lang.Boolean isChargeByZipCode () {
 								return chargeByZipCode == null ? Boolean.FALSE : chargeByZipCode;
 					}
-
 	/**
 	 * Set the value related to the column: CHARGE_BY_ZIP_CODE
 	 * @param chargeByZipCode the CHARGE_BY_ZIP_CODE value
@@ -120,9 +97,6 @@ public abstract class BaseDeliveryConfiguration  implements Comparable, Serializ
 	public void setChargeByZipCode (java.lang.Boolean chargeByZipCode) {
 		this.chargeByZipCode = chargeByZipCode;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -134,7 +108,6 @@ public abstract class BaseDeliveryConfiguration  implements Comparable, Serializ
 			else return (this.getId().equals(deliveryConfiguration.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -145,16 +118,13 @@ public abstract class BaseDeliveryConfiguration  implements Comparable, Serializ
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

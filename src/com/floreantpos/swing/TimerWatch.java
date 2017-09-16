@@ -16,49 +16,36 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 //A simple clock application using javax.swing.Timer class
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
 import org.joda.time.Duration;
 import org.joda.time.Instant;
 import org.joda.time.Interval;
-
 import com.floreantpos.config.AppConfig;
-
 public class TimerWatch extends JPanel implements ActionListener {
-
 	Timer updateTimer = new Timer(1000, this);
 	JLabel timerLabel = new JLabel();
 	private final Date date;
 	public Color backColor;
 	public Color textColor;
-
 	public TimerWatch(Date date) {
 		this.date = date;
-
 		timerLabel.setFont(timerLabel.getFont().deriveFont(Font.BOLD));
 		timerLabel.setHorizontalAlignment(JLabel.RIGHT);
-
 		actionPerformed(null);
-
 		add(timerLabel);
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Interval interval = new Interval(date.getTime(), new Instant().getMillis());
 		Duration duration = interval.toDuration();
-
 		int timeOutValueYellow = 300; 
 		int timeOutValueRed = 600; 
 		
@@ -69,7 +56,6 @@ public class TimerWatch extends JPanel implements ActionListener {
 		if(AppConfig.getString("RedTimeOut")!=null){
 			timeOutValueRed = Integer.parseInt(AppConfig.getString("RedTimeOut")); //$NON-NLS-1$
 		}
-
 		if (timeOutValueYellow < duration.getStandardSeconds() && timeOutValueRed > duration.getStandardSeconds()) {
 			backColor = Color.yellow;
 			textColor=Color.black;
@@ -82,20 +68,15 @@ public class TimerWatch extends JPanel implements ActionListener {
 			backColor = Color.white;
 			textColor=Color.black;
 		}
-
 		timerLabel.setText(duration.getStandardHours() + ":" + (duration.getStandardMinutes() % 60) + ":" + (duration.getStandardSeconds() % 60)); //$NON-NLS-1$ //$NON-NLS-2$
 	}
-
 	public void start() {
 		updateTimer.start();
 	}
-
 	public void stop() {
 		updateTimer.stop();
 	}
-
 	public Color getColor() {
 		return null;
-
 	}
 }

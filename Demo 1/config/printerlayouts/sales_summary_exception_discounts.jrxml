@@ -24,7 +24,6 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-
 	<field name="ratioDnet" class="java.lang.Double"/>
 	<field name="countPercent" class="java.lang.Double"/>
 	<field name="checkSize" class="java.lang.Double"/>
@@ -35,7 +34,6 @@
 	<field name="totalCount" class="java.lang.Integer"/>
 	<field name="name" class="java.lang.String"/>
 	<field name="no" class="java.lang.Integer"/>
-
 	<variable name="totalCountSum" class="java.lang.Integer" resetType="Report" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalCount}]]></variableExpression>
 	</variable>

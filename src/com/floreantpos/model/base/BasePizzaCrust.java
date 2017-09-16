@@ -1,8 +1,6 @@
 package com.floreantpos.model.base;
-
 import java.lang.Comparable;
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the PIZZA_CRUST table.
@@ -12,9 +10,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="PIZZA_CRUST"
  */
-
 public abstract class BasePizzaCrust  implements Comparable, Serializable {
-
 	public static String REF = "PizzaCrust"; //$NON-NLS-1$
 	public static String PROP_DESCRIPTION = "description"; //$NON-NLS-1$
 	public static String PROP_TRANSLATED_NAME = "translatedName"; //$NON-NLS-1$
@@ -23,12 +19,10 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 	public static String PROP_NAME = "name"; //$NON-NLS-1$
 
-
 	// constructors
 	public BasePizzaCrust () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -36,24 +30,17 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 		protected java.lang.String name;
 		protected java.lang.String translatedName;
 		protected java.lang.String description;
 		protected java.lang.Integer sortOrder;
 		protected java.lang.Boolean defaultCrust;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -64,7 +51,6 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -75,15 +61,12 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: NAME
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
@@ -92,15 +75,12 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: TRANSLATED_NAME
 	 */
 	public java.lang.String getTranslatedName () {
 					return translatedName;
 			}
-
 	/**
 	 * Set the value related to the column: TRANSLATED_NAME
 	 * @param translatedName the TRANSLATED_NAME value
@@ -109,15 +89,12 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 		this.translatedName = translatedName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DESCRIPTION
 	 */
 	public java.lang.String getDescription () {
 					return description;
 			}
-
 	/**
 	 * Set the value related to the column: DESCRIPTION
 	 * @param description the DESCRIPTION value
@@ -126,15 +103,12 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 		this.description = description;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SORT_ORDER
 	 */
 	public java.lang.Integer getSortOrder () {
 									return sortOrder == null ? Integer.valueOf(0) : sortOrder;
 					}
-
 	/**
 	 * Set the value related to the column: SORT_ORDER
 	 * @param sortOrder the SORT_ORDER value
@@ -143,15 +117,12 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 		this.sortOrder = sortOrder;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DEFAULT_CRUST
 	 */
 	public java.lang.Boolean isDefaultCrust () {
 								return defaultCrust == null ? Boolean.FALSE : defaultCrust;
 					}
-
 	/**
 	 * Set the value related to the column: DEFAULT_CRUST
 	 * @param defaultCrust the DEFAULT_CRUST value
@@ -159,9 +130,6 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 	public void setDefaultCrust (java.lang.Boolean defaultCrust) {
 		this.defaultCrust = defaultCrust;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -173,7 +141,6 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 			else return (this.getId().equals(pizzaCrust.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -184,16 +151,13 @@ public abstract class BasePizzaCrust  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

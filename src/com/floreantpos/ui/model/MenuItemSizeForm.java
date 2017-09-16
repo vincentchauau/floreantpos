@@ -1,11 +1,8 @@
 
 package com.floreantpos.ui.model;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import net.miginfocom.swing.MigLayout;
-
 import com.floreantpos.model.MenuItemSize;
 import com.floreantpos.model.dao.MenuItemSizeDAO;
 import com.floreantpos.swing.DoubleTextField;
@@ -14,39 +11,30 @@ import com.floreantpos.swing.IntegerTextField;
 import com.floreantpos.swing.MessageDialog;
 import com.floreantpos.ui.BeanEditor;
 import com.floreantpos.util.POSUtil;
-
 /**
  *
  * @author  MShahriar
  */
 public class MenuItemSizeForm extends BeanEditor {
-
 	private FixedLengthTextField tfName;
 	private FixedLengthTextField tfDescription;
 	private FixedLengthTextField tfTranslatedName;
 	private IntegerTextField tfSortOrder;
 	private DoubleTextField tfSizeInInch;
-
 	public MenuItemSizeForm() {
 		this(new MenuItemSize());
 	}
-
 	public MenuItemSizeForm(MenuItemSize menuItemSize) {
 		initComponents();
-
 		setBean(menuItemSize);
-
 	}
-
 	private void initComponents() {
 		JPanel contentPanel = new JPanel(new MigLayout("", "[][]", ""));
-
 		JLabel lblName = new JLabel(com.floreantpos.POSConstants.NAME + ":");
 		JLabel lblDescription = new JLabel("Description");
 		JLabel lblTranslatedName = new JLabel("Translated Name");
 		JLabel lblSortOrder = new JLabel("Sort Order");
 		JLabel lblSize = new JLabel("Size in Inch");
-
 		tfName = new FixedLengthTextField(60);
 		tfName.setColumns(30);
 		tfDescription = new FixedLengthTextField(120);
@@ -57,7 +45,6 @@ public class MenuItemSizeForm extends BeanEditor {
 		tfSortOrder.setColumns(10);
 		tfSizeInInch = new DoubleTextField();
 		tfSizeInInch.setColumns(10);
-
 		contentPanel.add(lblName, "");
 		contentPanel.add(tfName, "");
 		contentPanel.add(lblTranslatedName, "newline");
@@ -68,17 +55,13 @@ public class MenuItemSizeForm extends BeanEditor {
 		contentPanel.add(tfSizeInInch, "");
 		contentPanel.add(lblSortOrder, "newline");
 		contentPanel.add(tfSortOrder, "");
-
 		add(contentPanel);
 	}
-
 	@Override
 	public boolean save() {
-
 		try {
 			if (!updateModel())
 				return false;
-
 			MenuItemSize menuItemSize = (MenuItemSize) getBean();
 			MenuItemSizeDAO dao = new MenuItemSizeDAO();
 			dao.saveOrUpdate(menuItemSize);
@@ -86,10 +69,8 @@ public class MenuItemSizeForm extends BeanEditor {
 			MessageDialog.showError(e);
 			return false;
 		}
-
 		return true;
 	}
-
 	@Override
 	protected void updateView() {
 		MenuItemSize menuItemSize = (MenuItemSize) getBean();
@@ -101,13 +82,10 @@ public class MenuItemSizeForm extends BeanEditor {
 		tfTranslatedName.setText(menuItemSize.getTranslatedName());
 		tfSortOrder.setText(String.valueOf(menuItemSize.getSortOrder()));
 		tfSizeInInch.setText(String.valueOf(menuItemSize.getSizeInInch()));
-
 	}
-
 	@Override
 	protected boolean updateModel() {
 		MenuItemSize menuItemSize = (MenuItemSize) getBean();
-
 		String name = tfName.getText();
 		String description = tfDescription.getText();
 		String translatedName = tfTranslatedName.getText();
@@ -126,19 +104,15 @@ public class MenuItemSizeForm extends BeanEditor {
 		if (POSUtil.isBlankOrNull(sortOrder)) {
 			sortOrder = "";
 		}*/
-
 		menuItemSize.setName(name);
 		menuItemSize.setDescription(description);
 		menuItemSize.setTranslatedName(translatedName);
 		menuItemSize.setSortOrder(sortOrder);
 		menuItemSize.setSizeInInch(size);
-
 		MenuItemSizeDAO dao = new MenuItemSizeDAO();
 		dao.saveOrUpdate(menuItemSize);
-
 		return true;
 	}
-
 	public String getDisplayText() {
 		MenuItemSize menuItemSize = (MenuItemSize) getBean();
 		if (menuItemSize.getId() == null) {

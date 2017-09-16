@@ -16,13 +16,11 @@
  * ************************************************************************
  */
 package com.floreantpos.bo.ui.explorer;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,7 +28,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
-
 import com.floreantpos.POSConstants;
 import com.floreantpos.bo.ui.BOMessageDialog;
 import com.floreantpos.bo.ui.CustomCellRenderer;
@@ -42,39 +39,32 @@ import com.floreantpos.ui.dialog.BeanEditorDialog;
 import com.floreantpos.ui.dialog.ConfirmDeleteDialog;
 import com.floreantpos.ui.model.MultiplierForm;
 import com.floreantpos.util.POSUtil;
-
 public class MultiplierExplorer extends TransparentPanel {
 	private List<Multiplier> multiplierList;
 	private JTable table;
 	private MultiplierExplorerTableModel tableModel;
 	private JButton editButton;
 	private JButton deleteButton;
-
 	public MultiplierExplorer() {
 		multiplierList = MultiplierDAO.getInstance().findAll();
-
 		tableModel = new MultiplierExplorerTableModel();
 		table = new JTable(tableModel);
 		table.setDefaultRenderer(Object.class, new CustomCellRenderer());
 		table.getColumnModel().getColumn(6).setCellRenderer(new PosTableRenderer());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				int index = table.getSelectedRow();
 				if (index < 0)
 					return;
-
 				Multiplier multiplier = multiplierList.get(index);
 				editButton.setEnabled(!multiplier.isMain());
 				deleteButton.setEnabled(!multiplier.isMain());
 			}
 		});
-
 		setLayout(new BorderLayout(5, 5));
 		add(new JScrollPane(table));
-
 		JButton addButton = new JButton(com.floreantpos.POSConstants.ADD);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,15 +74,12 @@ public class MultiplierExplorer extends TransparentPanel {
 					dialog.open();
 					if (dialog.isCanceled())
 						return;
-
 					tableModel.addMultiplier((Multiplier) editor.getBean());
 				} catch (Exception x) {
 					BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
-
 		editButton = new JButton(com.floreantpos.POSConstants.EDIT);
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -100,23 +87,19 @@ public class MultiplierExplorer extends TransparentPanel {
 					int index = table.getSelectedRow();
 					if (index < 0)
 						return;
-
 					Multiplier multiplier = multiplierList.get(index);
 					if (multiplier.isMain())
 						return;
-
 					MultiplierForm multiplierForm = new MultiplierForm(multiplier);
 					BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), multiplierForm);
 					dialog.open();
 					if (dialog.isCanceled())
 						return;
-
 					table.repaint();
 				} catch (Throwable x) {
 					BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
 		deleteButton = new JButton(com.floreantpos.POSConstants.DELETE);
 		deleteButton.addActionListener(new ActionListener() {
@@ -138,7 +121,6 @@ public class MultiplierExplorer extends TransparentPanel {
 				}
 			}
 		});
-
 		JButton btnSetAsDefault = new JButton("Set default");
 		btnSetAsDefault.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -159,9 +141,7 @@ public class MultiplierExplorer extends TransparentPanel {
 					BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
 				}
 			}
-
 		});
-
 		TransparentPanel panel = new TransparentPanel();
 		panel.add(addButton);
 		panel.add(editButton);
@@ -169,38 +149,30 @@ public class MultiplierExplorer extends TransparentPanel {
 		panel.add(btnSetAsDefault);
 		add(panel, BorderLayout.SOUTH);
 	}
-
 	class MultiplierExplorerTableModel extends AbstractTableModel {
 		String[] columnNames = { POSConstants.NAME, "Prefix", POSConstants.RATE, POSConstants.SORT_ORDER, POSConstants.BUTTON_COLOR, POSConstants.TEXT_COLOR,
 				"Default" };
-
 		public int getRowCount() {
 			if (multiplierList == null) {
 				return 0;
 			}
 			return multiplierList.size();
 		}
-
 		public int getColumnCount() {
 			return columnNames.length;
 		}
-
 		@Override
 		public String getColumnName(int column) {
 			return columnNames[column];
 		}
-
 		@Override
 		public boolean isCellEditable(int rowIndex, int columnIndex) {
 			return false;
 		}
-
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			if (multiplierList == null)
 				return ""; //$NON-NLS-1$
-
 			Multiplier multiplier = multiplierList.get(rowIndex);
-
 			switch (columnIndex) {
 				case 0:
 					return multiplier.getName();
@@ -214,27 +186,22 @@ public class MultiplierExplorer extends TransparentPanel {
 					if (multiplier.getButtonColor() != null) {
 						return new Color(multiplier.getButtonColor());
 					}
-
 					return null;
 				case 5:
 					if (multiplier.getTextColor() != null) {
 						return new Color(multiplier.getTextColor());
 					}
-
 					return null;
 				case 6:
 					return multiplier.isDefaultMultiplier();
-
 			}
 			return null;
 		}
-
 		public void addMultiplier(Multiplier multiplier) {
 			int size = multiplierList.size();
 			multiplierList.add(multiplier);
 			fireTableRowsInserted(size, size);
 		}
-
 		public void deleteMultiplier(Multiplier multiplier, int index) {
 			multiplierList.remove(multiplier);
 			fireTableRowsDeleted(index, index);

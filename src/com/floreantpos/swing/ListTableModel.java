@@ -16,12 +16,9 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
-
 public abstract class ListTableModel<E> extends AbstractTableModel {
 	protected String[] columnNames;
 	protected List<E> rows;
@@ -29,39 +26,31 @@ public abstract class ListTableModel<E> extends AbstractTableModel {
 	public ListTableModel() {
 		super();
 	}
-
 	public ListTableModel(String[] names) {
 		columnNames = names;
 	}
-
 	public ListTableModel(String[] names, List<E> rows) {
 		columnNames = names;
 		this.rows = rows;
 	}
-
 	public String[] getColumnNames() {
 		return columnNames;
 	}
-
 	public void setColumnNames(String[] columnNames) {
 		this.columnNames = columnNames;
 	}
-
 	public List<E> getRows() {
 		return rows;
 	}
-
 	public void setRows(List<E> rows) {
 		this.rows = rows;
 		fireTableDataChanged();
 	}
-
 	public int getRowCount() {
 		if(rows == null) return 0;
 		
 		return rows.size();
 	}
-
 	public int getColumnCount() {
 		return columnNames.length;
 	}
@@ -79,7 +68,6 @@ public abstract class ListTableModel<E> extends AbstractTableModel {
 	public E getRowData(int row) {
 		return rows.get(row);
 	}
-
 	public void addItem(E data) {
 		if(rows == null) {
 			rows = new ArrayList();

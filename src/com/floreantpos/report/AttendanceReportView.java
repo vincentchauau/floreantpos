@@ -16,7 +16,6 @@
  * ************************************************************************
  */
 package com.floreantpos.report;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +25,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -34,7 +32,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
-
 import net.miginfocom.swing.MigLayout;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -42,9 +39,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JRViewer;
-
 import org.jdesktop.swingx.JXDatePicker;
-
 import com.floreantpos.POSConstants;
 import com.floreantpos.PosLog;
 import com.floreantpos.model.User;
@@ -53,7 +48,6 @@ import com.floreantpos.model.dao.UserDAO;
 import com.floreantpos.swing.TransparentPanel;
 import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.ui.util.UiUtil;
-
 /**
  * Created by IntelliJ IDEA.
  * User: mshahriar
@@ -68,15 +62,11 @@ public class AttendanceReportView extends TransparentPanel {
 	private JXDatePicker toDatePicker;
 	private JPanel reportPanel;
 	private JComboBox cbUserType;
-
 	public AttendanceReportView() {
-
 		setLayout(new BorderLayout());
 		createUI();
 	}
-
 	private void createUI() {
-
 		fromDatePicker = UiUtil.getCurrentMonthStart();
 		toDatePicker = UiUtil.getDeafultDate();
 		toDatePicker.setDate(new Date());
@@ -88,22 +78,15 @@ public class AttendanceReportView extends TransparentPanel {
 				viewReport();
 			}
 		});
-
 		cbUserType = new JComboBox();
-
 		UserDAO dao = new UserDAO();
 		List<User> userTypes = dao.findAll();
-
 		Vector list = new Vector();
 		list.add(POSConstants.ALL);
 		list.addAll(userTypes);
-
 		cbUserType.setModel(new DefaultComboBoxModel(list));
-
 		setLayout(new BorderLayout());
-
 		JPanel topPanel = new JPanel(new MigLayout());
-
 		topPanel.add(new JLabel(com.floreantpos.POSConstants.START_DATE + ":")); //$NON-NLS-1$ 
 		topPanel.add(fromDatePicker);
 		topPanel.add(new JLabel(com.floreantpos.POSConstants.END_DATE + ":")); //$NON-NLS-1$ 
@@ -112,32 +95,24 @@ public class AttendanceReportView extends TransparentPanel {
 		topPanel.add(cbUserType);
 		topPanel.add(btnGo, "width 60!"); //$NON-NLS-1$
 		add(topPanel, BorderLayout.NORTH);
-
 		JPanel centerPanel = new JPanel(new BorderLayout());
 		centerPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
 		centerPanel.add(new JSeparator(), BorderLayout.NORTH);
-
 		reportPanel = new JPanel(new BorderLayout());
 		centerPanel.add(reportPanel);
-
 		add(centerPanel);
 	}
-
 	private void viewReport() {
 		Date fromDate = fromDatePicker.getDate();
 		Date toDate = toDatePicker.getDate();
-
 		if (fromDate.after(toDate)) {
 			POSMessageDialog.showError(com.floreantpos.util.POSUtil.getFocusedWindow(), com.floreantpos.POSConstants.FROM_DATE_CANNOT_BE_GREATER_THAN_TO_DATE_);
 			return;
 		}
-
 		Calendar calendar = Calendar.getInstance();
 		calendar.clear();
-
 		Calendar calendar2 = Calendar.getInstance();
 		calendar2.setTime(fromDate);
-
 		calendar.set(Calendar.YEAR, calendar2.get(Calendar.YEAR));
 		calendar.set(Calendar.MONTH, calendar2.get(Calendar.MONTH));
 		calendar.set(Calendar.DATE, calendar2.get(Calendar.DATE));
@@ -145,7 +120,6 @@ public class AttendanceReportView extends TransparentPanel {
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		fromDate = calendar.getTime();
-
 		calendar.clear();
 		calendar2.setTime(toDate);
 		calendar.set(Calendar.YEAR, calendar2.get(Calendar.YEAR));
@@ -155,30 +129,23 @@ public class AttendanceReportView extends TransparentPanel {
 		calendar.set(Calendar.MINUTE, 59);
 		calendar.set(Calendar.SECOND, 59);
 		toDate = calendar.getTime();
-
 		User user = null;
 		if (!cbUserType.getSelectedItem().equals(POSConstants.ALL)) {
 			user = (User) cbUserType.getSelectedItem();
 		}
-
 		AttendenceHistoryDAO dao = new AttendenceHistoryDAO();
 		List<AttendanceReportData> attendanceList = dao.findAttendance(fromDate, toDate, user);
-
 		try {
 			
 			JasperReport report = ReportUtil.getReport("EmployeeAttendanceReport"); //$NON-NLS-1$
-
 			HashMap properties = new HashMap();
 			ReportUtil.populateRestaurantProperties(properties);
 			properties.put("fromDate", dateFormat.format(fromDate)); //$NON-NLS-1$
 			properties.put("toDate", dateFormat.format(toDate)); //$NON-NLS-1$
 			properties.put("reportDate", dateFormat.format(new Date())); //$NON-NLS-1$
-
 			AttendanceReportModel reportModel = new AttendanceReportModel();
 			reportModel.setRows(attendanceList);
-
 			JasperPrint print = JasperFillManager.fillReport(report, properties, new JRTableModelDataSource(reportModel));
-
 			JRViewer viewer = new JRViewer(print);
 			reportPanel.removeAll();
 			reportPanel.add(viewer);

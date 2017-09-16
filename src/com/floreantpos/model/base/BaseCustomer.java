@@ -1,7 +1,5 @@
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the CUSTOMER table.
@@ -11,9 +9,7 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="CUSTOMER"
  */
-
 public abstract class BaseCustomer  implements Comparable, Serializable {
-
 	public static String REF = "Customer";
 	public static String PROP_PICTURE = "picture";
 	public static String PROP_SOCIAL_SECURITY_NUMBER = "socialSecurityNumber";
@@ -41,12 +37,10 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 	public static String PROP_CREDIT_LIMIT = "creditLimit";
 	public static String PROP_LOYALTY_NO = "loyaltyNo";
 
-
 	// constructors
 	public BaseCustomer () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -54,16 +48,11 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.setAutoId(autoId);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer autoId;
-
 	// fields
 		protected java.lang.String loyaltyNo;
 		protected java.lang.Integer loyaltyPoint;
@@ -89,13 +78,10 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		protected java.lang.Double creditSpent;
 		protected java.lang.String creditCardNo;
 		protected java.lang.String note;
-
 	// collections
 	private java.util.List<com.floreantpos.model.DeliveryAddress> deliveryAddresses;
 	private java.util.List<com.floreantpos.model.DeliveryInstruction> deliveryInstructions;
 	private java.util.Map<String,String> properties;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -106,7 +92,6 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 	public java.lang.Integer getAutoId () {
 		return autoId;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param autoId the new ID
@@ -117,15 +102,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: LOYALTY_NO
 	 */
 	public java.lang.String getLoyaltyNo () {
 					return loyaltyNo;
 			}
-
 	/**
 	 * Set the value related to the column: LOYALTY_NO
 	 * @param loyaltyNo the LOYALTY_NO value
@@ -134,15 +116,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.loyaltyNo = loyaltyNo;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: LOYALTY_POINT
 	 */
 	public java.lang.Integer getLoyaltyPoint () {
 									return loyaltyPoint == null ? Integer.valueOf(0) : loyaltyPoint;
 					}
-
 	/**
 	 * Set the value related to the column: LOYALTY_POINT
 	 * @param loyaltyPoint the LOYALTY_POINT value
@@ -151,15 +130,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.loyaltyPoint = loyaltyPoint;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SOCIAL_SECURITY_NUMBER
 	 */
 	public java.lang.String getSocialSecurityNumber () {
 					return socialSecurityNumber;
 			}
-
 	/**
 	 * Set the value related to the column: SOCIAL_SECURITY_NUMBER
 	 * @param socialSecurityNumber the SOCIAL_SECURITY_NUMBER value
@@ -168,15 +144,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.socialSecurityNumber = socialSecurityNumber;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: PICTURE
 	 */
 	public byte[] getPicture () {
 					return picture;
 			}
-
 	/**
 	 * Set the value related to the column: PICTURE
 	 * @param picture the PICTURE value
@@ -185,15 +158,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.picture = picture;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: HOMEPHONE_NO
 	 */
 	public java.lang.String getHomePhoneNo () {
 					return homePhoneNo;
 			}
-
 	/**
 	 * Set the value related to the column: HOMEPHONE_NO
 	 * @param homePhoneNo the HOMEPHONE_NO value
@@ -202,15 +172,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.homePhoneNo = homePhoneNo;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: MOBILE_NO
 	 */
 	public java.lang.String getMobileNo () {
 					return mobileNo;
 			}
-
 	/**
 	 * Set the value related to the column: MOBILE_NO
 	 * @param mobileNo the MOBILE_NO value
@@ -219,15 +186,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.mobileNo = mobileNo;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: WORKPHONE_NO
 	 */
 	public java.lang.String getWorkPhoneNo () {
 					return workPhoneNo;
 			}
-
 	/**
 	 * Set the value related to the column: WORKPHONE_NO
 	 * @param workPhoneNo the WORKPHONE_NO value
@@ -236,15 +200,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.workPhoneNo = workPhoneNo;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: EMAIL
 	 */
 	public java.lang.String getEmail () {
 					return email;
 			}
-
 	/**
 	 * Set the value related to the column: EMAIL
 	 * @param email the EMAIL value
@@ -253,15 +214,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.email = email;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SALUTATION
 	 */
 	public java.lang.String getSalutation () {
 					return salutation;
 			}
-
 	/**
 	 * Set the value related to the column: SALUTATION
 	 * @param salutation the SALUTATION value
@@ -270,15 +228,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.salutation = salutation;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: FIRST_NAME
 	 */
 	public java.lang.String getFirstName () {
 					return firstName;
 			}
-
 	/**
 	 * Set the value related to the column: FIRST_NAME
 	 * @param firstName the FIRST_NAME value
@@ -287,15 +242,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.firstName = firstName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: LAST_NAME
 	 */
 	public java.lang.String getLastName () {
 					return lastName;
 			}
-
 	/**
 	 * Set the value related to the column: LAST_NAME
 	 * @param lastName the LAST_NAME value
@@ -304,15 +256,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.lastName = lastName;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: name
 	 */
 	public java.lang.String getName () {
 					return name;
 			}
-
 	/**
 	 * Set the value related to the column: name
 	 * @param name the name value
@@ -321,15 +270,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: DOB
 	 */
 	public java.lang.String getDob () {
 					return dob;
 			}
-
 	/**
 	 * Set the value related to the column: DOB
 	 * @param dob the DOB value
@@ -338,15 +284,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.dob = dob;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SSN
 	 */
 	public java.lang.String getSsn () {
 					return ssn;
 			}
-
 	/**
 	 * Set the value related to the column: SSN
 	 * @param ssn the SSN value
@@ -355,15 +298,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.ssn = ssn;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ADDRESS
 	 */
 	public java.lang.String getAddress () {
 					return address;
 			}
-
 	/**
 	 * Set the value related to the column: ADDRESS
 	 * @param address the ADDRESS value
@@ -372,15 +312,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.address = address;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CITY
 	 */
 	public java.lang.String getCity () {
 					return city;
 			}
-
 	/**
 	 * Set the value related to the column: CITY
 	 * @param city the CITY value
@@ -389,15 +326,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.city = city;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: STATE
 	 */
 	public java.lang.String getState () {
 					return state;
 			}
-
 	/**
 	 * Set the value related to the column: STATE
 	 * @param state the STATE value
@@ -406,15 +340,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.state = state;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: ZIP_CODE
 	 */
 	public java.lang.String getZipCode () {
 					return zipCode;
 			}
-
 	/**
 	 * Set the value related to the column: ZIP_CODE
 	 * @param zipCode the ZIP_CODE value
@@ -423,15 +354,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.zipCode = zipCode;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: COUNTRY
 	 */
 	public java.lang.String getCountry () {
 					return country;
 			}
-
 	/**
 	 * Set the value related to the column: COUNTRY
 	 * @param country the COUNTRY value
@@ -440,15 +368,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.country = country;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: VIP
 	 */
 	public java.lang.Boolean isVip () {
 								return vip == null ? Boolean.FALSE : vip;
 					}
-
 	/**
 	 * Set the value related to the column: VIP
 	 * @param vip the VIP value
@@ -457,15 +382,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.vip = vip;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CREDIT_LIMIT
 	 */
 	public java.lang.Double getCreditLimit () {
 									return creditLimit == null ? Double.valueOf(0) : creditLimit;
 					}
-
 	/**
 	 * Set the value related to the column: CREDIT_LIMIT
 	 * @param creditLimit the CREDIT_LIMIT value
@@ -474,15 +396,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.creditLimit = creditLimit;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CREDIT_SPENT
 	 */
 	public java.lang.Double getCreditSpent () {
 									return creditSpent == null ? Double.valueOf(0) : creditSpent;
 					}
-
 	/**
 	 * Set the value related to the column: CREDIT_SPENT
 	 * @param creditSpent the CREDIT_SPENT value
@@ -491,15 +410,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.creditSpent = creditSpent;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: CREDIT_CARD_NO
 	 */
 	public java.lang.String getCreditCardNo () {
 					return creditCardNo;
 			}
-
 	/**
 	 * Set the value related to the column: CREDIT_CARD_NO
 	 * @param creditCardNo the CREDIT_CARD_NO value
@@ -508,15 +424,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.creditCardNo = creditCardNo;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: NOTE
 	 */
 	public java.lang.String getNote () {
 					return note;
 			}
-
 	/**
 	 * Set the value related to the column: NOTE
 	 * @param note the NOTE value
@@ -525,15 +438,12 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		this.note = note;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: deliveryAddresses
 	 */
 	public java.util.List<com.floreantpos.model.DeliveryAddress> getDeliveryAddresses () {
 					return deliveryAddresses;
 			}
-
 	/**
 	 * Set the value related to the column: deliveryAddresses
 	 * @param deliveryAddresses the deliveryAddresses value
@@ -541,13 +451,10 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 	public void setDeliveryAddresses (java.util.List<com.floreantpos.model.DeliveryAddress> deliveryAddresses) {
 		this.deliveryAddresses = deliveryAddresses;
 	}
-
 	public void addTodeliveryAddresses (com.floreantpos.model.DeliveryAddress deliveryAddress) {
 		if (null == getDeliveryAddresses()) setDeliveryAddresses(new java.util.ArrayList<com.floreantpos.model.DeliveryAddress>());
 		getDeliveryAddresses().add(deliveryAddress);
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: deliveryInstructions
@@ -555,7 +462,6 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 	public java.util.List<com.floreantpos.model.DeliveryInstruction> getDeliveryInstructions () {
 					return deliveryInstructions;
 			}
-
 	/**
 	 * Set the value related to the column: deliveryInstructions
 	 * @param deliveryInstructions the deliveryInstructions value
@@ -563,13 +469,10 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 	public void setDeliveryInstructions (java.util.List<com.floreantpos.model.DeliveryInstruction> deliveryInstructions) {
 		this.deliveryInstructions = deliveryInstructions;
 	}
-
 	public void addTodeliveryInstructions (com.floreantpos.model.DeliveryInstruction deliveryInstruction) {
 		if (null == getDeliveryInstructions()) setDeliveryInstructions(new java.util.ArrayList<com.floreantpos.model.DeliveryInstruction>());
 		getDeliveryInstructions().add(deliveryInstruction);
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: properties
@@ -577,7 +480,6 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 	public java.util.Map<String,String> getProperties () {
 					return properties;
 			}
-
 	/**
 	 * Set the value related to the column: properties
 	 * @param properties the properties value
@@ -585,9 +487,6 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 	public void setProperties (java.util.Map<String,String> properties) {
 		this.properties = properties;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -599,7 +498,6 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 			else return (this.getAutoId().equals(customer.getAutoId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getAutoId()) return super.hashCode();
@@ -610,16 +508,13 @@ public abstract class BaseCustomer  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

@@ -20,11 +20,8 @@
  *
  * Created on October 12, 2006, 11:48 PM
  */
-
 package com.floreantpos.ui.model;
-
 import java.util.List;
-
 import com.floreantpos.PosRuntimeException;
 import com.floreantpos.model.MenuItemModifierGroup;
 import com.floreantpos.model.MenuModifierGroup;
@@ -32,21 +29,17 @@ import com.floreantpos.model.dao.MenuModifierGroupDAO;
 import com.floreantpos.swing.ListComboBoxModel;
 import com.floreantpos.ui.BeanEditor;
 import com.floreantpos.ui.dialog.POSMessageDialog;
-
 /**
  *
  * @author  mshahriar
  */
 public class MenuItemModifierGroupForm extends BeanEditor {
-
 	/** Creates new form MenuItemModifierGroupForm */
 	public MenuItemModifierGroupForm() {
 		this(new MenuItemModifierGroup());
 	}
-
 	public MenuItemModifierGroupForm(MenuItemModifierGroup modifierGroup) {
 		initComponents();
-
 		try {
 			MenuModifierGroupDAO dao = new MenuModifierGroupDAO();
 			List<MenuModifierGroup> groups = dao.findAll();
@@ -54,10 +47,8 @@ public class MenuItemModifierGroupForm extends BeanEditor {
 		} catch (Exception e) {
 			throw new PosRuntimeException(com.floreantpos.POSConstants.ERROR_MESSAGE);
 		}
-
 		setBean(modifierGroup);
 	}
-
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -71,13 +62,9 @@ public class MenuItemModifierGroupForm extends BeanEditor {
 		cbModifierGroups = new javax.swing.JComboBox();
 		tfMinQuantity = new javax.swing.JTextField();
 		tfMaxQuantity = new javax.swing.JTextField();
-
 		jLabel1.setText(com.floreantpos.POSConstants.MODIFIER_GROUP + ":"); //$NON-NLS-1$
-
 		jLabel2.setText(com.floreantpos.POSConstants.MIN_QUANTITY + ":"); //$NON-NLS-1$
-
 		jLabel3.setText(com.floreantpos.POSConstants.MAX_QUANTITY + ":"); //$NON-NLS-1$
-
 		org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
 		this.setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(
@@ -115,7 +102,6 @@ public class MenuItemModifierGroupForm extends BeanEditor {
 										org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
 						.addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 	}// </editor-fold>//GEN-END:initComponents
-
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JComboBox cbModifierGroups;
 	private javax.swing.JLabel jLabel1;
@@ -123,36 +109,29 @@ public class MenuItemModifierGroupForm extends BeanEditor {
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JTextField tfMaxQuantity;
 	private javax.swing.JTextField tfMinQuantity;
-
 	// End of variables declaration//GEN-END:variables
-
 	@Override
 	public boolean save() {
 		return updateModel();
 	}
-
 	@Override
 	protected void updateView() {
 		MenuItemModifierGroup modifierGroup = (MenuItemModifierGroup) getBean();
 		if (modifierGroup == null)
 			return;
-
 		cbModifierGroups.setSelectedItem(modifierGroup.getModifierGroup());
 		tfMinQuantity.setText(String.valueOf(modifierGroup.getMinQuantity()));
 		tfMaxQuantity.setText(String.valueOf(modifierGroup.getMaxQuantity()));
 	}
-
 	@Override
 	protected boolean updateModel() {
 		int minQuantity = 0;
 		int maxQuantity = 0;
-
 		try {
 			minQuantity = Integer.parseInt(tfMinQuantity.getText());
 			maxQuantity = Integer.parseInt(tfMaxQuantity.getText());
 		} catch (Exception e) {
 		}
-
 		MenuModifierGroup group = (MenuModifierGroup) cbModifierGroups.getSelectedItem();
 		if (group == null) {
 			POSMessageDialog.showError(this, com.floreantpos.POSConstants.MODIFIER_GROUP_REQUIRED);
@@ -162,18 +141,14 @@ public class MenuItemModifierGroupForm extends BeanEditor {
 		modifierGroup.setModifierGroup(group);
 		modifierGroup.setMinQuantity(minQuantity);
 		modifierGroup.setMaxQuantity(maxQuantity);
-
 		return true;
 	}
-
 	@Override
 	public String getDisplayText() {
 		MenuItemModifierGroup modifierGroup = (MenuItemModifierGroup) getBean();
 		if (modifierGroup.getId() == null) {
 			return com.floreantpos.POSConstants.ADD_NEW_MODIFIER_GROUP_IN_MENU_ITEM_;
 		}
-
 		return com.floreantpos.POSConstants.EDIT_MODIFIER_GROUP_IN_MENU_ITEM_;
 	}
-
 }

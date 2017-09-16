@@ -16,24 +16,18 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-
 import com.floreantpos.PosException;
 import com.floreantpos.model.Shift;
 
-
 public class ShiftDAO extends BaseShiftDAO {
-
 	/**
 	 * Default constructor.  Can be used in place of getInstance()
 	 */
 	public ShiftDAO () {}
-
 	public boolean exists(String shiftName) throws PosException {
 		Session session = null;
 		

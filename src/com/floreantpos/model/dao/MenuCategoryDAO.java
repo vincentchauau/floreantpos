@@ -16,27 +16,20 @@
  * ************************************************************************
  */
 package com.floreantpos.model.dao;
-
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-
 import com.floreantpos.model.MenuCategory;
-
 public class MenuCategoryDAO extends BaseMenuCategoryDAO {
-
 	/**
 	 * Default constructor.  Can be used in place of getInstance()
 	 */
 	public MenuCategoryDAO() {
 	}
-
 	public List<MenuCategory> findAllEnable() {
 		Session session = null;
-
 		try {
 			session = getSession();
 			Criteria criteria = session.createCriteria(getReferenceClass());

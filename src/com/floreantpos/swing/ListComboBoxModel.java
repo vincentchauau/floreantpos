@@ -16,25 +16,20 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.AbstractListModel;
 import javax.swing.MutableComboBoxModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
-
 public class ListComboBoxModel extends AbstractListModel implements MutableComboBoxModel, Serializable, ListDataListener {
 	private List dataList;
 	private Object selectedObject;
-
 	public ListComboBoxModel() {
 		this(new ArrayList());
 	}
-
 	public ListComboBoxModel(List list) {
 		setDataList(list);
 		
@@ -46,7 +41,6 @@ public class ListComboBoxModel extends AbstractListModel implements MutableCombo
 	public void setDataList(List list) {
 		dataList = list;
 	}
-
 	// implements javax.swing.ComboBoxModel
 	/**
 	 * Set the value of the selected item. The selected item may be null.
@@ -59,17 +53,14 @@ public class ListComboBoxModel extends AbstractListModel implements MutableCombo
 			fireContentsChanged(this, -1, -1);
 		}
 	}
-
 	// implements javax.swing.ComboBoxModel
 	public Object getSelectedItem() {
 		return selectedObject;
 	}
-
 	// implements javax.swing.ListModel
 	public int getSize() {
 		return dataList.size();
 	}
-
 	// implements javax.swing.ListModel
 	public Object getElementAt(int index) {
 		if (index >= 0 && index < dataList.size())
@@ -77,7 +68,6 @@ public class ListComboBoxModel extends AbstractListModel implements MutableCombo
 		else
 			return null;
 	}
-
 	/**
 	 * Returns the index-position of the specified object in the list.
 	 *
@@ -88,7 +78,6 @@ public class ListComboBoxModel extends AbstractListModel implements MutableCombo
 	public int getIndexOf(Object anObject) {
 		return dataList.indexOf(anObject);
 	}
-
 	// implements javax.swing.MutableComboBoxModel
 	public void addElement(Object anObject) {
 		dataList.add(anObject);
@@ -97,13 +86,11 @@ public class ListComboBoxModel extends AbstractListModel implements MutableCombo
 			setSelectedItem(anObject);
 		}
 	}
-
 	// implements javax.swing.MutableComboBoxModel
 	public void insertElementAt(Object anObject, int index) {
 		dataList.add(index, anObject);
 		fireIntervalAdded(this, index, index);
 	}
-
 	// implements javax.swing.MutableComboBoxModel
 	public void removeElementAt(int index) {
 		if (getElementAt(index) == selectedObject) {
@@ -113,12 +100,9 @@ public class ListComboBoxModel extends AbstractListModel implements MutableCombo
 				setSelectedItem(getElementAt(index - 1));
 			}
 		}
-
 		dataList.remove(index);
-
 		fireIntervalRemoved(this, index, index);
 	}
-
 	// implements javax.swing.MutableComboBoxModel
 	public void removeElement(Object anObject) {
 		int index = dataList.indexOf(anObject);
@@ -126,7 +110,6 @@ public class ListComboBoxModel extends AbstractListModel implements MutableCombo
 			removeElementAt(index);
 		}
 	}
-
 	/**
 	 * Empties the list.
 	 */
@@ -141,19 +124,16 @@ public class ListComboBoxModel extends AbstractListModel implements MutableCombo
 			selectedObject = null;
 		}
 	}
-
 	public void intervalAdded(ListDataEvent e) {
 		int index0 = e.getIndex0();
 		int index1 = e.getIndex1();
 		fireIntervalAdded(this, index0, index1);
 	}
-
 	public void intervalRemoved(ListDataEvent e) {
 		int index0 = e.getIndex0();
 		int index1 = e.getIndex1();
 		fireIntervalRemoved(this, index0, index1);
 	}
-
 	public void contentsChanged(ListDataEvent e) {
 		int index0 = e.getIndex0();
 		int index1 = e.getIndex1();

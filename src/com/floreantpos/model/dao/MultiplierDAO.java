@@ -1,23 +1,17 @@
 package com.floreantpos.model.dao;
-
 import java.util.Iterator;
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
-
 import com.floreantpos.model.Multiplier;
-
 public class MultiplierDAO extends BaseMultiplierDAO {
-
 	/**
 	 * Default constructor.  Can be used in place of getInstance()
 	 */
 	public MultiplierDAO() {
 	}
-
 	@Override
 	public List<Multiplier> findAll() {
 		Session session = null;
@@ -32,7 +26,6 @@ public class MultiplierDAO extends BaseMultiplierDAO {
 			closeSession(session);
 		}
 	}
-
 	public void saveOrUpdateMultipliers(List<Multiplier> items) {
 		Session session = null;
 		Transaction tx = null;
@@ -48,7 +41,6 @@ public class MultiplierDAO extends BaseMultiplierDAO {
 			session.close();
 		}
 	}
-
 	public void saveOrUpdateMultipliers(List<Multiplier> items, Session session) {
 		for (Iterator iterator = items.iterator(); iterator.hasNext();) {
 			Multiplier multiplier = (Multiplier) iterator.next();

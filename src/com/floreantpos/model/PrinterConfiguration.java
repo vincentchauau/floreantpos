@@ -16,29 +16,22 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 import com.floreantpos.Messages;
 import com.floreantpos.model.base.BasePrinterConfiguration;
 
-
-
 public class PrinterConfiguration extends BasePrinterConfiguration {
 	private static final long serialVersionUID = 1L;
-
 /*[CONSTRUCTOR MARKER BEGIN]*/
 	public PrinterConfiguration () {
 		super();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
 	public PrinterConfiguration (java.lang.Integer id) {
 		super(id);
 	}
-
 /*[CONSTRUCTOR MARKER END]*/
-
 	public final static Integer ID = Integer.valueOf(1);
 	
 	@Override

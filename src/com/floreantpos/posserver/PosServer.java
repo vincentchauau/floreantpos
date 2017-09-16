@@ -1,23 +1,17 @@
 package com.floreantpos.posserver;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
 import com.floreantpos.PosLog;
 import com.floreantpos.model.dao._RootDAO;
-
 public class PosServer implements Runnable {
 	public static final int PORT = 5656;
-
 	public PosServer() {
 		new Thread(this).start();
 	}
-
 	@Override
 	public void run() {
 		ServerSocket ss = null;
-
 		try {
 			PosLog.info(getClass(), "listening on ..." + PORT);
 			ss = new ServerSocket(PORT);
@@ -34,7 +28,6 @@ public class PosServer implements Runnable {
 			}
 		}
 	}
-
 	static void listen(ServerSocket ss) throws Exception {
 		//DataInputStream dis = null;
 		//DataOutputStream dos = null;
@@ -43,19 +36,15 @@ public class PosServer implements Runnable {
 		// Get Table Response Samples
 		// general response
 		//String prepend = "<POSResponse><Ident id='";
-
 		//String respTable = "' ttype='45'/>";
-
 		String resp = "";
 		String ids = "";
 		while (true) {
 			// ACCEPT Connections
 			PosLog.info(PosServer.class, "Waiting For Connections....");
 			Socket s = ss.accept();
-
 			PosRequestHandler posRequestHandler = new PosRequestHandler(s);
 			posRequestHandler.start();
-
 			//			//BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
 			//			//BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			//			//dis = new DataInputStream(s.getInputStream());
@@ -143,31 +132,22 @@ public class PosServer implements Runnable {
 			//			s.close();
 		}
 	}
-
 	public static void main(String[] args) throws Exception {
 		_RootDAO.initialize();
-
 		/*User user = UserDAO.getInstance().findUserBySecretKey("1111");
 		List<Ticket> ticketsForUser = TicketDAO.getInstance().findOpenTicketsForUser(user);
-
 		POSResponse posResponse = new POSResponse();
-
 		Ident ident = new Ident();
 		ident.setId("345");
 		ident.setTtype("45");
-
 		POSDefaultInfo posDefaultInfo = new POSDefaultInfo();
 		posDefaultInfo.setServer("1111");
 		posDefaultInfo.setRes("1");
 		posDefaultInfo.setrText("Success");
-
 		posResponse.setIdent(ident);
 		posResponse.setPosDefaultInfo(posDefaultInfo);
-
 		Checks checks = new Checks();
-
 		checks.setCheckList(new ArrayList<Check>());
-
 		for (Ticket ticket : ticketsForUser) {
 			List<Integer> tableNumbers = ticket.getTableNumbers();
 			if (tableNumbers != null && tableNumbers.size() > 0) {
@@ -181,14 +161,11 @@ public class PosServer implements Runnable {
 				checks.getCheckList().add(chk);
 			}
 		}
-
 		posResponse.setChecks(checks);
-
 		JAXBContext messageContext = JAXBContext.newInstance(POSResponse.class);
 		Marshaller marshaller = messageContext.createMarshaller();
 		final StringWriter dataWriter = new StringWriter();
 		marshaller.marshal(posResponse, dataWriter);
-
 		String string = dataWriter.toString();
 		string = string.replaceAll("<\\?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"\\?>", "");
 		PosLog.debug(getClass(),string);*/

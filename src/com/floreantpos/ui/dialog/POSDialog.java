@@ -16,21 +16,16 @@
  * ************************************************************************
  */
 package com.floreantpos.ui.dialog;
-
 import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Window;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-
 import com.floreantpos.config.TerminalConfig;
 import com.floreantpos.main.Application;
-
 public class POSDialog extends JDialog {
 	protected boolean canceled = true;
-
 	public POSDialog() throws HeadlessException {
 		super(Application.getPosWindow(), true);
 		initUI();
@@ -42,14 +37,12 @@ public class POSDialog extends JDialog {
 		initUI();
 		setIconImage(Application.getPosWindow().getIconImage());
 	}
-
 //	public POSDialog(Window owner) {
 //		this(owner, "");
 //	}
 //
 	public POSDialog(Window owner, String title) {
 		this(owner, title, true);
-
 		initUI();
 	}
 	
@@ -60,7 +53,6 @@ public class POSDialog extends JDialog {
 	}
 	
 	protected void initUI() {}
-
 	public void open() {
 		canceled = true;
 		
@@ -73,7 +65,6 @@ public class POSDialog extends JDialog {
 			else {
 				setLocationRelativeTo(owner);
 			}
-
 		}
 		else {
 			setLocationRelativeTo(getOwner());
@@ -96,11 +87,9 @@ public class POSDialog extends JDialog {
 		setUndecorated(true);
 		setVisible(true);
 	}
-
 	public boolean isCanceled() {
 		return canceled;
 	}
-
 	public void setCanceled(boolean canceled) {
 		this.canceled = canceled;
 	}

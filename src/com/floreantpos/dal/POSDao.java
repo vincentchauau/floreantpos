@@ -16,14 +16,10 @@
  * ************************************************************************
  */
 package com.floreantpos.dal;
-
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.floreantpos.PosException;
-
 public class POSDao {
 	public static void save(Object o) throws Exception {
 		Transaction tx = null;
@@ -84,5 +80,4 @@ public class POSDao {
 			PosSessionFactory.closeSession();
 		}
 	}
-
 }

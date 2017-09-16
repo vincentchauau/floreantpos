@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model.base;
-
 import java.io.Serializable;
-
 
 /**
  * This is an object that contains data related to the MENU_ITEM_SHIFT table.
@@ -28,20 +26,16 @@ import java.io.Serializable;
  * @hibernate.class
  *  table="MENU_ITEM_SHIFT"
  */
-
 public abstract class BaseMenuItemShift  implements Comparable, Serializable {
-
 	public static String REF = "MenuItemShift"; //$NON-NLS-1$
 	public static String PROP_SHIFT_PRICE = "shiftPrice"; //$NON-NLS-1$
 	public static String PROP_SHIFT = "shift"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 
-
 	// constructors
 	public BaseMenuItemShift () {
 		initialize();
 	}
-
 	/**
 	 * Constructor for primary key
 	 */
@@ -49,23 +43,15 @@ public abstract class BaseMenuItemShift  implements Comparable, Serializable {
 		this.setId(id);
 		initialize();
 	}
-
 	protected void initialize () {}
 
-
-
 	private int hashCode = Integer.MIN_VALUE;
-
 	// primary key
 	private java.lang.Integer id;
-
 	// fields
 	private java.lang.Double shiftPrice;
-
 	// many to one
 	private com.floreantpos.model.Shift shift;
-
-
 
 	/**
 	 * Return the unique identifier of this class
@@ -76,7 +62,6 @@ public abstract class BaseMenuItemShift  implements Comparable, Serializable {
 	public java.lang.Integer getId () {
 		return id;
 	}
-
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
@@ -87,15 +72,12 @@ public abstract class BaseMenuItemShift  implements Comparable, Serializable {
 	}
 
 
-
-
 	/**
 	 * Return the value associated with the column: SHIFT_PRICE
 	 */
 	public java.lang.Double getShiftPrice () {
 			return shiftPrice == null ? Double.valueOf(0) : shiftPrice;
 	}
-
 	/**
 	 * Set the value related to the column: SHIFT_PRICE
 	 * @param shiftPrice the SHIFT_PRICE value
@@ -104,15 +86,12 @@ public abstract class BaseMenuItemShift  implements Comparable, Serializable {
 		this.shiftPrice = shiftPrice;
 	}
 
-
-
 	/**
 	 * Return the value associated with the column: SHIFT_ID
 	 */
 	public com.floreantpos.model.Shift getShift () {
 			return shift;
 	}
-
 	/**
 	 * Set the value related to the column: SHIFT_ID
 	 * @param shift the SHIFT_ID value
@@ -120,9 +99,6 @@ public abstract class BaseMenuItemShift  implements Comparable, Serializable {
 	public void setShift (com.floreantpos.model.Shift shift) {
 		this.shift = shift;
 	}
-
-
-
 
 
 	public boolean equals (Object obj) {
@@ -134,7 +110,6 @@ public abstract class BaseMenuItemShift  implements Comparable, Serializable {
 			else return (this.getId().equals(menuItemShift.getId()));
 		}
 	}
-
 	public int hashCode () {
 		if (Integer.MIN_VALUE == this.hashCode) {
 			if (null == this.getId()) return super.hashCode();
@@ -145,16 +120,13 @@ public abstract class BaseMenuItemShift  implements Comparable, Serializable {
 		}
 		return this.hashCode;
 	}
-
 	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-
 	public String toString () {
 		return super.toString();
 	}
-
 
 }

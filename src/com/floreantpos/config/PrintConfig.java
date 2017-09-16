@@ -17,7 +17,6 @@
  */
 package com.floreantpos.config;
 
-
 public class PrintConfig {
 //	public final static String P_RECEIPT_PRINTER_TYPE =  "RECEIPT_PRINTER_TYPE";
 	public final static String REPORT_PRINTER_NAME = "report_printer_name"; //$NON-NLS-1$
@@ -31,7 +30,6 @@ public class PrintConfig {
 	public final static String P_PRINT_RECEIPT_ON_ORDER_SETTLE = "print_receipt_on_order_settle"; //$NON-NLS-1$
 	public final static String P_PRINT_TO_KITCHEN_ON_ORDER_FINISH = "print_to_kitchen_on_order_finish"; //$NON-NLS-1$
 	public final static String P_PRINT_TO_KITCHEN_ON_ORDER_SETTLE = "print_to_kitchen_on_order_settle"; //$NON-NLS-1$
-
 //	public static String getReportPrinterName() {
 //		return AppConfig.getString(REPORT_PRINTER_NAME, ""); //$NON-NLS-1$
 //	}
