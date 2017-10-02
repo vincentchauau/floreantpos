@@ -26,19 +26,18 @@ import java.awt.LayoutManager;
 import java.awt.Rectangle;
 import javax.swing.JPanel;
 /**
- * source:
- * http://java.sun.com/products/jfc/tsc/articles/cardpanel/
+ * source: http://java.sun.com/products/jfc/tsc/articles/cardpanel/
  * <p>
- * 
+ *
  * A simpler alternative to a JPanel with a CardLayout. The AWT CardLayout
  * layout manager can be inconvenient to use because the special "stack of
  * cards" operations it supports require a cast to use. For example to show the
  * card named "myCard" given a JPanel with a CardLayout one would write:
- * 
+ *
  * <pre>
  * ((CardLayout) (myJPanel.getLayout())).show(myJPanel, &quot;myCard&quot;);
  * </pre>
- * 
+ *
  * This doesn't work well with Swing - all of the CardLayout display operations,
  * like <code>show</code> call validate directly. Swing supports automatic
  * validation (see JComponent.revalidate()); this direct call to validate is
@@ -48,35 +47,35 @@ import javax.swing.JPanel;
  * number of cards, on the order of 100 or less. A cards name is it's component
  * name, as in java.awt.Component.getName(), which is set when the component is
  * added to the CardPanel:
- * 
+ *
  * <pre>
- * 
+ *
  * myCardPanel.add(myChild, &quot;MyChildName&quot;);
- * 
+ *
  * </pre>
- * 
+ *
  * As with CardLayout, the first child added to a CardPanel is made visible and
  * there's only one child visible at a time. The <code>showCard</code> method
  * accepts either a childs name or the child itself:
- * 
+ *
  * <pre>
  * myCardPanel.show(&quot;MyChildName&quot;);
  * myCardPanel.show(myChild);
  * </pre>
- * 
+ *
  * <p>
  * The CardPanel class doesn't support the vgap/hgap CardLayout properties since
  * one can add a Border, see JComponent.setBorder().
  * <p>
- * Originallly the <code>getVisibleChild()</code> method was private. I
- * changed it to protected. Alexander Benkwitz Feb 2002.
+ * Originallly the <code>getVisibleChild()</code> method was private. I changed
+ * it to protected. Alexander Benkwitz Feb 2002.
  */
 public class CardPanel extends JPanel {
     private static class Layout implements LayoutManager {
         /**
          * Set the childs name (if non-null) and and make it visible iff it's
          * the only CardPanel child.
-         * 
+         *
          * @see java.awt.Component#setName
          */
         public void addLayoutComponent(String name, Component child) {
@@ -151,8 +150,8 @@ public class CardPanel extends JPanel {
         }
     }
     /**
-     * Creates a <code>CardPanel</code>. Children, called "cards" in this
-     * API, should be added with add(). The first child we be made visible,
+     * Creates a <code>CardPanel</code>. Children, called "cards" in this API,
+     * should be added with add(). The first child we be made visible,
      * subsequent children will be hidden. To show a card, use one of the
      * show*Card methods.
      */
@@ -192,7 +191,7 @@ public class CardPanel extends JPanel {
     }
     /**
      * Show the card with the specified name.
-     * 
+     *
      * @see java.awt.Component#getName
      */
     public void showCard(String name) {

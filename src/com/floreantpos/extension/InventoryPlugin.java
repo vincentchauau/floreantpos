@@ -16,19 +16,15 @@
  * ************************************************************************
  */
 package com.floreantpos.extension;
-
 import javax.swing.AbstractAction;
 import javax.swing.JTabbedPane;
-
 public abstract class InventoryPlugin extends AbstractFloreantPlugin {
-	//	void showInventoryItemEntryDialog();
-	//	void showInventoryGroupEntryDialog();
-	//	void showInventoryLocationEntryDialog();
-	//	void showInventoryMetacodeEntryDialog();
-	//	void showInventoryVendorEntryDialog();
-	//	void showInventoryWarehouseEntryDialog();
-
-	public abstract AbstractAction[] getActions();
-
-	public abstract void addRecepieView(JTabbedPane tabbedPane);
+    //	void showInventoryItemEntryDialog();
+    //	void showInventoryGroupEntryDialog();
+    //	void showInventoryLocationEntryDialog();
+    //	void showInventoryMetacodeEntryDialog();
+    //	void showInventoryVendorEntryDialog();
+    //	void showInventoryWarehouseEntryDialog();
+    public abstract AbstractAction[] getActions();
+    public abstract void addRecepieView(JTabbedPane tabbedPane);
 }

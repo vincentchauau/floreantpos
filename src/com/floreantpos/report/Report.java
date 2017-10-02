@@ -21,62 +21,61 @@ import net.sf.jasperreports.view.JRViewer;
 import com.floreantpos.model.Terminal;
 import com.floreantpos.model.UserType;
 public abstract class Report {
-	public static final int REPORT_TYPE_1 = 0;
-	public static final int REPORT_TYPE_2 = 1;
-	private Date startDate;
-	private Date endDate;
-	private Terminal terminal;
-	private UserType userType; 
-	private int reportType = REPORT_TYPE_1;
-	private boolean includeFreeItem = false;
-	protected JRViewer viewer;
-	public abstract void refresh() throws Exception;
-	public abstract boolean isDateRangeSupported();
-	public abstract boolean isTypeSupported();
-	public JRViewer getViewer() {
-		return viewer;
-	}
-	public Date getEndDate() {
-		if (endDate == null) {
-			return new Date();
-		}
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	public int getReportType() {
-		return reportType;
-	}
-	public void setReportType(int reportType) {
-		this.reportType = reportType;
-	}
-	public boolean isIncludedFreeItems() {
-		return includeFreeItem;
-	}
-	public void setIncludeFreeItems(boolean includeFreeItem) {
-		this.includeFreeItem = includeFreeItem;
-	}
-	public Terminal getTerminal() {
-		return terminal;
-	}
-	public void setTerminal(Terminal terminal) {
-		this.terminal = terminal;
-	}
-	
-	public UserType getUserType() {
-		return userType;
-	}
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-	public Date getStartDate() {
-		if (startDate == null) {
-			return new Date();
-		}
-		return startDate;
-	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+    public static final int REPORT_TYPE_1 = 0;
+    public static final int REPORT_TYPE_2 = 1;
+    private Date startDate;
+    private Date endDate;
+    private Terminal terminal;
+    private UserType userType;
+    private int reportType = REPORT_TYPE_1;
+    private boolean includeFreeItem = false;
+    protected JRViewer viewer;
+    public abstract void refresh() throws Exception;
+    public abstract boolean isDateRangeSupported();
+    public abstract boolean isTypeSupported();
+    public JRViewer getViewer() {
+        return viewer;
+    }
+    public Date getEndDate() {
+        if (endDate == null) {
+            return new Date();
+        }
+        return endDate;
+    }
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+    public int getReportType() {
+        return reportType;
+    }
+    public void setReportType(int reportType) {
+        this.reportType = reportType;
+    }
+    public boolean isIncludedFreeItems() {
+        return includeFreeItem;
+    }
+    public void setIncludeFreeItems(boolean includeFreeItem) {
+        this.includeFreeItem = includeFreeItem;
+    }
+    public Terminal getTerminal() {
+        return terminal;
+    }
+    public void setTerminal(Terminal terminal) {
+        this.terminal = terminal;
+    }
+    public UserType getUserType() {
+        return userType;
+    }
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+    public Date getStartDate() {
+        if (startDate == null) {
+            return new Date();
+        }
+        return startDate;
+    }
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 }

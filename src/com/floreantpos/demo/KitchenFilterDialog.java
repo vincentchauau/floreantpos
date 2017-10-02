@@ -31,34 +31,34 @@ import com.floreantpos.swing.PosButton;
 import com.floreantpos.ui.TitlePanel;
 import com.floreantpos.ui.dialog.POSDialog;
 /**
- * 
+ *
  * @author MShahriar
  */
 public class KitchenFilterDialog extends POSDialog {
-	public KitchenFilterDialog() {
-		initializeComponent();
-		setResizable(true);
-	}
-	private void initializeComponent() {
-		setTitle("Select Printer and Order Type"); //$NON-NLS-1$
-		setLayout(new BorderLayout());
-		TitlePanel titlePanel = new TitlePanel();
-		titlePanel.setTitle("Select Printer and Order Type");//$NON-NLS-1$
-		add(titlePanel, BorderLayout.NORTH);
-		JPanel buttonActionPanel = new JPanel(new MigLayout("fill")); //$NON-NLS-1$
-		PosButton btnCancel = new PosButton(POSConstants.CANCEL.toUpperCase());
-		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				setCanceled(true);
-				dispose();
-			}
-		});
-		buttonActionPanel.add(btnCancel, "grow, span"); //$NON-NLS-1$
-		JPanel footerPanel = new JPanel(new BorderLayout());
-		footerPanel.setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
-		footerPanel.add(new JSeparator(), BorderLayout.NORTH);
-		footerPanel.add(buttonActionPanel);
-		add(footerPanel, BorderLayout.SOUTH);
-		setSize(550, 450);
-	}
+    public KitchenFilterDialog() {
+        initializeComponent();
+        setResizable(true);
+    }
+    private void initializeComponent() {
+        setTitle("Select Printer and Order Type"); //$NON-NLS-1$
+        setLayout(new BorderLayout());
+        TitlePanel titlePanel = new TitlePanel();
+        titlePanel.setTitle("Select Printer and Order Type");//$NON-NLS-1$
+        add(titlePanel, BorderLayout.NORTH);
+        JPanel buttonActionPanel = new JPanel(new MigLayout("fill")); //$NON-NLS-1$
+        PosButton btnCancel = new PosButton(POSConstants.CANCEL.toUpperCase());
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setCanceled(true);
+                dispose();
+            }
+        });
+        buttonActionPanel.add(btnCancel, "grow, span"); //$NON-NLS-1$
+        JPanel footerPanel = new JPanel(new BorderLayout());
+        footerPanel.setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
+        footerPanel.add(new JSeparator(), BorderLayout.NORTH);
+        footerPanel.add(buttonActionPanel);
+        add(footerPanel, BorderLayout.SOUTH);
+        setSize(550, 450);
+    }
 }

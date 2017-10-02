@@ -18,24 +18,23 @@
 package com.floreantpos.model.dao;
 import java.util.List;
 import com.floreantpos.model.Restaurant;
-
 public class RestaurantDAO extends BaseRestaurantDAO {
-	/**
-	 * Default constructor.  Can be used in place of getInstance()
-	 */
-	public RestaurantDAO () {}
-	public static Restaurant getRestaurant() {
-		Restaurant restaurant = getInstance().get(Integer.valueOf(1));
-		if (restaurant == null) {
-			List<Restaurant> list = getInstance().findAll();
-			if (list != null && list.size() > 0) {
-				return list.get(0);
-			}
-			
-			restaurant = new Restaurant(1);
-			getInstance().save(restaurant);
-			return restaurant;
-		}
-		return restaurant;
-	}
+    /**
+     * Default constructor. Can be used in place of getInstance()
+     */
+    public RestaurantDAO() {
+    }
+    public static Restaurant getRestaurant() {
+        Restaurant restaurant = getInstance().get(Integer.valueOf(1));
+        if (restaurant == null) {
+            List<Restaurant> list = getInstance().findAll();
+            if (list != null && list.size() > 0) {
+                return list.get(0);
+            }
+            restaurant = new Restaurant(1);
+            getInstance().save(restaurant);
+            return restaurant;
+        }
+        return restaurant;
+    }
 }

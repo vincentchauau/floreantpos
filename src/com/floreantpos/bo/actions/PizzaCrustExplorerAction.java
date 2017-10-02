@@ -24,27 +24,26 @@ import com.floreantpos.Messages;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.PizzaCrustExplorer;
 public class PizzaCrustExplorerAction extends AbstractAction {
-	public PizzaCrustExplorerAction() {
-		super(Messages.getString("PizzaCrustExplorerAction.0")); //$NON-NLS-1$
-	}
-	public PizzaCrustExplorerAction(String name) {
-		super(name);
-	}
-	public PizzaCrustExplorerAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
-		PizzaCrustExplorer explorer = null;
-		JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
-		int index = tabbedPane.indexOfTab(Messages.getString("PizzaCrustExplorerAction.0")); //$NON-NLS-1$
-		if (index == -1) {
-			explorer = new PizzaCrustExplorer();
-			tabbedPane.addTab(Messages.getString("PizzaCrustExplorerAction.0"), explorer); //$NON-NLS-1$
-		}
-		else {
-			explorer = (PizzaCrustExplorer) tabbedPane.getComponentAt(index);
-		}
-		tabbedPane.setSelectedComponent(explorer);
-	}
+    public PizzaCrustExplorerAction() {
+        super(Messages.getString("PizzaCrustExplorerAction.0")); //$NON-NLS-1$
+    }
+    public PizzaCrustExplorerAction(String name) {
+        super(name);
+    }
+    public PizzaCrustExplorerAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
+        PizzaCrustExplorer explorer = null;
+        JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
+        int index = tabbedPane.indexOfTab(Messages.getString("PizzaCrustExplorerAction.0")); //$NON-NLS-1$
+        if (index == -1) {
+            explorer = new PizzaCrustExplorer();
+            tabbedPane.addTab(Messages.getString("PizzaCrustExplorerAction.0"), explorer); //$NON-NLS-1$
+        } else {
+            explorer = (PizzaCrustExplorer) tabbedPane.getComponentAt(index);
+        }
+        tabbedPane.setSelectedComponent(explorer);
+    }
 }

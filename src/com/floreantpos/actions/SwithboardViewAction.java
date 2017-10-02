@@ -16,34 +16,27 @@
  * ************************************************************************
  */
 package com.floreantpos.actions;
-
 import javax.swing.Action;
-
 import com.floreantpos.IconFactory;
 import com.floreantpos.main.Application;
 import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.ui.views.SwitchboardView;
 import com.floreantpos.ui.views.order.RootView;
-
 public class SwithboardViewAction extends ViewChangeAction {
-
-	public SwithboardViewAction() {
-		super(); //$NON-NLS-1$
-	}
-	
-	public SwithboardViewAction(boolean showText, boolean showIcon) {
-		if (showIcon) {
-			putValue(Action.SMALL_ICON, IconFactory.getIcon("order.png")); //$NON-NLS-1$
-		}
-	}
-
-	@Override
-	public void execute() {
-		try {
-			RootView.getInstance().showView(SwitchboardView.getInstance()); 
-		} catch (Exception e) {
-			POSMessageDialog.showError(Application.getPosWindow(),e.getMessage(), e);
-		}
-	}
-
+    public SwithboardViewAction() {
+        super(); //$NON-NLS-1$
+    }
+    public SwithboardViewAction(boolean showText, boolean showIcon) {
+        if (showIcon) {
+            putValue(Action.SMALL_ICON, IconFactory.getIcon("order.png")); //$NON-NLS-1$
+        }
+    }
+    @Override
+    public void execute() {
+        try {
+            RootView.getInstance().showView(SwitchboardView.getInstance());
+        } catch (Exception e) {
+            POSMessageDialog.showError(Application.getPosWindow(), e.getMessage(), e);
+        }
+    }
 }

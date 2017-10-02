@@ -16,9 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.ui.views.payment;
-
 import com.floreantpos.model.PaymentType;
-
 public interface CardInputListener {
-	void cardInputted(CardInputProcessor inputter , PaymentType cardType);
+    void cardInputted(CardInputProcessor inputter, PaymentType cardType);
 }

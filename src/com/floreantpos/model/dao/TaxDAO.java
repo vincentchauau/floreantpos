@@ -21,20 +21,20 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import com.floreantpos.model.Tax;
 public class TaxDAO extends BaseTaxDAO {
-	/**
-	 * Default constructor.  Can be used in place of getInstance()
-	 */
-	public TaxDAO() {
-	}
-	public Tax findByTaxRate(double taxRate) {
-		Session session = null;
-		try {
-			session = createNewSession();
-			Criteria criteria = session.createCriteria(Tax.class);
-			criteria.add(Restrictions.eq(Tax.PROP_RATE, taxRate));
-			return (Tax) criteria.uniqueResult();
-		} finally {
-			closeSession(session);
-		}
-	}
+    /**
+     * Default constructor. Can be used in place of getInstance()
+     */
+    public TaxDAO() {
+    }
+    public Tax findByTaxRate(double taxRate) {
+        Session session = null;
+        try {
+            session = createNewSession();
+            Criteria criteria = session.createCriteria(Tax.class);
+            criteria.add(Restrictions.eq(Tax.PROP_RATE, taxRate));
+            return (Tax) criteria.uniqueResult();
+        } finally {
+            closeSession(session);
+        }
+    }
 }

@@ -40,126 +40,125 @@ import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.util.POSUtil;
 /**
  *
- * @author  MShahriar
+ * @author MShahriar
  */
 public class CurrencyForm extends BeanEditor {
-	private FixedLengthTextField tfCode;
-	private FixedLengthTextField tfName;
-	private JTextField tfSymbol;
-	private DoubleTextField tfExchangeRate;
-	private DoubleTextField tfTolerance;
-	private JCheckBox chkMain;
-	public CurrencyForm() {
-		this(new Currency());
-	}
-	public CurrencyForm(Currency currency) {
-		initComponents();
-		setBean(currency);
-	}
-	private void initComponents() {
-		JPanel contentPanel = new JPanel(new MigLayout("fill"));
-		JLabel lblCode = new JLabel("Code:");
-		tfCode = new FixedLengthTextField();
-		JLabel lblName = new JLabel(com.floreantpos.POSConstants.NAME + ":");
-		tfName = new FixedLengthTextField();
-		JLabel lblExchangeRate = new JLabel("Exchange Rate:");
-		tfExchangeRate = new DoubleTextField();
-		JLabel lblTolerance = new JLabel("Tolerance:");
-		tfTolerance = new DoubleTextField();
-		JLabel lblSymbol = new JLabel("Symbol");
-		tfSymbol = new JTextField();
-		chkMain = new JCheckBox("Main");
-		contentPanel.add(lblName, "cell 0 0");
-		contentPanel.add(tfName, "cell 1 0");
-		contentPanel.add(lblCode, "cell 0 1");
-		contentPanel.add(tfCode, "cell 1 1");
-		contentPanel.add(lblSymbol, "cell 0 2");
-		contentPanel.add(tfSymbol, "grow,cell 1 2");
-		contentPanel.add(lblExchangeRate, "cell 0 3");
-		contentPanel.add(tfExchangeRate, "grow,cell 1 3");
-		contentPanel.add(lblTolerance, "cell 0 4");
-		contentPanel.add(tfTolerance, "grow,cell 1 4");
-		contentPanel.add(chkMain, "cell 1 5");
-		add(contentPanel);
-	}
-	@Override
-	public boolean save() {
-		try {
-			if (!updateModel())
-				return false;
-			Currency currency = (Currency) getBean();
-			CurrencyDAO dao = new CurrencyDAO();
-			dao.saveOrUpdate(currency);
-		} catch (Exception e) {
-			MessageDialog.showError(e);
-			return false;
-		}
-		return true;
-	}
-	@Override
-	protected void updateView() {
-		Currency currency = (Currency) getBean();
-		if (currency == null) {
-			return;
-		}
-		tfCode.setText(currency.getCode());
-		tfName.setText(currency.getName());
-		tfSymbol.setText(currency.getSymbol());
-		tfExchangeRate.setText("" + currency.getExchangeRate()); //$NON-NLS-1$
-		tfTolerance.setText("" + currency.getTolerance()); //$NON-NLS-1$
-		chkMain.setSelected(currency.isMain());
-	}
-	@Override
-	protected boolean updateModel() {
-		Currency currency = (Currency) getBean();
-		String code = tfCode.getText();
-		String name = tfName.getText();
-		if (POSUtil.isBlankOrNull(code)) {
-			MessageDialog.showError("Code is required");
-			return false;
-		}
-		
-		double exchangeRate = tfExchangeRate.getDouble();
-		if(chkMain.isSelected()) {
-			if(exchangeRate != 1.0) {
-				POSMessageDialog.showMessage(POSUtil.getFocusedWindow(), "Exchange rate must be 1.0 for main currency");
-				return false;
-			}
-		}
-		
-		currency.setCode(code);
-		currency.setName(name);
-		currency.setSymbol(tfSymbol.getText());
-		currency.setMain(chkMain.isSelected());
-		currency.setExchangeRate(exchangeRate);
-		currency.setTolerance(tfTolerance.getDouble());
-		if (chkMain.isSelected()) {
-			CurrencyDAO dao = new CurrencyDAO();
-			List<Currency> currencyList = dao.findAll();
-			Session session = null;
-			Transaction transaction = null;
-			try {
-				session = CurrencyDAO.getInstance().createNewSession();
-				transaction = session.beginTransaction();
-				for (Currency curr : currencyList) {
-					curr.setMain(false);
-					session.saveOrUpdate(curr);
-				}
-				transaction.commit();
-			} catch (Exception ex) {
-				transaction.rollback();
-				BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, ex);
-			} finally {
-				session.close();
-			}
-		}
-		return true;
-	}
-	public String getDisplayText() {
-		Currency currency = (Currency) getBean();
-		if (currency.getId() == null) {
-			return "New Currency";
-		}
-		return "Edit Currency";
-	}
+    private FixedLengthTextField tfCode;
+    private FixedLengthTextField tfName;
+    private JTextField tfSymbol;
+    private DoubleTextField tfExchangeRate;
+    private DoubleTextField tfTolerance;
+    private JCheckBox chkMain;
+    public CurrencyForm() {
+        this(new Currency());
+    }
+    public CurrencyForm(Currency currency) {
+        initComponents();
+        setBean(currency);
+    }
+    private void initComponents() {
+        JPanel contentPanel = new JPanel(new MigLayout("fill"));
+        JLabel lblCode = new JLabel("Code:");
+        tfCode = new FixedLengthTextField();
+        JLabel lblName = new JLabel(com.floreantpos.POSConstants.NAME + ":");
+        tfName = new FixedLengthTextField();
+        JLabel lblExchangeRate = new JLabel("Exchange Rate:");
+        tfExchangeRate = new DoubleTextField();
+        JLabel lblTolerance = new JLabel("Tolerance:");
+        tfTolerance = new DoubleTextField();
+        JLabel lblSymbol = new JLabel("Symbol");
+        tfSymbol = new JTextField();
+        chkMain = new JCheckBox("Main");
+        contentPanel.add(lblName, "cell 0 0");
+        contentPanel.add(tfName, "cell 1 0");
+        contentPanel.add(lblCode, "cell 0 1");
+        contentPanel.add(tfCode, "cell 1 1");
+        contentPanel.add(lblSymbol, "cell 0 2");
+        contentPanel.add(tfSymbol, "grow,cell 1 2");
+        contentPanel.add(lblExchangeRate, "cell 0 3");
+        contentPanel.add(tfExchangeRate, "grow,cell 1 3");
+        contentPanel.add(lblTolerance, "cell 0 4");
+        contentPanel.add(tfTolerance, "grow,cell 1 4");
+        contentPanel.add(chkMain, "cell 1 5");
+        add(contentPanel);
+    }
+    @Override
+    public boolean save() {
+        try {
+            if (!updateModel()) {
+                return false;
+            }
+            Currency currency = (Currency) getBean();
+            CurrencyDAO dao = new CurrencyDAO();
+            dao.saveOrUpdate(currency);
+        } catch (Exception e) {
+            MessageDialog.showError(e);
+            return false;
+        }
+        return true;
+    }
+    @Override
+    protected void updateView() {
+        Currency currency = (Currency) getBean();
+        if (currency == null) {
+            return;
+        }
+        tfCode.setText(currency.getCode());
+        tfName.setText(currency.getName());
+        tfSymbol.setText(currency.getSymbol());
+        tfExchangeRate.setText("" + currency.getExchangeRate()); //$NON-NLS-1$
+        tfTolerance.setText("" + currency.getTolerance()); //$NON-NLS-1$
+        chkMain.setSelected(currency.isMain());
+    }
+    @Override
+    protected boolean updateModel() {
+        Currency currency = (Currency) getBean();
+        String code = tfCode.getText();
+        String name = tfName.getText();
+        if (POSUtil.isBlankOrNull(code)) {
+            MessageDialog.showError("Code is required");
+            return false;
+        }
+        double exchangeRate = tfExchangeRate.getDouble();
+        if (chkMain.isSelected()) {
+            if (exchangeRate != 1.0) {
+                POSMessageDialog.showMessage(POSUtil.getFocusedWindow(), "Exchange rate must be 1.0 for main currency");
+                return false;
+            }
+        }
+        currency.setCode(code);
+        currency.setName(name);
+        currency.setSymbol(tfSymbol.getText());
+        currency.setMain(chkMain.isSelected());
+        currency.setExchangeRate(exchangeRate);
+        currency.setTolerance(tfTolerance.getDouble());
+        if (chkMain.isSelected()) {
+            CurrencyDAO dao = new CurrencyDAO();
+            List<Currency> currencyList = dao.findAll();
+            Session session = null;
+            Transaction transaction = null;
+            try {
+                session = CurrencyDAO.getInstance().createNewSession();
+                transaction = session.beginTransaction();
+                for (Currency curr : currencyList) {
+                    curr.setMain(false);
+                    session.saveOrUpdate(curr);
+                }
+                transaction.commit();
+            } catch (Exception ex) {
+                transaction.rollback();
+                BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, ex);
+            } finally {
+                session.close();
+            }
+        }
+        return true;
+    }
+    public String getDisplayText() {
+        Currency currency = (Currency) getBean();
+        if (currency.getId() == null) {
+            return "New Currency";
+        }
+        return "Edit Currency";
+    }
 }

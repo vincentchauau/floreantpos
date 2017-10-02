@@ -24,27 +24,26 @@ import com.floreantpos.POSConstants;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.TicketExplorer;
 public class TicketExplorerAction extends AbstractAction {
-	public TicketExplorerAction() {
-		super(POSConstants.CLOSED_TICKETS);
-	}
-	public TicketExplorerAction(String name) {
-		super(name);
-	}
-	public TicketExplorerAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
-		TicketExplorer explorer = null;
-		JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
-		int index = tabbedPane.indexOfTab(POSConstants.CLOSED_TICKETS);
-		if (index == -1) {
-			explorer = new TicketExplorer();
-			tabbedPane.addTab(POSConstants.CLOSED_TICKETS, explorer);
-		}
-		else {
-			explorer = (TicketExplorer) tabbedPane.getComponentAt(index);
-		}
-		tabbedPane.setSelectedComponent(explorer);
-	}
+    public TicketExplorerAction() {
+        super(POSConstants.CLOSED_TICKETS);
+    }
+    public TicketExplorerAction(String name) {
+        super(name);
+    }
+    public TicketExplorerAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
+        TicketExplorer explorer = null;
+        JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
+        int index = tabbedPane.indexOfTab(POSConstants.CLOSED_TICKETS);
+        if (index == -1) {
+            explorer = new TicketExplorer();
+            tabbedPane.addTab(POSConstants.CLOSED_TICKETS, explorer);
+        } else {
+            explorer = (TicketExplorer) tabbedPane.getComponentAt(index);
+        }
+        tabbedPane.setSelectedComponent(explorer);
+    }
 }

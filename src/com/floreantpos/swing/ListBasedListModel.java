@@ -21,59 +21,61 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.AbstractListModel;
 public class ListBasedListModel<E> extends AbstractListModel<E> {
-	private List<E> dataList;
-	public ListBasedListModel() {
-		super();
-	}
-	public ListBasedListModel(List list) {
-		super();
-		this.dataList = list;
-	}
-	@Override
-	public int getSize() {
-		if (dataList == null) {
-			return 0;
-		}
-		return dataList.size();
-	}
-	@Override
-	public E getElementAt(int index) {
-		if (dataList == null) {
-			return null;
-		}
-		return dataList.get(index);
-	}
-	public void addElement(E element) {
-		ensureListNotNull();
-		dataList.add(element);
-	}
-	public List<E> getDataList() {
-		return dataList;
-	}
-	public void setDataList(List<E> dataList) {
-		this.dataList = dataList;
-	}
-	public Iterator<E> iterator() {
-		ensureListNotNull();
-		return dataList.iterator();
-	}
-	private void ensureListNotNull() {
-		if (dataList == null) {
-			dataList = new ArrayList<>();
-		}
-	}
-	public void clearAll() {
-		for (Iterator iterator = dataList.iterator(); iterator.hasNext();) {
-			E value = (E) iterator.next();
-			if (value != null)
-				iterator.remove();
-		}
-	}
-	public void clearItem(E item) {
-		for (Iterator iterator = dataList.iterator(); iterator.hasNext();) {
-			E value = (E) iterator.next();
-			if (value == item)
-				iterator.remove();
-		}
-	}
+    private List<E> dataList;
+    public ListBasedListModel() {
+        super();
+    }
+    public ListBasedListModel(List list) {
+        super();
+        this.dataList = list;
+    }
+    @Override
+    public int getSize() {
+        if (dataList == null) {
+            return 0;
+        }
+        return dataList.size();
+    }
+    @Override
+    public E getElementAt(int index) {
+        if (dataList == null) {
+            return null;
+        }
+        return dataList.get(index);
+    }
+    public void addElement(E element) {
+        ensureListNotNull();
+        dataList.add(element);
+    }
+    public List<E> getDataList() {
+        return dataList;
+    }
+    public void setDataList(List<E> dataList) {
+        this.dataList = dataList;
+    }
+    public Iterator<E> iterator() {
+        ensureListNotNull();
+        return dataList.iterator();
+    }
+    private void ensureListNotNull() {
+        if (dataList == null) {
+            dataList = new ArrayList<>();
+        }
+    }
+    public void clearAll() {
+        for (Iterator iterator = dataList.iterator(); iterator.hasNext();) {
+            E value = (E) iterator.next();
+            if (value != null) {
+                iterator.remove();
+            }
+        }
+    }
+    public void clearItem(E item) {
+        for (Iterator iterator = dataList.iterator(); iterator.hasNext();) {
+            E value = (E) iterator.next();
+            if (value == item) {
+                iterator.remove();
+            }
+        }
+    }
 }

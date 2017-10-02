@@ -29,92 +29,91 @@ import com.floreantpos.model.dao.ShopTableDAO;
 import com.floreantpos.swing.PosButton;
 import com.floreantpos.ui.TitlePanel;
 public class SeatSelectionDialog extends POSDialog implements ActionListener {
-	private TitlePanel titlePanel;
-	private Integer selectedSeat;
-	private List<Integer> seats = new ArrayList<>();
-	private List<Integer> orderSeats;
-	public SeatSelectionDialog(List<Integer> tableNumbers, List<Integer> orderSeats) {
-		List<ShopTable> tables = ShopTableDAO.getInstance().getByNumbers(tableNumbers);
-		int seatNumber = 1;
-		for (ShopTable shopTable : tables) {
-			for (int i = 0; i < shopTable.getCapacity(); i++) {
-				seats.add(seatNumber);
-				seatNumber++;
-			}
-		}
-		this.orderSeats = orderSeats;
-		if (orderSeats != null) {
-			for (Integer i = 0; i < orderSeats.size(); i++) {
-				int orderSeatNumber = orderSeats.get(i);
-				if (orderSeatNumber == 0)
-					continue;
-				if (!seats.contains(orderSeatNumber))
-					seats.add(orderSeatNumber);
-			}
-		}
-		init();
-	}
-	private void init() {
-		setResizable(false);
-		Container contentPane = getContentPane();
-		MigLayout layout = new MigLayout("fillx,wrap 3", "[60px,fill][60px,fill][60px,fill]", "[][][][][]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		contentPane.setLayout(layout);
-		titlePanel = new TitlePanel();
-		contentPane.add(titlePanel, "spanx ,growy,height 60,wrap"); //$NON-NLS-1$
-		for (Integer seat : seats) {
-			PosButton posButton = new PosButton();
-			posButton.setFocusable(false);
-			posButton.setFont(posButton.getFont().deriveFont(Font.BOLD, 24));
-			posButton.setText(String.valueOf(seat));
-			if (orderSeats != null && orderSeats.contains(seat)) {
-				posButton.setBackground(Color.GREEN);
-			}
-			posButton.addActionListener(this);
-			String constraints = "grow, height 55"; //$NON-NLS-1$
-			contentPane.add(posButton, constraints);
-		}
-		PosButton btnShared = new PosButton("Shared");
-		btnShared.setFocusable(false);
-		if (orderSeats != null && orderSeats.contains(0)) {
-			btnShared.setBackground(Color.GREEN);
-		}
-		btnShared.addActionListener(this);
-		contentPane.add(btnShared, "grow, height 55"); //$NON-NLS-1$
-		PosButton btnCustom = new PosButton("Custom");
-		btnCustom.setFocusable(false);
-		btnCustom.addActionListener(this);
-		contentPane.add(btnCustom, "grow, height 55"); //$NON-NLS-1$
-		PosButton btnCancel = new PosButton("Cancel");
-		btnCancel.setFocusable(false);
-		btnCancel.addActionListener(this);
-		contentPane.add(btnCancel, "newline, span,grow, height 55"); //$NON-NLS-1$
-	}
-	public void actionPerformed(ActionEvent e) {
-		String actionCommand = e.getActionCommand();
-		boolean canceled = false;
-		if ("Shared".equalsIgnoreCase(actionCommand)) {
-			selectedSeat = 0;
-		}
-		else if ("Custom".equalsIgnoreCase(actionCommand)) {
-			selectedSeat = -1;
-		}
-		else if ("Cancel".equalsIgnoreCase(actionCommand)) {
-			canceled = true;
-		}
-		else {
-			selectedSeat = Integer.valueOf(actionCommand);
-		}
-		setCanceled(canceled);
-		dispose();
-	}
-	public Integer getSeatNumber() {
-		return selectedSeat;
-	}
-	public void setTitle(String title) {
-		titlePanel.setTitle(title);
-		super.setTitle(title);
-	}
-	public void setDialogTitle(String title) {
-		super.setTitle(title);
-	}
+    private TitlePanel titlePanel;
+    private Integer selectedSeat;
+    private List<Integer> seats = new ArrayList<>();
+    private List<Integer> orderSeats;
+    public SeatSelectionDialog(List<Integer> tableNumbers, List<Integer> orderSeats) {
+        List<ShopTable> tables = ShopTableDAO.getInstance().getByNumbers(tableNumbers);
+        int seatNumber = 1;
+        for (ShopTable shopTable : tables) {
+            for (int i = 0; i < shopTable.getCapacity(); i++) {
+                seats.add(seatNumber);
+                seatNumber++;
+            }
+        }
+        this.orderSeats = orderSeats;
+        if (orderSeats != null) {
+            for (Integer i = 0; i < orderSeats.size(); i++) {
+                int orderSeatNumber = orderSeats.get(i);
+                if (orderSeatNumber == 0) {
+                    continue;
+                }
+                if (!seats.contains(orderSeatNumber)) {
+                    seats.add(orderSeatNumber);
+                }
+            }
+        }
+        init();
+    }
+    private void init() {
+        setResizable(false);
+        Container contentPane = getContentPane();
+        MigLayout layout = new MigLayout("fillx,wrap 3", "[60px,fill][60px,fill][60px,fill]", "[][][][][]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        contentPane.setLayout(layout);
+        titlePanel = new TitlePanel();
+        contentPane.add(titlePanel, "spanx ,growy,height 60,wrap"); //$NON-NLS-1$
+        for (Integer seat : seats) {
+            PosButton posButton = new PosButton();
+            posButton.setFocusable(false);
+            posButton.setFont(posButton.getFont().deriveFont(Font.BOLD, 24));
+            posButton.setText(String.valueOf(seat));
+            if (orderSeats != null && orderSeats.contains(seat)) {
+                posButton.setBackground(Color.GREEN);
+            }
+            posButton.addActionListener(this);
+            String constraints = "grow, height 55"; //$NON-NLS-1$
+            contentPane.add(posButton, constraints);
+        }
+        PosButton btnShared = new PosButton("Shared");
+        btnShared.setFocusable(false);
+        if (orderSeats != null && orderSeats.contains(0)) {
+            btnShared.setBackground(Color.GREEN);
+        }
+        btnShared.addActionListener(this);
+        contentPane.add(btnShared, "grow, height 55"); //$NON-NLS-1$
+        PosButton btnCustom = new PosButton("Custom");
+        btnCustom.setFocusable(false);
+        btnCustom.addActionListener(this);
+        contentPane.add(btnCustom, "grow, height 55"); //$NON-NLS-1$
+        PosButton btnCancel = new PosButton("Cancel");
+        btnCancel.setFocusable(false);
+        btnCancel.addActionListener(this);
+        contentPane.add(btnCancel, "newline, span,grow, height 55"); //$NON-NLS-1$
+    }
+    public void actionPerformed(ActionEvent e) {
+        String actionCommand = e.getActionCommand();
+        boolean canceled = false;
+        if ("Shared".equalsIgnoreCase(actionCommand)) {
+            selectedSeat = 0;
+        } else if ("Custom".equalsIgnoreCase(actionCommand)) {
+            selectedSeat = -1;
+        } else if ("Cancel".equalsIgnoreCase(actionCommand)) {
+            canceled = true;
+        } else {
+            selectedSeat = Integer.valueOf(actionCommand);
+        }
+        setCanceled(canceled);
+        dispose();
+    }
+    public Integer getSeatNumber() {
+        return selectedSeat;
+    }
+    public void setTitle(String title) {
+        titlePanel.setTitle(title);
+        super.setTitle(title);
+    }
+    public void setDialogTitle(String title) {
+        super.setTitle(title);
+    }
 }

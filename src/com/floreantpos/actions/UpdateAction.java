@@ -16,50 +16,42 @@
  * ************************************************************************
  */
 package com.floreantpos.actions;
-
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
-
 import com.floreantpos.Messages;
 import com.floreantpos.PosLog;
 import com.floreantpos.main.Application;
 import com.floreantpos.services.PosWebService;
 import com.floreantpos.ui.dialog.UpdateDialog;
 import com.orocube.common.util.TerminalUtil;
-
 public class UpdateAction extends AbstractAction {
-
-	public UpdateAction() {
-		super("Update"); //$NON-NLS-1$
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		openUpdateDialog();
-	}
-
-	private void openUpdateDialog() {
-		PosWebService service = new PosWebService();
-		try {
-			boolean up_to_date = false;
-			String versionInfo = service.getAvailableNewVersions(TerminalUtil.getSystemUID(), Application.VERSION.substring(0, 3));
-			String[] availableNewVersions = null;
-			if (versionInfo != null) {
-				if (versionInfo.equals("UP_TO_DATE")) { //$NON-NLS-1$
-					up_to_date = true;
-				}
-				else if (versionInfo.startsWith("[")) { //$NON-NLS-1$
-					versionInfo = versionInfo.replace("[", "").replace(",]", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-					availableNewVersions = versionInfo.split(","); //$NON-NLS-1$
-				}
-			}
-			UpdateDialog dialog = new UpdateDialog(availableNewVersions, up_to_date, true);
-			dialog.setTitle(Messages.getString("UpdateAction.7")); //$NON-NLS-1$
-			dialog.pack();
-			dialog.open();
-		} catch (Exception ex) {
-			PosLog.error(getClass(), ex);
-		}
-	}
+    public UpdateAction() {
+        super("Update"); //$NON-NLS-1$
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        openUpdateDialog();
+    }
+    private void openUpdateDialog() {
+        PosWebService service = new PosWebService();
+        try {
+            boolean up_to_date = false;
+            String versionInfo = service.getAvailableNewVersions(TerminalUtil.getSystemUID(), Application.VERSION.substring(0, 3));
+            String[] availableNewVersions = null;
+            if (versionInfo != null) {
+                if (versionInfo.equals("UP_TO_DATE")) { //$NON-NLS-1$
+                    up_to_date = true;
+                } else if (versionInfo.startsWith("[")) { //$NON-NLS-1$
+                    versionInfo = versionInfo.replace("[", "").replace(",]", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+                    availableNewVersions = versionInfo.split(","); //$NON-NLS-1$
+                }
+            }
+            UpdateDialog dialog = new UpdateDialog(availableNewVersions, up_to_date, true);
+            dialog.setTitle(Messages.getString("UpdateAction.7")); //$NON-NLS-1$
+            dialog.pack();
+            dialog.open();
+        } catch (Exception ex) {
+            PosLog.error(getClass(), ex);
+        }
+    }
 }

@@ -16,80 +16,60 @@
  * ************************************************************************
  */
 package com.floreantpos.ui.views;
-
 import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.swing.JPanel;
-
 import net.miginfocom.swing.MigLayout;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperPrint;
-
 import com.floreantpos.model.Ticket;
 import com.floreantpos.report.ReceiptPrintService;
 import com.floreantpos.report.TicketPrintProperties;
 import com.floreantpos.swing.PosScrollPane;
-
 public class OrderInfoView extends JPanel {
-
-	private List<Ticket> tickets;
-	private JPanel reportPanel;
-
-	public OrderInfoView(List<Ticket> tickets) throws Exception {
-
-		this.tickets = tickets;
-
-		createUI();
-	}
-
-	public void createUI() throws Exception {
-
-		reportPanel = new JPanel(new MigLayout("wrap 1, ax 50%", "", "")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		PosScrollPane scrollPane = new PosScrollPane(reportPanel);
-		scrollPane.getVerticalScrollBar().setUnitIncrement(20);
-
-		createReport();
-
-		setLayout(new BorderLayout());
-		add(scrollPane);
-	}
-
-	public void createReport() throws Exception {
-
-		for (int i = 0; i < tickets.size(); i++) {
-			Ticket ticket = (Ticket) tickets.get(i);
-
-			TicketPrintProperties printProperties = new TicketPrintProperties("*** ORDER " + ticket.getId() + " ***", false, true, true); //$NON-NLS-1$ //$NON-NLS-2$
-			HashMap map = ReceiptPrintService.populateTicketProperties(ticket, printProperties, null);
-			map.put(JRParameter.IS_IGNORE_PAGINATION, true);
-			JasperPrint jasperPrint = ReceiptPrintService.createPrint(ticket, map, null);
-			TicketReceiptView receiptView = new TicketReceiptView(jasperPrint);
-			reportPanel.add(receiptView.getReportPanel());
-		}
-	}
-
-	public void print() throws Exception {
-		for (Iterator iter = tickets.iterator(); iter.hasNext();) {
-			Ticket ticket = (Ticket) iter.next();
-			ReceiptPrintService.printTicket(ticket);
-		}
-	}
-	
-	public void printCopy(String copyType) throws Exception {
-		for (Iterator iter = tickets.iterator(); iter.hasNext();) {
-			Ticket ticket = (Ticket) iter.next();
-			ReceiptPrintService.printTicket(ticket, copyType);
-		}
-	}
-
-	public List<Ticket> getTickets() {
-		return tickets;
-	}
-
-	public JPanel getReportPanel() {
-		return reportPanel;
-	}
+    private List<Ticket> tickets;
+    private JPanel reportPanel;
+    public OrderInfoView(List<Ticket> tickets) throws Exception {
+        this.tickets = tickets;
+        createUI();
+    }
+    public void createUI() throws Exception {
+        reportPanel = new JPanel(new MigLayout("wrap 1, ax 50%", "", "")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        PosScrollPane scrollPane = new PosScrollPane(reportPanel);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+        createReport();
+        setLayout(new BorderLayout());
+        add(scrollPane);
+    }
+    public void createReport() throws Exception {
+        for (int i = 0; i < tickets.size(); i++) {
+            Ticket ticket = (Ticket) tickets.get(i);
+            TicketPrintProperties printProperties = new TicketPrintProperties("*** ORDER " + ticket.getId() + " ***", false, true, true); //$NON-NLS-1$ //$NON-NLS-2$
+            HashMap map = ReceiptPrintService.populateTicketProperties(ticket, printProperties, null);
+            map.put(JRParameter.IS_IGNORE_PAGINATION, true);
+            JasperPrint jasperPrint = ReceiptPrintService.createPrint(ticket, map, null);
+            TicketReceiptView receiptView = new TicketReceiptView(jasperPrint);
+            reportPanel.add(receiptView.getReportPanel());
+        }
+    }
+    public void print() throws Exception {
+        for (Iterator iter = tickets.iterator(); iter.hasNext();) {
+            Ticket ticket = (Ticket) iter.next();
+            ReceiptPrintService.printTicket(ticket);
+        }
+    }
+    public void printCopy(String copyType) throws Exception {
+        for (Iterator iter = tickets.iterator(); iter.hasNext();) {
+            Ticket ticket = (Ticket) iter.next();
+            ReceiptPrintService.printTicket(ticket, copyType);
+        }
+    }
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+    public JPanel getReportPanel() {
+        return reportPanel;
+    }
 }

@@ -16,10 +16,8 @@
  * ************************************************************************
  */
 package com.floreantpos.customer;
-
 import java.awt.BorderLayout;
 import java.awt.HeadlessException;
-
 import com.floreantpos.Messages;
 import com.floreantpos.main.Application;
 import com.floreantpos.main.PosWindow;
@@ -27,47 +25,35 @@ import com.floreantpos.model.Customer;
 import com.floreantpos.model.Ticket;
 import com.floreantpos.ui.TitlePanel;
 import com.floreantpos.ui.dialog.POSDialog;
-
 public class CustomerSelectorDialog extends POSDialog {
-
-	private final CustomerSelector customerSelector;
-
-	public CustomerSelectorDialog(CustomerSelector customerSelector) throws HeadlessException {
-		super(Application.getPosWindow(), true);
-		this.customerSelector = customerSelector;
-
-		TitlePanel titlePane = new TitlePanel();
-		titlePane.setTitle(Messages.getString("CustomerSelectorDialog.0")); //$NON-NLS-1$
-
-		getContentPane().add(titlePane, BorderLayout.NORTH);
-		getContentPane().add(customerSelector);
-
-		PosWindow window = Application.getPosWindow();
-		setSize(window.getSize());
-		setLocation(window.getLocation());
-	}
-
-	public void setCreateNewTicket(boolean createNewTicket) {
-		customerSelector.setCreateNewTicket(createNewTicket);
-	}
-
-	public void updateView(boolean update) {
-		customerSelector.updateView(update);
-	}
-
-	public Customer getSelectedCustomer() {
-		return customerSelector.getSelectedCustomer();
-	}
-
-	public void setTicket(Ticket thisTicket) {
-		customerSelector.setTicket(thisTicket);
-	}
-
-	public void setCustomer(Customer customer) {
-		customerSelector.setCustomer(customer); 
-	}
-
-	public void setCallerId(String callerId) {
-		customerSelector.setCallerId(callerId); 
-	}
+    private final CustomerSelector customerSelector;
+    public CustomerSelectorDialog(CustomerSelector customerSelector) throws HeadlessException {
+        super(Application.getPosWindow(), true);
+        this.customerSelector = customerSelector;
+        TitlePanel titlePane = new TitlePanel();
+        titlePane.setTitle(Messages.getString("CustomerSelectorDialog.0")); //$NON-NLS-1$
+        getContentPane().add(titlePane, BorderLayout.NORTH);
+        getContentPane().add(customerSelector);
+        PosWindow window = Application.getPosWindow();
+        setSize(window.getSize());
+        setLocation(window.getLocation());
+    }
+    public void setCreateNewTicket(boolean createNewTicket) {
+        customerSelector.setCreateNewTicket(createNewTicket);
+    }
+    public void updateView(boolean update) {
+        customerSelector.updateView(update);
+    }
+    public Customer getSelectedCustomer() {
+        return customerSelector.getSelectedCustomer();
+    }
+    public void setTicket(Ticket thisTicket) {
+        customerSelector.setTicket(thisTicket);
+    }
+    public void setCustomer(Customer customer) {
+        customerSelector.setCustomer(customer);
+    }
+    public void setCallerId(String callerId) {
+        customerSelector.setCallerId(callerId);
+    }
 }

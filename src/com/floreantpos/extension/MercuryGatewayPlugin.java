@@ -16,54 +16,41 @@
  * ************************************************************************
  */
 package com.floreantpos.extension;
-
 import net.xeoh.plugins.base.annotations.PluginImplementation;
-
 import com.floreantpos.config.ui.ConfigurationView;
 import com.floreantpos.config.ui.DefaultMerchantGatewayConfigurationView;
 import com.floreantpos.ui.views.payment.CardProcessor;
 import com.floreantpos.ui.views.payment.MercuryPayProcessor;
-
 @PluginImplementation
 public class MercuryGatewayPlugin extends AuthorizeNetGatewayPlugin {
-
-	@Override
-	public String getProductName() {
-		return "Mercury Pay"; //$NON-NLS-1$
-	}
-	
-	@Override
-	public ConfigurationView getConfigurationPane() {
-		if(view == null) {
-			view = new DefaultMerchantGatewayConfigurationView();
-			view.setMerchantDefaultValue("118725340908147", "XYZ"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		
-		return view;
-	}
-
-	@Override
-	public void initUI() {
-
-	}
-
-	@Override
-	public void initBackoffice() {
-
-	}
-
-	@Override
-	public String toString() {
-		return getProductName();
-	}
-	
-	@Override
-	public String getId() {
-		return String.valueOf("Mercury Pay".hashCode()); //$NON-NLS-1$
-	}
-	
-	@Override
-	public CardProcessor getProcessor() {
-		return new MercuryPayProcessor();
-	}
+    @Override
+    public String getProductName() {
+        return "Mercury Pay"; //$NON-NLS-1$
+    }
+    @Override
+    public ConfigurationView getConfigurationPane() {
+        if (view == null) {
+            view = new DefaultMerchantGatewayConfigurationView();
+            view.setMerchantDefaultValue("118725340908147", "XYZ"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+        return view;
+    }
+    @Override
+    public void initUI() {
+    }
+    @Override
+    public void initBackoffice() {
+    }
+    @Override
+    public String toString() {
+        return getProductName();
+    }
+    @Override
+    public String getId() {
+        return String.valueOf("Mercury Pay".hashCode()); //$NON-NLS-1$
+    }
+    @Override
+    public CardProcessor getProcessor() {
+        return new MercuryPayProcessor();
+    }
 }

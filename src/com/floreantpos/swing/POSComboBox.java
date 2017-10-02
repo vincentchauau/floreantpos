@@ -16,42 +16,35 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 import java.awt.Font;
 import java.util.Vector;
-
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.plaf.basic.ComboPopup;
-
 public class POSComboBox extends JComboBox {
-	Font font = new Font("Tahoma", Font.PLAIN, PosUIManager.getFontSize(18));
-
-	public POSComboBox() {
-		super();
-		setHeight(40);
-		setFont(font);
-	}
-
-	public POSComboBox(Object[] items) {
-		super(items);
-		setHeight(40);
-		setFont(font);
-	}
-
-	public void setHeight(int height) {
-		setMinimumSize(PosUIManager.getSize(60, 40));
-		setPreferredSize(PosUIManager.getSize(0, height));
-		Object popup = getUI().getAccessibleChild(this, 0);
-		if (popup instanceof ComboPopup) {
-			JList jlist = ((ComboPopup) popup).getList();
-			jlist.setFixedCellHeight(PosUIManager.getSize(height));
-		}
-	}
-
-	public POSComboBox(Vector items) {
-		super(items);
-		setHeight(40);
-		setFont(font);
-	}
+    Font font = new Font("Tahoma", Font.PLAIN, PosUIManager.getFontSize(18));
+    public POSComboBox() {
+        super();
+        setHeight(40);
+        setFont(font);
+    }
+    public POSComboBox(Object[] items) {
+        super(items);
+        setHeight(40);
+        setFont(font);
+    }
+    public void setHeight(int height) {
+        setMinimumSize(PosUIManager.getSize(60, 40));
+        setPreferredSize(PosUIManager.getSize(0, height));
+        Object popup = getUI().getAccessibleChild(this, 0);
+        if (popup instanceof ComboPopup) {
+            JList jlist = ((ComboPopup) popup).getList();
+            jlist.setFixedCellHeight(PosUIManager.getSize(height));
+        }
+    }
+    public POSComboBox(Vector items) {
+        super(items);
+        setHeight(40);
+        setFont(font);
+    }
 }

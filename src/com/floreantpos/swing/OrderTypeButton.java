@@ -37,76 +37,73 @@ import com.floreantpos.ui.tableselection.TableSelectorFactory;
 import com.floreantpos.ui.views.order.RootView;
 import com.floreantpos.util.TicketAlreadyExistsException;
 public class OrderTypeButton extends PosButton implements ActionListener {
-	private OrderType orderType;
-	public OrderTypeButton() {
-		super("");
-	}
-	public OrderTypeButton(OrderType orderType) {
-		super();
-		this.orderType = orderType;
-		if (orderType != null) {
-			if (orderType.getId() == null) {
-				setIcon(IconFactory.getIcon("/ui_icons/", "add+user.png"));
-			}
-			else
-				setText(orderType.name());
-		}
-		else {
-			setText(POSConstants.TAKE_OUT_BUTTON_TEXT);
-		}
-		addActionListener(this);
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (!hasPermission()) {
-			POSMessageDialog.showError("You do not have permission to create order");
-			return;
-		}
-		if (RootView.getInstance().isMaintenanceMode()) {
-			QuickMaintenanceExplorer.quickMaintain(orderType);
-			return;
-		}
-		/*if (orderType.isBarTab()) {
+    private OrderType orderType;
+    public OrderTypeButton() {
+        super("");
+    }
+    public OrderTypeButton(OrderType orderType) {
+        super();
+        this.orderType = orderType;
+        if (orderType != null) {
+            if (orderType.getId() == null) {
+                setIcon(IconFactory.getIcon("/ui_icons/", "add+user.png"));
+            } else {
+                setText(orderType.name());
+            }
+        } else {
+            setText(POSConstants.TAKE_OUT_BUTTON_TEXT);
+        }
+        addActionListener(this);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (!hasPermission()) {
+            POSMessageDialog.showError("You do not have permission to create order");
+            return;
+        }
+        if (RootView.getInstance().isMaintenanceMode()) {
+            QuickMaintenanceExplorer.quickMaintain(orderType);
+            return;
+        }
+        /*if (orderType.isBarTab()) {
 			new NewBarTabAction(orderType, Application.getPosWindow()).actionPerformed(e);
 		}
 		else */
-		if (orderType.isShowTableSelection()) {
-			TableSelectorDialog dialog = TableSelectorFactory.createTableSelectorDialog(orderType);
-			dialog.setCreateNewTicket(true);
-			dialog.updateView(true);
-			dialog.openUndecoratedFullScreen();
-			if (!dialog.isCanceled()) {
-				return;
-			}
-		}
-		else if (orderType.isRequiredCustomerData()) {
-			CustomerSelectorDialog dialog = CustomerSelectorFactory.createCustomerSelectorDialog(orderType);
-			dialog.setCreateNewTicket(true);
-			dialog.updateView(true);
-			dialog.openUndecoratedFullScreen();
-			if (!dialog.isCanceled()) {
-				return;
-			}
-		}
-		else {
-			try {
-				OrderServiceFactory.getOrderService().createNewTicket(orderType, null, null);
-			} catch (TicketAlreadyExistsException e1) {
-				PosLog.error(getClass(), e1);
-			}
-		}
-	}
-	private boolean hasPermission() {
-		User user = Application.getCurrentUser();
-		UserType userType = user.getType();
-		if (userType != null) {
-			Set<UserPermission> permissions = userType.getPermissions();
-			for (UserPermission permission : permissions) {
-				if (permission.equals(UserPermission.CREATE_TICKET)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+        if (orderType.isShowTableSelection()) {
+            TableSelectorDialog dialog = TableSelectorFactory.createTableSelectorDialog(orderType);
+            dialog.setCreateNewTicket(true);
+            dialog.updateView(true);
+            dialog.openUndecoratedFullScreen();
+            if (!dialog.isCanceled()) {
+                return;
+            }
+        } else if (orderType.isRequiredCustomerData()) {
+            CustomerSelectorDialog dialog = CustomerSelectorFactory.createCustomerSelectorDialog(orderType);
+            dialog.setCreateNewTicket(true);
+            dialog.updateView(true);
+            dialog.openUndecoratedFullScreen();
+            if (!dialog.isCanceled()) {
+                return;
+            }
+        } else {
+            try {
+                OrderServiceFactory.getOrderService().createNewTicket(orderType, null, null);
+            } catch (TicketAlreadyExistsException e1) {
+                PosLog.error(getClass(), e1);
+            }
+        }
+    }
+    private boolean hasPermission() {
+        User user = Application.getCurrentUser();
+        UserType userType = user.getType();
+        if (userType != null) {
+            Set<UserPermission> permissions = userType.getPermissions();
+            for (UserPermission permission : permissions) {
+                if (permission.equals(UserPermission.CREATE_TICKET)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

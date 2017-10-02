@@ -30,57 +30,56 @@ import com.floreantpos.swing.PosButton;
 import com.floreantpos.ui.TitlePanel;
 import com.floreantpos.util.POSUtil;
 public class ItemSelectionDialog extends POSDialog implements ActionListener {
-	private TitlePanel titlePanel;
-	private PosButton btnCancel;
-	private PosButton btnOk;
-	private ItemCheckBoxList cbListItems;
-	public ItemSelectionDialog() {
-		super(POSUtil.getBackOfficeWindow(), true);
-		init();
-	}
-	private void init() {
-		setLayout(new BorderLayout(10, 10));
-		setIconImage(Application.getPosWindow().getIconImage());
-		JPanel contentPane = new JPanel(new BorderLayout(10, 10));
-		titlePanel = new TitlePanel();
-		titlePanel.setTitle("Select item");
-		contentPane.add(titlePanel, BorderLayout.NORTH);
-		cbListItems = new ItemCheckBoxList();
-		contentPane.add(new JScrollPane(cbListItems), BorderLayout.CENTER);
-		btnOk = new PosButton(POSConstants.OK);
-		btnOk.setFocusable(false);
-		btnOk.addActionListener(this);
-		btnCancel = new PosButton(POSConstants.CANCEL);
-		btnCancel.setFocusable(false);
-		btnCancel.addActionListener(this);
-		JPanel footerPanel = new JPanel(new MigLayout("fill, ins 2", "sg, fill", ""));
-		footerPanel.add(btnOk);
-		footerPanel.add(btnCancel);
-		contentPane.add(footerPanel, BorderLayout.SOUTH);
-		add(contentPane);
-		setSize(500, 400);
-	}
-	public void setModel(TableModel items) {
-		cbListItems.setModel(items);
-	}
-	public TableModel getModel() {
-		return cbListItems.getModel();
-	}
-	private void doOk() {
-		setCanceled(false);
-		dispose();
-	}
-	private void doCancel() {
-		setCanceled(true);
-		dispose();
-	}
-	public void actionPerformed(ActionEvent e) {
-		String actionCommand = e.getActionCommand();
-		if (POSConstants.CANCEL.equalsIgnoreCase(actionCommand)) {
-			doCancel();
-		}
-		else if (POSConstants.OK.equalsIgnoreCase(actionCommand)) {
-			doOk();
-		}
-	}
+    private TitlePanel titlePanel;
+    private PosButton btnCancel;
+    private PosButton btnOk;
+    private ItemCheckBoxList cbListItems;
+    public ItemSelectionDialog() {
+        super(POSUtil.getBackOfficeWindow(), true);
+        init();
+    }
+    private void init() {
+        setLayout(new BorderLayout(10, 10));
+        setIconImage(Application.getPosWindow().getIconImage());
+        JPanel contentPane = new JPanel(new BorderLayout(10, 10));
+        titlePanel = new TitlePanel();
+        titlePanel.setTitle("Select item");
+        contentPane.add(titlePanel, BorderLayout.NORTH);
+        cbListItems = new ItemCheckBoxList();
+        contentPane.add(new JScrollPane(cbListItems), BorderLayout.CENTER);
+        btnOk = new PosButton(POSConstants.OK);
+        btnOk.setFocusable(false);
+        btnOk.addActionListener(this);
+        btnCancel = new PosButton(POSConstants.CANCEL);
+        btnCancel.setFocusable(false);
+        btnCancel.addActionListener(this);
+        JPanel footerPanel = new JPanel(new MigLayout("fill, ins 2", "sg, fill", ""));
+        footerPanel.add(btnOk);
+        footerPanel.add(btnCancel);
+        contentPane.add(footerPanel, BorderLayout.SOUTH);
+        add(contentPane);
+        setSize(500, 400);
+    }
+    public void setModel(TableModel items) {
+        cbListItems.setModel(items);
+    }
+    public TableModel getModel() {
+        return cbListItems.getModel();
+    }
+    private void doOk() {
+        setCanceled(false);
+        dispose();
+    }
+    private void doCancel() {
+        setCanceled(true);
+        dispose();
+    }
+    public void actionPerformed(ActionEvent e) {
+        String actionCommand = e.getActionCommand();
+        if (POSConstants.CANCEL.equalsIgnoreCase(actionCommand)) {
+            doCancel();
+        } else if (POSConstants.OK.equalsIgnoreCase(actionCommand)) {
+            doOk();
+        }
+    }
 }

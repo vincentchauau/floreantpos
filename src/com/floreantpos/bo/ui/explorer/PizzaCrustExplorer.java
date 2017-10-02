@@ -35,108 +35,114 @@ import com.floreantpos.ui.dialog.ConfirmDeleteDialog;
 import com.floreantpos.ui.model.PizzaCrustForm;
 import com.floreantpos.util.POSUtil;
 public class PizzaCrustExplorer extends TransparentPanel {
-	private JXTable table;
-	private BeanTableModel<PizzaCrust> tableModel;
-	private List<PizzaCrust> pizzaCrustList;
-	public PizzaCrustExplorer() {
-		tableModel = new BeanTableModel<PizzaCrust>(PizzaCrust.class);
-		tableModel.addColumn(POSConstants.ID.toUpperCase(), "id"); //$NON-NLS-1$
-		tableModel.addColumn(POSConstants.NAME.toUpperCase(), "name"); //$NON-NLS-1$
-		tableModel.addColumn("TRANSLATED NAME", "translatedName"); //$NON-NLS-1$
-		tableModel.addColumn("DESCRIPTION", "description"); //$NON-NLS-1$
-		tableModel.addColumn("SORT", "sortOrder"); //$NON-NLS-1$
-		tableModel.addColumn("DEFAULT", "defaultCrust"); //$NON-NLS-1$
-		pizzaCrustList = PizzaCrustDAO.getInstance().findAll();
-		tableModel.addRows(pizzaCrustList);
-		table = new JXTable(tableModel);
-		table.setDefaultRenderer(Object.class, new PosTableRenderer());
-		setLayout(new BorderLayout(5, 5));
-		add(new JScrollPane(table));
-		JButton addButton = new JButton(com.floreantpos.POSConstants.ADD);
-		addButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					PizzaCrustForm editor = new PizzaCrustForm();
-					BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
-					dialog.open();
-					if (dialog.isCanceled())
-						return;
-					PizzaCrust foodCategory = (PizzaCrust) editor.getBean();
-					tableModel.addRow(foodCategory);
-				} catch (Exception x) {
-					BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
-				}
-			}
-		});
-		JButton editButton = new JButton(com.floreantpos.POSConstants.EDIT);
-		editButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					int index = table.getSelectedRow();
-					if (index < 0)
-						return;
-					index = table.convertRowIndexToModel(index);
-					PizzaCrust pizzaCrust = tableModel.getRow(index);
-					PizzaCrustForm editor = new PizzaCrustForm(pizzaCrust);
-					BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
-					dialog.open();
-					if (dialog.isCanceled())
-						return;
-					table.repaint();
-				} catch (Throwable x) {
-					BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
-				}
-			}
-		});
-		JButton deleteButton = new JButton(com.floreantpos.POSConstants.DELETE);
-		deleteButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					int index = table.getSelectedRow();
-					if (index < 0)
-						return;
-					if (ConfirmDeleteDialog.showMessage(PizzaCrustExplorer.this, com.floreantpos.POSConstants.CONFIRM_DELETE,
-							com.floreantpos.POSConstants.DELETE) == ConfirmDeleteDialog.YES) {
-						PizzaCrust pizzaCrust = tableModel.getRow(index);
-						PizzaCrustDAO dao = new PizzaCrustDAO();
-						dao.delete(pizzaCrust);
-						tableModel.removeRow(index);
-					}
-				} catch (Exception x) {
-					BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
-				}
-			}
-		});
-		JButton defaultButton = new JButton("Set Default");
-		defaultButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					int index = table.getSelectedRow();
-					if (index < 0)
-						return;
-					index = table.convertRowIndexToModel(index);
-					PizzaCrust pizzaCrust = tableModel.getRow(index);
-					for (PizzaCrust item : pizzaCrustList) {
-						if (pizzaCrust.getId() == item.getId())
-							item.setDefaultCrust(true);
-						else
-							item.setDefaultCrust(false);
-					}
-					PizzaCrustDAO dao = new PizzaCrustDAO();
-					dao.setDefault(pizzaCrustList);
-					tableModel.fireTableDataChanged();
-					table.revalidate();
-					table.repaint();
-				} catch (Exception x) {
-					BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
-				}
-			}
-		});
-		TransparentPanel panel = new TransparentPanel();
-		panel.add(addButton);
-		panel.add(editButton);
-		panel.add(deleteButton);
-		panel.add(defaultButton);
-		add(panel, BorderLayout.SOUTH);
-	}
+    private JXTable table;
+    private BeanTableModel<PizzaCrust> tableModel;
+    private List<PizzaCrust> pizzaCrustList;
+    public PizzaCrustExplorer() {
+        tableModel = new BeanTableModel<PizzaCrust>(PizzaCrust.class);
+        tableModel.addColumn(POSConstants.ID.toUpperCase(), "id"); //$NON-NLS-1$
+        tableModel.addColumn(POSConstants.NAME.toUpperCase(), "name"); //$NON-NLS-1$
+        tableModel.addColumn("TRANSLATED NAME", "translatedName"); //$NON-NLS-1$
+        tableModel.addColumn("DESCRIPTION", "description"); //$NON-NLS-1$
+        tableModel.addColumn("SORT", "sortOrder"); //$NON-NLS-1$
+        tableModel.addColumn("DEFAULT", "defaultCrust"); //$NON-NLS-1$
+        pizzaCrustList = PizzaCrustDAO.getInstance().findAll();
+        tableModel.addRows(pizzaCrustList);
+        table = new JXTable(tableModel);
+        table.setDefaultRenderer(Object.class, new PosTableRenderer());
+        setLayout(new BorderLayout(5, 5));
+        add(new JScrollPane(table));
+        JButton addButton = new JButton(com.floreantpos.POSConstants.ADD);
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    PizzaCrustForm editor = new PizzaCrustForm();
+                    BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
+                    dialog.open();
+                    if (dialog.isCanceled()) {
+                        return;
+                    }
+                    PizzaCrust foodCategory = (PizzaCrust) editor.getBean();
+                    tableModel.addRow(foodCategory);
+                } catch (Exception x) {
+                    BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
+                }
+            }
+        });
+        JButton editButton = new JButton(com.floreantpos.POSConstants.EDIT);
+        editButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int index = table.getSelectedRow();
+                    if (index < 0) {
+                        return;
+                    }
+                    index = table.convertRowIndexToModel(index);
+                    PizzaCrust pizzaCrust = tableModel.getRow(index);
+                    PizzaCrustForm editor = new PizzaCrustForm(pizzaCrust);
+                    BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
+                    dialog.open();
+                    if (dialog.isCanceled()) {
+                        return;
+                    }
+                    table.repaint();
+                } catch (Throwable x) {
+                    BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
+                }
+            }
+        });
+        JButton deleteButton = new JButton(com.floreantpos.POSConstants.DELETE);
+        deleteButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int index = table.getSelectedRow();
+                    if (index < 0) {
+                        return;
+                    }
+                    if (ConfirmDeleteDialog.showMessage(PizzaCrustExplorer.this, com.floreantpos.POSConstants.CONFIRM_DELETE,
+                            com.floreantpos.POSConstants.DELETE) == ConfirmDeleteDialog.YES) {
+                        PizzaCrust pizzaCrust = tableModel.getRow(index);
+                        PizzaCrustDAO dao = new PizzaCrustDAO();
+                        dao.delete(pizzaCrust);
+                        tableModel.removeRow(index);
+                    }
+                } catch (Exception x) {
+                    BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
+                }
+            }
+        });
+        JButton defaultButton = new JButton("Set Default");
+        defaultButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int index = table.getSelectedRow();
+                    if (index < 0) {
+                        return;
+                    }
+                    index = table.convertRowIndexToModel(index);
+                    PizzaCrust pizzaCrust = tableModel.getRow(index);
+                    for (PizzaCrust item : pizzaCrustList) {
+                        if (pizzaCrust.getId() == item.getId()) {
+                            item.setDefaultCrust(true);
+                        } else {
+                            item.setDefaultCrust(false);
+                        }
+                    }
+                    PizzaCrustDAO dao = new PizzaCrustDAO();
+                    dao.setDefault(pizzaCrustList);
+                    tableModel.fireTableDataChanged();
+                    table.revalidate();
+                    table.repaint();
+                } catch (Exception x) {
+                    BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
+                }
+            }
+        });
+        TransparentPanel panel = new TransparentPanel();
+        panel.add(addButton);
+        panel.add(editButton);
+        panel.add(deleteButton);
+        panel.add(defaultButton);
+        add(panel, BorderLayout.SOUTH);
+    }
 }

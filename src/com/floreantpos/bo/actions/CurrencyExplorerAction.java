@@ -22,22 +22,22 @@ import javax.swing.Icon;
 import com.floreantpos.Messages;
 import com.floreantpos.bo.ui.explorer.CurrencyDialog;
 public class CurrencyExplorerAction extends AbstractAction {
-	public CurrencyExplorerAction() {
-		super(Messages.getString("CurrencyExplorerAction.0")); //$NON-NLS-1$
-	}
-	public CurrencyExplorerAction(String name) {
-		super(name);
-	}
-	public CurrencyExplorerAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		//CurrencyExplorer explorer = new CurrencyExplorer();
-		//explorer.setBorder(new EmptyBorder(20, 10, 20, 10));
-		CurrencyDialog dialog = new CurrencyDialog();
-		dialog.setTitle(Messages.getString("CurrencyExplorerAction.1")); //$NON-NLS-1$
-		//dialog.add(explorer);
-		dialog.setSize(800, 600);
-		dialog.open();
-	}
+    public CurrencyExplorerAction() {
+        super(Messages.getString("CurrencyExplorerAction.0")); //$NON-NLS-1$
+    }
+    public CurrencyExplorerAction(String name) {
+        super(name);
+    }
+    public CurrencyExplorerAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        //CurrencyExplorer explorer = new CurrencyExplorer();
+        //explorer.setBorder(new EmptyBorder(20, 10, 20, 10));
+        CurrencyDialog dialog = new CurrencyDialog();
+        dialog.setTitle(Messages.getString("CurrencyExplorerAction.1")); //$NON-NLS-1$
+        //dialog.add(explorer);
+        dialog.setSize(800, 600);
+        dialog.open();
+    }
 }

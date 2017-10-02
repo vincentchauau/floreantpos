@@ -30,52 +30,52 @@ import com.floreantpos.swing.PosUIManager;
 import com.floreantpos.swing.QwertyKeyPad;
 import com.floreantpos.util.POSUtil;
 public class ItemSearchDialog extends OkCancelOptionDialog {
-	private JTextField tfNumber;
-	private String value;
-	private QwertyKeyPad qwertyKeyPad;
-	public ItemSearchDialog() {
-		super(POSUtil.getFocusedWindow(), POSConstants.SEARCH_ITEM_BUTTON_TEXT);
-		init();
-	}
-	public ItemSearchDialog(Frame parent) {
-		super(parent, POSConstants.SEARCH_ITEM_BUTTON_TEXT);
-		init();
-	}
-	private void init() {
-		setResizable(false);
-		JPanel contentPane = getContentPanel();
-		MigLayout layout = new MigLayout("inset 0"); //$NON-NLS-1$ 
-		contentPane.setLayout(layout);
-		tfNumber = new JTextField();
-		tfNumber.setFont(tfNumber.getFont().deriveFont(Font.BOLD, PosUIManager.getNumberFieldFontSize()));
-		tfNumber.setFocusable(true);
-		tfNumber.requestFocus();
-		tfNumber.setBackground(Color.WHITE);
-		tfNumber.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				doOk();
-			}
-		});
-		qwertyKeyPad = new QwertyKeyPad();
-		contentPane.add(tfNumber, "spanx, grow"); //$NON-NLS-1$
-		contentPane.add(qwertyKeyPad, "spanx ,grow"); //$NON-NLS-1$
-	}
-	@Override
-	public void doOk() {
-		String s = tfNumber.getText();
-		if (s.equals("0") || s.equals("")) {
-			POSMessageDialog.showError(Application.getPosWindow(), "Please enter barcode or item no.");
-			return;
-		}
-		setValue(tfNumber.getText());
-		setCanceled(false);
-		dispose();
-	}
-	public String getValue() {
-		return value;
-	}
-	public void setValue(String value) {
-		this.value = value;
-	}
+    private JTextField tfNumber;
+    private String value;
+    private QwertyKeyPad qwertyKeyPad;
+    public ItemSearchDialog() {
+        super(POSUtil.getFocusedWindow(), POSConstants.SEARCH_ITEM_BUTTON_TEXT);
+        init();
+    }
+    public ItemSearchDialog(Frame parent) {
+        super(parent, POSConstants.SEARCH_ITEM_BUTTON_TEXT);
+        init();
+    }
+    private void init() {
+        setResizable(false);
+        JPanel contentPane = getContentPanel();
+        MigLayout layout = new MigLayout("inset 0"); //$NON-NLS-1$ 
+        contentPane.setLayout(layout);
+        tfNumber = new JTextField();
+        tfNumber.setFont(tfNumber.getFont().deriveFont(Font.BOLD, PosUIManager.getNumberFieldFontSize()));
+        tfNumber.setFocusable(true);
+        tfNumber.requestFocus();
+        tfNumber.setBackground(Color.WHITE);
+        tfNumber.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                doOk();
+            }
+        });
+        qwertyKeyPad = new QwertyKeyPad();
+        contentPane.add(tfNumber, "spanx, grow"); //$NON-NLS-1$
+        contentPane.add(qwertyKeyPad, "spanx ,grow"); //$NON-NLS-1$
+    }
+    @Override
+    public void doOk() {
+        String s = tfNumber.getText();
+        if (s.equals("0") || s.equals("")) {
+            POSMessageDialog.showError(Application.getPosWindow(), "Please enter barcode or item no.");
+            return;
+        }
+        setValue(tfNumber.getText());
+        setCanceled(false);
+        dispose();
+    }
+    public String getValue() {
+        return value;
+    }
+    public void setValue(String value) {
+        this.value = value;
+    }
 }

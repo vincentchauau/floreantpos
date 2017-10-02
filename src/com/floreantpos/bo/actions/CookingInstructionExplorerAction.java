@@ -23,28 +23,26 @@ import javax.swing.JTabbedPane;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.CookingInstructionExplorer;
 public class CookingInstructionExplorerAction extends AbstractAction {
-	public CookingInstructionExplorerAction() {
-		super(com.floreantpos.POSConstants.COOKING_INSTRUCTIONS);
-	}
-	public CookingInstructionExplorerAction(String name) {
-		super(name);
-	}
-	public CookingInstructionExplorerAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
-		
-		CookingInstructionExplorer explorer = null;
-		JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
-		int index = tabbedPane.indexOfTab(com.floreantpos.POSConstants.COOKING_INSTRUCTIONS);
-		if (index == -1) {
-			explorer = new CookingInstructionExplorer();
-			tabbedPane.addTab(com.floreantpos.POSConstants.COOKING_INSTRUCTIONS, explorer);
-		}
-		else {
-			explorer = (CookingInstructionExplorer) tabbedPane.getComponentAt(index);
-		}
-		tabbedPane.setSelectedComponent(explorer);
-	}
+    public CookingInstructionExplorerAction() {
+        super(com.floreantpos.POSConstants.COOKING_INSTRUCTIONS);
+    }
+    public CookingInstructionExplorerAction(String name) {
+        super(name);
+    }
+    public CookingInstructionExplorerAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
+        CookingInstructionExplorer explorer = null;
+        JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
+        int index = tabbedPane.indexOfTab(com.floreantpos.POSConstants.COOKING_INSTRUCTIONS);
+        if (index == -1) {
+            explorer = new CookingInstructionExplorer();
+            tabbedPane.addTab(com.floreantpos.POSConstants.COOKING_INSTRUCTIONS, explorer);
+        } else {
+            explorer = (CookingInstructionExplorer) tabbedPane.getComponentAt(index);
+        }
+        tabbedPane.setSelectedComponent(explorer);
+    }
 }

@@ -16,38 +16,27 @@
  * ************************************************************************
  */
 package com.floreantpos.demo;
-
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
-
 import com.floreantpos.Messages;
 import com.floreantpos.main.Application;
-
 public class KitchenDisplayWindow extends JFrame {
-
-	KitchenDisplayView view = new KitchenDisplayView(false);
-
-	public KitchenDisplayWindow() {
-		setTitle(Messages.getString("KitchenDisplayWindow.0")); //$NON-NLS-1$
-		setIconImage(Application.getApplicationIcon().getImage());
-
-		add(view);
-		setSize(Toolkit.getDefaultToolkit().getScreenSize());
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	}
-
-	@Override
-	public void setVisible(boolean b) {
-		super.setVisible(b);
-
-		view.setVisible(b);
-	}
-
-	@Override
-	public void dispose() {
-		view.cleanup();
-
-		super.dispose();
-	}
+    KitchenDisplayView view = new KitchenDisplayView(false);
+    public KitchenDisplayWindow() {
+        setTitle(Messages.getString("KitchenDisplayWindow.0")); //$NON-NLS-1$
+        setIconImage(Application.getApplicationIcon().getImage());
+        add(view);
+        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b);
+        view.setVisible(b);
+    }
+    @Override
+    public void dispose() {
+        view.cleanup();
+        super.dispose();
+    }
 }

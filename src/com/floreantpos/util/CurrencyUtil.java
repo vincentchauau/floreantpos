@@ -16,76 +16,62 @@
  * ************************************************************************
  */
 package com.floreantpos.util;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
 import com.floreantpos.model.Currency;
 import com.floreantpos.model.dao.CurrencyDAO;
-
 public class CurrencyUtil {
-	private static Currency mainCurrency;
-	private static List<Currency> auxiliaryCurrencyList;
-
-	public static void populateCurrency() {
-		auxiliaryCurrencyList = new ArrayList<Currency>();
-
-		List<Currency> currencyList = CurrencyDAO.getInstance().findAll();
-
-		if (currencyList != null) {
-			for (Currency currency : currencyList) {
-				if (currency.isMain()) {
-					mainCurrency = currency;
-				}
-				else {
-					auxiliaryCurrencyList.add(currency);
-				}
-			}
-		}
-	}
-
-	public static Currency getMainCurrency() {
-		return mainCurrency;
-	}
-
-	public static List<Currency> getAuxiliaryCurrencyList() {
-		return auxiliaryCurrencyList;
-	}
-
-	public static List<Currency> getAllCurrency() {
-		List<Currency> currencyList = new ArrayList<Currency>();
-		currencyList.add(mainCurrency);
-		Collections.sort(auxiliaryCurrencyList, new Comparator<Currency>() {
-			@Override
-			public int compare(Currency curr1, Currency curr2) {
-				return curr1.getName().compareTo(curr2.getName());
-			}
-		});
-		currencyList.addAll(auxiliaryCurrencyList);
-		return currencyList;
-	}
-
-	public static String getCurrencyName() {
-		String currencyName = null;
-		if (mainCurrency != null) {
-			currencyName = mainCurrency.getName();
-		}
-		else {
-			currencyName = "USD"; //$NON-NLS-1$
-		}
-		return currencyName;
-	}
-
-	public static String getCurrencySymbol() {
-		String currencySymbol = null;
-		if (mainCurrency != null) {
-			currencySymbol = mainCurrency.getSymbol();
-		}
-		else {
-			currencySymbol = "$"; //$NON-NLS-1$
-		}
-		return currencySymbol;
-	}
+    private static Currency mainCurrency;
+    private static List<Currency> auxiliaryCurrencyList;
+    public static void populateCurrency() {
+        auxiliaryCurrencyList = new ArrayList<Currency>();
+        List<Currency> currencyList = CurrencyDAO.getInstance().findAll();
+        if (currencyList != null) {
+            for (Currency currency : currencyList) {
+                if (currency.isMain()) {
+                    mainCurrency = currency;
+                } else {
+                    auxiliaryCurrencyList.add(currency);
+                }
+            }
+        }
+    }
+    public static Currency getMainCurrency() {
+        return mainCurrency;
+    }
+    public static List<Currency> getAuxiliaryCurrencyList() {
+        return auxiliaryCurrencyList;
+    }
+    public static List<Currency> getAllCurrency() {
+        List<Currency> currencyList = new ArrayList<Currency>();
+        currencyList.add(mainCurrency);
+        Collections.sort(auxiliaryCurrencyList, new Comparator<Currency>() {
+            @Override
+            public int compare(Currency curr1, Currency curr2) {
+                return curr1.getName().compareTo(curr2.getName());
+            }
+        });
+        currencyList.addAll(auxiliaryCurrencyList);
+        return currencyList;
+    }
+    public static String getCurrencyName() {
+        String currencyName = null;
+        if (mainCurrency != null) {
+            currencyName = mainCurrency.getName();
+        } else {
+            currencyName = "USD"; //$NON-NLS-1$
+        }
+        return currencyName;
+    }
+    public static String getCurrencySymbol() {
+        String currencySymbol = null;
+        if (mainCurrency != null) {
+            currencySymbol = mainCurrency.getSymbol();
+        } else {
+            currencySymbol = "$"; //$NON-NLS-1$
+        }
+        return currencySymbol;
+    }
 }

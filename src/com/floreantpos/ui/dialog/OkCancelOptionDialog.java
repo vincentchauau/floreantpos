@@ -34,83 +34,83 @@ import com.floreantpos.swing.TransparentPanel;
 import com.floreantpos.ui.TitlePanel;
 import com.floreantpos.util.POSUtil;
 public abstract class OkCancelOptionDialog extends POSDialog {
-	private PosButton btnOk;
-	private PosButton btnCancel;
-	private TitlePanel titlePanel;
-	private TransparentPanel contentPanel;
-	public OkCancelOptionDialog() {
-		super(POSUtil.getBackOfficeWindow(), "");
-		init();
-		titlePanel.setTitle("");
-	}
-	public OkCancelOptionDialog(String title) {
-		super(Application.getPosWindow(), title);
-		init();
-		titlePanel.setTitle(title);
-	}
-	public OkCancelOptionDialog(Window owner) {
-		super(owner, "");
-		init();
-	}
-	public OkCancelOptionDialog(Frame owner, boolean model) {
-		super(owner, model);
-		init();
-	}
-	public OkCancelOptionDialog(Window owner, String title) {
-		super(owner, title);
-		init();
-		titlePanel.setTitle(title);
-	}
-	private void init() {
-		setLayout(new BorderLayout(10, 10));
-		setIconImage(Application.getApplicationIcon().getImage());
-		setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-		titlePanel = new TitlePanel();
-		add(titlePanel, BorderLayout.NORTH);
-		contentPanel = new TransparentPanel();
-		contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		add(contentPanel, BorderLayout.CENTER);
-		JSeparator jSeparator1 = new JSeparator();
-		TransparentPanel buttonPanel = new TransparentPanel();
-		btnOk = new PosButton();
-		btnCancel = new PosButton();
-		TransparentPanel southPanel = new TransparentPanel();
-		southPanel.setLayout(new BorderLayout());
-		buttonPanel.setLayout(new FlowLayout());
-		Dimension btnSize = PosUIManager.getSize(100, 70);
-		btnOk.setPreferredSize(btnSize);
-		btnOk.setText(com.floreantpos.POSConstants.OK.toUpperCase());
-		btnOk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				doOk();
-			}
-		});
-		buttonPanel.add(btnOk);
-		btnCancel.setPreferredSize(btnSize);
-		btnCancel.setText(POSConstants.CANCEL.toUpperCase());
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				doCancel();
-			}
-		});
-		buttonPanel.add(btnCancel);
-		southPanel.add(jSeparator1, BorderLayout.NORTH);
-		southPanel.add(buttonPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new BorderLayout());
-		add(southPanel, BorderLayout.SOUTH);
-	}
-	public void setTitlePaneText(String title) {
-		titlePanel.setTitle(title);
-	}
-	public void setOkButtonText(String text) {
-		btnOk.setText(text);
-	}
-	public JPanel getContentPanel() {
-		return contentPanel;
-	}
-	public abstract void doOk();
-	public void doCancel() {
-		setCanceled(true);
-		dispose();
-	}
+    private PosButton btnOk;
+    private PosButton btnCancel;
+    private TitlePanel titlePanel;
+    private TransparentPanel contentPanel;
+    public OkCancelOptionDialog() {
+        super(POSUtil.getBackOfficeWindow(), "");
+        init();
+        titlePanel.setTitle("");
+    }
+    public OkCancelOptionDialog(String title) {
+        super(Application.getPosWindow(), title);
+        init();
+        titlePanel.setTitle(title);
+    }
+    public OkCancelOptionDialog(Window owner) {
+        super(owner, "");
+        init();
+    }
+    public OkCancelOptionDialog(Frame owner, boolean model) {
+        super(owner, model);
+        init();
+    }
+    public OkCancelOptionDialog(Window owner, String title) {
+        super(owner, title);
+        init();
+        titlePanel.setTitle(title);
+    }
+    private void init() {
+        setLayout(new BorderLayout(10, 10));
+        setIconImage(Application.getApplicationIcon().getImage());
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        titlePanel = new TitlePanel();
+        add(titlePanel, BorderLayout.NORTH);
+        contentPanel = new TransparentPanel();
+        contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        add(contentPanel, BorderLayout.CENTER);
+        JSeparator jSeparator1 = new JSeparator();
+        TransparentPanel buttonPanel = new TransparentPanel();
+        btnOk = new PosButton();
+        btnCancel = new PosButton();
+        TransparentPanel southPanel = new TransparentPanel();
+        southPanel.setLayout(new BorderLayout());
+        buttonPanel.setLayout(new FlowLayout());
+        Dimension btnSize = PosUIManager.getSize(100, 70);
+        btnOk.setPreferredSize(btnSize);
+        btnOk.setText(com.floreantpos.POSConstants.OK.toUpperCase());
+        btnOk.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                doOk();
+            }
+        });
+        buttonPanel.add(btnOk);
+        btnCancel.setPreferredSize(btnSize);
+        btnCancel.setText(POSConstants.CANCEL.toUpperCase());
+        btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                doCancel();
+            }
+        });
+        buttonPanel.add(btnCancel);
+        southPanel.add(jSeparator1, BorderLayout.NORTH);
+        southPanel.add(buttonPanel, BorderLayout.CENTER);
+        contentPanel.setLayout(new BorderLayout());
+        add(southPanel, BorderLayout.SOUTH);
+    }
+    public void setTitlePaneText(String title) {
+        titlePanel.setTitle(title);
+    }
+    public void setOkButtonText(String text) {
+        btnOk.setText(text);
+    }
+    public JPanel getContentPanel() {
+        return contentPanel;
+    }
+    public abstract void doOk();
+    public void doCancel() {
+        setCanceled(true);
+        dispose();
+    }
 }

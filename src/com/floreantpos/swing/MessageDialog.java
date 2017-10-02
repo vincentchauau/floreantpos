@@ -21,17 +21,16 @@ import org.apache.log4j.Logger;
 import com.floreantpos.Messages;
 import com.floreantpos.main.Application;
 public class MessageDialog {
-	private static Logger logger = Logger.getLogger(Application.class);
-	
-	public static void showError(String errorMessage) {
-		JOptionPane.showMessageDialog(Application.getPosWindow(), errorMessage, Messages.getString("MessageDialog.0"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
-	}
-	public static void showError(String errorMessage, Throwable t) {
-		logger.error(errorMessage, t);
-		JOptionPane.showMessageDialog(Application.getPosWindow(), errorMessage, Messages.getString("MessageDialog.0"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
-	}
-	public static void showError(Throwable t) {
-		logger.error(t); //$NON-NLS-1$
-		JOptionPane.showMessageDialog(Application.getPosWindow(), Messages.getString("GenericErrorMessage"), Messages.getString("MessageDialog.0"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
-	}
+    private static Logger logger = Logger.getLogger(Application.class);
+    public static void showError(String errorMessage) {
+        JOptionPane.showMessageDialog(Application.getPosWindow(), errorMessage, Messages.getString("MessageDialog.0"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
+    }
+    public static void showError(String errorMessage, Throwable t) {
+        logger.error(errorMessage, t);
+        JOptionPane.showMessageDialog(Application.getPosWindow(), errorMessage, Messages.getString("MessageDialog.0"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
+    }
+    public static void showError(Throwable t) {
+        logger.error(t); //$NON-NLS-1$
+        JOptionPane.showMessageDialog(Application.getPosWindow(), Messages.getString("GenericErrorMessage"), Messages.getString("MessageDialog.0"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+    }
 }

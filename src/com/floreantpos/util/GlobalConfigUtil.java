@@ -16,59 +16,47 @@
  * ************************************************************************
  */
 package com.floreantpos.util;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
-
 import com.floreantpos.model.GlobalConfig;
 import com.floreantpos.model.dao.GlobalConfigDAO;
-
 public class GlobalConfigUtil {
-	private static List<GlobalConfig> globalConfigList;
-
-	public static void populateGlobalConfig() {
-		globalConfigList = new ArrayList<GlobalConfig>();
-		List<GlobalConfig> list = GlobalConfigDAO.getInstance().findAll();
-		if (list != null) {
-			globalConfigList.addAll(list);
-		}
-	}
-
-	public static GlobalConfig get(String key) {
-		if (globalConfigList == null) {
-			return null;
-		}
-
-		for (GlobalConfig config : globalConfigList) {
-			if (key.equals(config.getKey())) {
-				return config;
-			}
-		}
-
-		return null;
-	}
-
-	public static String getValue(String key) {
-		if (globalConfigList == null) {
-			return null;
-		}
-
-		for (GlobalConfig config : globalConfigList) {
-			if (key.equals(config.getKey())) {
-				return config.getValue();
-			}
-		}
-
-		return null;
-	}
-
-	public static String getMapApiKey() {
-		String mapApiKey = getValue(GlobalConfig.MAP_API_KEY);
-		if (StringUtils.isEmpty(mapApiKey)) {
-			return "AIzaSyDc-5LFTSC-bB9kQcZkM74LHUxwndRy_XM";
-		}
-		return mapApiKey;
-	}
+    private static List<GlobalConfig> globalConfigList;
+    public static void populateGlobalConfig() {
+        globalConfigList = new ArrayList<GlobalConfig>();
+        List<GlobalConfig> list = GlobalConfigDAO.getInstance().findAll();
+        if (list != null) {
+            globalConfigList.addAll(list);
+        }
+    }
+    public static GlobalConfig get(String key) {
+        if (globalConfigList == null) {
+            return null;
+        }
+        for (GlobalConfig config : globalConfigList) {
+            if (key.equals(config.getKey())) {
+                return config;
+            }
+        }
+        return null;
+    }
+    public static String getValue(String key) {
+        if (globalConfigList == null) {
+            return null;
+        }
+        for (GlobalConfig config : globalConfigList) {
+            if (key.equals(config.getKey())) {
+                return config.getValue();
+            }
+        }
+        return null;
+    }
+    public static String getMapApiKey() {
+        String mapApiKey = getValue(GlobalConfig.MAP_API_KEY);
+        if (StringUtils.isEmpty(mapApiKey)) {
+            return "AIzaSyDc-5LFTSC-bB9kQcZkM74LHUxwndRy_XM";
+        }
+        return mapApiKey;
+    }
 }

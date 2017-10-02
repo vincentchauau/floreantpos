@@ -24,27 +24,26 @@ import com.floreantpos.POSConstants;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.TaxGroupExplorer;
 public class TaxExplorerAction extends AbstractAction {
-	public TaxExplorerAction() {
-		super(com.floreantpos.POSConstants.TAX);
-	}
-	public TaxExplorerAction(String name) {
-		super(name);
-	}
-	public TaxExplorerAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
-		TaxGroupExplorer explorer = null;
-		JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
-		int index = tabbedPane.indexOfTab(POSConstants.TAX_EXPLORER);
-		if (index == -1) {
-			explorer = new TaxGroupExplorer();
-			tabbedPane.addTab(POSConstants.TAX_EXPLORER, explorer);
-		}
-		else {
-			explorer = (TaxGroupExplorer) tabbedPane.getComponentAt(index);
-		}
-		tabbedPane.setSelectedComponent(explorer);
-	}
+    public TaxExplorerAction() {
+        super(com.floreantpos.POSConstants.TAX);
+    }
+    public TaxExplorerAction(String name) {
+        super(name);
+    }
+    public TaxExplorerAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
+        TaxGroupExplorer explorer = null;
+        JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
+        int index = tabbedPane.indexOfTab(POSConstants.TAX_EXPLORER);
+        if (index == -1) {
+            explorer = new TaxGroupExplorer();
+            tabbedPane.addTab(POSConstants.TAX_EXPLORER, explorer);
+        } else {
+            explorer = (TaxGroupExplorer) tabbedPane.getComponentAt(index);
+        }
+        tabbedPane.setSelectedComponent(explorer);
+    }
 }

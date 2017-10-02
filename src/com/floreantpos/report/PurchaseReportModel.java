@@ -21,25 +21,24 @@ import java.text.SimpleDateFormat;
 import com.floreantpos.model.InventoryItem;
 import com.floreantpos.swing.ListTableModel;
 public class PurchaseReportModel extends ListTableModel {
-	SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy, h:m a"); //$NON-NLS-1$
-	DecimalFormat decimalFormat = new DecimalFormat("0.00"); //$NON-NLS-1$
-	public PurchaseReportModel() {
-		super(new String[] { "item", "description", "quantity", "price", "total" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
-	}
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		InventoryItem data = (InventoryItem) rows.get(rowIndex);
-		switch (columnIndex) {
-			case 0:
-				return String.valueOf(data.getName());
-			case 1:
-				return data.getDescription();
-			case 2:
-				return String.valueOf(data.getPackageReplenishLevel());
-			case 3:
-				return String.valueOf(data.getUnitPurchasePrice());
-			case 4:
-				String.valueOf(data.getAveragePackagePrice());
-		}
-		return null;
-	}
+    DecimalFormat decimalFormat = new DecimalFormat("0.00"); //$NON-NLS-1$
+    public PurchaseReportModel() {
+        super(new String[]{"item", "description", "quantity", "price", "total"}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
+    }
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        InventoryItem data = (InventoryItem) rows.get(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                return String.valueOf(data.getName());
+            case 1:
+                return data.getDescription();
+            case 2:
+                return String.valueOf(data.getPackageReplenishLevel());
+            case 3:
+                return String.valueOf(data.getUnitPurchasePrice());
+            case 4:
+                String.valueOf(data.getAveragePackagePrice());
+        }
+        return null;
+    }
 }

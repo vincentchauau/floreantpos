@@ -24,58 +24,57 @@ import javax.swing.table.DefaultTableCellRenderer;
 import com.floreantpos.model.ITicketItem;
 import com.floreantpos.util.NumberUtil;
 public class TicketViewerTableCellRenderer extends DefaultTableCellRenderer {
-	private boolean inTicketScreen = false;
-	MultiLineTableCellRenderer multiLineTableCellRenderer = new MultiLineTableCellRenderer();
-	public TicketViewerTableCellRenderer() {
-		super();
-	}
-	@Override
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-		Component rendererComponent = null;
-		TicketViewerTableModel model = (TicketViewerTableModel) table.getModel();
-		Object object = model.get(row);
-		if (column == 1) {
-			rendererComponent = multiLineTableCellRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		}
-		else {
-			rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, false, row, column);
-			if (column == 0) {
-				setHorizontalAlignment(SwingConstants.CENTER);
-			}
-			else
-				setHorizontalAlignment(SwingConstants.RIGHT);
-		}
-		if (!inTicketScreen || isSelected) {
-			return rendererComponent;
-		}
-		rendererComponent.setBackground(table.getBackground());
-		if (object instanceof ITicketItem) {
-			ITicketItem ticketItem = (ITicketItem) object;
-			if (ticketItem.isPrintedToKitchen()) {
-				rendererComponent.setBackground(Color.YELLOW);
-			}
-		}
-		return rendererComponent;
-	}
-	@Override
-	protected void setValue(Object value) {
-		if (value == null) {
-			setText(""); //$NON-NLS-1$
-			return;
-		}
-		String text = value.toString();
-		if (value instanceof String) {
-			setHorizontalAlignment(SwingConstants.CENTER);
-		}
-		if (value instanceof Double || value instanceof Float) {
-			text = NumberUtil.formatNumber(((java.lang.Number) value).doubleValue());
-		}
-		setText(text);
-	}
-	public boolean isInTicketScreen() {
-		return inTicketScreen;
-	}
-	public void setInTicketScreen(boolean inTicketScreen) {
-		this.inTicketScreen = inTicketScreen;
-	}
+    private boolean inTicketScreen = false;
+    MultiLineTableCellRenderer multiLineTableCellRenderer = new MultiLineTableCellRenderer();
+    public TicketViewerTableCellRenderer() {
+        super();
+    }
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component rendererComponent = null;
+        TicketViewerTableModel model = (TicketViewerTableModel) table.getModel();
+        Object object = model.get(row);
+        if (column == 1) {
+            rendererComponent = multiLineTableCellRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        } else {
+            rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, false, row, column);
+            if (column == 0) {
+                setHorizontalAlignment(SwingConstants.CENTER);
+            } else {
+                setHorizontalAlignment(SwingConstants.RIGHT);
+            }
+        }
+        if (!inTicketScreen || isSelected) {
+            return rendererComponent;
+        }
+        rendererComponent.setBackground(table.getBackground());
+        if (object instanceof ITicketItem) {
+            ITicketItem ticketItem = (ITicketItem) object;
+            if (ticketItem.isPrintedToKitchen()) {
+                rendererComponent.setBackground(Color.YELLOW);
+            }
+        }
+        return rendererComponent;
+    }
+    @Override
+    protected void setValue(Object value) {
+        if (value == null) {
+            setText(""); //$NON-NLS-1$
+            return;
+        }
+        String text = value.toString();
+        if (value instanceof String) {
+            setHorizontalAlignment(SwingConstants.CENTER);
+        }
+        if (value instanceof Double || value instanceof Float) {
+            text = NumberUtil.formatNumber(((java.lang.Number) value).doubleValue());
+        }
+        setText(text);
+    }
+    public boolean isInTicketScreen() {
+        return inTicketScreen;
+    }
+    public void setInTicketScreen(boolean inTicketScreen) {
+        this.inTicketScreen = inTicketScreen;
+    }
 }

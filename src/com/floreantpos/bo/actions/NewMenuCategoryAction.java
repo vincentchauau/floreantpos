@@ -24,22 +24,22 @@ import com.floreantpos.ui.dialog.BeanEditorDialog;
 import com.floreantpos.ui.model.MenuCategoryForm;
 import com.floreantpos.util.POSUtil;
 public class NewMenuCategoryAction extends AbstractAction {
-	public NewMenuCategoryAction() {
-		super();
-	}
-	public NewMenuCategoryAction(String name) {
-		super(name);
-	}
-	public NewMenuCategoryAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		try {
-			MenuCategoryForm editor = new MenuCategoryForm();
-			BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
-			dialog.open();
-		} catch (Exception x) {
-			BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
-		}
-	}
+    public NewMenuCategoryAction() {
+        super();
+    }
+    public NewMenuCategoryAction(String name) {
+        super(name);
+    }
+    public NewMenuCategoryAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        try {
+            MenuCategoryForm editor = new MenuCategoryForm();
+            BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
+            dialog.open();
+        } catch (Exception x) {
+            BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
+        }
+    }
 }

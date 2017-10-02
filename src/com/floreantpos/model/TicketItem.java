@@ -16,7 +16,6 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -34,23 +33,17 @@ import com.floreantpos.model.dao.MenuItemDAO;
 import com.floreantpos.model.dao.PrinterGroupDAO;
 import com.floreantpos.util.DiscountUtil;
 import com.floreantpos.util.NumberUtil;
-
 public class TicketItem extends BaseTicketItem implements ITicketItem {
-
     private static final long serialVersionUID = 1L;
-
     public enum PIZZA_SECTION_MODE {
         FULL(1), HALF(2), QUARTER(3);
         private final int value;
-
         private PIZZA_SECTION_MODE(int value) {
             this.value = value;
         }
-
         public int getValue() {
             return value;
         }
-
         public static PIZZA_SECTION_MODE from(int value) {
             if (value == 2) {
                 return HALF;
@@ -60,33 +53,27 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
             }
             return FULL;
         }
-
         @Override
         public String toString() {
             return name();
         }
     }
-
     public PIZZA_SECTION_MODE getPizzaSectionMode() {
         return PIZZA_SECTION_MODE.from(getPizzaSectionModeType());
     }
-
     public void setPizzaSectionMode(PIZZA_SECTION_MODE pizzaSectionMode) {
         setPizzaSectionModeType(pizzaSectionMode.getValue());
     }
-
     /*[CONSTRUCTOR MARKER BEGIN]*/
     public TicketItem() {
         super();
     }
-
     /**
      * Constructor for primary key
      */
     public TicketItem(java.lang.Integer id) {
         super(id);
     }
-
     /**
      * Constructor for required fields
      */
@@ -97,10 +84,8 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
                 id,
                 ticket);
     }
-
     /*[CONSTRUCTOR MARKER END]*/
     private MenuItem menuItem;
-
     public TicketItem clone(TicketItem source) {
         try {
             // Write the object out to a byte array
@@ -120,34 +105,28 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
     }
     private boolean priceIncludesTax;
     private int tableRowNum;
-
     public int getTableRowNum() {
         return tableRowNum;
     }
-
     public void setTableRowNum(int tableRowNum) {
         this.tableRowNum = tableRowNum;
     }
-
     public boolean canAddCookingInstruction() {
         if (isPrintedToKitchen()) {
             return false;
         }
         return true;
     }
-
     public java.lang.Double getTaxAmount() {
         if (getTicket().isTaxExempt()) {
             return 0.0;
         }
         return super.getTaxAmount();
     }
-
     @Override
     public String toString() {
         return getName();
     }
-
     public TicketItemModifier addTicketItemModifier(MenuModifier menuModifier, int modifierType, OrderType type, Multiplier multiplier) {
         TicketItemModifier ticketItemModifier = new TicketItemModifier();
         ticketItemModifier.setModifierId(menuModifier.getId());
@@ -170,7 +149,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         addToticketItemModifiers(ticketItemModifier);
         return ticketItemModifier;
     }
-
     public TicketItemModifier addTicketItemModifier(MenuModifier menuModifier, boolean addOn) {
         TicketItemModifier ticketItemModifier = new TicketItemModifier();
         ticketItemModifier.setModifierId(menuModifier.getId());
@@ -193,7 +171,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         addToticketItemModifiers(ticketItemModifier);
         return ticketItemModifier;
     }
-
     public void updateModifiersUnitPrice(double defaultSellPortion) {
         List<TicketItemModifier> ticketItemModifiers = getTicketItemModifiers();
         if (ticketItemModifiers != null) {
@@ -204,7 +181,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
             }
         }
     }
-
     public boolean contains(TicketItemModifier ticketItemModifier) {
         List<TicketItemModifier> ticketItemModifiers = getTicketItemModifiers();
         int count = 0;
@@ -219,7 +195,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return (count > 1) ? true : false;
     }
-
     public TicketItemModifier removeTicketItemModifier(TicketItemModifier ticketItemModifier) {
         List<TicketItemModifier> ticketItemModifiers = getTicketItemModifiers();
         if (ticketItemModifiers == null) {
@@ -235,7 +210,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return ticketItemModifier;
     }
-
     public void addCookingInstruction(TicketItemCookingInstruction cookingInstruction) {
         List<TicketItemCookingInstruction> cookingInstructions = getCookingInstructions();
         if (cookingInstructions == null) {
@@ -244,7 +218,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         cookingInstructions.add(cookingInstruction);
     }
-
     public void addCookingInstructions(List<TicketItemCookingInstruction> instructions) {
         List<TicketItemCookingInstruction> cookingInstructions = getCookingInstructions();
         if (cookingInstructions == null) {
@@ -253,7 +226,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         cookingInstructions.addAll(instructions);
     }
-
     public void removeCookingInstruction(TicketItemCookingInstruction itemCookingInstruction) {
         List<TicketItemCookingInstruction> cookingInstructions2 = getCookingInstructions();
         if (cookingInstructions2 == null) {
@@ -303,7 +275,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
     //
     //		return null;
     //	}
-
     public TicketItemModifier findAddOnFor(MenuModifier modifier) {
         List<TicketItemModifier> list = getAddOns();
         if (list == null) {
@@ -316,7 +287,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return null;
     }
-
     public void addAddOn(MenuModifier menuModifier) {
         List<TicketItemModifier> list = getAddOns();
         if (list == null) {
@@ -336,7 +306,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         list.add(convertToAddOn(menuModifier));
     }
-
     public TicketItemModifier convertToAddOn(MenuModifier menuModifier) {
         TicketItemModifier ticketItemModifier = new TicketItemModifier();
         ticketItemModifier.setModifierId(menuModifier.getId());
@@ -352,7 +321,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         ticketItemModifier.setTicketItem(this);
         return ticketItemModifier;
     }
-
     public void removeAddOn(TicketItemModifier addOn) {
         List<TicketItemModifier> addOns = getAddOns();
         if (addOns == null) {
@@ -365,7 +333,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
             }
         }
     }
-
     public void calculatePrice() {
         priceIncludesTax = Application.getInstance().isPriceIncludesTax();
         if (getSizeModifier() != null) {
@@ -391,7 +358,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         setTotalAmount(NumberUtil.roundToTwoDigit(calculateTotal(true)));
         setTotalAmountWithoutModifiers(NumberUtil.roundToTwoDigit(calculateTotal(false)));
     }
-
     public boolean isMergable(TicketItem otherItem, boolean merge) {
         if (this.isFractionalUnit() || this.getItemId() == 0 || (this.getCookingInstructions() != null && this.getCookingInstructions().size() > 0)) {
             return false;
@@ -450,7 +416,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return true;
     }
-
     public boolean isMergableModifiers(List<TicketItemModifier> thisModifiers, List<TicketItemModifier> thatModifiers, boolean merge) {
         if (thatModifiers == null) {
             return true;
@@ -480,7 +445,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return true;
     }
-
     public void merge(TicketItem otherItem) {
         if (!this.isHasModifiers() && !otherItem.isHasModifiers()) {
             this.setItemCount(this.getItemCount() + otherItem.getItemCount());
@@ -501,7 +465,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
     //		
     //		return subtotalWithoutModifiers;
     //	}
-
     private double calculateSubtotal(boolean includeModifierPrice) {
         //TODO: added Fractional Item Unit Quantity
         double subTotalAmount;
@@ -556,7 +519,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
     //		}
     //		return 0;
     //	}
-
     private double calculateDiscount() {
         double discount = 0;
         TicketItemDiscount maxDiscount = DiscountUtil.getMaxDiscount(getDiscounts());
@@ -565,7 +527,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return discount;
     }
-
     public double getAmountByType(TicketItemDiscount discount) {
         switch (discount.getType()) {
             case Discount.DISCOUNT_TYPE_AMOUNT:
@@ -577,7 +538,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return 0;
     }
-
     private double calculateTax(boolean includeModifierTax) {
         double subtotal = 0;
         subtotal = getSubtotalAmountWithoutModifiers();
@@ -614,7 +574,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return tax;
     }
-
     private double calculateTotal(boolean includeModifiers) {
         double total = 0;
         if (includeModifiers) {
@@ -630,7 +589,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return total;
     }
-
     @Override
     public String getNameDisplay() {
         String name = getName();
@@ -639,7 +597,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return name;
     }
-
     @Override
     public Double getUnitPriceDisplay() {
         if (isTreatAsSeat()) {
@@ -647,7 +604,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return getUnitPrice();
     }
-
     @Override
     public String getItemQuantityDisplay() {
         if (isTreatAsSeat()) {
@@ -663,22 +619,18 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return String.valueOf(getItemCount());
     }
-
     @Override
     public Double getTaxAmountWithoutModifiersDisplay() {
         return getTaxAmountWithoutModifiers();
     }
-
     @Override
     public Double getTotalAmountWithoutModifiersDisplay() {
         return getTotalAmountWithoutModifiers();
     }
-
     @Override
     public Double getSubTotalAmountDisplay() {
         return getSubtotalAmount();
     }
-
     @Override
     public Double getSubTotalAmountWithoutModifiersDisplay() {
         if (isTreatAsSeat()) {
@@ -686,20 +638,16 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return getSubtotalAmountWithoutModifiers();
     }
-
     public boolean isPriceIncludesTax() {
         return priceIncludesTax;
     }
-
     public void setPriceIncludesTax(boolean priceIncludesTax) {
         this.priceIncludesTax = priceIncludesTax;
     }
-
     @Override
     public String getItemCode() {
         return String.valueOf(getItemId());
     }
-
     public List<Printer> getPrinters(OrderType orderType) {
         PosPrinters printers = PosPrinters.load();
         PrinterGroup printerGroup = getPrinterGroup();
@@ -717,7 +665,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return printerAll;
     }
-
     public PrinterGroup getPrinterGroup() {
         if (super.getPrinterGroup() == null) {
             List<PrinterGroup> printerGroups = PrinterGroupDAO.getInstance().findAll();
@@ -729,33 +676,27 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return super.getPrinterGroup();
     }
-
     @Override
     public boolean canAddDiscount() {
         return true;
     }
-
     @Override
     public boolean canVoid() {
         return true;
     }
-
     @Override
     public boolean canAddAdOn() {
         return true;
     }
-
     public MenuItem getMenuItem() {
         if (menuItem == null) {
             menuItem = MenuItemDAO.getInstance().loadInitialized(getItemId());
         }
         return menuItem;
     }
-
     public void setMenuItem(MenuItem menuItem) {
         this.menuItem = menuItem;
     }
-
     @Override
     public String getKitchenStatus() {
         if (super.getStatus() == null) {
@@ -763,7 +704,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return super.getStatus();
     }
-
     public TicketItemModifier findTicketItemModifierFor(MenuModifier menuModifier) {
         List<TicketItemModifier> modifiers = getTicketItemModifiers();
         if (modifiers == null) {
@@ -777,7 +717,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return null;
     }
-
     public TicketItemModifier findTicketItemModifierFor(MenuModifier menuModifier, Multiplier multiplier) {
         List<TicketItemModifier> modifiers = getTicketItemModifiers();
         if (modifiers == null) {
@@ -791,11 +730,9 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return null;
     }
-
     public TicketItemModifier findTicketItemModifierFor(MenuModifier menuModifier, String sectionName) {
         return findTicketItemModifierFor(menuModifier, sectionName, null);
     }
-
     public TicketItemModifier findTicketItemModifierFor(MenuModifier menuModifier, String sectionName, Multiplier multiplier) {
         List<TicketItemModifier> modifiers = getTicketItemModifiers();
         if (modifiers == null) {
@@ -817,7 +754,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return null;
     }
-
     public int countModifierFromGroup(MenuItemModifierGroup menuItemModifierGroup) {
         List<TicketItemModifier> modifiers = getTicketItemModifiers();
         if (modifiers == null) {
@@ -832,7 +768,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return modifierFromGroupCount;
     }
-
     public boolean requiredModifiersAdded(MenuItemModifierGroup menuItemModifierGroup) {
         int minQuantity = menuItemModifierGroup.getMinQuantity();
         if (minQuantity == 0) {
@@ -840,7 +775,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return countModifierFromGroup(menuItemModifierGroup) >= minQuantity;
     }
-
     public boolean deleteTicketItemModifier(TicketItemModifier ticketItemModifierToRemove) {
         List<TicketItemModifier> modifiers = getTicketItemModifiers();
         if (modifiers == null) {
@@ -855,7 +789,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return false;
     }
-
     public boolean deleteTicketItemModifierByName(TicketItemModifier ticketItemModifierToRemove) {
         List<TicketItemModifier> modifiers = getTicketItemModifiers();
         if (modifiers == null) {
@@ -870,7 +803,6 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
         }
         return false;
     }
-
     public java.util.List<com.floreantpos.model.TicketItemDiscount> getDiscounts() {
         if (super.getDiscounts() == null) {
             super.setDiscounts(new ArrayList<TicketItemDiscount>());

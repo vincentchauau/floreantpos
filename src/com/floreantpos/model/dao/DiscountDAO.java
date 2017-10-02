@@ -25,76 +25,75 @@ import org.hibernate.criterion.Restrictions;
 import com.floreantpos.model.Discount;
 import com.floreantpos.model.MenuItem;
 public class DiscountDAO extends BaseDiscountDAO {
-	/**
-	 * Default constructor.  Can be used in place of getInstance()
-	 */
-	public DiscountDAO() {
-	}
-	public List<Discount> findAllValidCoupons() {
-		Session session = null;
-		Date currentDate = new Date();
-		try {
-			session = createNewSession();
-			Criteria criteria = session.createCriteria(getReferenceClass());
-			criteria.add(Restrictions.eq(Discount.PROP_ENABLED, Boolean.TRUE));
-			criteria.add(Restrictions.or(Restrictions.eq(Discount.PROP_NEVER_EXPIRE, Boolean.TRUE), Restrictions.ge(Discount.PROP_EXPIRY_DATE, currentDate)));
-			return criteria.list();
-		} finally {
-			closeSession(session);
-		}
-	}
-	public List<Discount> getValidCoupons() {
-		Session session = null;
-		Date currentDate = new Date();
-		try {
-			session = createNewSession();
-			Criteria criteria = session.createCriteria(getReferenceClass());
-			criteria.add(Restrictions.eq(Discount.PROP_ENABLED, Boolean.TRUE));
-			criteria.add(Restrictions.eq(Discount.PROP_QUALIFICATION_TYPE, Discount.QUALIFICATION_TYPE_ITEM));
-			criteria.add(Restrictions.or(Restrictions.eq(Discount.PROP_NEVER_EXPIRE, Boolean.TRUE), Restrictions.ge(Discount.PROP_EXPIRY_DATE, currentDate)));
-			return criteria.list();
-		} finally {
-			closeSession(session);
-		}
-	}
-	public List<Discount> getValidCoupon(MenuItem menuItem) {
-		List<Discount> discountList = new ArrayList<Discount>();
-		for (Discount discount : getValidCoupons()) {
-			if (discount.getMenuItems().contains(menuItem) || discount.isApplyToAll()) {
-				discountList.add(discount);
-			}
-		}
-		return discountList;
-	}
-	public List<Discount> getTicketValidCoupon() {
-		Session session = null;
-		Date currentDate = new Date();
-		try {
-			session = createNewSession();
-			Criteria criteria = session.createCriteria(getReferenceClass());
-			criteria.add(Restrictions.eq(Discount.PROP_ENABLED, Boolean.TRUE));
-			criteria.add(Restrictions.eq(Discount.PROP_QUALIFICATION_TYPE, Discount.QUALIFICATION_TYPE_ORDER));
-			criteria.add(Restrictions.or(Restrictions.eq(Discount.PROP_NEVER_EXPIRE, Boolean.TRUE), Restrictions.ge(Discount.PROP_EXPIRY_DATE, currentDate)));
-			return criteria.list();
-		} finally {
-			closeSession(session);
-		}
-	}
-	
-	public Discount getDiscountByBarcode(String barcode) {
-		Session session = null;
-		Criteria criteria = null;
-		try {
-			session = createNewSession();
-			criteria = session.createCriteria(Discount.class);
-			criteria.add(Restrictions.like(Discount.PROP_BARCODE, barcode));
-			List<Discount> result = criteria.list();
-			if (result == null || result.isEmpty()) {
-				return null;
-			}
-			return (Discount) result.get(0);
-		} finally {
-			closeSession(session);
-		}
-	}
+    /**
+     * Default constructor. Can be used in place of getInstance()
+     */
+    public DiscountDAO() {
+    }
+    public List<Discount> findAllValidCoupons() {
+        Session session = null;
+        Date currentDate = new Date();
+        try {
+            session = createNewSession();
+            Criteria criteria = session.createCriteria(getReferenceClass());
+            criteria.add(Restrictions.eq(Discount.PROP_ENABLED, Boolean.TRUE));
+            criteria.add(Restrictions.or(Restrictions.eq(Discount.PROP_NEVER_EXPIRE, Boolean.TRUE), Restrictions.ge(Discount.PROP_EXPIRY_DATE, currentDate)));
+            return criteria.list();
+        } finally {
+            closeSession(session);
+        }
+    }
+    public List<Discount> getValidCoupons() {
+        Session session = null;
+        Date currentDate = new Date();
+        try {
+            session = createNewSession();
+            Criteria criteria = session.createCriteria(getReferenceClass());
+            criteria.add(Restrictions.eq(Discount.PROP_ENABLED, Boolean.TRUE));
+            criteria.add(Restrictions.eq(Discount.PROP_QUALIFICATION_TYPE, Discount.QUALIFICATION_TYPE_ITEM));
+            criteria.add(Restrictions.or(Restrictions.eq(Discount.PROP_NEVER_EXPIRE, Boolean.TRUE), Restrictions.ge(Discount.PROP_EXPIRY_DATE, currentDate)));
+            return criteria.list();
+        } finally {
+            closeSession(session);
+        }
+    }
+    public List<Discount> getValidCoupon(MenuItem menuItem) {
+        List<Discount> discountList = new ArrayList<Discount>();
+        for (Discount discount : getValidCoupons()) {
+            if (discount.getMenuItems().contains(menuItem) || discount.isApplyToAll()) {
+                discountList.add(discount);
+            }
+        }
+        return discountList;
+    }
+    public List<Discount> getTicketValidCoupon() {
+        Session session = null;
+        Date currentDate = new Date();
+        try {
+            session = createNewSession();
+            Criteria criteria = session.createCriteria(getReferenceClass());
+            criteria.add(Restrictions.eq(Discount.PROP_ENABLED, Boolean.TRUE));
+            criteria.add(Restrictions.eq(Discount.PROP_QUALIFICATION_TYPE, Discount.QUALIFICATION_TYPE_ORDER));
+            criteria.add(Restrictions.or(Restrictions.eq(Discount.PROP_NEVER_EXPIRE, Boolean.TRUE), Restrictions.ge(Discount.PROP_EXPIRY_DATE, currentDate)));
+            return criteria.list();
+        } finally {
+            closeSession(session);
+        }
+    }
+    public Discount getDiscountByBarcode(String barcode) {
+        Session session = null;
+        Criteria criteria = null;
+        try {
+            session = createNewSession();
+            criteria = session.createCriteria(Discount.class);
+            criteria.add(Restrictions.like(Discount.PROP_BARCODE, barcode));
+            List<Discount> result = criteria.list();
+            if (result == null || result.isEmpty()) {
+                return null;
+            }
+            return (Discount) result.get(0);
+        } finally {
+            closeSession(session);
+        }
+    }
 }

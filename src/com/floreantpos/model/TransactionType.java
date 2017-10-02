@@ -16,8 +16,7 @@
  * ************************************************************************
  */
 package com.floreantpos.model;
-
 public enum TransactionType {
-	DEBIT,  //give away money from drawer
-	CREDIT; //add money to drawer
+    DEBIT, //give away money from drawer
+    CREDIT; //add money to drawer
 }

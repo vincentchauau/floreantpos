@@ -16,42 +16,29 @@
  * ************************************************************************
  */
 package com.floreantpos.report;
-
+import static com.floreantpos.model.util.DateUtil.getDateString;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-
 import com.floreantpos.swing.ListTableModel;
-
 public class AttendanceReportModel extends ListTableModel {
-	SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy, h:m a"); //$NON-NLS-1$
-
-	DecimalFormat decimalFormat = new DecimalFormat("0.00"); //$NON-NLS-1$
-
-	public AttendanceReportModel() {
-		super(new String[] { "employeeId", "employeeName", "clockIn", "clockOut", "workTime" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ 
-	}
-
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		AttendanceReportData data = (AttendanceReportData) rows.get(rowIndex);
-
-		switch (columnIndex) {
-			case 0:
-				return String.valueOf(data.getUser().getUserId());
-
-			case 1:
-				return data.getUser().getFirstName() + " " + data.getUser().getLastName(); //$NON-NLS-1$
-
-			case 2:
-				return dateFormat2.format(data.getClockIn());
-
-			case 3:
-				return dateFormat2.format(data.getClockOut());
-
-			case 4:
-				return decimalFormat.format(data.getWorkTime());
-
-		}
-		return null;
-	}
-
+    DecimalFormat decimalFormat = new DecimalFormat("0.00"); //$NON-NLS-1$
+    public AttendanceReportModel() {
+        super(new String[]{"employeeId", "employeeName", "clockIn", "clockOut", "workTime"}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ 
+    }
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        AttendanceReportData data = (AttendanceReportData) rows.get(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                return String.valueOf(data.getUser().getUserId());
+            case 1:
+                return data.getUser().getFirstName() + " " + data.getUser().getLastName(); //$NON-NLS-1$
+            case 2:
+                return getDateString(data.getClockIn());
+            case 3:
+                return getDateString(data.getClockOut());
+            case 4:
+                return decimalFormat.format(data.getWorkTime());
+        }
+        return null;
+    }
 }

@@ -33,92 +33,91 @@ import com.floreantpos.model.TipsCashoutReportData;
 import com.floreantpos.model.User;
 import com.floreantpos.model.util.DateUtil;
 public class GratuityDAO extends BaseGratuityDAO {
-	/**
-	 * Default constructor.  Can be used in place of getInstance()
-	 */
-	public GratuityDAO() {
-	}
-	public List<Gratuity> findByUser(User user) throws PosException {
-		Session session = null;
-		try {
-			session = getSession();
-			Criteria criteria = session.createCriteria(getReferenceClass());
-			criteria.add(Restrictions.eq(Gratuity.PROP_OWNER, user));
-			criteria.add(Restrictions.eq(Gratuity.PROP_PAID, Boolean.FALSE));
-			criteria.add(Restrictions.eq(Gratuity.PROP_REFUNDED, Boolean.FALSE));
-			return criteria.list();
-		} catch (Exception e) {
-			throw new PosException(Messages.getString("GratuityDAO.0") + user.getFirstName() + " " + user.getLastName()); //$NON-NLS-1$ //$NON-NLS-2$
-		} finally {
-			closeSession(session);
-		}
-	}
-	public void payGratuities(List<Gratuity> gratuities) {
-		Session session = null;
-		Transaction tx = null;
-		double total = 0;
-		try {
-			session = getSession();
-			tx = session.beginTransaction();
-			for (Gratuity gratuity : gratuities) {
-				total += gratuity.getAmount();
-				gratuity.setPaid(true);
-				session.saveOrUpdate(gratuity);
-				Terminal terminal = gratuity.getTerminal();
-				terminal.setCurrentBalance(terminal.getCurrentBalance() - gratuity.getAmount());
-				session.saveOrUpdate(terminal);
-			}
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new PosException(Messages.getString("GratuityDAO.2")); //$NON-NLS-1$
-		} finally {
-			closeSession(session);
-		}
-	}
-	public TipsCashoutReport createReport(Date fromDate, Date toDate, User user) {
-		Session session = null;
-		try {
-			session = getSession();
-			fromDate = DateUtil.startOfDay(fromDate);
-			toDate = DateUtil.endOfDay(toDate);
-			Criteria criteria = session.createCriteria(Ticket.class);
-			//criteria = criteria.createAlias(Ti, "t");
-			criteria.add(Restrictions.eq(Ticket.PROP_OWNER, user));
-			//criteria.add(Restrictions.eq(Ticket.PROP_DRAWER_RESETTED, Boolean.FALSE));
-			//criteria.add(Restrictions.eq(Ticket.PROP_CLOSED, Boolean.TRUE));
-			criteria.add(Restrictions.ge(Ticket.PROP_CREATE_DATE, fromDate));
-			criteria.add(Restrictions.le(Ticket.PROP_CREATE_DATE, toDate));
-			List list = criteria.list();
-			TipsCashoutReport report = new TipsCashoutReport();
-			report.setServer(user.getUserId() + "/" + user.toString()); //$NON-NLS-1$
-			report.setFromDate(fromDate);
-			report.setToDate(toDate);
-			report.setReportTime(new Date());
-			for (Iterator iter = list.iterator(); iter.hasNext();) {
-				Ticket ticket = (Ticket) iter.next();
-				Gratuity gratuity = ticket.getGratuity();
-				TipsCashoutReportData data = new TipsCashoutReportData();
-				data.setTicketId(ticket.getId());
-				//				data.setSaleType(ticket.getCardType());
-				data.setTicketTotal(ticket.getTotalAmount());
-				if (gratuity != null && !gratuity.isRefunded()) {
-					data.setTips(gratuity.getAmount());
-					data.setPaid(gratuity.isPaid().booleanValue());
-				}
-				else {
-					data.setTips(Double.valueOf(0));
-				}
-				report.addReportData(data);
-			}
-			report.calculateOthers();
-			return report;
-		} catch (Exception e) {
-			throw new PosException(Messages.getString("GratuityDAO.4") + user.getFirstName() + " " + user.getLastName(), e); //$NON-NLS-1$ //$NON-NLS-2$
-		} finally {
-			closeSession(session);
-		}
-	}
+    /**
+     * Default constructor. Can be used in place of getInstance()
+     */
+    public GratuityDAO() {
+    }
+    public List<Gratuity> findByUser(User user) throws PosException {
+        Session session = null;
+        try {
+            session = getSession();
+            Criteria criteria = session.createCriteria(getReferenceClass());
+            criteria.add(Restrictions.eq(Gratuity.PROP_OWNER, user));
+            criteria.add(Restrictions.eq(Gratuity.PROP_PAID, Boolean.FALSE));
+            criteria.add(Restrictions.eq(Gratuity.PROP_REFUNDED, Boolean.FALSE));
+            return criteria.list();
+        } catch (Exception e) {
+            throw new PosException(Messages.getString("GratuityDAO.0") + user.getFirstName() + " " + user.getLastName()); //$NON-NLS-1$ //$NON-NLS-2$
+        } finally {
+            closeSession(session);
+        }
+    }
+    public void payGratuities(List<Gratuity> gratuities) {
+        Session session = null;
+        Transaction tx = null;
+        double total = 0;
+        try {
+            session = getSession();
+            tx = session.beginTransaction();
+            for (Gratuity gratuity : gratuities) {
+                total += gratuity.getAmount();
+                gratuity.setPaid(true);
+                session.saveOrUpdate(gratuity);
+                Terminal terminal = gratuity.getTerminal();
+                terminal.setCurrentBalance(terminal.getCurrentBalance() - gratuity.getAmount());
+                session.saveOrUpdate(terminal);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            throw new PosException(Messages.getString("GratuityDAO.2")); //$NON-NLS-1$
+        } finally {
+            closeSession(session);
+        }
+    }
+    public TipsCashoutReport createReport(Date fromDate, Date toDate, User user) {
+        Session session = null;
+        try {
+            session = getSession();
+            fromDate = DateUtil.startOfDay(fromDate);
+            toDate = DateUtil.endOfDay(toDate);
+            Criteria criteria = session.createCriteria(Ticket.class);
+            //criteria = criteria.createAlias(Ti, "t");
+            criteria.add(Restrictions.eq(Ticket.PROP_OWNER, user));
+            //criteria.add(Restrictions.eq(Ticket.PROP_DRAWER_RESETTED, Boolean.FALSE));
+            //criteria.add(Restrictions.eq(Ticket.PROP_CLOSED, Boolean.TRUE));
+            criteria.add(Restrictions.ge(Ticket.PROP_CREATE_DATE, fromDate));
+            criteria.add(Restrictions.le(Ticket.PROP_CREATE_DATE, toDate));
+            List list = criteria.list();
+            TipsCashoutReport report = new TipsCashoutReport();
+            report.setServer(user.getUserId() + "/" + user.toString()); //$NON-NLS-1$
+            report.setFromDate(fromDate);
+            report.setToDate(toDate);
+            report.setReportTime(new Date());
+            for (Iterator iter = list.iterator(); iter.hasNext();) {
+                Ticket ticket = (Ticket) iter.next();
+                Gratuity gratuity = ticket.getGratuity();
+                TipsCashoutReportData data = new TipsCashoutReportData();
+                data.setTicketId(ticket.getId());
+                //				data.setSaleType(ticket.getCardType());
+                data.setTicketTotal(ticket.getTotalAmount());
+                if (gratuity != null && !gratuity.isRefunded()) {
+                    data.setTips(gratuity.getAmount());
+                    data.setPaid(gratuity.isPaid().booleanValue());
+                } else {
+                    data.setTips(Double.valueOf(0));
+                }
+                report.addReportData(data);
+            }
+            report.calculateOthers();
+            return report;
+        } catch (Exception e) {
+            throw new PosException(Messages.getString("GratuityDAO.4") + user.getFirstName() + " " + user.getLastName(), e); //$NON-NLS-1$ //$NON-NLS-2$
+        } finally {
+            closeSession(session);
+        }
+    }
 }

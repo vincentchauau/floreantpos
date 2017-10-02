@@ -27,44 +27,44 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Options;
 import com.floreantpos.config.TerminalConfig;
 public class Main {
-	private static final String DEVELOPMENT_MODE = "developmentMode"; //$NON-NLS-1$
-	/**
-	 * @param args
-	 * @throws Exception 
-	 */
-	public static void main(String[] args) throws Exception {
-		Options options = new Options();
-		options.addOption(DEVELOPMENT_MODE, true, "State if this is developmentMode"); //$NON-NLS-1$
-		CommandLineParser parser = new BasicParser();
-		CommandLine commandLine = parser.parse(options, args);
-		String optionValue = commandLine.getOptionValue(DEVELOPMENT_MODE);
-		Locale defaultLocale = TerminalConfig.getDefaultLocale();
-		if (defaultLocale != null) {
-			Locale.setDefault(defaultLocale);
-		}
-		Application application = Application.getInstance();
-		if (optionValue != null) {
-			application.setDevelopmentMode(Boolean.valueOf(optionValue));
-		}
-		application.start();
-	}
-	public static void restart() throws IOException, InterruptedException, URISyntaxException {
-		final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		//		Properties properties = System.getProperties();
-		//		Set<Object> keySet = properties.keySet();
-		//		for (Object object : keySet) {
-		//			PosLog.debug(getClass(),object + ":"+properties.getProperty((String) object));
-		//		}
-		String classPath = System.getProperty("java.class.path"); //$NON-NLS-1$
-		String mainClass = System.getProperty("sun.java.command"); //$NON-NLS-1$
-		/* Build command: java -jar application.jar */
-		final ArrayList<String> command = new ArrayList<String>();
-		command.add(javaBin);
-		command.add("-cp"); //$NON-NLS-1$
-		command.add(classPath);
-		command.add(mainClass);
-		final ProcessBuilder builder = new ProcessBuilder(command);
-		builder.start();
-		System.exit(0);
-	}
+    private static final String DEVELOPMENT_MODE = "developmentMode"; //$NON-NLS-1$
+    /**
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        Options options = new Options();
+        options.addOption(DEVELOPMENT_MODE, true, "State if this is developmentMode"); //$NON-NLS-1$
+        CommandLineParser parser = new BasicParser();
+        CommandLine commandLine = parser.parse(options, args);
+        String optionValue = commandLine.getOptionValue(DEVELOPMENT_MODE);
+        Locale defaultLocale = TerminalConfig.getDefaultLocale();
+        if (defaultLocale != null) {
+            Locale.setDefault(defaultLocale);
+        }
+        Application application = Application.getInstance();
+        if (optionValue != null) {
+            application.setDevelopmentMode(Boolean.valueOf(optionValue));
+        }
+        application.start();
+    }
+    public static void restart() throws IOException, InterruptedException, URISyntaxException {
+        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        //		Properties properties = System.getProperties();
+        //		Set<Object> keySet = properties.keySet();
+        //		for (Object object : keySet) {
+        //			PosLog.debug(getClass(),object + ":"+properties.getProperty((String) object));
+        //		}
+        String classPath = System.getProperty("java.class.path"); //$NON-NLS-1$
+        String mainClass = System.getProperty("sun.java.command"); //$NON-NLS-1$
+        /* Build command: java -jar application.jar */
+        final ArrayList<String> command = new ArrayList<String>();
+        command.add(javaBin);
+        command.add("-cp"); //$NON-NLS-1$
+        command.add(classPath);
+        command.add(mainClass);
+        final ProcessBuilder builder = new ProcessBuilder(command);
+        builder.start();
+        System.exit(0);
+    }
 }

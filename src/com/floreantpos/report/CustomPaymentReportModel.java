@@ -16,48 +16,35 @@
  * ************************************************************************
  */
 package com.floreantpos.report;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import com.floreantpos.model.CustomPaymentTransaction;
+import static com.floreantpos.model.util.DateUtil.getDateString;
 import com.floreantpos.swing.ListTableModel;
 import com.floreantpos.util.NumberUtil;
-
 public class CustomPaymentReportModel extends ListTableModel<CustomPaymentTransaction> {
-	private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, h:m a");
-
-	public CustomPaymentReportModel(List<CustomPaymentTransaction> data) {
-		super(new String[] { "ticketId", "paymentType", "date", "server", "authCode", "tips", "total" }, data); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
-	}
-
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		CustomPaymentTransaction transaction = getRowData(rowIndex);
-
-		switch (columnIndex) {
-			case 0:
-				return String.valueOf(transaction.getTicket().getId());
-
-			case 1:
-				return transaction.getPaymentType();
-
-			case 2:
-				return String.valueOf(formatter.format(transaction.getTransactionTime()));
-
-			case 3:
-				return transaction.getTicket().getOwner().getFullName();
-
-			case 4:
-				return transaction.getCardAuthCode();
-
-			case 5:
-				return NumberUtil.formatNumber(transaction.getTipsAmount());
-
-			case 6:
-				return NumberUtil.formatNumber(transaction.getAmount());
-		}
-
-		return null;
-	}
+    public CustomPaymentReportModel(List<CustomPaymentTransaction> data) {
+        super(new String[]{"ticketId", "paymentType", "date", "server", "authCode", "tips", "total"}, data); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+    }
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        CustomPaymentTransaction transaction = getRowData(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                return String.valueOf(transaction.getTicket().getId());
+            case 1:
+                return transaction.getPaymentType();
+            case 2:
+                return getDateString(transaction.getTransactionTime());
+            case 3:
+                return transaction.getTicket().getOwner().getFullName();
+            case 4:
+                return transaction.getCardAuthCode();
+            case 5:
+                return NumberUtil.formatNumber(transaction.getTipsAmount());
+            case 6:
+                return NumberUtil.formatNumber(transaction.getAmount());
+        }
+        return null;
+    }
 }

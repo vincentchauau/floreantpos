@@ -17,5 +17,5 @@
  */
 package com.floreantpos.ui.views.actions;
 public interface NumberSelectionListener {
-	void numberSelected(double number);
+    void numberSelected(double number);
 }

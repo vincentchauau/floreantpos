@@ -16,31 +16,22 @@
  * ************************************************************************
  */
 package com.floreantpos.ui.views.payment;
-
 import java.awt.Font;
-
 import javax.swing.JLabel;
-
 import com.floreantpos.Messages;
 import com.floreantpos.ui.dialog.POSDialog;
-
 public class PosPaymentWaitDialog extends POSDialog {
-
-	private JLabel label;
-
-	public PosPaymentWaitDialog() {
-		setTitle(Messages.getString("PaymentProcessWaitDialog.0")); //$NON-NLS-1$
-
-		label = new JLabel("Waiting for response from credit card Device.........."); //$NON-NLS-1$
-		label.setHorizontalAlignment(JLabel.CENTER);
-		label.setFont(label.getFont().deriveFont(Font.BOLD,20));
-		add(label);
-
-		setSize(500, 400);
-		setLocationRelativeTo(null);
-	}
-
-	public void setMessage(String msg) {
-		label.setText(msg);
-	}
+    private JLabel label;
+    public PosPaymentWaitDialog() {
+        setTitle(Messages.getString("PaymentProcessWaitDialog.0")); //$NON-NLS-1$
+        label = new JLabel("Waiting for response from credit card Device.........."); //$NON-NLS-1$
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setFont(label.getFont().deriveFont(Font.BOLD, 20));
+        add(label);
+        setSize(500, 400);
+        setLocationRelativeTo(null);
+    }
+    public void setMessage(String msg) {
+        label.setText(msg);
+    }
 }

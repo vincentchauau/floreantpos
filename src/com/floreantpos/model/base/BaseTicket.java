@@ -1,8 +1,6 @@
 package com.floreantpos.model.base;
-
 import java.lang.Comparable;
 import java.io.Serializable;
-
 /**
  * This is an object that contains data related to the TICKET table. Do not
  * modify this class because it will be overwritten if the configuration file
@@ -11,7 +9,6 @@ import java.io.Serializable;
  * @hibernate.class table="TICKET"
  */
 public abstract class BaseTicket implements Comparable, Serializable {
-
     public static String REF = "Ticket"; //$NON-NLS-1$
     public static String PROP_ADVANCE_AMOUNT = "advanceAmount"; //$NON-NLS-1$
     public static String PROP_NUMBER_OF_GUESTS = "numberOfGuests"; //$NON-NLS-1$
@@ -52,12 +49,10 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public static String PROP_EXTRA_DELIVERY_INFO = "extraDeliveryInfo"; //$NON-NLS-1$
     public static String PROP_CLOSING_DATE = "closingDate"; //$NON-NLS-1$
     public static String PROP_ID = "id"; //$NON-NLS-1$
-
     // constructors
     public BaseTicket() {
         initialize();
     }
-
     /**
      * Constructor for primary key
      */
@@ -65,10 +60,8 @@ public abstract class BaseTicket implements Comparable, Serializable {
         this.setId(id);
         initialize();
     }
-
     protected void initialize() {
     }
-
     private int hashCode = Integer.MIN_VALUE;
     // primary key
     private java.lang.Integer id;
@@ -119,7 +112,6 @@ public abstract class BaseTicket implements Comparable, Serializable {
     private java.util.List<com.floreantpos.model.TicketDiscount> discounts;
     private java.util.Set<com.floreantpos.model.PosTransaction> transactions;
     private java.util.List<Integer> tableNumbers;
-
     /**
      * Return the unique identifier of this class
      *
@@ -128,7 +120,6 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public java.lang.Integer getId() {
         return id;
     }
-
     /**
      * Set the unique identifier of this class
      *
@@ -138,14 +129,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
         this.id = id;
         this.hashCode = Integer.MIN_VALUE;
     }
-
     /**
      * Return the value associated with the column: VERSION_NO
      */
     public long getVersion() {
         return version;
     }
-
     /**
      * Set the value related to the column: VERSION_NO
      *
@@ -154,14 +143,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setVersion(long version) {
         this.version = version;
     }
-
     /**
      * Return the value associated with the column: GLOBAL_ID
      */
     public java.lang.String getGlobalId() {
         return globalId;
     }
-
     /**
      * Set the value related to the column: GLOBAL_ID
      *
@@ -170,14 +157,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setGlobalId(java.lang.String globalId) {
         this.globalId = globalId;
     }
-
     /**
      * Return the value associated with the column: CREATE_DATE
      */
     public java.util.Date getCreateDate() {
         return createDate;
     }
-
     /**
      * Set the value related to the column: CREATE_DATE
      *
@@ -186,14 +171,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setCreateDate(java.util.Date createDate) {
         this.createDate = createDate;
     }
-
     /**
      * Return the value associated with the column: CLOSING_DATE
      */
     public java.util.Date getClosingDate() {
         return closingDate;
     }
-
     /**
      * Set the value related to the column: CLOSING_DATE
      *
@@ -202,14 +185,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setClosingDate(java.util.Date closingDate) {
         this.closingDate = closingDate;
     }
-
     /**
      * Return the value associated with the column: ACTIVE_DATE
      */
     public java.util.Date getActiveDate() {
         return activeDate;
     }
-
     /**
      * Set the value related to the column: ACTIVE_DATE
      *
@@ -218,14 +199,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setActiveDate(java.util.Date activeDate) {
         this.activeDate = activeDate;
     }
-
     /**
      * Return the value associated with the column: DELIVEERY_DATE
      */
     public java.util.Date getDeliveryDate() {
         return deliveryDate;
     }
-
     /**
      * Set the value related to the column: DELIVEERY_DATE
      *
@@ -234,14 +213,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setDeliveryDate(java.util.Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
-
     /**
      * Return the value associated with the column: CREATION_HOUR
      */
     public java.lang.Integer getCreationHour() {
         return creationHour == null ? Integer.valueOf(0) : creationHour;
     }
-
     /**
      * Set the value related to the column: CREATION_HOUR
      *
@@ -250,14 +227,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setCreationHour(java.lang.Integer creationHour) {
         this.creationHour = creationHour;
     }
-
     /**
      * Return the value associated with the column: PAID
      */
     public java.lang.Boolean isPaid() {
         return paid == null ? Boolean.FALSE : paid;
     }
-
     /**
      * Set the value related to the column: PAID
      *
@@ -266,14 +241,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setPaid(java.lang.Boolean paid) {
         this.paid = paid;
     }
-
     /**
      * Return the value associated with the column: VOIDED
      */
     public java.lang.Boolean isVoided() {
         return voided == null ? Boolean.FALSE : voided;
     }
-
     /**
      * Set the value related to the column: VOIDED
      *
@@ -282,14 +255,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setVoided(java.lang.Boolean voided) {
         this.voided = voided;
     }
-
     /**
      * Return the value associated with the column: VOID_REASON
      */
     public java.lang.String getVoidReason() {
         return voidReason;
     }
-
     /**
      * Set the value related to the column: VOID_REASON
      *
@@ -298,14 +269,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setVoidReason(java.lang.String voidReason) {
         this.voidReason = voidReason;
     }
-
     /**
      * Return the value associated with the column: WASTED
      */
     public java.lang.Boolean isWasted() {
         return wasted == null ? Boolean.FALSE : wasted;
     }
-
     /**
      * Set the value related to the column: WASTED
      *
@@ -314,14 +283,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setWasted(java.lang.Boolean wasted) {
         this.wasted = wasted;
     }
-
     /**
      * Return the value associated with the column: REFUNDED
      */
     public java.lang.Boolean isRefunded() {
         return refunded == null ? Boolean.FALSE : refunded;
     }
-
     /**
      * Set the value related to the column: REFUNDED
      *
@@ -330,14 +297,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setRefunded(java.lang.Boolean refunded) {
         this.refunded = refunded;
     }
-
     /**
      * Return the value associated with the column: SETTLED
      */
     public java.lang.Boolean isClosed() {
         return closed == null ? Boolean.FALSE : closed;
     }
-
     /**
      * Set the value related to the column: SETTLED
      *
@@ -346,14 +311,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setClosed(java.lang.Boolean closed) {
         this.closed = closed;
     }
-
     /**
      * Return the value associated with the column: DRAWER_RESETTED
      */
     public java.lang.Boolean isDrawerResetted() {
         return drawerResetted == null ? Boolean.FALSE : drawerResetted;
     }
-
     /**
      * Set the value related to the column: DRAWER_RESETTED
      *
@@ -362,14 +325,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setDrawerResetted(java.lang.Boolean drawerResetted) {
         this.drawerResetted = drawerResetted;
     }
-
     /**
      * Return the value associated with the column: SUB_TOTAL
      */
     public java.lang.Double getSubtotalAmount() {
         return subtotalAmount == null ? Double.valueOf(0) : subtotalAmount;
     }
-
     /**
      * Set the value related to the column: SUB_TOTAL
      *
@@ -378,14 +339,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setSubtotalAmount(java.lang.Double subtotalAmount) {
         this.subtotalAmount = subtotalAmount;
     }
-
     /**
      * Return the value associated with the column: TOTAL_DISCOUNT
      */
     public java.lang.Double getDiscountAmount() {
         return discountAmount == null ? Double.valueOf(0) : discountAmount;
     }
-
     /**
      * Set the value related to the column: TOTAL_DISCOUNT
      *
@@ -394,14 +353,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setDiscountAmount(java.lang.Double discountAmount) {
         this.discountAmount = discountAmount;
     }
-
     /**
      * Return the value associated with the column: TOTAL_TAX
      */
     public java.lang.Double getTaxAmount() {
         return taxAmount == null ? Double.valueOf(0) : taxAmount;
     }
-
     /**
      * Set the value related to the column: TOTAL_TAX
      *
@@ -410,14 +367,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setTaxAmount(java.lang.Double taxAmount) {
         this.taxAmount = taxAmount;
     }
-
     /**
      * Return the value associated with the column: TOTAL_PRICE
      */
     public java.lang.Double getTotalAmount() {
         return totalAmount == null ? Double.valueOf(0) : totalAmount;
     }
-
     /**
      * Set the value related to the column: TOTAL_PRICE
      *
@@ -426,14 +381,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setTotalAmount(java.lang.Double totalAmount) {
         this.totalAmount = totalAmount;
     }
-
     /**
      * Return the value associated with the column: PAID_AMOUNT
      */
     public java.lang.Double getPaidAmount() {
         return paidAmount == null ? Double.valueOf(0) : paidAmount;
     }
-
     /**
      * Set the value related to the column: PAID_AMOUNT
      *
@@ -442,14 +395,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setPaidAmount(java.lang.Double paidAmount) {
         this.paidAmount = paidAmount;
     }
-
     /**
      * Return the value associated with the column: DUE_AMOUNT
      */
     public java.lang.Double getDueAmount() {
         return dueAmount == null ? Double.valueOf(0) : dueAmount;
     }
-
     /**
      * Set the value related to the column: DUE_AMOUNT
      *
@@ -458,14 +409,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setDueAmount(java.lang.Double dueAmount) {
         this.dueAmount = dueAmount;
     }
-
     /**
      * Return the value associated with the column: ADVANCE_AMOUNT
      */
     public java.lang.Double getAdvanceAmount() {
         return advanceAmount == null ? Double.valueOf(0) : advanceAmount;
     }
-
     /**
      * Set the value related to the column: ADVANCE_AMOUNT
      *
@@ -474,14 +423,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setAdvanceAmount(java.lang.Double advanceAmount) {
         this.advanceAmount = advanceAmount;
     }
-
     /**
      * Return the value associated with the column: NUMBER_OF_GUESTS
      */
     public java.lang.Integer getNumberOfGuests() {
         return numberOfGuests == null ? Integer.valueOf(0) : numberOfGuests;
     }
-
     /**
      * Set the value related to the column: NUMBER_OF_GUESTS
      *
@@ -490,14 +437,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setNumberOfGuests(java.lang.Integer numberOfGuests) {
         this.numberOfGuests = numberOfGuests;
     }
-
     /**
      * Return the value associated with the column: STATUS
      */
     public java.lang.String getStatus() {
         return status;
     }
-
     /**
      * Set the value related to the column: STATUS
      *
@@ -506,14 +451,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setStatus(java.lang.String status) {
         this.status = status;
     }
-
     /**
      * Return the value associated with the column: BAR_TAB
      */
     public java.lang.Boolean isBarTab() {
         return barTab == null ? Boolean.FALSE : barTab;
     }
-
     /**
      * Set the value related to the column: BAR_TAB
      *
@@ -522,14 +465,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setBarTab(java.lang.Boolean barTab) {
         this.barTab = barTab;
     }
-
     /**
      * Return the value associated with the column: IS_TAX_EXEMPT
      */
     public java.lang.Boolean isTaxExempt() {
         return taxExempt == null ? Boolean.FALSE : taxExempt;
     }
-
     /**
      * Set the value related to the column: IS_TAX_EXEMPT
      *
@@ -538,14 +479,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setTaxExempt(java.lang.Boolean taxExempt) {
         this.taxExempt = taxExempt;
     }
-
     /**
      * Return the value associated with the column: IS_RE_OPENED
      */
     public java.lang.Boolean isReOpened() {
         return reOpened == null ? Boolean.FALSE : reOpened;
     }
-
     /**
      * Set the value related to the column: IS_RE_OPENED
      *
@@ -554,14 +493,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setReOpened(java.lang.Boolean reOpened) {
         this.reOpened = reOpened;
     }
-
     /**
      * Return the value associated with the column: SERVICE_CHARGE
      */
     public java.lang.Double getServiceCharge() {
         return serviceCharge == null ? Double.valueOf(0) : serviceCharge;
     }
-
     /**
      * Set the value related to the column: SERVICE_CHARGE
      *
@@ -570,14 +507,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setServiceCharge(java.lang.Double serviceCharge) {
         this.serviceCharge = serviceCharge;
     }
-
     /**
      * Return the value associated with the column: DELIVERY_CHARGE
      */
     public java.lang.Double getDeliveryCharge() {
         return deliveryCharge == null ? Double.valueOf(0) : deliveryCharge;
     }
-
     /**
      * Set the value related to the column: DELIVERY_CHARGE
      *
@@ -586,14 +521,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setDeliveryCharge(java.lang.Double deliveryCharge) {
         this.deliveryCharge = deliveryCharge;
     }
-
     /**
      * Return the value associated with the column: CUSTOMER_ID
      */
     public java.lang.Integer getCustomerId() {
         return customerId == null ? Integer.valueOf(0) : customerId;
     }
-
     /**
      * Set the value related to the column: CUSTOMER_ID
      *
@@ -602,7 +535,6 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setCustomerId(java.lang.Integer customerId) {
         this.customerId = customerId;
     }
-
     /**
      * Return the value associated with the column: DELIVERY_ADDRESS
      */
@@ -610,7 +542,6 @@ public abstract class BaseTicket implements Comparable, Serializable {
         return "Pick up from hotel";
         //return deliveryAddress;
     }
-
     /**
      * Set the value related to the column: DELIVERY_ADDRESS
      *
@@ -619,14 +550,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setDeliveryAddress(java.lang.String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
-
     /**
      * Return the value associated with the column: CUSTOMER_PICKEUP
      */
     public java.lang.Boolean isCustomerWillPickup() {
         return customerWillPickup == null ? Boolean.FALSE : customerWillPickup;
     }
-
     /**
      * Set the value related to the column: CUSTOMER_PICKEUP
      *
@@ -635,14 +564,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setCustomerWillPickup(java.lang.Boolean customerWillPickup) {
         this.customerWillPickup = customerWillPickup;
     }
-
     /**
      * Return the value associated with the column: DELIVERY_EXTRA_INFO
      */
     public java.lang.String getExtraDeliveryInfo() {
         return extraDeliveryInfo;
     }
-
     /**
      * Set the value related to the column: DELIVERY_EXTRA_INFO
      *
@@ -651,14 +578,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setExtraDeliveryInfo(java.lang.String extraDeliveryInfo) {
         this.extraDeliveryInfo = extraDeliveryInfo;
     }
-
     /**
      * Return the value associated with the column: TICKET_TYPE
      */
     public java.lang.String getTicketType() {
         return ticketType;
     }
-
     /**
      * Set the value related to the column: TICKET_TYPE
      *
@@ -667,14 +592,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setTicketType(java.lang.String ticketType) {
         this.ticketType = ticketType;
     }
-
     /**
      * Return the value associated with the column: SHIFT_ID
      */
     public com.floreantpos.model.Shift getShift() {
         return shift;
     }
-
     /**
      * Set the value related to the column: SHIFT_ID
      *
@@ -683,14 +606,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setShift(com.floreantpos.model.Shift shift) {
         this.shift = shift;
     }
-
     /**
      * Return the value associated with the column: OWNER_ID
      */
     public com.floreantpos.model.User getOwner() {
         return owner;
     }
-
     /**
      * Set the value related to the column: OWNER_ID
      *
@@ -699,14 +620,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setOwner(com.floreantpos.model.User owner) {
         this.owner = owner;
     }
-
     /**
      * Return the value associated with the column: DRIVER_ID
      */
     public com.floreantpos.model.User getAssignedDriver() {
         return assignedDriver;
     }
-
     /**
      * Set the value related to the column: DRIVER_ID
      *
@@ -715,14 +634,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setAssignedDriver(com.floreantpos.model.User assignedDriver) {
         this.assignedDriver = assignedDriver;
     }
-
     /**
      * Return the value associated with the column: GRATUITY_ID
      */
     public com.floreantpos.model.Gratuity getGratuity() {
         return gratuity;
     }
-
     /**
      * Set the value related to the column: GRATUITY_ID
      *
@@ -731,14 +648,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setGratuity(com.floreantpos.model.Gratuity gratuity) {
         this.gratuity = gratuity;
     }
-
     /**
      * Return the value associated with the column: VOID_BY_USER
      */
     public com.floreantpos.model.User getVoidedBy() {
         return voidedBy;
     }
-
     /**
      * Set the value related to the column: VOID_BY_USER
      *
@@ -747,14 +662,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setVoidedBy(com.floreantpos.model.User voidedBy) {
         this.voidedBy = voidedBy;
     }
-
     /**
      * Return the value associated with the column: TERMINAL_ID
      */
     public com.floreantpos.model.Terminal getTerminal() {
         return terminal;
     }
-
     /**
      * Set the value related to the column: TERMINAL_ID
      *
@@ -763,14 +676,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setTerminal(com.floreantpos.model.Terminal terminal) {
         this.terminal = terminal;
     }
-
     /**
      * Return the value associated with the column: properties
      */
     public java.util.Map<String, String> getProperties() {
         return properties;
     }
-
     /**
      * Set the value related to the column: properties
      *
@@ -779,14 +690,12 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setProperties(java.util.Map<String, String> properties) {
         this.properties = properties;
     }
-
     /**
      * Return the value associated with the column: ticketItems
      */
     public java.util.List<com.floreantpos.model.TicketItem> getTicketItems() {
         return ticketItems;
     }
-
     /**
      * Set the value related to the column: ticketItems
      *
@@ -795,21 +704,18 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setTicketItems(java.util.List<com.floreantpos.model.TicketItem> ticketItems) {
         this.ticketItems = ticketItems;
     }
-
     public void addToticketItems(com.floreantpos.model.TicketItem ticketItem) {
         if (null == getTicketItems()) {
             setTicketItems(new java.util.ArrayList<com.floreantpos.model.TicketItem>());
         }
         getTicketItems().add(ticketItem);
     }
-
     /**
      * Return the value associated with the column: discounts
      */
     public java.util.List<com.floreantpos.model.TicketDiscount> getDiscounts() {
         return discounts;
     }
-
     /**
      * Set the value related to the column: discounts
      *
@@ -818,21 +724,18 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setDiscounts(java.util.List<com.floreantpos.model.TicketDiscount> discounts) {
         this.discounts = discounts;
     }
-
     public void addTodiscounts(com.floreantpos.model.TicketDiscount ticketDiscount) {
         if (null == getDiscounts()) {
             setDiscounts(new java.util.ArrayList<com.floreantpos.model.TicketDiscount>());
         }
         getDiscounts().add(ticketDiscount);
     }
-
     /**
      * Return the value associated with the column: transactions
      */
     public java.util.Set<com.floreantpos.model.PosTransaction> getTransactions() {
         return transactions;
     }
-
     /**
      * Set the value related to the column: transactions
      *
@@ -841,21 +744,18 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setTransactions(java.util.Set<com.floreantpos.model.PosTransaction> transactions) {
         this.transactions = transactions;
     }
-
     public void addTotransactions(com.floreantpos.model.PosTransaction posTransaction) {
         if (null == getTransactions()) {
             setTransactions(new java.util.TreeSet<com.floreantpos.model.PosTransaction>());
         }
         getTransactions().add(posTransaction);
     }
-
     /**
      * Return the value associated with the column: tableNumbers
      */
     public java.util.List<Integer> getTableNumbers() {
         return tableNumbers;
     }
-
     /**
      * Set the value related to the column: tableNumbers
      *
@@ -864,7 +764,6 @@ public abstract class BaseTicket implements Comparable, Serializable {
     public void setTableNumbers(java.util.List<Integer> tableNumbers) {
         this.tableNumbers = tableNumbers;
     }
-
     public boolean equals(Object obj) {
         if (null == obj) {
             return false;
@@ -880,7 +779,6 @@ public abstract class BaseTicket implements Comparable, Serializable {
             }
         }
     }
-
     public int hashCode() {
         if (Integer.MIN_VALUE == this.hashCode) {
             if (null == this.getId()) {
@@ -892,7 +790,6 @@ public abstract class BaseTicket implements Comparable, Serializable {
         }
         return this.hashCode;
     }
-
     public int compareTo(Object obj) {
         if (obj.hashCode() > hashCode()) {
             return 1;
@@ -902,9 +799,7 @@ public abstract class BaseTicket implements Comparable, Serializable {
             return 0;
         }
     }
-
     public String toString() {
         return super.toString();
     }
-
 }

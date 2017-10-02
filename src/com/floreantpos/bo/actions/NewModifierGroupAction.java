@@ -24,22 +24,22 @@ import com.floreantpos.ui.dialog.BeanEditorDialog;
 import com.floreantpos.ui.model.MenuModifierGroupForm;
 import com.floreantpos.util.POSUtil;
 public class NewModifierGroupAction extends AbstractAction {
-	public NewModifierGroupAction() {
-		super();
-	}
-	public NewModifierGroupAction(String name) {
-		super(name);
-	}
-	public NewModifierGroupAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		try {
-			MenuModifierGroupForm editor = new MenuModifierGroupForm();
-			BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
-			dialog.open();
-		} catch (Exception x) {
-			BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
-		}
-	}
+    public NewModifierGroupAction() {
+        super();
+    }
+    public NewModifierGroupAction(String name) {
+        super(name);
+    }
+    public NewModifierGroupAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        try {
+            MenuModifierGroupForm editor = new MenuModifierGroupForm();
+            BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), editor);
+            dialog.open();
+        } catch (Exception x) {
+            BOMessageDialog.showError(com.floreantpos.POSConstants.ERROR_MESSAGE, x);
+        }
+    }
 }

@@ -28,42 +28,40 @@ import com.floreantpos.model.UserPermission;
 import com.floreantpos.model.UserType;
 import com.floreantpos.ui.views.LoginView;
 public class OrderTypeLoginButton extends PosButton implements ActionListener {
-	private OrderType orderType;
-	public OrderTypeLoginButton() {
-		super("");
-	}
-	public OrderTypeLoginButton(OrderType orderType) {
-		super();
-		this.orderType = orderType;
-		if (orderType != null) {
-			setText(orderType.getName());
-		}
-		else {
-			setText(POSConstants.TAKE_OUT_BUTTON_TEXT);
-		}
-		addActionListener(this);
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
+    private OrderType orderType;
+    public OrderTypeLoginButton() {
+        super("");
+    }
+    public OrderTypeLoginButton(OrderType orderType) {
+        super();
+        this.orderType = orderType;
+        if (orderType != null) {
+            setText(orderType.getName());
+        } else {
+            setText(POSConstants.TAKE_OUT_BUTTON_TEXT);
+        }
+        addActionListener(this);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
 //		if(!hasPermission()) {
 //			POSMessageDialog.showError("You do not have permission to create order");
 //			return;
 //		}
-		
-		TerminalConfig.setDefaultView(orderType.getName());
-		LoginView.getInstance().doLogin();
-	}
-	private boolean hasPermission() {
-		User user = Application.getCurrentUser();
-		UserType userType = user.getType();
-		if (userType != null) {
-			Set<UserPermission> permissions = userType.getPermissions();
-			for (UserPermission permission : permissions) {
-				if (permission.equals(UserPermission.CREATE_TICKET)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+        TerminalConfig.setDefaultView(orderType.getName());
+        LoginView.getInstance().doLogin();
+    }
+    private boolean hasPermission() {
+        User user = Application.getCurrentUser();
+        UserType userType = user.getType();
+        if (userType != null) {
+            Set<UserPermission> permissions = userType.getPermissions();
+            for (UserPermission permission : permissions) {
+                if (permission.equals(UserPermission.CREATE_TICKET)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

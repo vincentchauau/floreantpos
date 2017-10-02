@@ -23,28 +23,26 @@ import javax.swing.JTabbedPane;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.MultiplierExplorer;
 public class MultiplierExplorerAction extends AbstractAction {
-	public MultiplierExplorerAction() {
-		super("Multipliers");
-	}
-	public MultiplierExplorerAction(String name) {
-		super(name);
-	}
-	public MultiplierExplorerAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
-		
-		MultiplierExplorer explorer = null;
-		JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
-		int index = tabbedPane.indexOfTab("Multipliers");
-		if (index == -1) {
-			explorer = new MultiplierExplorer();
-			tabbedPane.addTab("Multipliers", explorer);
-		}
-		else {
-			explorer = (MultiplierExplorer) tabbedPane.getComponentAt(index);
-		}
-		tabbedPane.setSelectedComponent(explorer);
-	}
+    public MultiplierExplorerAction() {
+        super("Multipliers");
+    }
+    public MultiplierExplorerAction(String name) {
+        super(name);
+    }
+    public MultiplierExplorerAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
+        MultiplierExplorer explorer = null;
+        JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
+        int index = tabbedPane.indexOfTab("Multipliers");
+        if (index == -1) {
+            explorer = new MultiplierExplorer();
+            tabbedPane.addTab("Multipliers", explorer);
+        } else {
+            explorer = (MultiplierExplorer) tabbedPane.getComponentAt(index);
+        }
+        tabbedPane.setSelectedComponent(explorer);
+    }
 }

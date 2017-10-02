@@ -42,83 +42,82 @@ import com.floreantpos.swing.PosUIManager;
 import com.floreantpos.swing.ScrollableFlowPanel;
 import com.floreantpos.util.POSUtil;
 /**
- * 
+ *
  * @author MShahriar
  */
 public class TicketItemDiscountSelectionDialog extends OkCancelOptionDialog {
-	private ScrollableFlowPanel buttonsPanel;
-	private Ticket ticket;
-	private Discount discount;
-	private List<TicketItem> addedTicketItems = new ArrayList<TicketItem>();
-	public TicketItemDiscountSelectionDialog(Ticket ticket, Discount discount) {
-		super(POSUtil.getFocusedWindow(), POSConstants.SELECT_ITEMS);
-		this.ticket = ticket;
-		this.discount = discount;
-		initComponent();
-		rendererTicketItems();
-	}
-	private void initComponent() {
-		setOkButtonText(POSConstants.SAVE_BUTTON_TEXT);
-		buttonsPanel = new ScrollableFlowPanel(FlowLayout.LEADING);
-		PosScrollPane scrollPane = new PosScrollPane(buttonsPanel, PosScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, PosScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5), scrollPane.getBorder()));
-		getContentPanel().add(scrollPane, BorderLayout.CENTER);
-		setSize(600, 500);
-	}
-	private void rendererTicketItems() {
-		buttonsPanel.getContentPane().removeAll();
-		List<TicketItem> ticketItems = ticket.getTicketItems();
-		try {
-			Dimension size = PosUIManager.getSize(115, 80);
-			for (TicketItem ticketItem : ticketItems) {
-				Integer itemId = Integer.parseInt(ticketItem.getItemId().toString());
-				MenuItem menuItem = MenuItemDAO.getInstance().get(itemId);
-				List<MenuItem> menuItems = discount.getMenuItems();
-				if (menuItem != null) {
-					if (discount.isApplyToAll() || menuItems.contains(menuItem)) {
-						TicketItemButton ticketItemButton = new TicketItemButton(ticketItem);
-						ticketItemButton.setPreferredSize(size);
-						buttonsPanel.add(ticketItemButton);
-					}
-				}
-			}
-			buttonsPanel.repaint();
-			buttonsPanel.revalidate();
-		} catch (PosException e) {
-			POSMessageDialog.showError(TicketItemDiscountSelectionDialog.this, e.getLocalizedMessage(), e);
-		}
-	}
-	@Override
-	public void doOk() {
-		if (addedTicketItems.isEmpty()) {
-			POSMessageDialog.showMessage("Please select one or more item.");
-			return;
-		}
-		setCanceled(false);
-		dispose();
-	}
-	public void doCancel() {
-		addedTicketItems.clear();
-		setCanceled(true);
-		dispose();
-	}
-	public List<TicketItem> getSelectedTicketItems() {
-		return addedTicketItems;
-	}
-	private class TicketItemButton extends POSToggleButton implements ActionListener {
-		TicketItem ticketItem;
-		TicketItemButton(TicketItem ticketItem) {
-			this.ticketItem = ticketItem;
-			setText("<html><body><center>" + ticketItem.getName() + "</center></body></html>"); //$NON-NLS-1$ //$NON-NLS-2$ 
-			addActionListener(this);
-		}
-		public void actionPerformed(ActionEvent e) {
-			if (isSelected()) {
-				addedTicketItems.add(ticketItem);
-			}
-			else {
-				addedTicketItems.remove(ticketItem);
-			}
-		}
-	}
+    private ScrollableFlowPanel buttonsPanel;
+    private Ticket ticket;
+    private Discount discount;
+    private List<TicketItem> addedTicketItems = new ArrayList<TicketItem>();
+    public TicketItemDiscountSelectionDialog(Ticket ticket, Discount discount) {
+        super(POSUtil.getFocusedWindow(), POSConstants.SELECT_ITEMS);
+        this.ticket = ticket;
+        this.discount = discount;
+        initComponent();
+        rendererTicketItems();
+    }
+    private void initComponent() {
+        setOkButtonText(POSConstants.SAVE_BUTTON_TEXT);
+        buttonsPanel = new ScrollableFlowPanel(FlowLayout.LEADING);
+        PosScrollPane scrollPane = new PosScrollPane(buttonsPanel, PosScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, PosScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5), scrollPane.getBorder()));
+        getContentPanel().add(scrollPane, BorderLayout.CENTER);
+        setSize(600, 500);
+    }
+    private void rendererTicketItems() {
+        buttonsPanel.getContentPane().removeAll();
+        List<TicketItem> ticketItems = ticket.getTicketItems();
+        try {
+            Dimension size = PosUIManager.getSize(115, 80);
+            for (TicketItem ticketItem : ticketItems) {
+                Integer itemId = Integer.parseInt(ticketItem.getItemId().toString());
+                MenuItem menuItem = MenuItemDAO.getInstance().get(itemId);
+                List<MenuItem> menuItems = discount.getMenuItems();
+                if (menuItem != null) {
+                    if (discount.isApplyToAll() || menuItems.contains(menuItem)) {
+                        TicketItemButton ticketItemButton = new TicketItemButton(ticketItem);
+                        ticketItemButton.setPreferredSize(size);
+                        buttonsPanel.add(ticketItemButton);
+                    }
+                }
+            }
+            buttonsPanel.repaint();
+            buttonsPanel.revalidate();
+        } catch (PosException e) {
+            POSMessageDialog.showError(TicketItemDiscountSelectionDialog.this, e.getLocalizedMessage(), e);
+        }
+    }
+    @Override
+    public void doOk() {
+        if (addedTicketItems.isEmpty()) {
+            POSMessageDialog.showMessage("Please select one or more item.");
+            return;
+        }
+        setCanceled(false);
+        dispose();
+    }
+    public void doCancel() {
+        addedTicketItems.clear();
+        setCanceled(true);
+        dispose();
+    }
+    public List<TicketItem> getSelectedTicketItems() {
+        return addedTicketItems;
+    }
+    private class TicketItemButton extends POSToggleButton implements ActionListener {
+        TicketItem ticketItem;
+        TicketItemButton(TicketItem ticketItem) {
+            this.ticketItem = ticketItem;
+            setText("<html><body><center>" + ticketItem.getName() + "</center></body></html>"); //$NON-NLS-1$ //$NON-NLS-2$ 
+            addActionListener(this);
+        }
+        public void actionPerformed(ActionEvent e) {
+            if (isSelected()) {
+                addedTicketItems.add(ticketItem);
+            } else {
+                addedTicketItems.remove(ticketItem);
+            }
+        }
+    }
 }

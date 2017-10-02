@@ -24,28 +24,26 @@ import com.floreantpos.POSConstants;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.OrderTypeExplorer;
 public class OrdersTypeExplorerAction extends AbstractAction {
-	public OrdersTypeExplorerAction() {
-		super(POSConstants.ORDER_TYPE);
-	}
-	public OrdersTypeExplorerAction(String name) {
-		super(name);
-	}
-	public OrdersTypeExplorerAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
-		
-		OrderTypeExplorer explorer = null;
-		JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
-		int index = tabbedPane.indexOfTab(POSConstants.ORDER_TYPE);
-		if (index == -1) {
-			explorer = new OrderTypeExplorer();
-			tabbedPane.addTab(POSConstants.ORDER_TYPE, explorer);
-		}
-		else {
-			explorer = (OrderTypeExplorer) tabbedPane.getComponentAt(index);
-		}
-		tabbedPane.setSelectedComponent(explorer);
-	}
+    public OrdersTypeExplorerAction() {
+        super(POSConstants.ORDER_TYPE);
+    }
+    public OrdersTypeExplorerAction(String name) {
+        super(name);
+    }
+    public OrdersTypeExplorerAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
+        OrderTypeExplorer explorer = null;
+        JTabbedPane tabbedPane = backOfficeWindow.getTabbedPane();
+        int index = tabbedPane.indexOfTab(POSConstants.ORDER_TYPE);
+        if (index == -1) {
+            explorer = new OrderTypeExplorer();
+            tabbedPane.addTab(POSConstants.ORDER_TYPE, explorer);
+        } else {
+            explorer = (OrderTypeExplorer) tabbedPane.getComponentAt(index);
+        }
+        tabbedPane.setSelectedComponent(explorer);
+    }
 }

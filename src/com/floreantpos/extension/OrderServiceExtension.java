@@ -16,47 +16,28 @@
  * ************************************************************************
  */
 package com.floreantpos.extension;
-
 import java.util.List;
-
 import javax.swing.JMenu;
-
 import com.floreantpos.customer.CustomerSelector;
 import com.floreantpos.model.Customer;
 import com.floreantpos.model.OrderType;
 import com.floreantpos.model.ShopTable;
 import com.floreantpos.ui.views.IView;
 import com.floreantpos.util.TicketAlreadyExistsException;
-
 public abstract class OrderServiceExtension extends AbstractFloreantPlugin {
-	public abstract String getProductName();
-
-	public abstract String getDescription();
-
-	public abstract void initUI();
-
-	public abstract void createNewTicket(OrderType ticketType, List<ShopTable> selectedTables, Customer selectedCustomer) throws TicketAlreadyExistsException;
-
-	public abstract void setCustomerToTicket(int ticketId);
-
-	public abstract void setDeliveryDate(int ticketId);
-
-	public abstract void assignDriver(int ticketId);
-
-	public abstract boolean finishOrder(int ticketId);
-
-	public abstract void createCustomerMenu(JMenu menu);
-
-	public abstract CustomerSelector createNewCustomerSelector();
-
-	public abstract CustomerSelector createCustomerSelectorView();
-
-	public abstract IView getDeliveryDispatchView(OrderType orderType);
-
-	public abstract IView getDriverView();
-
-	public abstract void openDeliveryDispatchDialog(OrderType orderType);
-	
-	public abstract void showDeliveryInfo(OrderType orderType, Customer customer);
-
+    public abstract String getProductName();
+    public abstract String getDescription();
+    public abstract void initUI();
+    public abstract void createNewTicket(OrderType ticketType, List<ShopTable> selectedTables, Customer selectedCustomer) throws TicketAlreadyExistsException;
+    public abstract void setCustomerToTicket(int ticketId);
+    public abstract void setDeliveryDate(int ticketId);
+    public abstract void assignDriver(int ticketId);
+    public abstract boolean finishOrder(int ticketId);
+    public abstract void createCustomerMenu(JMenu menu);
+    public abstract CustomerSelector createNewCustomerSelector();
+    public abstract CustomerSelector createCustomerSelectorView();
+    public abstract IView getDeliveryDispatchView(OrderType orderType);
+    public abstract IView getDriverView();
+    public abstract void openDeliveryDispatchDialog(OrderType orderType);
+    public abstract void showDeliveryInfo(OrderType orderType, Customer customer);
 }

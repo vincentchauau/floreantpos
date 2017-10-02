@@ -23,28 +23,26 @@ import javax.swing.JTabbedPane;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.report.CustomPaymentReportView;
 public class CustomPaymentReportAction extends AbstractAction {
-	public CustomPaymentReportAction() {
-		super(com.floreantpos.POSConstants.CUSTOM_PAYMENT_REPORT);
-	}
-	public CustomPaymentReportAction(String name) {
-		super(name);
-	}
-	public CustomPaymentReportAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		BackOfficeWindow window = com.floreantpos.util.POSUtil.getBackOfficeWindow();
-		JTabbedPane tabbedPane = window.getTabbedPane();
-		
-		CustomPaymentReportView reportView = null;
-		int index = tabbedPane.indexOfTab(com.floreantpos.POSConstants.CUSTOM_PAYMENT_REPORT);
-		if (index == -1) {
-			reportView = new CustomPaymentReportView();
-			tabbedPane.addTab(com.floreantpos.POSConstants.CUSTOM_PAYMENT_REPORT, reportView);
-		}
-		else {
-			reportView = (CustomPaymentReportView) tabbedPane.getComponentAt(index);
-		}
-		tabbedPane.setSelectedComponent(reportView);
-	}
+    public CustomPaymentReportAction() {
+        super(com.floreantpos.POSConstants.CUSTOM_PAYMENT_REPORT);
+    }
+    public CustomPaymentReportAction(String name) {
+        super(name);
+    }
+    public CustomPaymentReportAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        BackOfficeWindow window = com.floreantpos.util.POSUtil.getBackOfficeWindow();
+        JTabbedPane tabbedPane = window.getTabbedPane();
+        CustomPaymentReportView reportView = null;
+        int index = tabbedPane.indexOfTab(com.floreantpos.POSConstants.CUSTOM_PAYMENT_REPORT);
+        if (index == -1) {
+            reportView = new CustomPaymentReportView();
+            tabbedPane.addTab(com.floreantpos.POSConstants.CUSTOM_PAYMENT_REPORT, reportView);
+        } else {
+            reportView = (CustomPaymentReportView) tabbedPane.getComponentAt(index);
+        }
+        tabbedPane.setSelectedComponent(reportView);
+    }
 }

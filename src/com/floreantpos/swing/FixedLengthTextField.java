@@ -16,24 +16,20 @@
  * ************************************************************************
  */
 package com.floreantpos.swing;
-
 public class FixedLengthTextField extends FocusedTextField {
-	private FixedLengthDocument fixedLengthDocument;
-	
-	public FixedLengthTextField() {
-		this(30);
-	}
-	
-	public FixedLengthTextField(int length) {
-		super(length);
-		
-		fixedLengthDocument = new FixedLengthDocument(length);
-		setDocument(fixedLengthDocument);
-	}
-	public int getLength() {
-		return fixedLengthDocument.getLength();
-	}
-	public void setLength(int length) {
-		fixedLengthDocument.setMaximumLength(length);
-	}
+    private FixedLengthDocument fixedLengthDocument;
+    public FixedLengthTextField() {
+        this(30);
+    }
+    public FixedLengthTextField(int length) {
+        super(length);
+        fixedLengthDocument = new FixedLengthDocument(length);
+        setDocument(fixedLengthDocument);
+    }
+    public int getLength() {
+        return fixedLengthDocument.getLength();
+    }
+    public void setLength(int length) {
+        fixedLengthDocument.setMaximumLength(length);
+    }
 }

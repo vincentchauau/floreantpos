@@ -27,43 +27,40 @@ import net.sf.jasperreports.view.JRViewer;
 import com.floreantpos.Messages;
 import com.floreantpos.model.Ticket;
 import com.floreantpos.model.dao.TicketDAO;
+import static com.floreantpos.model.util.DateUtil.getDateString;
 import com.floreantpos.report.service.ReportService;
 import com.floreantpos.util.CurrencyUtil;
 public class OpenTicketSummaryReport extends Report {
-	public OpenTicketSummaryReport() {
-		super();
-	}
-	@Override
-	public void refresh() throws Exception {
-		//Date date1 = DateUtils.startOfDay(getStartDate());
-		//Date date2 = DateUtils.endOfDay(getEndDate());
-		
-		
-		List<Ticket> tickets = TicketDAO.getInstance().findOpenTickets(getTerminal(), getUserType());
-		TicketReportModel reportModel = new TicketReportModel();
-		reportModel.setItems(tickets);
-		reportModel.calculateGrandTotal(); 
-		
-		HashMap map = new HashMap();
-		ReportUtil.populateRestaurantProperties(map);
-		map.put("reportTitle", Messages.getString("OpenTicketSummaryReport.0")); //$NON-NLS-1$ //$NON-NLS-2$
-		map.put("reportTime", ReportService.formatFullDate(new Date())); //$NON-NLS-1$
-		//map.put("dateRange", Application.formatDate(date1) + " to " + Application.formatDate(date2));
-		map.put("userType", getUserType() == null ? com.floreantpos.POSConstants.ALL : getUserType().getName()); //$NON-NLS-1$
-		map.put("terminalName", getTerminal() == null ? com.floreantpos.POSConstants.ALL : getTerminal().getName()); //$NON-NLS-1$
-		map.put("currency", Messages.getString("SalesReport.8") + CurrencyUtil.getCurrencyName() + " (" + CurrencyUtil.getCurrencySymbol() + ")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		map.put("grandTotal", reportModel.getGrandTotalAsString()); //$NON-NLS-1$
-		
-		JasperReport masterReport = ReportUtil.getReport("open_ticket_summary_report"); //$NON-NLS-1$
-		JasperPrint print = JasperFillManager.fillReport(masterReport, map, new JRTableModelDataSource(reportModel));
-		viewer = new JRViewer(print);
-	}
-	@Override
-	public boolean isDateRangeSupported() {
-		return false;
-	}
-	@Override
-	public boolean isTypeSupported() {
-		return false;
-	}
+    public OpenTicketSummaryReport() {
+        super();
+    }
+    @Override
+    public void refresh() throws Exception {
+        //Date date1 = DateUtils.startOfDay(getStartDate());
+        //Date date2 = DateUtils.endOfDay(getEndDate());
+        List<Ticket> tickets = TicketDAO.getInstance().findOpenTickets(getTerminal(), getUserType());
+        TicketReportModel reportModel = new TicketReportModel();
+        reportModel.setItems(tickets);
+        reportModel.calculateGrandTotal();
+        HashMap map = new HashMap();
+        ReportUtil.populateRestaurantProperties(map);
+        map.put("reportTitle", Messages.getString("OpenTicketSummaryReport.0")); //$NON-NLS-1$ //$NON-NLS-2$
+        map.put("reportTime", getDateString(new Date())); //$NON-NLS-1$
+        //map.put("dateRange", Application.formatDate(date1) + " to " + Application.formatDate(date2));
+        map.put("userType", getUserType() == null ? com.floreantpos.POSConstants.ALL : getUserType().getName()); //$NON-NLS-1$
+        map.put("terminalName", getTerminal() == null ? com.floreantpos.POSConstants.ALL : getTerminal().getName()); //$NON-NLS-1$
+        map.put("currency", Messages.getString("SalesReport.8") + CurrencyUtil.getCurrencyName() + " (" + CurrencyUtil.getCurrencySymbol() + ")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+        map.put("grandTotal", reportModel.getGrandTotalAsString()); //$NON-NLS-1$
+        JasperReport masterReport = ReportUtil.getReport("open_ticket_summary_report"); //$NON-NLS-1$
+        JasperPrint print = JasperFillManager.fillReport(masterReport, map, new JRTableModelDataSource(reportModel));
+        viewer = new JRViewer(print);
+    }
+    @Override
+    public boolean isDateRangeSupported() {
+        return false;
+    }
+    @Override
+    public boolean isTypeSupported() {
+        return false;
+    }
 }

@@ -16,7 +16,6 @@
  * ************************************************************************
  */
 package com.floreantpos.ui.views;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,10 +23,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-
 import com.floreantpos.Messages;
 import com.floreantpos.main.Application;
 import com.floreantpos.model.Ticket;
@@ -43,70 +40,50 @@ import com.floreantpos.ui.dialog.POSDialog;
 import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.ui.views.order.OrderView;
 import com.floreantpos.ui.views.order.RootView;
-
 public class OrderInfoDialog extends POSDialog {
-
     OrderInfoView view;
     private boolean reorder = false;
     private PosButton btnReOrder;
     private PosButton btnTransferUser;
     private PosButton btnPrint;
     private PosButton btnPrintDriverCopy;
-
     public OrderInfoDialog(OrderInfoView view) {
         this.view = view;
         setTitle(Messages.getString("OrderInfoDialog.0")); //$NON-NLS-1$
-
         createUI();
     }
-
     public void createUI() {
         add(view);
-
         JPanel panel = new JPanel();
         getContentPane().add(panel, BorderLayout.SOUTH);
-
         btnReOrder = new PosButton("Reorder");
-
         btnReOrder.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (Iterator iter = view.getTickets().iterator(); iter.hasNext();) {
-
                     Ticket ticket = (Ticket) iter.next();
-
                     createReOrder(ticket);
                     setCanceled(true);
                     dispose();
-
                 }
             }
         });
-
         panel.add(btnReOrder);
-
         btnTransferUser = new PosButton();
         btnTransferUser.setText(Messages.getString("OrderInfoDialog.3")); //$NON-NLS-1$
         btnTransferUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 User currentUser = Application.getCurrentUser();
-
                 for (Iterator iter = view.getTickets().iterator(); iter.hasNext();) {
-
                     Ticket ticket = (Ticket) iter.next();
-
                     if (!currentUser.equals(ticket.getOwner())) {
-
                         if (!currentUser.hasPermission(UserPermission.TRANSFER_TICKET)) {
                             POSMessageDialog.showError(getParent(), Messages.getString("OrderInfoDialog.4") + ticket.getId()); //$NON-NLS-1$
                             return;
                         }
                     }
                 }
-
                 UserTransferDialog dialog = new UserTransferDialog(view);
                 dialog.setSize(PosUIManager.getSize(360, 555));
                 dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -114,9 +91,7 @@ public class OrderInfoDialog extends POSDialog {
                 dialog.setVisible(true);
             }
         });
-
         panel.add(btnTransferUser);
-
         btnPrint = new PosButton();
         btnPrint.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -125,7 +100,6 @@ public class OrderInfoDialog extends POSDialog {
         });
         btnPrint.setText(Messages.getString("OrderInfoDialog.1")); //$NON-NLS-1$
         panel.add(btnPrint);
-
         btnPrintDriverCopy = new PosButton();
         btnPrintDriverCopy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -135,7 +109,6 @@ public class OrderInfoDialog extends POSDialog {
         btnPrintDriverCopy.setText("Print (Driver Copy)"); //$NON-NLS-1$
         btnPrintDriverCopy.setVisible(false);
         panel.add(btnPrintDriverCopy);
-
         PosButton btnClose = new PosButton();
         btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -145,7 +118,6 @@ public class OrderInfoDialog extends POSDialog {
         btnClose.setText(Messages.getString("OrderInfoDialog.2")); //$NON-NLS-1$
         panel.add(btnClose);
     }
-
     private void doPrintDriverCopy() {
         try {
             view.printCopy(ReceiptPrintService.DRIVER_COPY);
@@ -153,14 +125,12 @@ public class OrderInfoDialog extends POSDialog {
             POSMessageDialog.showError(Application.getPosWindow(), e.getMessage());
         }
     }
-
     public void updateView() {
         btnTransferUser.setVisible(false);
         btnReOrder.setVisible(false);
         btnPrintDriverCopy.setVisible(true);
         btnPrint.setText("Print (Customer Copy)");
     }
-
     protected void doPrint() {
         try {
             view.printCopy(ReceiptPrintService.CUSTOMER_COPY);
@@ -168,7 +138,6 @@ public class OrderInfoDialog extends POSDialog {
             POSMessageDialog.showError(Application.getPosWindow(), e.getMessage());
         }
     }
-
     private void createReOrder(Ticket oldticket) {
         Ticket ticket = new Ticket();
         ticket.setPriceIncludesTax(oldticket.isPriceIncludesTax());
@@ -178,11 +147,9 @@ public class OrderInfoDialog extends POSDialog {
         ticket.setOwner(Application.getCurrentUser());
         ticket.setShift(Application.getInstance().getCurrentShift());
         ticket.setNumberOfGuests(oldticket.getNumberOfGuests());
-
         Calendar currentTime = Calendar.getInstance();
         ticket.setCreateDate(currentTime.getTime());
         ticket.setCreationHour(currentTime.get(Calendar.HOUR_OF_DAY));
-
         List<TicketItem> newTicketItems = new ArrayList<TicketItem>();
         for (TicketItem oldTicketItem : oldticket.getTicketItems()) {
             TicketItem newTicketItem = new TicketItem();
@@ -196,7 +163,6 @@ public class OrderInfoDialog extends POSDialog {
             newTicketItem.setUnitPrice(oldTicketItem.getUnitPrice());
             newTicketItem.setFractionalUnit(oldTicketItem.isFractionalUnit());
             newTicketItem.setItemUnitName(oldTicketItem.getItemUnitName());
-
             List<TicketItemDiscount> discounts = oldTicketItem.getDiscounts();
             if (discounts != null) {
                 List<TicketItemDiscount> newDiscounts = new ArrayList<TicketItemDiscount>();
@@ -207,7 +173,6 @@ public class OrderInfoDialog extends POSDialog {
                 }
                 newTicketItem.setDiscounts(newDiscounts);
             }
-
             List<TicketItemModifier> ticketItemModifiers = oldTicketItem.getTicketItemModifiers();
             if (ticketItemModifiers != null) {
                 for (TicketItemModifier ticketItemModifier : ticketItemModifiers) {
@@ -241,24 +206,19 @@ public class OrderInfoDialog extends POSDialog {
                     newTicketItem.addToaddOns(newAddOns);
                 }
             }
-
             newTicketItem.setTaxRate(oldTicketItem.getTaxRate());
             newTicketItem.setBeverage(oldTicketItem.isBeverage());
             newTicketItem.setShouldPrintToKitchen(oldTicketItem.isShouldPrintToKitchen());
             newTicketItem.setPrinterGroup(oldTicketItem.getPrinterGroup());
             newTicketItem.setPrintedToKitchen(false);
-
             newTicketItem.setTicket(ticket);
             newTicketItems.add(newTicketItem);
         }
         ticket.getTicketItems().addAll(newTicketItems);
-
         OrderView.getInstance().setCurrentTicket(ticket);
         RootView.getInstance().showView(OrderView.VIEW_NAME);
-
         reorder = true;
     }
-
     public boolean isReorder() {
         return reorder;
     }

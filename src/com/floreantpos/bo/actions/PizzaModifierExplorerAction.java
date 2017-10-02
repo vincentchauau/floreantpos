@@ -24,28 +24,27 @@ import com.floreantpos.Messages;
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.PizzaModifierExplorer;
 public class PizzaModifierExplorerAction extends AbstractAction {
-	public PizzaModifierExplorerAction() {
-		super(Messages.getString("PizzaModifierExplorerAction.0")); //$NON-NLS-1$
-	}
-	public PizzaModifierExplorerAction(String name) {
-		super(name);
-	}
-	public PizzaModifierExplorerAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
-		JTabbedPane tabbedPane;
-		PizzaModifierExplorer modifier;
-		tabbedPane = backOfficeWindow.getTabbedPane();
-		int index = tabbedPane.indexOfTab(Messages.getString("PizzaModifierExplorerAction.1")); //$NON-NLS-1$
-		if (index == -1) {
-			modifier = new PizzaModifierExplorer();
-			tabbedPane.addTab(Messages.getString("PizzaModifierExplorerAction.1"), modifier); //$NON-NLS-1$
-		}
-		else {
-			modifier = (PizzaModifierExplorer) tabbedPane.getComponentAt(index);
-		}
-		tabbedPane.setSelectedComponent(modifier);
-	}
+    public PizzaModifierExplorerAction() {
+        super(Messages.getString("PizzaModifierExplorerAction.0")); //$NON-NLS-1$
+    }
+    public PizzaModifierExplorerAction(String name) {
+        super(name);
+    }
+    public PizzaModifierExplorerAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        BackOfficeWindow backOfficeWindow = com.floreantpos.util.POSUtil.getBackOfficeWindow();
+        JTabbedPane tabbedPane;
+        PizzaModifierExplorer modifier;
+        tabbedPane = backOfficeWindow.getTabbedPane();
+        int index = tabbedPane.indexOfTab(Messages.getString("PizzaModifierExplorerAction.1")); //$NON-NLS-1$
+        if (index == -1) {
+            modifier = new PizzaModifierExplorer();
+            tabbedPane.addTab(Messages.getString("PizzaModifierExplorerAction.1"), modifier); //$NON-NLS-1$
+        } else {
+            modifier = (PizzaModifierExplorer) tabbedPane.getComponentAt(index);
+        }
+        tabbedPane.setSelectedComponent(modifier);
+    }
 }

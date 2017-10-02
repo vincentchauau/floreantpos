@@ -24,27 +24,26 @@ import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.AttendanceHistoryExplorer;
 import com.floreantpos.bo.ui.explorer.PizzaExplorer;
 public class PizzaExplorerAction extends AbstractAction {
-	public PizzaExplorerAction() {
-		super("Pizza");
-	}
-	public PizzaExplorerAction(String name) {
-		super(name);
-	}
-	public PizzaExplorerAction(String name, Icon icon) {
-		super(name, icon);
-	}
-	public void actionPerformed(ActionEvent e) {
-		BackOfficeWindow window = com.floreantpos.util.POSUtil.getBackOfficeWindow();
-		JTabbedPane tabbedPane = window.getTabbedPane();
-		PizzaExplorer explorer = null;
-		int index = tabbedPane.indexOfTab("Pizza");
-		if (index == -1) {
-			explorer = new PizzaExplorer();
-			tabbedPane.addTab("Pizza", explorer);
-		}
-		else {
-			explorer = (PizzaExplorer) tabbedPane.getComponentAt(index);
-		}
-		tabbedPane.setSelectedComponent(explorer);
-	}
+    public PizzaExplorerAction() {
+        super("Pizza");
+    }
+    public PizzaExplorerAction(String name) {
+        super(name);
+    }
+    public PizzaExplorerAction(String name, Icon icon) {
+        super(name, icon);
+    }
+    public void actionPerformed(ActionEvent e) {
+        BackOfficeWindow window = com.floreantpos.util.POSUtil.getBackOfficeWindow();
+        JTabbedPane tabbedPane = window.getTabbedPane();
+        PizzaExplorer explorer = null;
+        int index = tabbedPane.indexOfTab("Pizza");
+        if (index == -1) {
+            explorer = new PizzaExplorer();
+            tabbedPane.addTab("Pizza", explorer);
+        } else {
+            explorer = (PizzaExplorer) tabbedPane.getComponentAt(index);
+        }
+        tabbedPane.setSelectedComponent(explorer);
+    }
 }

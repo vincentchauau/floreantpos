@@ -16,20 +16,16 @@
  * ************************************************************************
  */
 package com.floreantpos.actions;
-
 import com.floreantpos.POSConstants;
 import com.floreantpos.demo.KitchenDisplayView;
 import com.floreantpos.ui.views.order.RootView;
-
 public class ShowKitchenDisplayAction extends PosAction {
-
-	public ShowKitchenDisplayAction() {
-		super(POSConstants.KITCHEN_DISPLAY_BUTTON_TEXT); //$NON-NLS-1$
-	}
-
-	@Override
-	public void execute() {
-		/*Window[] windows = Window.getWindows();
+    public ShowKitchenDisplayAction() {
+        super(POSConstants.KITCHEN_DISPLAY_BUTTON_TEXT); //$NON-NLS-1$
+    }
+    @Override
+    public void execute() {
+        /*Window[] windows = Window.getWindows();
 		for (Window window : windows) {
 			if(window instanceof KitchenDisplayWindow) {
 				window.setVisible(true);
@@ -40,8 +36,7 @@ public class ShowKitchenDisplayAction extends PosAction {
 		
 		KitchenDisplayWindow window = new KitchenDisplayWindow();
 		window.setVisible(true);*/
-		RootView.getInstance().showView(KitchenDisplayView.getInstance());
-		RootView.getInstance().getHeaderPanel().setVisible(false); 
-	}
-
+        RootView.getInstance().showView(KitchenDisplayView.getInstance());
+        RootView.getInstance().getHeaderPanel().setVisible(false);
+    }
 }

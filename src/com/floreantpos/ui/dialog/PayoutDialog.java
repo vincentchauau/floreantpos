@@ -38,52 +38,52 @@ import com.floreantpos.ui.views.PayOutView;
 import com.floreantpos.util.NumberUtil;
 /**
  *
- * @author  MShahriar
+ * @author MShahriar
  */
 public class PayoutDialog extends OkCancelOptionDialog {
-	private PayOutView payOutView;
-	public PayoutDialog() {
-		setTitle(Application.getTitle() + POSConstants.PAYOUT_BUTTON_TEXT);
-		initComponents();
-		payOutView.initialize();
-	}
-	private void initComponents() {
-		setTitlePaneText(POSConstants.PAYOUT_BUTTON_TEXT);
-		setOkButtonText(com.floreantpos.POSConstants.FINISH);
-		payOutView = new PayOutView();
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		getContentPanel().add(payOutView);
-		pack();
-	}
-	@Override
-	public void doOk() {
-		Application application = Application.getInstance();
-		Terminal terminal = application.refreshAndGetTerminal();
-		double payoutAmount = payOutView.getPayoutAmount();
-		PayoutReason reason = payOutView.getReason();
-		PayoutRecepient recepient = payOutView.getRecepient();
-		String note = payOutView.getNote();
-		terminal.setCurrentBalance(terminal.getCurrentBalance() - payoutAmount);
-		PayOutTransaction payOutTransaction = new PayOutTransaction();
-		payOutTransaction.setPaymentType(PaymentType.CASH.name());
-		payOutTransaction.setTransactionType(TransactionType.DEBIT.name());
-		payOutTransaction.setReason(reason);
-		payOutTransaction.setRecepient(recepient);
-		payOutTransaction.setNote(note);
-		payOutTransaction.setAmount(Double.valueOf(payoutAmount));
-		payOutTransaction.setUser(Application.getCurrentUser());
-		payOutTransaction.setTransactionTime(new Date());
-		payOutTransaction.setTerminal(terminal);
-		try {
-			PayOutTransactionDAO dao = new PayOutTransactionDAO();
-			dao.saveTransaction(payOutTransaction, terminal);
-			setCanceled(false);
-			String actionMessage = ""; //$NON-NLS-1$
-			actionMessage += Messages.getString("PayoutDialog.2") + ":" + NumberUtil.formatNumber(payoutAmount); //$NON-NLS-1$ //$NON-NLS-2$
-			ActionHistoryDAO.getInstance().saveHistory(Application.getCurrentUser(), ActionHistory.PAY_OUT, actionMessage);
-			dispose();
-		} catch (Exception e) {
-			POSMessageDialog.showError(Application.getPosWindow(), e.getMessage(), e);
-		}
-	}
+    private PayOutView payOutView;
+    public PayoutDialog() {
+        setTitle(Application.getTitle() + POSConstants.PAYOUT_BUTTON_TEXT);
+        initComponents();
+        payOutView.initialize();
+    }
+    private void initComponents() {
+        setTitlePaneText(POSConstants.PAYOUT_BUTTON_TEXT);
+        setOkButtonText(com.floreantpos.POSConstants.FINISH);
+        payOutView = new PayOutView();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPanel().add(payOutView);
+        pack();
+    }
+    @Override
+    public void doOk() {
+        Application application = Application.getInstance();
+        Terminal terminal = application.refreshAndGetTerminal();
+        double payoutAmount = payOutView.getPayoutAmount();
+        PayoutReason reason = payOutView.getReason();
+        PayoutRecepient recepient = payOutView.getRecepient();
+        String note = payOutView.getNote();
+        terminal.setCurrentBalance(terminal.getCurrentBalance() - payoutAmount);
+        PayOutTransaction payOutTransaction = new PayOutTransaction();
+        payOutTransaction.setPaymentType(PaymentType.CASH.name());
+        payOutTransaction.setTransactionType(TransactionType.DEBIT.name());
+        payOutTransaction.setReason(reason);
+        payOutTransaction.setRecepient(recepient);
+        payOutTransaction.setNote(note);
+        payOutTransaction.setAmount(Double.valueOf(payoutAmount));
+        payOutTransaction.setUser(Application.getCurrentUser());
+        payOutTransaction.setTransactionTime(new Date());
+        payOutTransaction.setTerminal(terminal);
+        try {
+            PayOutTransactionDAO dao = new PayOutTransactionDAO();
+            dao.saveTransaction(payOutTransaction, terminal);
+            setCanceled(false);
+            String actionMessage = ""; //$NON-NLS-1$
+            actionMessage += Messages.getString("PayoutDialog.2") + ":" + NumberUtil.formatNumber(payoutAmount); //$NON-NLS-1$ //$NON-NLS-2$
+            ActionHistoryDAO.getInstance().saveHistory(Application.getCurrentUser(), ActionHistory.PAY_OUT, actionMessage);
+            dispose();
+        } catch (Exception e) {
+            POSMessageDialog.showError(Application.getPosWindow(), e.getMessage(), e);
+        }
+    }
 }

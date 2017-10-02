@@ -16,74 +16,55 @@
  * ************************************************************************
  */
 package com.floreantpos.report;
-
 import java.util.Date;
-
 import com.floreantpos.model.User;
-
 public class AttendanceReportData {
-	User user;
-
-	String name;
-	Date clockIn;
-	Date clockOut;
-	double workTime;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getClockIn() {
-		return clockIn;
-	}
-
-	public void setClockIn(Date clockIn) {
-		this.clockIn = clockIn;
-	}
-
-	public Date getClockOut() {
-		return clockOut;
-	}
-
-	public void setClockOut(Date clockOut) {
-		this.clockOut = clockOut;
-	}
-
-	public double getWorkTime() {
-		return workTime;
-	}
-
-	public void setWorkTime(double workTime) {
-		this.workTime = workTime;
-	}
-
-	public void calculate() {
-		long cin = clockIn.getTime();
-		long cout = clockOut.getTime();
-
-		long milliseconds = cout - cin;
-		if (milliseconds < 0) {
-			workTime = 0;
-			return;
-		}
-
-		double seconds = milliseconds / 1000.0;
-		double minutes = seconds / 60.0;
-		double hours = minutes / 60.0;
-
-		workTime = hours;
-	}
-
+    User user;
+    String name;
+    Date clockIn;
+    Date clockOut;
+    double workTime;
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public Date getClockIn() {
+        return clockIn;
+    }
+    public void setClockIn(Date clockIn) {
+        this.clockIn = clockIn;
+    }
+    public Date getClockOut() {
+        return clockOut;
+    }
+    public void setClockOut(Date clockOut) {
+        this.clockOut = clockOut;
+    }
+    public double getWorkTime() {
+        return workTime;
+    }
+    public void setWorkTime(double workTime) {
+        this.workTime = workTime;
+    }
+    public void calculate() {
+        long cin = clockIn.getTime();
+        long cout = clockOut.getTime();
+        long milliseconds = cout - cin;
+        if (milliseconds < 0) {
+            workTime = 0;
+            return;
+        }
+        double seconds = milliseconds / 1000.0;
+        double minutes = seconds / 60.0;
+        double hours = minutes / 60.0;
+        workTime = hours;
+    }
 }
