@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Wed Oct 04 07:32:30 AEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-015e-e427-4975-000005caea20 
-on database directory D:\Projects\Java\Agile Company\floreantpos\Demo\floreantpos\database\derby-single\posdb  with class loader sun.misc.Launcher$AppClassLoader@42a57993 
-Loaded from file:/D:/Projects/Java/Agile%20Company/floreantpos/Demo/floreantpos/lib/derby-10.8.1.2.jar
+Wed Oct 04 16:46:17 AEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-015e-e622-8cbf-000008cf2cf8 
+on database directory D:\Projects\Java\Agile Company\floreantpos\target\floreantpos-bin\floreantpos\database\derby-single\posdb  with class loader sun.misc.Launcher$AppClassLoader@42a57993 
+Loaded from file:/D:/Projects/Java/Agile%20Company/floreantpos/target/floreantpos-bin/floreantpos/lib/derby-10.8.1.2.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_112-b15
-user.dir=D:\Projects\Java\Agile Company\floreantpos\Demo\floreantpos
+user.dir=D:\Projects\Java\Agile Company\floreantpos\target\floreantpos-bin\floreantpos
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

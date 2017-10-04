@@ -539,8 +539,7 @@ public abstract class BaseTicket implements Comparable, Serializable {
      * Return the value associated with the column: DELIVERY_ADDRESS
      */
     public java.lang.String getDeliveryAddress() {
-        return "Pick up from hotel";
-        //return deliveryAddress;
+        return deliveryAddress;
     }
     /**
      * Set the value related to the column: DELIVERY_ADDRESS

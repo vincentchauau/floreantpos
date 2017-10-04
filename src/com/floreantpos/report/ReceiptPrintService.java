@@ -134,23 +134,6 @@ public class ReceiptPrintService {
         TicketDataSource dataSource = new TicketDataSource(ticket);
         return createJasperPrint(ReportUtil.getReport("ticket-receipt"), map, new JRTableModelDataSource(dataSource)); //$NON-NLS-1$
     }
-    /*public static void printTicket(Ticket ticket) {
-		try {
-			TicketPrintProperties printProperties = new TicketPrintProperties("*** ORDER " + ticket.getId() + " ***", false, true, true); //$NON-NLS-1$ //$NON-NLS-2$
-			printProperties.setPrintCookingInstructions(false);
-			HashMap map = populateTicketProperties(ticket, printProperties, null);
-			JasperPrint jasperPrint = createPrint(ticket, map, null);
-			jasperPrint.setName(ORDER_ + ticket.getId());
-			jasperPrint.setProperty(PROP_PRINTER_NAME, Application.getPrinters().getReceiptPrinter());
-			printQuitely(jasperPrint);
-			JasperPrint jasperPrint = createPrint(ticket, map, null);
-			jasperPrint.setName(ORDER_ + ticket.getId());
-			jasperPrint.setProperty(PROP_PRINTER_NAME, Application.getPrinters().getReceiptPrinter());
-			printQuitely(jasperPrint);
-		} catch (Exception e) {
-			logger.error(com.floreantpos.POSConstants.PRINT_ERROR, e);
-		}
-	}*/
     public static void printTicket(Ticket ticket) {
         try {
             TicketPrintProperties printProperties = new TicketPrintProperties("*** ORDER " + ticket.getId() + " ***", false, true, true); //$NON-NLS-1$ //$NON-NLS-2$
@@ -524,7 +507,8 @@ public class ReceiptPrintService {
                         addColumn(ticketHeaderBuilder, ticket.getExtraDeliveryInfo());
                         endRow(ticketHeaderBuilder);
                     }
-                } else {
+                }
+                else {
                     beginRow(ticketHeaderBuilder);
                     addColumn(ticketHeaderBuilder, Messages.getString("ReceiptPrintService.111")); //$NON-NLS-1$
                     endRow(ticketHeaderBuilder);

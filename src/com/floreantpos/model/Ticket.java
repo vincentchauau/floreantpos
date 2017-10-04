@@ -43,13 +43,6 @@ import com.floreantpos.util.POSUtil;
 @XmlRootElement(name = "ticket")
 public class Ticket extends BaseTicket {
     private static final long serialVersionUID = 1L;
-    // public final static int TAKE_OUT = -1;
-    //	public final static String DINE_IN = "DINE IN";
-    //	public final static String TAKE_OUT = "TAKE OUT";
-    //	public final static String PICKUP = "PICKUP";
-    //	public final static String HOME_DELIVERY = "HOME DELIVERY";
-    //	public final static String DRIVE_THROUGH = "DRIVE THRU";
-    //	public final static String BAR_TAB = "BAR_TAB";
     public final static String PROPERTY_CARD_TRANSACTION_ID = "card_transaction_id"; //$NON-NLS-1$
     public final static String PROPERTY_CARD_TRACKS = "card_tracks"; //$NON-NLS-1$
     public static final String PROPERTY_CARD_NAME = "card_name"; //$NON-NLS-1$
@@ -87,22 +80,6 @@ public class Ticket extends BaseTicket {
     public static final String PHONE_EXTENSION = "PHONE_EXTENSION";
     public static final String DRIVER_OUT_TIME = "OUT_AT"; //$NON-NLS-1$
     private String sortOrder;
-    //	public String getTableNumbers() {
-    //		Set<ShopTable> tables = getTables();
-    //		if(tables == null) return "";
-    //		
-    //		String s = "";
-    //		for (Iterator iterator = tables.iterator(); iterator.hasNext();) {
-    //			ShopTable shopTable = (ShopTable) iterator.next();
-    //			s += shopTable.getTableNumber();
-    //			
-    //			if(iterator.hasNext()) {
-    //				s += ", ";
-    //			}
-    //		}
-    //		
-    //		return s;
-    //	}
     public void addTable(int tableNumber) {
         List<Integer> numbers = getTableNumbers();
         if (numbers == null) {
@@ -488,30 +465,6 @@ public class Ticket extends BaseTicket {
         }
         return false;
     }
-    //	public double calculateDefaultGratutity() {
-    //		if (!DINE_IN.equals(getTicketType())) {
-    //			return 0;
-    //		}
-    //
-    //		Restaurant restaurant = Application.getInstance().getRestaurant();
-    //		double defaultGratuityPercentage = restaurant.getDefaultGratuityPercentage();
-    //
-    //		if (defaultGratuityPercentage <= 0) {
-    //			return 0;
-    //		}
-    //
-    //		Gratuity gratuity = new Gratuity();
-    //		double tip = getDueAmount() * (defaultGratuityPercentage / 100.0);
-    //		gratuity.setAmount(tip);
-    //		gratuity.setOwner(getOwner());
-    //		gratuity.setPaid(false);
-    //		gratuity.setTicket(this);
-    //		gratuity.setTerminal(getTerminal());
-    //
-    //		setGratuity(gratuity);
-    //
-    //		return tip;
-    //	}
     public double calculateServiceCharge() {
         /*if (getType() != OrderType.DINE_IN) {
 			return 0;
@@ -603,6 +556,7 @@ public class Ticket extends BaseTicket {
             addProperty(Ticket.CUSTOMER_NAME, customer.getFirstName());
             addProperty(Ticket.CUSTOMER_MOBILE, customer.getMobileNo());
             addProperty(Ticket.CUSTOMER_ZIP_CODE, customer.getZipCode());
+            setDeliveryAddress(customer.getAddress());
         }
         if (customer != null) {
             setCustomerId(customer.getAutoId());
